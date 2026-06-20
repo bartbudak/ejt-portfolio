@@ -123,9 +123,20 @@ Beaucoup):
 
 ## 6. Brand system (already implemented)
 
-- **Palette (warm edible neutrals):** cream `#f6f1e7`, paper `#fbf8f1`,
-  cocoa `#2a1b12`, espresso `#19110a`, ember `#c0532a`, amber `#d9963a`,
-  berry `#9a3a59`, gold `#c39a48`. (CSS vars `--ej-*` in `globals.css`.)
+- **Palette "Atelier Paper" — APPLIED to `globals.css` (light + dark).**
+  Workflow-synthesized warm paper/ink gallery neutrals + ONE tamed-rose accent
+  (Maeve's hot pink `#EF6FBC` disciplined into a text-safe berry-rose).
+  Light: bg `#F2EAD9` · ink `#2A2521` · rose `#A23A6A`. Dark: bg `#1E1A19` ·
+  bone `#ECE3D2` · blush `#E79CBF`. Brand accents: `--ej-rose / -rose-deep /
+  -blush / -gold / -gold-ink / -cocoa`. WCAG AA in both themes; rose is
+  text-safe. **Guard rails:** `--ej-gold` is hairline/decoration-only on light
+  (use `--ej-gold-ink` for gold text); cards need `--shadow-card` (bg→surface
+  is subtle by design). Rose is routed via `--ring` + `--ej-*`; shadcn
+  `--accent` kept a neutral hover bg. **Runner-up "Deep Atelier"** (dark
+  espresso/oxblood) kept in pocket as the optional dark case-study stage.
+- **Coming-soon is FROZEN** — its colors are hardcoded (decoupled from the
+  theme tokens) per Ellie's approval. Do NOT restyle it when iterating the
+  palette.
 - **Type system "Tempered"** (all Google Fonts):
   - Display — **Fraunces** (chunky, high-contrast; SOFT/WONK axes for character)
   - Headings — **Gabarito** (rounded)
@@ -221,3 +232,46 @@ to make case studies feel real.
 - **Be efficient with UI verification.** The preview-screenshot loop is the main
   time sink — verify once when a change is settled; don't chase animation frames
   or restart-and-re-screenshot. Trust the build for correctness.
+
+## 11. Hero / visual direction — "loud hero, quiet work" (prototype built)
+
+Bart's refined brief (referencing the SAMSON site, danilodemarco.com, and a grainy
+"color-blotch" Behance portfolio): a **maximalist collage hero**. Decision **LOCKED**:
+**loud hero, quiet work** — the home hero is a maximalist Maeve-character collage
+framing the edges, with the pixel/particle wordmark reading **"Welcome, I'm Ellie"**
+as the bright centerpiece; case-study pages stay calm/editorial so the work reads
+clean. Positioning safeguard: the Maeve cast = "the world she directed" at the
+EDGES; Ellie's OWN identity (the rose wordmark, grain, warm palette) owns the
+refined center and stays distinct from the saturated cartoon characters.
+
+**Built (v1 prototype, behind `/preview` — live coming-soon page untouched):**
+- `src/components/sections/HeroCollage.tsx` — full-bleed hero. CSS-only background
+  (paper + 4 soft radial-gradient brand-tone blotches + a tiling feTurbulence grain
+  at ~9% soft-light). Edge **cutout frame** of 9 transparent cutouts (vw-sized,
+  rotated, denser toward the bottom), isolated below the centered copy.
+- `src/components/shared/HeroParticle.tsx` — a **separate** instance of the particle
+  wordmark (frozen `ComingSoon` mount left alone), retargeted to "Welcome," /
+  "I'm Ellie" with a warm rose→rose-deep→cocoa→gold-ink→rose gradient (all AA-safe
+  on paper). Center box has an explicit clamp height so the canvas always paints.
+- `src/app/preview/page.tsx` — renders a local `<Navbar/>` + `<HeroCollage/>` + the
+  existing sections; `noindex`. Preview at `pnpm exec next dev --port 3100` → `/preview`.
+- `public/hero/` — the only shipped derivatives: `greg-rocket.png` (1800px),
+  `greg-stars.png` (1280px), and 6 vector SVGs (froggy-trench, pineapple, roses,
+  heart-arrow, heart-red, heart-yellow). Raw `/assets/` kit stays gitignored/local.
+
+**Hero cast (from the Maeve kit):** Greg on Rocket (bottom-right anchor), Trench-coat
+Froggy (bottom-left), Greg with Stars (top-right), pineapple, 2 roses, pink
+heart-arrow, red + yellow hearts (scatter). Greg PNGs confirmed true-alpha (bg
+palette index has alpha 0 — not a baked rectangle). Gretchen is a 7-pose **sheet**
+that still needs slicing if used.
+
+**⚠️ Deploy caution (verified):** `firebase deploy` (main channel) would ship
+`/preview/` + `public/hero/` to live elliejthompson.com despite `comingSoon=true`
+(Firebase serves `out/`, robots `Allow: /`). Iterate **locally only**; use the
+ephemeral `pnpm deploy:preview` channel for sharing, never the main channel.
+
+**Deferred for v1:** dark/blush wordmark gradient (STOPS are a JS constant, not
+theme-reactive, and unseeable while `forcedTheme='light'`); motion — parallax on
+the cutouts, the scatter "spill" into the collage, danilo-style scroll that clears
+the frame into the quiet work tiles (install the Claude-in-Chrome plugin to study
+danilo's motion live); webp optimization of the Greg PNGs; mobile/responsive pass.
