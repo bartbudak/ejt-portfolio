@@ -304,6 +304,15 @@ Hero section height is `calc(100svh-4rem)` to sit under the sticky nav.
   at z3 (behind the cast + wordmark); respects `prefers-reduced-motion` (static blob).
   Greg-cartwheel is desktop-only now (the mobile nav owns the top-right corner).
 
+**Update — stripped to Faizan-minimal + whisp retune (Bart):** the hero is now
+minimal — only the wordmark, the whisp, the floating nav, and **three Greg
+astronauts** (rocket BR, hearts BL, cartwheel TR/desktop-only). Removed: all the SVG
+cutouts (frog/pineapple/hearts), the CTA buttons, and the corner micro-labels.
+Unused derivatives pruned from `public/hero/` (only `greg-rocket/-hearts/-cartwheel.png`
+remain). Whisp retuned: slower drift, longer **dragging tail** (60-pt trail, gentle
+falloff), lower opacity (~0.34), and an **amorphous** per-point squash (±15%) so it
+stays roughly circular without going chaotic.
+
 **Still to do / deferred:** more **motion** — parallax on the cutouts, the wordmark
 scatter "spill", and a danilo-style scroll that clears the frame into the quiet work
 tiles (install the Claude-in-Chrome plugin to study danilo's motion live before
