@@ -289,10 +289,24 @@ below, pineapple + hearts woven in (`public/hero/greg-cartwheel.png`,
 idles static and runs the scatter physics only on hover; mounted in `Navbar.tsx`.
 Hero section height is `calc(100svh-4rem)` to sit under the sticky nav.
 
-**Still to do / deferred:** **motion** (next up) — parallax on the cutouts, the
-scatter "spill" of the wordmark into the collage, and a danilo-style scroll that
-clears the frame into the quiet work tiles (install the Claude-in-Chrome plugin to
-study danilo's motion live before building the scroll). Also deferred: dark/blush
-wordmark gradient (STOPS are a JS constant, not theme-reactive, and unseeable while
-`forcedTheme='light'`); webp optimization of the Greg PNGs; a tiny mobile polish
-(role label vs. Portal-Froggy spacing).
+**Update — Marimba nav + Faizan field + living whisp (Bart's refs):**
+- **Floating nav** — `Navbar.tsx` is now a `fixed`, fully transparent header (no
+  bg/border/blur → no seam between header and page; `pointer-events-none` so presses
+  pass through to the whisp). Pixel "ejt." logo left; **`RightNav.tsx`** (new) is a
+  floating right-side vertical nav (Home/Work/About/Contact) with **scroll-spy** via
+  IntersectionObserver (`-45% 0px` band) that marks the in-view section with a thick
+  `border-b-[3px] border-ej-rose` underline. Hero is back to `min-h-[100svh]`.
+- **Background** — lighter Faizan-style field: base `#ecebe4`, heavier grain
+  (opacity 0.18), static pink washes removed (the whisp supplies the pink).
+- **Living whisp** — `src/components/shared/Whisp.tsx` (new): a canvas blob that
+  wanders with a fading tail and slow hue drift (~288–348°, pink↔purple), and chases
+  the pointer while pressed (window `pointerdown`→follow, `pointerup`→wander). Sits
+  at z3 (behind the cast + wordmark); respects `prefers-reduced-motion` (static blob).
+  Greg-cartwheel is desktop-only now (the mobile nav owns the top-right corner).
+
+**Still to do / deferred:** more **motion** — parallax on the cutouts, the wordmark
+scatter "spill", and a danilo-style scroll that clears the frame into the quiet work
+tiles (install the Claude-in-Chrome plugin to study danilo's motion live before
+building the scroll). Also deferred: theme toggle was dropped from the floating nav
+for the clean look (re-add when needed); dark-mode tuning (whisp/bg are light-only;
+STOPS are a JS constant); webp optimization of the Greg PNGs.
