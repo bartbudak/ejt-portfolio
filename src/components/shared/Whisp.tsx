@@ -32,9 +32,9 @@ export function Whisp() {
       if (!sctx) return;
       sctx.clearRect(0, 0, r * 2, r * 2);
       const g = sctx.createRadialGradient(r, r, 0, r, r, r);
-      g.addColorStop(0, `hsla(${h},88%,72%,0.8)`);
-      g.addColorStop(0.45, `hsla(${h},86%,66%,0.32)`);
-      g.addColorStop(1, `hsla(${h},86%,66%,0)`);
+      g.addColorStop(0, `hsla(${h},54%,71%,0.8)`);
+      g.addColorStop(0.45, `hsla(${h},50%,64%,0.32)`);
+      g.addColorStop(1, `hsla(${h},50%,64%,0)`);
       sctx.fillStyle = g;
       sctx.fillRect(0, 0, r * 2, r * 2);
     }
@@ -64,8 +64,9 @@ export function Whisp() {
     }
 
     function pickTarget() {
-      const padX = cw * 0.16;
-      const padY = ch * 0.18;
+      // roam the whole screen, completely random (incl. near the edges)
+      const padX = cw * 0.05;
+      const padY = ch * 0.06;
       target.x = padX + Math.random() * (cw - 2 * padX);
       target.y = padY + Math.random() * (ch - 2 * padY);
     }
@@ -74,9 +75,9 @@ export function Whisp() {
       t++;
       let tx = target.x;
       let ty = target.y;
-      let spring = 0.0016; // gentle, slow
+      let spring = 0.0018; // gentle, slow
       let fr = 0.95;
-      let maxv = 1.6;
+      let maxv = 2.1;
       if (ptr.active) {
         tx = ptr.x;
         ty = ptr.y;
@@ -85,7 +86,7 @@ export function Whisp() {
         maxv = 6;
       } else if (t > nextRetarget) {
         pickTarget();
-        nextRetarget = t + 220 + ((Math.random() * 220) | 0);
+        nextRetarget = t + 150 + ((Math.random() * 190) | 0);
       }
       // faint organic drift while wandering
       const dx = ptr.active ? 0 : Math.sin(t * 0.011) * 0.18 + Math.cos(t * 0.0163) * 0.14;

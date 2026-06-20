@@ -103,7 +103,7 @@ export function HeroParticle({ stops = WARM_STOPS }: { stops?: Stops }) {
         ctx.measureText(LINE1).width || 1,
         ctx.measureText(LINE2).width || 1,
       );
-      let main = Math.min((100 * (cw * 0.86)) / widest, ch * 0.42, 220);
+      let main = Math.min((100 * (cw * 0.94)) / widest, ch * 0.46, 360);
       main = Math.max(main, 30);
       const gap = main * 0.08;
       const blockH = main * 2 + gap;
@@ -111,8 +111,8 @@ export function HeroParticle({ stops = WARM_STOPS }: { stops?: Stops }) {
       const cx = cw / 2;
       const l1Y = top + main * 0.5;
       const l2Y = top + main + gap + main * 0.5;
-      // floor keeps the diameter >= the 2px step so thin strokes read connected
-      dotR = Math.max(1.05, main * 0.0072);
+      // small dots on a fine 1px grid → high-res, reads as text not pixels
+      dotR = Math.max(0.5, main * 0.0034);
 
       // sample glyphs from an offscreen canvas
       const off = document.createElement("canvas");
@@ -129,7 +129,7 @@ export function HeroParticle({ stops = WARM_STOPS }: { stops?: Stops }) {
       octx.fillText(LINE2, cx, l2Y);
       const data = octx.getImageData(0, 0, cw, ch).data;
 
-      const step = 2;
+      const step = 1;
       const spread = main * 1.4;
       const next: Particle[] = [];
       for (let y = 0; y < ch; y += step) {

@@ -51,7 +51,7 @@ export function HeroCollage() {
           Welcome, I&apos;m Ellie — {site.name}, {site.role}
         </h1>
         {/* explicit height so the canvas has a resolved size to sample into */}
-        <div className="relative mx-auto h-[clamp(220px,44vh,460px)] w-full max-w-3xl">
+        <div className="relative mx-auto h-[clamp(260px,56vh,620px)] w-full max-w-4xl">
           <HeroParticle stops={ACID_STOPS} />
         </div>
       </div>

@@ -41,16 +41,12 @@ export function RightNav() {
             href={`#${it.id}`}
             aria-current={on ? "true" : undefined}
             className={`font-mono text-sm tracking-wide transition-colors ${
-              on ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+              on
+                ? "font-bold text-foreground"
+                : "font-normal text-muted-foreground hover:text-foreground"
             }`}
           >
-            <span
-              className={`inline-block pb-1 ${
-                on ? "border-b-[3px] border-ej-rose" : "border-b-[3px] border-transparent"
-              }`}
-            >
-              {it.label}
-            </span>
+            {it.label}
           </a>
         );
       })}

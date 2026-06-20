@@ -294,8 +294,8 @@ Hero section height is `calc(100svh-4rem)` to sit under the sticky nav.
   bg/border/blur → no seam between header and page; `pointer-events-none` so presses
   pass through to the whisp). Pixel "ejt." logo left; **`RightNav.tsx`** (new) is a
   floating right-side vertical nav (Home/Work/About/Contact) with **scroll-spy** via
-  IntersectionObserver (`-45% 0px` band) that marks the in-view section with a thick
-  `border-b-[3px] border-ej-rose` underline. Hero is back to `min-h-[100svh]`.
+  IntersectionObserver (`-45% 0px` band) that marks the in-view section by **bolding**
+  it (700-weight mono — the underline was dropped per Bart). Hero is `min-h-[100svh]`.
 - **Background** — lighter Faizan-style field: base `#ecebe4`, heavier grain
   (opacity 0.18), static pink washes removed (the whisp supplies the pink).
 - **Living whisp** — `src/components/shared/Whisp.tsx` (new): a canvas blob that
