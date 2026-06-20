@@ -26,8 +26,8 @@ export const ACID_STOPS: Stops = [
   [239, 111, 188], // back to hot pink
 ];
 
-const LINE1 = "Welcome,";
-const LINE2 = "I'm Ellie";
+const LINE1 = "WELCOME,";
+const LINE2 = "I'M ELLIE";
 
 function colorAt(f: number, stops: Stops): string {
   const seg = Math.max(0, Math.min(1, f)) * (stops.length - 1);

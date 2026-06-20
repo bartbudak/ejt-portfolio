@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
+import { PixelLogo } from "@/components/shared/PixelLogo";
 
 export function Navbar() {
   return (
@@ -8,10 +9,10 @@ export function Navbar() {
       <nav className="mx-auto flex h-16 w-full max-w-5xl items-center justify-between px-6">
         <Link
           href="/"
-          className="font-heading text-lg font-medium tracking-tight"
+          className="-my-1 inline-flex items-center"
           aria-label={`${site.name} — home`}
         >
-          {site.name}
+          <PixelLogo text="ejt." />
         </Link>
 
         <div className="flex items-center gap-1 sm:gap-2">

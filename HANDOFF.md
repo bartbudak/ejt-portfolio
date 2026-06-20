@@ -277,9 +277,22 @@ so the smaller wordmark stays uncrowded. Verified desktop (1440) + mobile (375).
 (Firebase serves `out/`, robots `Allow: /`). Iterate **locally only**; use the
 ephemeral `pnpm deploy:preview` channel for sharing, never the main channel.
 
+**Update — Valentin-Gassend restructure (Bart's ref):** the hero moved to a
+type-forward framed layout: **UPPERCASE** wordmark "WELCOME, I'M ELLIE" (acid), a
+faint gold structural **grid**, and **corner micro-labels** (role top-left,
+"Portfolio 2026" / "Based in {location}" bottom corners) wrapping the center. The
+Maeve cast is now **wrapped IN around the wordmark** (behind the dots), with a
+fresh cast: Portal Froggy + Greg-cartwheel up top, Greg-with-hearts + Greg-rocket
+below, pineapple + hearts woven in (`public/hero/greg-cartwheel.png`,
+`greg-hearts.png`, `froggy-portal.svg` added). The **nav logo is now a pixel
+"ejt."** — `src/components/shared/PixelLogo.tsx`, a small particle wordmark that
+idles static and runs the scatter physics only on hover; mounted in `Navbar.tsx`.
+Hero section height is `calc(100svh-4rem)` to sit under the sticky nav.
+
 **Still to do / deferred:** **motion** (next up) — parallax on the cutouts, the
 scatter "spill" of the wordmark into the collage, and a danilo-style scroll that
 clears the frame into the quiet work tiles (install the Claude-in-Chrome plugin to
 study danilo's motion live before building the scroll). Also deferred: dark/blush
 wordmark gradient (STOPS are a JS constant, not theme-reactive, and unseeable while
-`forcedTheme='light'`); webp optimization of the Greg PNGs.
+`forcedTheme='light'`); webp optimization of the Greg PNGs; a tiny mobile polish
+(role label vs. Portal-Froggy spacing).

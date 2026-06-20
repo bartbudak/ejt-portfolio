@@ -2,13 +2,12 @@ import { site } from "@/lib/site";
 import { Button } from "@/components/ui/button";
 import { HeroParticle, ACID_STOPS } from "@/components/shared/HeroParticle";
 
-// PROTOTYPE — maximalist "loud hero, quiet work" landing. The Maeve cast Ellie
-// directed is pushed to the EDGES as a SAMSON-style cutout frame; her own voice
-// (the particle wordmark, grain, warm washes) owns the bright center.
+// PROTOTYPE — "loud hero, quiet work", Valentin-Gassend-style framing: corner
+// micro-labels + a faint grid wrap a big UPPERCASE particle wordmark, with the
+// Maeve cast Ellie directed wrapped in AROUND the text (behind the dots).
 // Built behind /preview; the live coming-soon page (site.comingSoon) is untouched.
 
-// 100% CSS background — no raster downloads. Soft brand-tone washes pulled to the
-// corners so the center stays near-paper and the wordmark reads.
+// 100% CSS background — no raster downloads.
 const BLOTCHES = [
   "radial-gradient(50% 50% at 16% 84%, rgba(162,58,106,0.22), transparent 72%)", // rose
   "radial-gradient(46% 46% at 85% 15%, rgba(185,140,60,0.18), transparent 72%)", // gold
@@ -17,88 +16,81 @@ const BLOTCHES = [
   "radial-gradient(34% 30% at 64% 74%, rgba(217,150,58,0.12), transparent 76%)", // amber lift
 ].join(", ");
 
-// Tiling fractal-noise grain (feTurbulence) as a data-URI — tactile print-zine
-// texture over the paper, kept low-opacity via soft-light blend.
+// Faint structural grid (Valentin-style) in muted gold.
+const GRID = [
+  "repeating-linear-gradient(90deg, rgba(185,140,60,0.13) 0 1px, transparent 1px 25%)",
+  "repeating-linear-gradient(0deg, rgba(185,140,60,0.10) 0 1px, transparent 1px 33.334%)",
+].join(", ");
+
+// Tiling fractal-noise grain (feTurbulence) as a data-URI.
 const GRAIN =
   `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
 
-// Cutouts framing the viewport edges, denser toward the bottom. Sizes/positions
-// are responsive: bolder, fewer pieces on mobile (the scatter decor is desktop-
-// only via `hidden sm:block`) so the small wordmark stays uncrowded.
+// Cast wrapped IN around the central wordmark (not stuck at the viewport edges).
+// Mobile keeps 3 bold pieces bleeding off-edge; the rest are desktop-only.
 const CUTOUTS: { src: string; className: string }[] = [
-  // Greg on Rocket — bottom-right hero anchor.
+  // Greg on Rocket — lower-right anchor.
   {
     src: "/hero/greg-rocket.png",
     className:
-      "absolute h-auto z-[20] w-[64vw] -bottom-[3%] -right-[14%] rotate-[-12deg] sm:w-[40vw] sm:-bottom-[4%] sm:-right-[6%]",
+      "absolute h-auto z-[18] w-[52vw] -bottom-[2%] -right-[12%] rotate-[-10deg] sm:w-[22vw] sm:bottom-[4%] sm:right-[6%]",
   },
-  // Trench-coat Froggy — tall detective silhouette, bottom-left.
+  // Portal Froggy — upper-left swirl (sits below the corner label on mobile).
   {
-    src: "/hero/froggy-trench.svg",
+    src: "/hero/froggy-portal.svg",
     className:
-      "absolute h-auto z-[18] w-[34vw] -bottom-[2%] -left-[6%] rotate-[5deg] sm:w-[19vw] sm:-bottom-[3%] sm:-left-[1%]",
+      "absolute h-auto z-[16] w-[38vw] top-[13%] -left-[8%] rotate-[-6deg] sm:w-[18vw] sm:top-[11%] sm:left-[12%]",
   },
-  // Greg with Stars — top-right.
+  // Greg cartwheel — upper-right, dynamic.
   {
-    src: "/hero/greg-stars.png",
+    src: "/hero/greg-cartwheel.png",
     className:
-      "absolute h-auto z-[16] w-[42vw] top-[6%] -right-[10%] rotate-[8deg] sm:w-[21vw] sm:top-[12%] sm:-right-[3%]",
+      "absolute h-auto z-[15] w-[42vw] top-[5%] -right-[12%] rotate-[10deg] sm:w-[17vw] sm:top-[8%] sm:right-[11%]",
   },
-  // Pink heart-arrow — top-left accent (kept on mobile).
+  // --- desktop-only: complete the wreath around the wordmark ---
   {
-    src: "/hero/heart-arrow.svg",
+    src: "/hero/greg-hearts.png",
     className:
-      "absolute h-auto z-[12] w-[13vw] top-[12%] left-[3%] rotate-[-14deg] sm:w-[7vw] sm:top-[15%] sm:left-[4%]",
+      "hidden sm:block absolute h-auto z-[15] w-[18vw] bottom-[8%] left-[11%] rotate-[-4deg]",
   },
-  // --- desktop-only density ---
   {
     src: "/hero/pineapple.svg",
     className:
-      "hidden sm:block absolute h-auto z-[14] w-[11vw] bottom-[15%] left-[9%] rotate-[-8deg]",
-  },
-  {
-    src: "/hero/roses.svg",
-    className:
-      "hidden sm:block absolute h-auto z-[15] w-[15vw] bottom-[3%] left-[43%] rotate-[6deg]",
+      "hidden sm:block absolute h-auto z-[14] w-[8vw] bottom-[7%] left-[45%] rotate-[-6deg]",
   },
   {
     src: "/hero/heart-red.svg",
     className:
-      "hidden sm:block absolute h-auto z-[13] w-[4.5vw] bottom-[21%] right-[23%] rotate-[18deg]",
+      "hidden sm:block absolute h-auto z-[13] w-[3.8vw] top-[33%] left-[29%] rotate-[16deg]",
   },
   {
     src: "/hero/heart-yellow.svg",
     className:
-      "hidden sm:block absolute h-auto z-[11] w-[3vw] top-[46%] right-[4%] rotate-[-10deg]",
-  },
-  {
-    src: "/hero/heart-yellow.svg",
-    className:
-      "hidden sm:block absolute h-auto z-[11] w-[2.4vw] bottom-[30%] left-[23%] rotate-[14deg]",
-  },
-  {
-    src: "/hero/heart-yellow.svg",
-    className:
-      "hidden sm:block absolute h-auto z-[11] w-[2.2vw] top-[16%] left-[33%] rotate-[12deg]",
+      "hidden sm:block absolute h-auto z-[13] w-[3vw] top-[29%] right-[27%] rotate-[-12deg]",
   },
 ];
+
+const LABEL =
+  "font-mono uppercase tracking-[0.18em] text-muted-foreground text-[10px] sm:text-[11px]";
 
 export function HeroCollage() {
   return (
     <section
       id="top"
-      className="relative isolate flex min-h-[100svh] w-full items-center overflow-hidden bg-background"
+      className="relative isolate flex min-h-[calc(100svh-4rem)] w-full items-center overflow-hidden bg-background"
     >
       {/* soft color washes */}
       <div aria-hidden className="absolute inset-0" style={{ zIndex: 0, background: BLOTCHES }} />
+      {/* structural grid */}
+      <div aria-hidden className="absolute inset-0" style={{ zIndex: 1, backgroundImage: GRID }} />
       {/* grain */}
       <div
         aria-hidden
         className="absolute inset-0"
-        style={{ zIndex: 1, backgroundImage: GRAIN, backgroundSize: "180px 180px", mixBlendMode: "soft-light", opacity: 0.09 }}
+        style={{ zIndex: 2, backgroundImage: GRAIN, backgroundSize: "180px 180px", mixBlendMode: "soft-light", opacity: 0.09 }}
       />
-      {/* edge cutout frame — isolated so its z-stack stays below the copy */}
-      <div aria-hidden className="absolute inset-0" style={{ zIndex: 2, isolation: "isolate" }}>
+      {/* cast wrapped around the wordmark — isolated so its z-stack stays below the copy */}
+      <div aria-hidden className="absolute inset-0" style={{ zIndex: 3, isolation: "isolate" }}>
         {CUTOUTS.map((c, i) => (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -112,19 +104,27 @@ export function HeroCollage() {
         ))}
       </div>
 
+      {/* corner micro-labels (Valentin-style framing) */}
+      <div className="pointer-events-none absolute inset-0" style={{ zIndex: 4 }}>
+        <p className={`absolute left-6 top-6 leading-relaxed ${LABEL}`}>
+          {site.role}
+          <br />
+          Brand &amp; Art Direction
+        </p>
+        <p className={`absolute bottom-6 left-6 ${LABEL}`}>Portfolio 2026</p>
+        <p className={`absolute bottom-6 right-6 ${LABEL}`}>Based in {site.location}</p>
+      </div>
+
       {/* center content */}
-      <div className="relative mx-auto w-full max-w-5xl px-6" style={{ zIndex: 3 }}>
+      <div className="relative mx-auto w-full max-w-5xl px-6" style={{ zIndex: 5 }}>
         <h1 className="sr-only">
           Welcome, I&apos;m Ellie — {site.name}, {site.role}
         </h1>
-        <p className="animate-fade-up text-center font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
-          {site.role}
-        </p>
         {/* explicit height so the canvas has a resolved size to sample into */}
-        <div className="relative mx-auto mt-3 h-[clamp(200px,42vh,440px)] w-full max-w-3xl">
+        <div className="relative mx-auto h-[clamp(220px,44vh,460px)] w-full max-w-3xl">
           <HeroParticle stops={ACID_STOPS} />
         </div>
-        <div className="animate-fade-up mt-4 flex flex-wrap justify-center gap-3">
+        <div className="animate-fade-up mt-2 flex flex-wrap justify-center gap-3">
           <Button nativeButton={false} render={<a href="#work" />}>
             View work
           </Button>
