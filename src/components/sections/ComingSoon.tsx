@@ -6,7 +6,7 @@ export function ComingSoon() {
   return (
     <div
       className="relative min-h-screen w-full overflow-hidden"
-      style={{ backgroundColor: "var(--ej-cream)" }}
+      style={{ backgroundColor: "#f6f1e7" }}
     >
       <div
         aria-hidden

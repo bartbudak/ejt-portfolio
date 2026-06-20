@@ -40,6 +40,15 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  /* Brand accents — the single "rose" system (see :root below). */
+  --color-ej-rose: var(--ej-rose);
+  --color-ej-rose-deep: var(--ej-rose-deep);
+  --color-ej-blush: var(--ej-blush);
+  --color-ej-gold: var(--ej-gold);
+  --color-ej-gold-ink: var(--ej-gold-ink);
+  --color-ej-cocoa: var(--ej-cocoa);
+  /* Card elevation — bg→surface is intentionally subtle, so lean on this. */
+  --shadow-card: 0 1px 2px rgb(42 37 33 / 0.04), 0 8px 24px rgb(42 37 33 / 0.06);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -49,77 +58,88 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* ── Editorial light theme (warm paper / ink) ───────────────
-   Placeholder palette — a clean gallery-neutral base to design on top of
-   once Ellie's brand direction is set. */
+/* ── Atelier Paper — light (warm paper / ink, one tamed-rose accent) ──────
+   Synthesized from the Maeve brand kit: a calm gallery frame that lets the
+   colorful case-study imagery pop. Body text clears WCAG AA in both themes;
+   the rose accent is text-safe (5.2:1 light / 8.1:1 dark). */
 :root {
-  --background: oklch(0.985 0.004 85);   /* warm paper */
-  --foreground: oklch(0.18 0.006 60);    /* soft ink */
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.006 60);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.006 60);
-  --primary: oklch(0.2 0.006 60);        /* near-black ink */
-  --primary-foreground: oklch(0.985 0.004 85);
-  --secondary: oklch(0.95 0.005 85);
-  --secondary-foreground: oklch(0.2 0.006 60);
-  --muted: oklch(0.95 0.005 85);
-  --muted-foreground: oklch(0.52 0.006 60);
-  --accent: oklch(0.93 0.01 80);
-  --accent-foreground: oklch(0.2 0.006 60);
+  --background: #f2ead9;
+  --foreground: #2a2521;
+  --card: #fcf8f0;
+  --card-foreground: #2a2521;
+  --popover: #fcf8f0;
+  --popover-foreground: #2a2521;
+  --primary: #221e1d;
+  --primary-foreground: #fcf8f0;
+  --secondary: #ebe1cf;
+  --secondary-foreground: #2a2521;
+  --muted: #ebe1cf;
+  --muted-foreground: #6d5a51;
+  --accent: #efe6d6; /* soft neutral hover bg — NOT the brand accent */
+  --accent-foreground: #2a2521;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.9 0.005 70);
-  --input: oklch(0.9 0.005 70);
-  --ring: oklch(0.6 0.006 60);
-  --chart-1: oklch(0.7 0.04 60);
-  --chart-2: oklch(0.6 0.04 60);
-  --chart-3: oklch(0.5 0.04 60);
-  --chart-4: oklch(0.4 0.04 60);
-  --chart-5: oklch(0.3 0.04 60);
+  --border: #dccfb8;
+  --input: #dccfb8;
+  --ring: #a23a6a; /* rose — brand accent on focus */
+  --chart-1: #a23a6a;
+  --chart-2: #b98c3c;
+  --chart-3: #4a3b33;
+  --chart-4: #6d5a51;
+  --chart-5: #8e2f5c;
   --radius: 0.5rem;
-  --sidebar: oklch(0.985 0.004 85);
-  --sidebar-foreground: oklch(0.18 0.006 60);
-  --sidebar-primary: oklch(0.2 0.006 60);
-  --sidebar-primary-foreground: oklch(0.985 0.004 85);
-  --sidebar-accent: oklch(0.93 0.01 80);
-  --sidebar-accent-foreground: oklch(0.2 0.006 60);
-  --sidebar-border: oklch(0.9 0.005 70);
-  --sidebar-ring: oklch(0.6 0.006 60);
+  --sidebar: #f2ead9;
+  --sidebar-foreground: #2a2521;
+  --sidebar-primary: #221e1d;
+  --sidebar-primary-foreground: #fcf8f0;
+  --sidebar-accent: #efe6d6;
+  --sidebar-accent-foreground: #2a2521;
+  --sidebar-border: #dccfb8;
+  --sidebar-ring: #a23a6a;
 }
 
-/* ── Editorial dark theme (charcoal / bone) ─────────────────── */
+/* ── Atelier Paper — dark (espresso / bone, blush accent) ────────────────── */
 .dark {
-  --background: oklch(0.16 0.004 60);
-  --foreground: oklch(0.94 0.006 85);
-  --card: oklch(0.2 0.005 60);
-  --card-foreground: oklch(0.94 0.006 85);
-  --popover: oklch(0.2 0.005 60);
-  --popover-foreground: oklch(0.94 0.006 85);
-  --primary: oklch(0.94 0.006 85);
-  --primary-foreground: oklch(0.16 0.004 60);
-  --secondary: oklch(0.26 0.005 60);
-  --secondary-foreground: oklch(0.94 0.006 85);
-  --muted: oklch(0.24 0.005 60);
-  --muted-foreground: oklch(0.7 0.006 70);
-  --accent: oklch(0.28 0.006 60);
-  --accent-foreground: oklch(0.94 0.006 85);
+  --background: #1e1a19;
+  --foreground: #ece3d2;
+  --card: #292422;
+  --card-foreground: #ece3d2;
+  --popover: #292422;
+  --popover-foreground: #ece3d2;
+  --primary: #ece3d2;
+  --primary-foreground: #1e1a19;
+  --secondary: #322c29;
+  --secondary-foreground: #ece3d2;
+  --muted: #322c29;
+  --muted-foreground: #b2a293;
+  --accent: #322c29;
+  --accent-foreground: #ece3d2;
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(0.94 0.006 85 / 0.12);
-  --input: oklch(0.94 0.006 85 / 0.15);
-  --ring: oklch(0.7 0.006 70);
-  --chart-1: oklch(0.8 0.04 70);
-  --chart-2: oklch(0.7 0.04 70);
-  --chart-3: oklch(0.6 0.04 70);
-  --chart-4: oklch(0.5 0.04 70);
-  --chart-5: oklch(0.4 0.04 70);
-  --sidebar: oklch(0.2 0.005 60);
-  --sidebar-foreground: oklch(0.94 0.006 85);
-  --sidebar-primary: oklch(0.94 0.006 85);
-  --sidebar-primary-foreground: oklch(0.16 0.004 60);
-  --sidebar-accent: oklch(0.28 0.006 60);
-  --sidebar-accent-foreground: oklch(0.94 0.006 85);
-  --sidebar-border: oklch(0.94 0.006 85 / 0.12);
-  --sidebar-ring: oklch(0.7 0.006 70);
+  --border: #403935;
+  --input: #403935;
+  --ring: #e79cbf; /* blush */
+  --chart-1: #e79cbf;
+  --chart-2: #b98c3c;
+  --chart-3: #c7a761;
+  --chart-4: #b2a293;
+  --chart-5: #8e2f5c;
+  --sidebar: #292422;
+  --sidebar-foreground: #ece3d2;
+  --sidebar-primary: #ece3d2;
+  --sidebar-primary-foreground: #1e1a19;
+  --sidebar-accent: #322c29;
+  --sidebar-accent-foreground: #ece3d2;
+  --sidebar-border: #403935;
+  --sidebar-ring: #e79cbf;
+}
+
+/* ── Brand accents — ONE rose voice (gold & cocoa are detail-only) ───────── */
+:root {
+  --ej-rose: #a23a6a; /* the warm gesture: tamed Maeve pink. Text-safe. */
+  --ej-rose-deep: #8e2f5c; /* hover/pressed; rose text on cards */
+  --ej-blush: #e79cbf; /* dark-theme rose; tints/overlays */
+  --ej-gold: #b98c3c; /* HAIRLINE / decoration only on light — never text */
+  --ej-gold-ink: #7e5e1c; /* AA-safe gold text on paper */
+  --ej-cocoa: #4a3b33; /* secondary text / fills / deep gradient anchor */
 }
 
 @layer base {
@@ -162,51 +182,18 @@
   animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* ── Ellie brand palette (warm, edible neutrals) ─────────────── */
-:root {
-  --ej-cream: #f6f1e7;
-  --ej-paper: #fbf8f1;
-  --ej-cocoa: #2a1b12;
-  --ej-espresso: #19110a;
-  --ej-ember: #c0532a;
-  --ej-amber: #d9963a;
-  --ej-berry: #9a3a59;
-  --ej-gold: #c39a48;
-}
-
-/* ── Coming-soon holding page ────────────────────────────────── */
-@keyframes gradient-pan {
-  0%, 100% { background-position: 0% 50%; }
-  50%      { background-position: 100% 50%; }
-}
+/* ── Coming-soon holding page (FROZEN — colors hardcoded so the theme above
+   can't change the look Ellie approved; see ComingSoon + ParticleHeadline) ── */
 @keyframes blob-drift {
   0%, 100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
   33%      { transform: translate(-44%, -56%) scale(1.12) rotate(6deg); }
   66%      { transform: translate(-56%, -46%) scale(0.92) rotate(-5deg); }
 }
-/* Chunky, slightly psychedelic gradient wordmark (Fraunces display). */
-.cs-name {
-  background-image: linear-gradient(
-    105deg,
-    var(--ej-ember) 0%,
-    var(--ej-berry) 30%,
-    var(--ej-cocoa) 52%,
-    var(--ej-amber) 76%,
-    var(--ej-ember) 100%
-  );
-  background-size: 280% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: gradient-pan 14s ease-in-out infinite;
-  font-variation-settings: "opsz" 144, "SOFT" 55, "WONK" 1;
-}
-/* The one warm gesture: a soft drifting amber/ember blob. */
 .cs-blob {
   background: radial-gradient(
     circle at 50% 50%,
-    var(--ej-amber),
-    var(--ej-ember) 45%,
+    #d9963a,
+    #c0532a 45%,
     transparent 70%
   );
   filter: blur(64px);
@@ -214,6 +201,5 @@
   animation: blob-drift 20s ease-in-out infinite;
 }
 @media (prefers-reduced-motion: reduce) {
-  .cs-name, .cs-blob, .animate-fade-up { animation: none; }
-  .cs-name { background-position: 0% 50%; }
+  .cs-blob, .animate-fade-up { animation: none; }
 }
