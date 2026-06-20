@@ -43,4 +43,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-platycerium-archive/
+
+# 8 GB local Maeve brand kit — keep out of git; export optimized files to public/
+/assets/
