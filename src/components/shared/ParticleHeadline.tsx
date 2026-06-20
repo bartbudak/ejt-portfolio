@@ -83,14 +83,14 @@ export function ParticleHeadline() {
       const measured = ctx.measureText("coming soon").width || 1;
       let main = Math.min((100 * (cw * 0.82)) / measured, ch * 0.32, 190);
       main = Math.max(main, 34);
-      const small = main * 0.34;
+      const small = main;
       const gap = main * 0.26;
       const blockH = small + gap + main;
       const top = (ch - blockH) / 2;
       const cx = cw / 2;
       const ejtY = top + small * 0.5;
       const csY = top + small + gap + main * 0.5;
-      dotR = Math.max(1.1, main * 0.013);
+      dotR = Math.max(0.8, main * 0.008);
 
       // sample glyphs from an offscreen canvas
       const off = document.createElement("canvas");
@@ -108,7 +108,7 @@ export function ParticleHeadline() {
       octx.fillText("coming soon", cx, csY);
       const data = octx.getImageData(0, 0, cw, ch).data;
 
-      const step = 4;
+      const step = 3;
       const next: Particle[] = [];
       for (let y = 0; y < ch; y += step) {
         for (let x = 0; x < cw; x += step) {
