@@ -1,0 +1,223 @@
+# ejt-portfolio — Session Handoff
+
+Portfolio for **Ellie J. Thompson** (creative director) → **elliejthompson.com**.
+Built by Bart (her husband). This doc captures the direction, research, and
+decisions so a fresh session can continue without re-deriving anything.
+
+---
+
+## 1. Goal & positioning
+
+- **Primary goal:** a portfolio to land a **senior Creative Director role at an
+  agency** — and to showcase future freelance work.
+- **Audience:** agency creative directors / recruiters (US, moving toward
+  global). They know this industry — accuracy and credited collaborators matter.
+- **Title decision (important):** present her as **"Creative Director"**, framed
+  as the **brand-side creative lead / vision owner**. Press consistently titles
+  her "Brand Manager" and credits the agencies for execution — but Bart confirms
+  Ellie **owned the full creative scope**: concept, art direction, copy, color &
+  flavor-character decisions, casting + directing the partners, and on-set
+  direction of shoots. **Case-study copy must credit the agencies (Young Jerks,
+  View Source, photographer) and frame her as the director — never imply she did
+  the design execution herself.** Agency readers will know better.
+
+## 2. Brand voice
+
+Refined / luxury, but **warm, down-to-earth, kind, honest, world-aware**.
+
+---
+
+## 3. Verified research (web, June 2026)
+
+**Maeve = the full rebrand of Seattle Chocolate Company** (a ~30-yr-old brand
+renamed, not a spinoff). Announced March 3 2025; trade debut Expo West April
+2025. Named after the fierce Irish warrior queen Maeve. A **mother–daughter**
+project: CEO/owner **Jean Thompson** (mom) + Ellie. Ellie joined SCC in 2019
+(sales → brand/marketing) and **initiated** the rebrand.
+
+**Collaborators she directed**
+- **Young Jerks** (Brooklyn) — identity, packaging, brand world. Partners/CDs
+  Dan Cassaro & Dan Christofferson.
+- **View Source** — the e-commerce website.
+- **Valeria Roca** — photography (per Bart; not independently corroborated online).
+
+**Awards**
+- **Webby (2026, Food & Drink — Websites)** — CONFIRMED via winners page Bart
+  provided: `winners.webbyawards.com/2026/.../food-drink/364780/maeve-chocolate`.
+  The page is JS-rendered (not fetchable); **still need the award LEVEL**
+  (Winner vs Nominee vs People's Voice) for accurate copy.
+- **CSS Design Awards "Website of the Day"** — Oct 23 2025, judge score 8.01,
+  credited to View Source. (This is a real, separate award — not the Webby.)
+- **Dieline Awards** (credited "Maeve & Young Jerks"):
+  - 2026: Celebrations **2nd** & Spring **3rd** (Confectionery, cat 1F);
+    Holiday **2nd** & Summer **Merit** (Limited Editions, cat 09).
+  - 2025: **2nd** (Confectionery).
+- **NEXTY 2025 finalist** — PR-sourced only; treat as "finalist" and verify.
+
+**Press / media**
+KING 5 *Evening*, *Seattle Refined*, *Seattle Magazine*, FOX 13, **The Brand
+Study** podcast (Sweep Creative), **Dieline** (x2 features), **Brand New /
+UnderConsideration** (prestigious in branding), MediaPost, **Transform** (UK
+trade), FoodNavigator, New Hope.
+
+**Projects / collaborations**
+- **Maeve flagship rebrand** — the anchor case study.
+- **Maeve × Dungeon Crawler Carl** — "Virgin Dirty Shirley" bar w/ author Matt
+  Dinniman (confirmed; he promoted it himself).
+- **Maeve × TALEA** — experiential: "Galentine's Rom-Com Trivia" at TALEA's
+  Brooklyn taproom; co-brewed **"Pineapple Coco Cacao Sour"** beer + custom
+  glassware + Maeve craft stations; 119 attendees (`luma.com/crgez1nk`).
+  This is an **experiential / brand-event** collab, not a product.
+- **SCC seasonal artist collections** — global illustrators she art-directed:
+  Kendra Dandy, Bodil Jane (Amsterdam), Frida Clements, Esther Loopstra,
+  Llewellyn Mejia.
+
+**Quote bank (usable for About / voice)** — examples:
+- "The packaging didn't reflect the soul of the company I loved."
+- "With Maeve, I want people to feel something the moment they lay eyes on a bar."
+- "Maeve isn't just a new name; it's a new energy."
+- "When they buy Maeve, they're voting with their dollar to help save cocoa."
+- "It was like trying to assemble a 50,000-piece puzzle while blindfolded, while
+  juggling, during a global supply chain crisis."
+
+## 4. Still needed from Ellie (Bart to gather)
+
+- Webby **award level** + a screenshot/badge.
+- NW Chocolate Festival panels (Climate Crisis; How to Rebrand) — titles/years.
+- UW & Seattle U session details (the Seattle U Family Business Exchange fireside
+  chat, ~Apr 2026, is confirmed).
+- **Ethical Apparel Africa** (2024) — her role/scope/links.
+- **Cancer Pathways** fundraiser (2021–24) — her role/scope.
+- Valeria Roca photo credit confirmation (which shoots).
+- Dieline awards **speech** details (which year, recording?).
+- **High-res assets** (packaging, photography, web captures) — drives the visual design.
+- **Portrait** of Ellie.
+- 3–4 sentences of her **own creative philosophy** for the About page.
+
+Note: sources say she did **not** initially plan to join the family business
+(cocoa-farm sourcing trips drew her in) — soften any "always meant to lead it"
+framing unless she wants to own it.
+
+---
+
+## 5. Design direction — "Calm craft, with one warm gesture"
+
+Synthesized from Bart's four references (Hello Monday, Monogrid, dgrees,
+Beaucoup):
+
+- **Governing layer = restraint (Beaucoup):** generous negative space, tight
+  editorial type system, slow honest scroll reveals, no effect-for-its-own-sake.
+- **One signature whimsy (Hello Monday):** a single playful **chocolate-drop /
+  wax-seal "blob"** motif that doubles as menu + back-to-top and morphs on
+  interaction. Exactly one such element so the luxury read survives.
+- **Motion vocabulary (Monogrid) minus its problem:** a crafted intro loader,
+  scroll-linked transitions between case studies, subtle mouse-reactive texture
+  — but reject the cold electric `#0000ff`; use warm edible neutrals and
+  **viscous "poured-chocolate" easing** (heavy, smooth, unhurried).
+- **Structure (dgrees):** a hero pairing one motion centerpiece with a plain,
+  human thesis line; a manifesto-as-numbered-values section; a **stepped,
+  conversational contact form**.
+- Human footer with real collaborator names, locations, and real awards.
+- **Honesty caveat:** rendered animations can't be judged from fetched HTML —
+  final motion must be evaluated live in a browser.
+
+## 6. Brand system (already implemented)
+
+- **Palette (warm edible neutrals):** cream `#f6f1e7`, paper `#fbf8f1`,
+  cocoa `#2a1b12`, espresso `#19110a`, ember `#c0532a`, amber `#d9963a`,
+  berry `#9a3a59`, gold `#c39a48`. (CSS vars `--ej-*` in `globals.css`.)
+- **Type system "Tempered"** (all Google Fonts):
+  - Display — **Fraunces** (chunky, high-contrast; SOFT/WONK axes for character)
+  - Headings — **Gabarito** (rounded)
+  - Body — **Hanken Grotesk**
+  - Labels — **JetBrains Mono**
+  - Alternates explored: "Carnival" (Syne / Zodiak) and "Atelier"
+    (Instrument Serif / Cabinet Grotesk).
+
+---
+
+## 7. IA — LOCKED (Bart confirmed)
+
+**Structure: hybrid** — a work-forward single-scroll home funneling into
+dedicated case-study pages.
+
+**Sitemap**
+```
+/                  Home (scroll)
+/work/maeve        ★ Maeve flagship rebrand        (full case study)
+/work/maeve-dcc    Maeve × Dungeon Crawler Carl     (full case study)
+/work/seasonal     Seasonal collections / system    (full case study)
+/about             Full bio / philosophy / recognition
+```
+- **Full case studies:** Maeve (flagship), Maeve × DCC, Seasonal collections.
+- **Selected projects (mentions, not full pages):** Maeve × TALEA (experiential
+  Galentine's event + co-brewed beer), Ethical Apparel Africa, Cancer Pathways
+  — pending details.
+- **Home scroll:** Hero · Selected Work (tiles) · About teaser · Recognition
+  strip (Webby · Dieline ×5 · CSS Design Award · press) · Contact · footer.
+- **Hero = evolve the particle wordmark** (the dot-scatter "ejt." concept) into
+  the live homepage hero as the signature motion moment.
+- **Case-study template:** header (title/client/year/HER ROLE/disciplines) →
+  hero visual → challenge → insight → **creative direction (what she directed)**
+  → the work (gallery) → outcome (awards/press) → **credits (agencies)** → next.
+- **Data model:** typed `projects` array in `src/data/projects.ts`
+  (`slug, title, client, year, role, disciplines[], summary, hero, sections[],
+  gallery[], credits[], awards[], press[]`); home tiles + case-study pages both
+  render from it.
+- **Contact:** section on home + footer → `elliejth@gmail.com`; socials
+  (IG @elliejthompson, LinkedIn `in/ellie-thompson-aa405116a`).
+
+**Asset mapping (from `assets/`):** Maeve flagship draws on Primary/Vertical
+logos, the seasonal logo systems, characters (Greg, Gretchen, Froggy Bottom),
+product elements (Forbidden Fruits, Heat & Honey, PB Banana Affair), and the
+Young Jerks Decks (process). DCC → `Logos/DCC Logo`. Seasonal → the five seasonal
+systems. **Asset GAP:** kit is vectors/logos/elements — still need lifestyle/
+packaging **photography** (Valeria Roca) and **website captures** (View Source)
+to make case studies feel real.
+
+---
+
+## 8. Repo / build / deploy state
+
+- **Repo:** `github.com/divs-are-aligned/ejt-portfolio` (private).
+- **Local:** `/Users/scclt_mb002/Documents/GitHub/ejt-portfolio`
+- **Stack:** Next.js 16 (static export) · pnpm · shadcn/ui · Tailwind v4 ·
+  Firebase Hosting. Same deploy flow as `bb-portfolio`. (See `AGENTS.md`: this
+  Next.js has breaking changes — read `node_modules/next/dist/docs/` before
+  writing framework code.)
+- **Coming-soon page is built and verified** — an interactive **particle
+  wordmark**: "ejt." over "coming soon" sampled into a field of warm gradient
+  dots that scatter from the pointer/touch and spring back (Canvas 2D + a small
+  rAF physics loop; `prefers-reduced-motion` → static). Gated by the
+  `comingSoon: true` flag in `src/lib/site.ts`.
+- **Firebase project `ejt-folio` is created** (empty). **NOT yet deployed.**
+  Bart verbally OK'd deploying the holding page but it hasn't shipped.
+  - Deploy: `pnpm run deploy` (builds + `firebase deploy --only hosting`) →
+    `ejt-folio.web.app`.
+  - Custom domain `elliejthompson.com`: add in Firebase Console → Hosting after
+    first deploy (needs Bart's DNS records at the registrar).
+- **Full site sections** (`Hero/Work/About/Contact`) are placeholders behind the
+  `comingSoon` flag — flip to `false` to launch the full site.
+
+### Key files
+- `src/lib/site.ts` — identity + `comingSoon` flag (single source of truth).
+- `src/components/sections/ComingSoon.tsx` — holding page.
+- `src/components/shared/ParticleHeadline.tsx` — particle wordmark (tunable:
+  `R`, `PUSH`, `SPRING`, `FRICTION`, `step`, `dotR`).
+- `src/app/globals.css` — palette + type tokens.
+- `functions/index.js` — contact-form email Function (recipient is a TODO).
+
+## 9. Next steps
+
+1. Finalize the **IA** (section 7) and confirm single-scroll-vs-multi-page.
+2. Get Ellie's missing details + **high-res assets** (section 4).
+3. Draft the **Maeve flagship case study** copy from the verified material.
+4. Apply the **design direction** (section 5) section by section.
+5. Deploy the holding page when Bart says go; wire the custom domain.
+
+## 10. Working preferences (Bart)
+
+- Committing/pushing is fine — no need to ask each time.
+- **Be efficient with UI verification.** The preview-screenshot loop is the main
+  time sink — verify once when a change is settled; don't chase animation frames
+  or restart-and-re-screenshot. Trust the build for correctness.
