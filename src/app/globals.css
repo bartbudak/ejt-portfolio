@@ -7,9 +7,10 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-dm-sans);
+  --font-sans: var(--font-hanken);
   --font-mono: var(--font-jetbrains);
-  --font-heading: var(--font-playfair);
+  --font-heading: var(--font-gabarito);
+  --font-display: var(--font-fraunces);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -159,4 +160,60 @@
 }
 .animate-fade-up {
   animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Ellie brand palette (warm, edible neutrals) ─────────────── */
+:root {
+  --ej-cream: #f6f1e7;
+  --ej-paper: #fbf8f1;
+  --ej-cocoa: #2a1b12;
+  --ej-espresso: #19110a;
+  --ej-ember: #c0532a;
+  --ej-amber: #d9963a;
+  --ej-berry: #9a3a59;
+  --ej-gold: #c39a48;
+}
+
+/* ── Coming-soon holding page ────────────────────────────────── */
+@keyframes gradient-pan {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+@keyframes blob-drift {
+  0%, 100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+  33%      { transform: translate(-44%, -56%) scale(1.12) rotate(6deg); }
+  66%      { transform: translate(-56%, -46%) scale(0.92) rotate(-5deg); }
+}
+/* Chunky, slightly psychedelic gradient wordmark (Fraunces display). */
+.cs-name {
+  background-image: linear-gradient(
+    105deg,
+    var(--ej-ember) 0%,
+    var(--ej-berry) 30%,
+    var(--ej-cocoa) 52%,
+    var(--ej-amber) 76%,
+    var(--ej-ember) 100%
+  );
+  background-size: 280% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-pan 14s ease-in-out infinite;
+  font-variation-settings: "opsz" 144, "SOFT" 55, "WONK" 1;
+}
+/* The one warm gesture: a soft drifting amber/ember blob. */
+.cs-blob {
+  background: radial-gradient(
+    circle at 50% 50%,
+    var(--ej-amber),
+    var(--ej-ember) 45%,
+    transparent 70%
+  );
+  filter: blur(64px);
+  opacity: 0.45;
+  animation: blob-drift 20s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cs-name, .cs-blob, .animate-fade-up { animation: none; }
+  .cs-name { background-position: 0% 50%; }
 }

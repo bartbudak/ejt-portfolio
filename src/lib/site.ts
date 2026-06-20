@@ -3,25 +3,25 @@
 export const site = {
   name: "Ellie J. Thompson",
   shortName: "EJT",
-  // TODO: confirm exact title/positioning with Ellie.
   role: "Creative Director",
   tagline: "Creative direction, brand, and art direction.",
   url: "https://elliejthompson.com",
-  // TODO: confirm the public contact address.
-  email: "hello@elliejthompson.com",
-  location: "", // TODO
+  email: "elliejth@gmail.com",
+  location: "Seattle",
   description:
     "Portfolio of Ellie J. Thompson — creative director and art director crafting brand worlds, campaigns, and visual systems.",
+  // While the full site is in progress, render the coming-soon holding page.
+  // Flip to false to launch the full multi-section site.
+  comingSoon: true,
   nav: [
     { label: "Work", href: "#work" },
     { label: "About", href: "#about" },
     { label: "Contact", href: "#contact" },
   ],
-  // TODO: fill in real handles, or remove the ones that don't apply.
   social: {
-    instagram: "", // e.g. "https://instagram.com/elliejthompson"
-    linkedin: "", // e.g. "https://linkedin.com/in/elliejthompson"
+    instagram: "https://instagram.com/elliejthompson",
+    linkedin: "https://www.linkedin.com/in/ellie-thompson-aa405116a/",
     behance: "",
-    email: "hello@elliejthompson.com",
+    email: "elliejth@gmail.com",
   },
 } as const;

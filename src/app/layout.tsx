@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, DM_Sans, JetBrains_Mono } from "next/font/google";
+import { Fraunces, Gabarito, Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
 import { ThemeProvider } from "@/components/shared/ThemeProvider";
@@ -8,16 +8,23 @@ import { ServiceWorkerRegistration } from "@/components/shared/ServiceWorkerRegi
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+// Display: chunky, slightly psychedelic high-contrast serif (SOFT/WONK axes).
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  axes: ["opsz", "SOFT", "WONK"],
 });
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+// Headings: rounded, friendly geometric display sans.
+const gabarito = Gabarito({
+  variable: "--font-gabarito",
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
+});
+
+// Body / UI: clean humanist grotesque for design-system text.
+const hanken = Hanken_Grotesk({
+  variable: "--font-hanken",
+  subsets: ["latin"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -80,10 +87,12 @@ const personJsonLd = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const showChrome = !site.comingSoon;
+
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${dmSans.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${gabarito.variable} ${hanken.variable} ${jetbrainsMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
@@ -91,12 +100,17 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={showChrome}
+          forcedTheme={site.comingSoon ? "light" : undefined}
+        >
           <TooltipProvider>
             <ServiceWorkerRegistration />
-            <Navbar />
+            {showChrome && <Navbar />}
             <main className="flex-1">{children}</main>
-            <Footer />
+            {showChrome && <Footer />}
           </TooltipProvider>
         </ThemeProvider>
       </body>
