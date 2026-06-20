@@ -251,8 +251,10 @@ refined center and stays distinct from the saturated cartoon characters.
   rotated, denser toward the bottom), isolated below the centered copy.
 - `src/components/shared/HeroParticle.tsx` — a **separate** instance of the particle
   wordmark (frozen `ComingSoon` mount left alone), retargeted to "Welcome," /
-  "I'm Ellie" with a warm rose→rose-deep→cocoa→gold-ink→rose gradient (all AA-safe
-  on paper). Center box has an explicit clamp height so the canvas always paints.
+  "I'm Ellie". Gradient is a `stops` prop: `WARM_STOPS` (rose→gold) and `ACID_STOPS`
+  (hot pink→magenta→red-orange→purple). **Bart picked ACID** (the louder Maeve pop)
+  — the hero passes `stops={ACID_STOPS}`. Center box has an explicit clamp height so
+  the canvas always paints.
 - `src/app/preview/page.tsx` — renders a local `<Navbar/>` + `<HeroCollage/>` + the
   existing sections; `noindex`. Preview at `pnpm exec next dev --port 3100` → `/preview`.
 - `public/hero/` — the only shipped derivatives: `greg-rocket.png` (1800px),
@@ -265,13 +267,19 @@ heart-arrow, red + yellow hearts (scatter). Greg PNGs confirmed true-alpha (bg
 palette index has alpha 0 — not a baked rectangle). Gretchen is a 7-pose **sheet**
 that still needs slicing if used.
 
+**Responsive:** cutout size/position/visibility are Tailwind responsive classes.
+Mobile (`<sm`) shows 4 bold pieces (Greg-rocket, Froggy, Greg-stars, heart-arrow,
+all larger-vw and bleeding off-edge); the 6 scatter-decor pieces are `hidden sm:block`
+so the smaller wordmark stays uncrowded. Verified desktop (1440) + mobile (375).
+
 **⚠️ Deploy caution (verified):** `firebase deploy` (main channel) would ship
 `/preview/` + `public/hero/` to live elliejthompson.com despite `comingSoon=true`
 (Firebase serves `out/`, robots `Allow: /`). Iterate **locally only**; use the
 ephemeral `pnpm deploy:preview` channel for sharing, never the main channel.
 
-**Deferred for v1:** dark/blush wordmark gradient (STOPS are a JS constant, not
-theme-reactive, and unseeable while `forcedTheme='light'`); motion — parallax on
-the cutouts, the scatter "spill" into the collage, danilo-style scroll that clears
-the frame into the quiet work tiles (install the Claude-in-Chrome plugin to study
-danilo's motion live); webp optimization of the Greg PNGs; mobile/responsive pass.
+**Still to do / deferred:** **motion** (next up) — parallax on the cutouts, the
+scatter "spill" of the wordmark into the collage, and a danilo-style scroll that
+clears the frame into the quiet work tiles (install the Claude-in-Chrome plugin to
+study danilo's motion live before building the scroll). Also deferred: dark/blush
+wordmark gradient (STOPS are a JS constant, not theme-reactive, and unseeable while
+`forcedTheme='light'`); webp optimization of the Greg PNGs.

@@ -1,11 +1,10 @@
-import type { CSSProperties } from "react";
 import { site } from "@/lib/site";
 import { Button } from "@/components/ui/button";
-import { HeroParticle } from "@/components/shared/HeroParticle";
+import { HeroParticle, ACID_STOPS } from "@/components/shared/HeroParticle";
 
 // PROTOTYPE — maximalist "loud hero, quiet work" landing. The Maeve cast Ellie
 // directed is pushed to the EDGES as a SAMSON-style cutout frame; her own voice
-// (the rose particle wordmark, grain, warm washes) owns the bright center.
+// (the particle wordmark, grain, warm washes) owns the bright center.
 // Built behind /preview; the live coming-soon page (site.comingSoon) is untouched.
 
 // 100% CSS background — no raster downloads. Soft brand-tone washes pulled to the
@@ -23,30 +22,65 @@ const BLOTCHES = [
 const GRAIN =
   `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
 
-type Cutout = { src: string; w: string; style: CSSProperties };
-
-// Anchored to true viewport edges; denser toward the bottom. Widths in vw so the
-// collage scales with the viewport. z within the (isolated) frame layer only.
-const CUTOUTS: Cutout[] = [
-  // Greg on Rocket — bottom-right hero anchor, rocket angled up-left into center.
-  { src: "/hero/greg-rocket.png", w: "40vw", style: { right: "-6%", bottom: "-4%", transform: "rotate(-12deg)", zIndex: 20 } },
+// Cutouts framing the viewport edges, denser toward the bottom. Sizes/positions
+// are responsive: bolder, fewer pieces on mobile (the scatter decor is desktop-
+// only via `hidden sm:block`) so the small wordmark stays uncrowded.
+const CUTOUTS: { src: string; className: string }[] = [
+  // Greg on Rocket — bottom-right hero anchor.
+  {
+    src: "/hero/greg-rocket.png",
+    className:
+      "absolute h-auto z-[20] w-[64vw] -bottom-[3%] -right-[14%] rotate-[-12deg] sm:w-[40vw] sm:-bottom-[4%] sm:-right-[6%]",
+  },
   // Trench-coat Froggy — tall detective silhouette, bottom-left.
-  { src: "/hero/froggy-trench.svg", w: "19vw", style: { left: "-1%", bottom: "-3%", transform: "rotate(5deg)", zIndex: 18 } },
-  // Greg with Stars — the only upper character, top-right below the nav band.
-  { src: "/hero/greg-stars.png", w: "21vw", style: { right: "-3%", top: "12%", transform: "rotate(8deg)", zIndex: 16 } },
-  // Pineapple — mid prop bridging characters + decor, lower-left band.
-  { src: "/hero/pineapple.svg", w: "11vw", style: { left: "9%", bottom: "13%", transform: "rotate(-8deg)", zIndex: 14 } },
-  // Two roses — organic curve in the dense bottom-center gutter, lifted into view.
-  { src: "/hero/roses.svg", w: "15vw", style: { left: "43%", bottom: "3%", transform: "rotate(6deg)", zIndex: 15 } },
-  // Pink heart-arrow — top-left mark so the frame isn't bottom-only.
-  { src: "/hero/heart-arrow.svg", w: "7vw", style: { left: "4%", top: "15%", transform: "rotate(-14deg)", zIndex: 12 } },
-  // Red heart — confetti beat balancing Greg's cool blues, lower-right.
-  { src: "/hero/heart-red.svg", w: "4.5vw", style: { right: "23%", bottom: "21%", transform: "rotate(18deg)", zIndex: 13 } },
-  // Yellow hearts — smallest scatter, repeated for confetti rhythm.
-  { src: "/hero/heart-yellow.svg", w: "3vw", style: { right: "4%", top: "46%", transform: "rotate(-10deg)", zIndex: 11 } },
-  { src: "/hero/heart-yellow.svg", w: "2.4vw", style: { left: "23%", bottom: "30%", transform: "rotate(14deg)", zIndex: 11 } },
-  // Upper-center scatter beat to balance the lighter top-left.
-  { src: "/hero/heart-yellow.svg", w: "2.2vw", style: { left: "33%", top: "16%", transform: "rotate(12deg)", zIndex: 11 } },
+  {
+    src: "/hero/froggy-trench.svg",
+    className:
+      "absolute h-auto z-[18] w-[34vw] -bottom-[2%] -left-[6%] rotate-[5deg] sm:w-[19vw] sm:-bottom-[3%] sm:-left-[1%]",
+  },
+  // Greg with Stars — top-right.
+  {
+    src: "/hero/greg-stars.png",
+    className:
+      "absolute h-auto z-[16] w-[42vw] top-[6%] -right-[10%] rotate-[8deg] sm:w-[21vw] sm:top-[12%] sm:-right-[3%]",
+  },
+  // Pink heart-arrow — top-left accent (kept on mobile).
+  {
+    src: "/hero/heart-arrow.svg",
+    className:
+      "absolute h-auto z-[12] w-[13vw] top-[12%] left-[3%] rotate-[-14deg] sm:w-[7vw] sm:top-[15%] sm:left-[4%]",
+  },
+  // --- desktop-only density ---
+  {
+    src: "/hero/pineapple.svg",
+    className:
+      "hidden sm:block absolute h-auto z-[14] w-[11vw] bottom-[15%] left-[9%] rotate-[-8deg]",
+  },
+  {
+    src: "/hero/roses.svg",
+    className:
+      "hidden sm:block absolute h-auto z-[15] w-[15vw] bottom-[3%] left-[43%] rotate-[6deg]",
+  },
+  {
+    src: "/hero/heart-red.svg",
+    className:
+      "hidden sm:block absolute h-auto z-[13] w-[4.5vw] bottom-[21%] right-[23%] rotate-[18deg]",
+  },
+  {
+    src: "/hero/heart-yellow.svg",
+    className:
+      "hidden sm:block absolute h-auto z-[11] w-[3vw] top-[46%] right-[4%] rotate-[-10deg]",
+  },
+  {
+    src: "/hero/heart-yellow.svg",
+    className:
+      "hidden sm:block absolute h-auto z-[11] w-[2.4vw] bottom-[30%] left-[23%] rotate-[14deg]",
+  },
+  {
+    src: "/hero/heart-yellow.svg",
+    className:
+      "hidden sm:block absolute h-auto z-[11] w-[2.2vw] top-[16%] left-[33%] rotate-[12deg]",
+  },
 ];
 
 export function HeroCollage() {
@@ -73,8 +107,7 @@ export function HeroCollage() {
             alt=""
             aria-hidden
             draggable={false}
-            className="animate-fade-up absolute h-auto select-none"
-            style={{ width: c.w, ...c.style }}
+            className={`animate-fade-up select-none ${c.className}`}
           />
         ))}
       </div>
@@ -88,8 +121,8 @@ export function HeroCollage() {
           {site.role}
         </p>
         {/* explicit height so the canvas has a resolved size to sample into */}
-        <div className="relative mx-auto mt-3 h-[clamp(220px,42vh,440px)] w-full max-w-3xl">
-          <HeroParticle />
+        <div className="relative mx-auto mt-3 h-[clamp(200px,42vh,440px)] w-full max-w-3xl">
+          <HeroParticle stops={ACID_STOPS} />
         </div>
         <div className="animate-fade-up mt-4 flex flex-wrap justify-center gap-3">
           <Button nativeButton={false} render={<a href="#work" />}>
