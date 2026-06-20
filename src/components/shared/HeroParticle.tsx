@@ -3,10 +3,12 @@
 import { useEffect, useRef } from "react";
 
 // Home-hero wordmark. A sibling of ParticleHeadline (which stays frozen on the
-// coming-soon page) retargeted to "Welcome, / I'm Ellie" and recolored to
-// Ellie's own warm rose voice — rose → rose-deep → cocoa → gold-ink → rose,
-// sampled from the Atelier Paper brand tokens (all AA-safe on the paper bg).
-const STOPS: [number, number, number][] = [
+// coming-soon page) retargeted to "Welcome, / I'm Ellie".
+type Stops = [number, number, number][];
+
+// Warm: Ellie's own rose voice — rose → rose-deep → cocoa → gold-ink → rose,
+// from the Atelier Paper brand tokens (all AA-safe on the paper bg).
+export const WARM_STOPS: Stops = [
   [162, 58, 106], // --ej-rose      #a23a6a
   [142, 47, 92], //  --ej-rose-deep #8e2f5c
   [74, 59, 51], //   --ej-cocoa     #4a3b33
@@ -14,15 +16,25 @@ const STOPS: [number, number, number][] = [
   [162, 58, 106], // back to rose
 ];
 
+// Acid: Maeve's own saturated brights — hot pink → magenta → red-orange →
+// purple → hot pink. Louder, more SAMSON-style pop.
+export const ACID_STOPS: Stops = [
+  [239, 111, 188], // hot pink   #ef6fbc
+  [196, 46, 122], //  magenta    #c42e7a
+  [255, 77, 0], //    red-orange #ff4d00
+  [130, 93, 199], //  purple     #825dc7
+  [239, 111, 188], // back to hot pink
+];
+
 const LINE1 = "Welcome,";
 const LINE2 = "I'm Ellie";
 
-function colorAt(f: number): string {
-  const seg = Math.max(0, Math.min(1, f)) * (STOPS.length - 1);
+function colorAt(f: number, stops: Stops): string {
+  const seg = Math.max(0, Math.min(1, f)) * (stops.length - 1);
   const i = Math.floor(seg);
   const t = seg - i;
-  const a = STOPS[i];
-  const b = STOPS[Math.min(i + 1, STOPS.length - 1)];
+  const a = stops[i];
+  const b = stops[Math.min(i + 1, stops.length - 1)];
   const r = Math.round(a[0] + (b[0] - a[0]) * t);
   const g = Math.round(a[1] + (b[1] - a[1]) * t);
   const bl = Math.round(a[2] + (b[2] - a[2]) * t);
@@ -44,7 +56,7 @@ type Particle = {
  * scatter fluidly away from the pointer, and spring back. Decorative: the
  * accessible name lives in the sr-only <h1> in HeroCollage.
  */
-export function HeroParticle() {
+export function HeroParticle({ stops = WARM_STOPS }: { stops?: Stops }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -131,7 +143,7 @@ export function HeroParticle() {
               y: reduce ? y : y + (Math.random() - 0.5) * spread,
               vx: 0,
               vy: 0,
-              color: colorAt(x / cw),
+              color: colorAt(x / cw, stops),
             });
           }
         }
@@ -219,7 +231,7 @@ export function HeroParticle() {
       canvas.removeEventListener("pointerleave", onLeave);
       canvas.removeEventListener("pointerup", onLeave);
     };
-  }, []);
+  }, [stops]);
 
   return (
     <canvas

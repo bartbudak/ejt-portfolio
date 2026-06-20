@@ -11,10 +11,11 @@ import { HeroParticle } from "@/components/shared/HeroParticle";
 // 100% CSS background — no raster downloads. Soft brand-tone washes pulled to the
 // corners so the center stays near-paper and the wordmark reads.
 const BLOTCHES = [
-  "radial-gradient(46% 46% at 18% 82%, rgba(162,58,106,0.14), transparent 70%)", // rose
-  "radial-gradient(40% 40% at 84% 16%, rgba(185,140,60,0.12), transparent 70%)", // gold
-  "radial-gradient(38% 38% at 88% 90%, rgba(74,59,51,0.10), transparent 70%)", // cocoa
-  "radial-gradient(34% 34% at 12% 22%, rgba(231,156,191,0.12), transparent 70%)", // blush
+  "radial-gradient(50% 50% at 16% 84%, rgba(162,58,106,0.22), transparent 72%)", // rose
+  "radial-gradient(46% 46% at 85% 15%, rgba(185,140,60,0.18), transparent 72%)", // gold
+  "radial-gradient(42% 42% at 90% 92%, rgba(74,59,51,0.15), transparent 72%)", // cocoa
+  "radial-gradient(40% 40% at 10% 20%, rgba(231,156,191,0.20), transparent 72%)", // blush
+  "radial-gradient(34% 30% at 64% 74%, rgba(217,150,58,0.12), transparent 76%)", // amber lift
 ].join(", ");
 
 // Tiling fractal-noise grain (feTurbulence) as a data-URI — tactile print-zine
@@ -35,15 +36,17 @@ const CUTOUTS: Cutout[] = [
   { src: "/hero/greg-stars.png", w: "21vw", style: { right: "-3%", top: "12%", transform: "rotate(8deg)", zIndex: 16 } },
   // Pineapple — mid prop bridging characters + decor, lower-left band.
   { src: "/hero/pineapple.svg", w: "11vw", style: { left: "9%", bottom: "13%", transform: "rotate(-8deg)", zIndex: 14 } },
-  // Two roses — organic curve in the dense bottom-center gutter.
-  { src: "/hero/roses.svg", w: "14vw", style: { left: "44%", bottom: "-2%", transform: "rotate(6deg)", zIndex: 15 } },
-  // Pink heart-arrow — lone top-left mark so the frame isn't bottom-only.
-  { src: "/hero/heart-arrow.svg", w: "6vw", style: { left: "4%", top: "16%", transform: "rotate(-14deg)", zIndex: 12 } },
+  // Two roses — organic curve in the dense bottom-center gutter, lifted into view.
+  { src: "/hero/roses.svg", w: "15vw", style: { left: "43%", bottom: "3%", transform: "rotate(6deg)", zIndex: 15 } },
+  // Pink heart-arrow — top-left mark so the frame isn't bottom-only.
+  { src: "/hero/heart-arrow.svg", w: "7vw", style: { left: "4%", top: "15%", transform: "rotate(-14deg)", zIndex: 12 } },
   // Red heart — confetti beat balancing Greg's cool blues, lower-right.
   { src: "/hero/heart-red.svg", w: "4.5vw", style: { right: "23%", bottom: "21%", transform: "rotate(18deg)", zIndex: 13 } },
   // Yellow hearts — smallest scatter, repeated for confetti rhythm.
   { src: "/hero/heart-yellow.svg", w: "3vw", style: { right: "4%", top: "46%", transform: "rotate(-10deg)", zIndex: 11 } },
   { src: "/hero/heart-yellow.svg", w: "2.4vw", style: { left: "23%", bottom: "30%", transform: "rotate(14deg)", zIndex: 11 } },
+  // Upper-center scatter beat to balance the lighter top-left.
+  { src: "/hero/heart-yellow.svg", w: "2.2vw", style: { left: "33%", top: "16%", transform: "rotate(12deg)", zIndex: 11 } },
 ];
 
 export function HeroCollage() {
