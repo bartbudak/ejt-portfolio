@@ -65,8 +65,8 @@ export function ParticleHeadline() {
     // physics
     const R = 92;
     const R2 = R * R;
-    const SPRING = 0.06;
-    const FRICTION = 0.82;
+    const SPRING = 0.075;
+    const FRICTION = 0.8;
     const PUSH = 5.4;
 
     function build() {
@@ -81,7 +81,7 @@ export function ParticleHeadline() {
       // fit "coming soon" to ~82% of width, capped by height
       ctx.font = `700 100px ${family}`;
       const measured = ctx.measureText("coming soon").width || 1;
-      let main = Math.min((100 * (cw * 0.82)) / measured, ch * 0.32, 190);
+      let main = Math.min((100 * (cw * 0.82)) / measured, ch * 0.3, 150);
       main = Math.max(main, 34);
       const small = main;
       const gap = main * 0.26;
@@ -90,7 +90,9 @@ export function ParticleHeadline() {
       const cx = cw / 2;
       const ejtY = top + small * 0.5;
       const csY = top + small + gap + main * 0.5;
-      dotR = Math.max(0.8, main * 0.008);
+      // floor keeps the diameter >= the 2px step so thin strokes (e.g. the
+      // crossbar of "e") read as a connected line rather than separate dots
+      dotR = Math.max(1.05, main * 0.0065);
 
       // sample glyphs from an offscreen canvas
       const off = document.createElement("canvas");
@@ -108,7 +110,8 @@ export function ParticleHeadline() {
       octx.fillText("coming soon", cx, csY);
       const data = octx.getImageData(0, 0, cw, ch).data;
 
-      const step = 3;
+      const step = 2;
+      const spread = main * 1.4;
       const next: Particle[] = [];
       for (let y = 0; y < ch; y += step) {
         for (let x = 0; x < cw; x += step) {
@@ -116,8 +119,9 @@ export function ParticleHeadline() {
             next.push({
               hx: x,
               hy: y,
-              x: reduce ? x : Math.random() * cw,
-              y: reduce ? y : Math.random() * ch,
+              // start in a tight cloud around home so it assembles fast
+              x: reduce ? x : x + (Math.random() - 0.5) * spread,
+              y: reduce ? y : y + (Math.random() - 0.5) * spread,
               vx: 0,
               vy: 0,
               color: colorAt(x / cw),
@@ -149,9 +153,7 @@ export function ParticleHeadline() {
         p.x += p.vx;
         p.y += p.vy;
         ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, dotR, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.fillRect(p.x - dotR, p.y - dotR, dotR * 2, dotR * 2);
       }
       raf = requestAnimationFrame(frame);
     }
@@ -160,9 +162,7 @@ export function ParticleHeadline() {
       ctx.clearRect(0, 0, cw, ch);
       for (const p of particles) {
         ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.arc(p.hx, p.hy, dotR, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.fillRect(p.hx - dotR, p.hy - dotR, dotR * 2, dotR * 2);
       }
     }
 
@@ -186,19 +186,20 @@ export function ParticleHeadline() {
       }
     }
 
-    start();
-
     canvas.addEventListener("pointermove", onMove);
     canvas.addEventListener("pointerdown", onMove);
     canvas.addEventListener("pointerleave", onLeave);
     canvas.addEventListener("pointerup", onLeave);
 
+    // ResizeObserver fires on first observe (once the canvas actually has a
+    // size) and on every resize — this is what kicks off the initial build,
+    // so it works even if layout isn't ready at mount.
     let resizeT: ReturnType<typeof setTimeout>;
-    function onResize() {
+    const ro = new ResizeObserver(() => {
       clearTimeout(resizeT);
-      resizeT = setTimeout(start, 180);
-    }
-    window.addEventListener("resize", onResize);
+      resizeT = setTimeout(start, 120);
+    });
+    ro.observe(canvas);
 
     // Re-sample once the Fraunces webfont is guaranteed loaded.
     document.fonts?.ready?.then(() => {
@@ -209,7 +210,7 @@ export function ParticleHeadline() {
       cancelled = true;
       cancelAnimationFrame(raf);
       clearTimeout(resizeT);
-      window.removeEventListener("resize", onResize);
+      ro.disconnect();
       canvas.removeEventListener("pointermove", onMove);
       canvas.removeEventListener("pointerdown", onMove);
       canvas.removeEventListener("pointerleave", onLeave);
