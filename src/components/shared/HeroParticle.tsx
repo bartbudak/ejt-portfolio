@@ -98,7 +98,7 @@ export function HeroParticle({ stops = WARM_STOPS }: { stops?: Stops }) {
       let main = Math.min((100 * (cw * 0.92)) / w1at100, ch * 0.6, 400);
       main = Math.max(main, 30);
       const sub = main * 0.4;
-      const gap = main * 0.12;
+      const gap = main * 0.03;
       const w1 = w1at100 * (main / 100);
       const w2 = w2at100 * (sub / 100);
 

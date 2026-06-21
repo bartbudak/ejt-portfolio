@@ -327,5 +327,10 @@ smaller (0.4x) and black, right-aligned under WELCOME's right edge** for contras
 **Still to do / deferred:** **motion** — a danilo-style scroll that clears the hero
 into the quiet Work/About sections (install the Claude-in-Chrome plugin to study
 danilo's motion live). Also deferred: theme toggle dropped from the floating nav
-(re-add when needed); dark-mode tuning (bg + wordmark STOPS are light-only); and the
-real Work/About/Contact section content + case studies.
+(re-add when needed); dark-mode tuning (bg + wordmark STOPS are light-only). **Work**
+is now a real editorial case-study index (Maeve / Maeve×DCC / Seasonal + the "Also"
+selected projects, all from `projects.ts`) — the calm "quiet work" counterpoint to
+the loud hero. Still TODO: About + Contact content, image-forward case-study pages
+(`/work/[slug]`, needs assets exported from `/assets/`), the hero→work scroll motion
+(danilo-style; Chrome plugin would help), and bg continuity between hero (`#ecebe4`)
+and the sections (theme `#f2ead9`).
