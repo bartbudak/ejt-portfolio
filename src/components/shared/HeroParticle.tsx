@@ -3,30 +3,31 @@
 import { useEffect, useRef } from "react";
 
 // Home-hero wordmark. A sibling of ParticleHeadline (which stays frozen on the
-// coming-soon page) retargeted to "Welcome, / I'm Ellie".
+// coming-soon page). Big acid "WELCOME" with the name "I'M ELLIE" smaller and
+// black, right-aligned under WELCOME for contrast.
 type Stops = [number, number, number][];
 
-// Warm: Ellie's own rose voice — rose → rose-deep → cocoa → gold-ink → rose,
-// from the Atelier Paper brand tokens (all AA-safe on the paper bg).
+// Warm: Ellie's own rose voice — rose → rose-deep → cocoa → gold-ink → rose.
 export const WARM_STOPS: Stops = [
-  [162, 58, 106], // --ej-rose      #a23a6a
-  [142, 47, 92], //  --ej-rose-deep #8e2f5c
-  [74, 59, 51], //   --ej-cocoa     #4a3b33
-  [126, 94, 28], //  --ej-gold-ink  #7e5e1c
-  [162, 58, 106], // back to rose
+  [162, 58, 106],
+  [142, 47, 92],
+  [74, 59, 51],
+  [126, 94, 28],
+  [162, 58, 106],
 ];
 
-// Acid: Maeve's own saturated brights — hot pink → magenta → red-orange →
-// purple → hot pink. Louder, more SAMSON-style pop.
+// Acid: Maeve's own saturated brights — hot pink → magenta → red-orange → purple.
 export const ACID_STOPS: Stops = [
-  [239, 111, 188], // hot pink   #ef6fbc
-  [196, 46, 122], //  magenta    #c42e7a
-  [255, 77, 0], //    red-orange #ff4d00
-  [130, 93, 199], //  purple     #825dc7
-  [239, 111, 188], // back to hot pink
+  [239, 111, 188],
+  [196, 46, 122],
+  [255, 77, 0],
+  [130, 93, 199],
+  [239, 111, 188],
 ];
 
-const LINE1 = "WELCOME,";
+const INK: [number, number, number] = [28, 25, 23]; // near-black for "I'M ELLIE"
+
+const LINE1 = "WELCOME";
 const LINE2 = "I'M ELLIE";
 
 function colorAt(f: number, stops: Stops): string {
@@ -49,13 +50,9 @@ type Particle = {
   vx: number;
   vy: number;
   color: string;
+  r: number;
 };
 
-/**
- * Renders "Welcome, / I'm Ellie" as a field of dots that hold the glyph shapes,
- * scatter fluidly away from the pointer, and spring back. Decorative: the
- * accessible name lives in the sr-only <h1> in HeroCollage.
- */
 export function HeroParticle({ stops = WARM_STOPS }: { stops?: Stops }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -67,20 +64,16 @@ export function HeroParticle({ stops = WARM_STOPS }: { stops?: Stops }) {
     const canvas: HTMLCanvasElement = node;
     const ctx: CanvasRenderingContext2D = maybeCtx;
 
-    const reduce = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const family = getComputedStyle(canvas).fontFamily || "serif";
 
     let particles: Particle[] = [];
     let cw = 0;
     let ch = 0;
-    let dotR = 1.4;
     let raf = 0;
     let cancelled = false;
     const pointer = { x: -9999, y: -9999, active: false };
 
-    // physics
     const R = 96;
     const R2 = R * R;
     const SPRING = 0.075;
@@ -96,25 +89,29 @@ export function HeroParticle({ stops = WARM_STOPS }: { stops?: Stops }) {
       canvas.height = Math.round(ch * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      // fit the WIDER of the two lines to ~86% width, capped by height so two
-      // stacked lines always clear the box
+      // WELCOME fills ~92% width; "I'M ELLIE" is 0.4x and right-aligned under it
       ctx.font = `700 100px ${family}`;
-      const widest = Math.max(
-        ctx.measureText(LINE1).width || 1,
-        ctx.measureText(LINE2).width || 1,
-      );
-      let main = Math.min((100 * (cw * 0.94)) / widest, ch * 0.46, 360);
+      const w1at100 = ctx.measureText(LINE1).width || 1;
+      const w2at100 = ctx.measureText(LINE2).width || 1;
+      let main = Math.min((100 * (cw * 0.92)) / w1at100, ch * 0.6, 400);
       main = Math.max(main, 30);
-      const gap = main * 0.08;
-      const blockH = main * 2 + gap;
+      const sub = main * 0.4;
+      const gap = main * 0.12;
+      const w1 = w1at100 * (main / 100);
+      const w2 = w2at100 * (sub / 100);
+
+      const blockH = main + gap + sub;
       const top = (ch - blockH) / 2;
       const cx = cw / 2;
       const l1Y = top + main * 0.5;
-      const l2Y = top + main + gap + main * 0.5;
-      // small dots on a fine 1px grid → high-res, reads as text not pixels
-      dotR = Math.max(0.5, main * 0.0034);
+      const l2Y = top + main + gap + sub * 0.5;
+      const l1Right = cx + w1 / 2;
+      const l2cx = l1Right - w2 / 2; // right-align "I'M ELLIE" to WELCOME's right edge
+      const boundaryY = top + main + gap * 0.5;
 
-      // sample glyphs from an offscreen canvas
+      const dotMain = Math.max(0.5, main * 0.0034);
+      const dotSub = Math.max(0.4, sub * 0.0034);
+
       const off = document.createElement("canvas");
       off.width = cw;
       off.height = ch;
@@ -126,24 +123,27 @@ export function HeroParticle({ stops = WARM_STOPS }: { stops?: Stops }) {
       octx.textBaseline = "middle";
       octx.font = `700 ${main}px ${family}`;
       octx.fillText(LINE1, cx, l1Y);
-      octx.fillText(LINE2, cx, l2Y);
+      octx.font = `700 ${sub}px ${family}`;
+      octx.fillText(LINE2, l2cx, l2Y);
       const data = octx.getImageData(0, 0, cw, ch).data;
 
       const step = 1;
       const spread = main * 1.4;
+      const inkColor = `rgb(${INK[0]},${INK[1]},${INK[2]})`;
       const next: Particle[] = [];
       for (let y = 0; y < ch; y += step) {
         for (let x = 0; x < cw; x += step) {
           if (data[(y * cw + x) * 4 + 3] > 140) {
+            const isMain = y < boundaryY;
             next.push({
               hx: x,
               hy: y,
-              // start in a tight cloud around home so it assembles fast
               x: reduce ? x : x + (Math.random() - 0.5) * spread,
               y: reduce ? y : y + (Math.random() - 0.5) * spread,
               vx: 0,
               vy: 0,
-              color: colorAt(x / cw, stops),
+              color: isMain ? colorAt(x / cw, stops) : inkColor,
+              r: isMain ? dotMain : dotSub,
             });
           }
         }
@@ -172,7 +172,7 @@ export function HeroParticle({ stops = WARM_STOPS }: { stops?: Stops }) {
         p.x += p.vx;
         p.y += p.vy;
         ctx.fillStyle = p.color;
-        ctx.fillRect(p.x - dotR, p.y - dotR, dotR * 2, dotR * 2);
+        ctx.fillRect(p.x - p.r, p.y - p.r, p.r * 2, p.r * 2);
       }
       raf = requestAnimationFrame(frame);
     }
@@ -181,7 +181,7 @@ export function HeroParticle({ stops = WARM_STOPS }: { stops?: Stops }) {
       ctx.clearRect(0, 0, cw, ch);
       for (const p of particles) {
         ctx.fillStyle = p.color;
-        ctx.fillRect(p.hx - dotR, p.hy - dotR, dotR * 2, dotR * 2);
+        ctx.fillRect(p.hx - p.r, p.hy - p.r, p.r * 2, p.r * 2);
       }
     }
 

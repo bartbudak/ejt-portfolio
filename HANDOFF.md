@@ -318,8 +318,11 @@ removed entirely; replaced with a **soft static pink blotch** (Faizan-style) in 
 `BLOTCHES` washes behind the wordmark. Nav active state is now **bold** (not the
 underline). Wordmark made higher-res (1px sampling, smaller dots, bigger font in a
 `max-w-4xl` / `56vh` box → reads as crisp text, ~80fps). **Current hero = grainy
-`#ecebe4` field + static pink blotch + faint grid + big acid wordmark + floating
-nav.** (Whisp is recoverable from git history if its design ever clicks.)
+`#ecebe4` field + static pink blotch + faint grid + two-tone wordmark + floating
+nav.** The wordmark is now **big acid "WELCOME"** (comma dropped) with **"I'M ELLIE"
+smaller (0.4x) and black, right-aligned under WELCOME's right edge** for contrast
+(`HeroParticle` samples both lines into one canvas; per-particle color + radius).
+(Whisp is recoverable from git history if its design ever clicks.)
 
 **Still to do / deferred:** **motion** — a danilo-style scroll that clears the hero
 into the quiet Work/About sections (install the Claude-in-Chrome plugin to study
