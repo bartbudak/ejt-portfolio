@@ -16,19 +16,21 @@ export const WARM_STOPS: Stops = [
   [162, 58, 106],
 ];
 
-// Acid: Maeve's own saturated brights — hot pink → magenta → red-orange → purple.
+// Acid, warm-forward: hot pink → red-orange → amber → gold → burnt amber → pink.
+// Yellows/ambers carry the centre; pink anchors the ends.
 export const ACID_STOPS: Stops = [
-  [239, 111, 188],
-  [196, 46, 122],
-  [255, 77, 0],
-  [130, 93, 199],
-  [239, 111, 188],
+  [233, 99, 162], // hot pink
+  [243, 92, 28], //  red-orange
+  [233, 150, 22], // amber
+  [240, 184, 38], // gold
+  [232, 130, 30], // burnt amber
+  [233, 99, 162], // hot pink
 ];
 
 const INK: [number, number, number] = [28, 25, 23]; // near-black for "I'M ELLIE"
 
 const LINE1 = "WELCOME";
-const LINE2 = "I'M ELLIE";
+const LINE2 = "i'm ellie";
 
 function colorAt(f: number, stops: Stops): string {
   const seg = Math.max(0, Math.min(1, f)) * (stops.length - 1);
