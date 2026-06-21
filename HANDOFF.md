@@ -313,9 +313,16 @@ art is wanted again). Whisp retuned: slower drift, longer **dragging tail** (60-
 trail, gentle falloff), lower opacity (~0.34), and an **amorphous** per-point squash
 (±15%) so it stays roughly circular without going chaotic.
 
-**Still to do / deferred:** more **motion** — parallax on the cutouts, the wordmark
-scatter "spill", and a danilo-style scroll that clears the frame into the quiet work
-tiles (install the Claude-in-Chrome plugin to study danilo's motion live before
-building the scroll). Also deferred: theme toggle was dropped from the floating nav
-for the clean look (re-add when needed); dark-mode tuning (whisp/bg are light-only;
-STOPS are a JS constant); webp optimization of the Greg PNGs.
+**Update — animated whisp DROPPED (Bart couldn't settle its design).** `Whisp.tsx`
+removed entirely; replaced with a **soft static pink blotch** (Faizan-style) in the
+`BLOTCHES` washes behind the wordmark. Nav active state is now **bold** (not the
+underline). Wordmark made higher-res (1px sampling, smaller dots, bigger font in a
+`max-w-4xl` / `56vh` box → reads as crisp text, ~80fps). **Current hero = grainy
+`#ecebe4` field + static pink blotch + faint grid + big acid wordmark + floating
+nav.** (Whisp is recoverable from git history if its design ever clicks.)
+
+**Still to do / deferred:** **motion** — a danilo-style scroll that clears the hero
+into the quiet Work/About sections (install the Claude-in-Chrome plugin to study
+danilo's motion live). Also deferred: theme toggle dropped from the floating nav
+(re-add when needed); dark-mode tuning (bg + wordmark STOPS are light-only); and the
+real Work/About/Contact section content + case studies.
