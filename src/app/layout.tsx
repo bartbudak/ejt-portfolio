@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Gabarito, Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Fraunces, Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
 import { ThemeProvider } from "@/components/shared/ThemeProvider";
@@ -15,11 +15,6 @@ const fraunces = Fraunces({
   axes: ["opsz", "SOFT", "WONK"],
 });
 
-// Headings: rounded, friendly geometric display sans.
-const gabarito = Gabarito({
-  variable: "--font-gabarito",
-  subsets: ["latin"],
-});
 
 // Body / UI: clean humanist grotesque for design-system text.
 const hanken = Hanken_Grotesk({
@@ -36,7 +31,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — ${site.role}`,
+    default: `${site.name} — ${site.metaRole}`,
     template: `%s — ${site.name}`,
   },
   description: site.description,
@@ -46,7 +41,7 @@ export const metadata: Metadata = {
   publisher: site.name,
   alternates: { canonical: "/" },
   openGraph: {
-    title: `${site.name} — ${site.role}`,
+    title: `${site.name} — ${site.metaRole}`,
     description: site.description,
     url: site.url,
     siteName: site.name,
@@ -55,7 +50,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — ${site.role}`,
+    title: `${site.name} — ${site.metaRole}`,
     description: site.description,
   },
   robots: {
@@ -77,7 +72,7 @@ const personJsonLd = {
   "@type": "Person",
   name: site.name,
   url: site.url,
-  jobTitle: site.role,
+  jobTitle: [...site.roles],
   description: site.description,
   sameAs: Object.values(site.social).filter(
     (v) => typeof v === "string" && v.startsWith("http"),
@@ -92,7 +87,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${gabarito.variable} ${hanken.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${hanken.variable} ${jetbrainsMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">

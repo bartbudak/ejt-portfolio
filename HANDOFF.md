@@ -1,5 +1,35 @@
 # ejt-portfolio — Session Handoff
 
+> ## ⚠️ SUPERSEDED IN PART — read this first (2026-09-04)
+>
+> Ellie produced her own Canva deck (`Ellie Thompson Portfolio.pdf`) and a copy
+> doc (`assets/maeve/docs/ellie-thompson-portfolio-copy.md`). **Bart confirmed:
+> where those contradict anything below, they win.** Concretely:
+>
+> - **Positioning.** She is presented as **Brand Manager · Marketing Director ·
+>   Creative Strategist**, moving to NYC, results-first — *not* as an agency-side
+>   Creative Director. §1 below is obsolete on this point.
+> - **Palette.** Her deck's colours (marigold `#FEB431`, vermilion `#F83E02`,
+>   blush `#F2B7B3`, ice `#99F0FF`, sage `#8C9F5D`) replace "Atelier Paper" for
+>   new work. They live in `globals.css` as `--ejd-*`. **Several fail WCAG
+>   contrast; that is a deliberate aesthetic call by Bart.** Display type is
+>   treated as graphic; body copy stays near-black, as her deck does.
+> - **Type.** Her deck runs ITC Benguiat Condensed + Beth Ellen + Futura, none
+>   of which are web-licensed via Canva. Substitute: **Fraunces (wght 900,
+>   WONK 1) + Hanken Grotesk + JetBrains Mono** — already installed. Drop
+>   Gabarito (redundant with Hanken).
+> - **Hero.** §11's "Welcome, I'm Ellie" particle-wordmark direction is
+>   **retired**. The hero is now a translation of the deck's title card —
+>   see `src/components/sections/Hero.tsx`. `HeroCollage.tsx` and
+>   `HeroParticle.tsx` have been **deleted** (recoverable from git history);
+>   `PixelLogo` still runs in the nav and now owns its own gradient.
+> - **Assets.** 274 items organised under `assets/maeve/` — see **`ASSETS.md`**,
+>   which is authoritative for where media lives and what's still missing.
+>
+> UX arrangement, the seasonal card system and the before/after wipe:
+> https://claude.ai/code/artifact/302d48db-c9cb-4696-9e37-233ac19d8a8d
+
+
 Portfolio for **Ellie J. Thompson** (creative director) → **elliejthompson.com**.
 Built by Bart (her husband). This doc captures the direction, research, and
 decisions so a fresh session can continue without re-deriving anything.

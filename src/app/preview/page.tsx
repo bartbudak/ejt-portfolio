@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
-import { HeroCollage } from "@/components/sections/HeroCollage";
-import { Work } from "@/components/sections/Work";
-import { About } from "@/components/sections/About";
-import { Contact } from "@/components/sections/Contact";
+import { Hero } from "@/components/sections/Hero";
+import { Results } from "@/components/sections/Results";
+import { BeforeAfter } from "@/components/sections/BeforeAfter";
 
-// Local-only preview of the full home while the live site stays on the
-// coming-soon holding page (site.comingSoon). noindex as defense-in-depth —
-// do NOT deploy this to the main hosting channel while iterating.
+// Local-only preview of the home while the live site stays on the coming-soon
+// holding page (site.comingSoon). noindex as defense-in-depth — do NOT deploy
+// this to the main hosting channel while iterating.
 export const metadata: Metadata = {
   title: "Preview",
   robots: { index: false, follow: false },
@@ -19,10 +18,9 @@ export default function PreviewPage() {
   return (
     <>
       <Navbar />
-      <HeroCollage />
-      <Work />
-      <About />
-      <Contact />
+      <Hero />
+      <Results />
+      <BeforeAfter />
     </>
   );
 }

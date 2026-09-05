@@ -1,12 +1,22 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { ACID_STOPS } from "./HeroParticle";
 
 // Small particle wordmark for the navbar — the hero's pixel/dot treatment shrunk
 // to a logo. Idles as a static dot render; runs the scatter physics only while
 // hovered (rAF stops once it settles) so it costs nothing at rest.
 type P = { hx: number; hy: number; x: number; y: number; vx: number; vy: number; c: string };
+
+// Acid gradient — hot pink → red-orange → amber → gold → burnt amber → pink.
+// Previously imported from HeroParticle; inlined when that prototype was removed.
+const ACID_STOPS: [number, number, number][] = [
+  [233, 99, 162],
+  [243, 92, 28],
+  [233, 150, 22],
+  [240, 184, 38],
+  [232, 130, 30],
+  [233, 99, 162],
+];
 
 function colorAt(f: number): string {
   const s = ACID_STOPS;
@@ -24,10 +34,15 @@ export function PixelLogo({ text = "ejt." }: { text?: string }) {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const canvas = ref.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    const el = ref.current;
+    if (!el) return;
+    const context = el.getContext("2d");
+    if (!context) return;
+    // Re-bind with explicit non-null types: the nested function declarations
+    // below are hoisted, so TS won't carry the narrowing from the guards above
+    // into them, and `next build` fails type-checking.
+    const canvas: HTMLCanvasElement = el;
+    const ctx: CanvasRenderingContext2D = context;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const family = getComputedStyle(canvas).fontFamily || "serif";

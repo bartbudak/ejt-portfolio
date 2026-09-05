@@ -9,7 +9,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-hanken);
   --font-mono: var(--font-jetbrains);
-  --font-heading: var(--font-gabarito);
+  --font-heading: var(--font-hanken); /* was Gabarito; one sans does both */
   --font-display: var(--font-fraunces);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -40,13 +40,23 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  /* Brand accents — the single "rose" system (see :root below). */
-  --color-ej-rose: var(--ej-rose);
-  --color-ej-rose-deep: var(--ej-rose-deep);
-  --color-ej-blush: var(--ej-blush);
-  --color-ej-gold: var(--ej-gold);
-  --color-ej-gold-ink: var(--ej-gold-ink);
-  --color-ej-cocoa: var(--ej-cocoa);
+  /* Deck palette — sampled from Ellie's Canva deck (2026-09-04). Aesthetic-led:
+     these are her true colours, several of which do not clear WCAG contrast.
+     Bart's call — display type is treated as graphic, body copy stays ink. */
+  --color-ejd-marigold: var(--ejd-marigold);
+  --color-ejd-vermilion: var(--ejd-vermilion);
+  --color-ejd-blush: var(--ejd-blush);
+  --color-ejd-ice: var(--ejd-ice);
+  --color-ejd-sage: var(--ejd-sage);
+  --color-ejd-red: var(--ejd-red);
+  --color-ejd-burnt: var(--ejd-burnt);
+  --color-ejd-deep: var(--ejd-deep);
+  --color-ejd-ink: var(--ejd-ink);
+  --color-mv-paper: var(--mv-paper);
+  --color-mv-red: var(--mv-red);
+  --color-mv-pink: var(--mv-pink);
+  --color-mv-yellow: var(--mv-yellow);
+  --color-mv-soft-black: var(--mv-soft-black);
   /* Card elevation — bg→surface is intentionally subtle, so lean on this. */
   --shadow-card: 0 1px 2px rgb(42 37 33 / 0.04), 0 8px 24px rgb(42 37 33 / 0.06);
   --radius-sm: calc(var(--radius) * 0.6);
@@ -80,7 +90,7 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: #dccfb8;
   --input: #dccfb8;
-  --ring: #a23a6a; /* rose — brand accent on focus */
+  --ring: #f83e02; /* deck vermilion — brand accent on focus */
   --chart-1: #a23a6a;
   --chart-2: #b98c3c;
   --chart-3: #4a3b33;
@@ -116,7 +126,7 @@
   --destructive: oklch(0.704 0.191 22.216);
   --border: #403935;
   --input: #403935;
-  --ring: #e79cbf; /* blush */
+  --ring: #feb431; /* deck marigold on dark */
   --chart-1: #e79cbf;
   --chart-2: #b98c3c;
   --chart-3: #c7a761;
@@ -132,14 +142,33 @@
   --sidebar-ring: #e79cbf;
 }
 
-/* ── Brand accents — ONE rose voice (gold & cocoa are detail-only) ───────── */
+/* ── Deck palette (Ellie's Canva deck) ───────────────────────────────────── */
 :root {
-  --ej-rose: #a23a6a; /* the warm gesture: tamed Maeve pink. Text-safe. */
-  --ej-rose-deep: #8e2f5c; /* hover/pressed; rose text on cards */
-  --ej-blush: #e79cbf; /* dark-theme rose; tints/overlays */
-  --ej-gold: #b98c3c; /* HAIRLINE / decoration only on light — never text */
-  --ej-gold-ink: #7e5e1c; /* AA-safe gold text on paper */
-  --ej-cocoa: #4a3b33; /* secondary text / fills / deep gradient anchor */
+  --ejd-marigold: #feb431; /* 15% of the deck — the dominant ground */
+  --ejd-vermilion: #f83e02; /* 13% — display type + the loud ground */
+  --ejd-blush: #f2b7b3; /* the hero field */
+  --ejd-ice: #99f0ff;
+  --ejd-sage: #8c9f5d;
+  --ejd-red: #cc0000;
+  --ejd-burnt: #cc4e00;
+  --ejd-deep: #7a1a00; /* deepened vermilion, for small text on colour */
+  --ejd-ink: #1a1210; /* warm near-black — her deck's body colour */
+
+  /* Lifted from the live Maeve theme (github: maeve/styles/__base.scss) so the
+     case-study furniture matches the site she actually shipped. */
+  --mv-paper: #fff3e5; /* --cr-paper */
+  --mv-red: #ff4001; /* --cr-red — the frame colour */
+  --mv-pink: #fb66e5; /* --cr-pink — the showcase panel */
+  --mv-yellow: #ffc72c; /* --cr-yellow */
+  --mv-soft-black: #2d2926; /* --cr-black-soft — every rule + stroke */
+  --mv-stroke: 2px; /* --stroke-width */
+  --mv-frame: 7px; /* frame() mixin ring width; 5px under 768 */
+}
+
+@media (max-width: 767px) {
+  :root {
+    --mv-frame: 5px;
+  }
 }
 
 @layer base {
