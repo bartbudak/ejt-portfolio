@@ -29,6 +29,32 @@
 > UX arrangement, the seasonal card system and the before/after wipe:
 > https://claude.ai/code/artifact/302d48db-c9cb-4696-9e37-233ac19d8a8d
 
+> ### Update 2026-09-05 — the deck's own running order
+>
+> Rendering deck p1 settles what goes where. Her order after the title card is:
+> **HI THERE! → MY CROWN JEWEL (before/after) → MAEVE WAS (RE)BORN IN 2025
+> (the results) → WHY DID I PITCH THE REBRAND? → THE BRIEF.** Note the deck puts
+> the before/after *above* the results; the build currently has it below.
+>
+> - **`About.tsx` is now "HI THERE!"** — the deck panel, with her three
+>   paragraphs verbatim in `site.about`. The longer About in the copy doc
+>   (psychology degree, four promotions, the jcoco refresh, the exec team) is a
+>   different and fuller piece of writing and is **still unplaced**.
+> - **`Marquee.tsx`** is a port of the live Maeve theme's `.c-marquee--text`
+>   (`maeve/styles/_c-marquee.scss`), recoloured to marigold/vermilion/ink.
+>   "Open to Work" and "Moving to NYC" live there now, not in the hero corners.
+> - **Beth Ellen** (the deck's script face) is installed as `font-script`, for
+>   handwritten asides only — "Hello", "Before"/"After", "In a nutshell".
+> - **Hero centring is now derived, not eyeballed.** The wordmark's font size
+>   comes from a measured glyph advance so the line always fits its box, and
+>   `opsz` is pinned to 144 so that advance stays constant across sizes. Don't
+>   change the type settings without re-measuring `--wm-advance`.
+> - **Still unbuilt:** the flagship case study (§3a–e), seasonal collections
+>   (§4, the card+drawer system), the DCC collab (§5), Beyond the Desk (§6),
+>   Recognition & Press (§7).
+> - `ASSETS.md` says one before/after pair exists; `public/work/before-after/`
+>   actually holds eight. That doc is stale on this point.
+
 
 Portfolio for **Ellie J. Thompson** (creative director) → **elliejthompson.com**.
 Built by Bart (her husband). This doc captures the direction, research, and
