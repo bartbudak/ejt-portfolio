@@ -42,7 +42,7 @@ export function Hero() {
         className="relative flex min-h-[100svh] w-full flex-col overflow-hidden"
         style={{ backgroundColor: "var(--ejd-blush)" }}
       >
-        <div className="relative z-20 mx-auto w-full max-w-[1600px] px-4 pt-36 sm:px-8 sm:pt-24">
+        <div className="relative z-20 mx-auto w-full max-w-[1600px] px-4 pt-12 sm:px-8 sm:pt-16">
           {/* One line, full bleed — the deck sets this in Benguiat *Condensed*.
               Fraunces has no condensed cut, so a slight scaleX recovers the
               proportion without needing a licensed face. */}
@@ -87,7 +87,7 @@ export function Hero() {
             // Next 16 deprecated `priority` in favour of `preload`; this is the
             // above-the-fold LCP element.
             preload
-            className="mt-[-4vw] h-auto w-[min(108vw,34rem)] max-w-none object-contain sm:w-[min(84vw,34rem)]"
+            className="mt-[-4vw] h-auto w-[min(124vw,34rem)] max-w-none object-contain sm:w-[min(84vw,34rem)]"
           />
         </div>
 

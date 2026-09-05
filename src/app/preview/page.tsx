@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { Results } from "@/components/sections/Results";
 import { BeforeAfter } from "@/components/sections/BeforeAfter";
@@ -14,11 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default function PreviewPage() {
-  // layout.tsx hides the Navbar while comingSoon=true, so render one locally
-  // for hero context. (layout already provides the <main> wrapper.)
   return (
     <>
-      <Navbar />
       <Hero />
       <Results />
       <BeforeAfter />

@@ -5,7 +5,6 @@ import { site } from "@/lib/site";
 import { ThemeProvider } from "@/components/shared/ThemeProvider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ServiceWorkerRegistration } from "@/components/shared/ServiceWorkerRegistration";
-import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 
 // Display: chunky, slightly psychedelic high-contrast serif (SOFT/WONK axes).
@@ -103,7 +102,6 @@ export default function RootLayout({
         >
           <TooltipProvider>
             <ServiceWorkerRegistration />
-            {showChrome && <Navbar />}
             <main className="flex-1">{children}</main>
             {showChrome && <Footer />}
           </TooltipProvider>

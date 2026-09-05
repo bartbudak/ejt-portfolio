@@ -35,6 +35,9 @@ export const site = {
     { value: "4", label: "National design awards" },
     { value: "5.5x", label: "Email list growth, 10K to 55K" },
   ],
+  // Nothing renders these right now — the floating header was removed. Kept as
+  // config for whatever navigation comes back; keep the hrefs matching real
+  // section ids so it can't drift out of sync again.
   nav: [
     { label: "Results", href: "#results" },
     { label: "Work", href: "#before-after" },
