@@ -30,8 +30,11 @@ export function Marquee({
   // The two-copy trick only stays seamless while ONE copy is at least as wide
   // as the viewport: copy A runs 0 → -W while copy B runs W → 0, so the pair
   // spans [-W, 2W-t·W], which still reaches the right edge at the end of the
-  // cycle only if W ≥ viewport. Five short phrases measured 1504px, which holds
-  // at 1440 and tears on anything wider, so each copy carries the list twice.
+  // cycle only if W ≥ viewport. The phrase list on its own does not clear that
+  // bar, and it cannot grow into it either — the font size stops scaling at its
+  // 2rem clamp around 1830px, so W is FIXED above that width no matter how wide
+  // the display is. Three passes of the list measures ~3985px, which covers
+  // 4K and ultrawide; two passes measured 2657px and tore past 2657.
   const run = (copy: number) => (
     <div
       key={copy}
@@ -40,7 +43,7 @@ export function Marquee({
       aria-hidden={copy > 0 || undefined}
       className="ejt-marquee__track flex flex-none items-center whitespace-nowrap"
     >
-      {[0, 1].map((pass) =>
+      {[0, 1, 2].map((pass) =>
         items.map((item) => (
           <span key={`${pass}-${item}`} className="ejt-marquee__item">
             {item}

@@ -36,14 +36,13 @@ export const site = {
     { value: "5.5x", label: "Email list growth, 10K to 55K" },
   ],
   // The scrolling band under the hero (components/shared/Marquee.tsx). The
-  // first two were the title card's corner tags in her deck; the rest keep the
-  // loop from reading as a two-word stutter on a wide screen.
+  // first two were the title card's corner tags in her deck. Keep this list
+  // short — the component repeats it to fill the loop, so length here is about
+  // what the band says, not whether it scrolls cleanly.
   marquee: [
     "Open to Work",
     "Moving to NYC",
     "Brand · Marketing · Creative Strategy",
-    "Let's talk",
-    "Portfolio 2026",
   ],
   // "HI THERE!" — her deck's own introduction, verbatim. Deliberately hers and
   // not the longer About in assets/maeve/docs/ellie-thompson-portfolio-copy.md;
