@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Beth_Ellen, Fraunces, Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
 import { ThemeProvider } from "@/components/shared/ThemeProvider";
@@ -19,6 +19,15 @@ const fraunces = Fraunces({
 const hanken = Hanken_Grotesk({
   variable: "--font-hanken",
   subsets: ["latin"],
+});
+
+// Script accent — the face Ellie's deck actually uses for its handwritten
+// asides ("Hello", "Before"/"After", "In a nutshell"). Decorative only: it is
+// unreadable at body sizes, so it never carries information a reader needs.
+const bethEllen = Beth_Ellen({
+  variable: "--font-beth-ellen",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -86,7 +95,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${hanken.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${hanken.variable} ${bethEllen.variable} ${jetbrainsMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">

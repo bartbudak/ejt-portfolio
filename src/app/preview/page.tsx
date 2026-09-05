@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/sections/Hero";
+import { Marquee } from "@/components/shared/Marquee";
+import { About } from "@/components/sections/About";
 import { Results } from "@/components/sections/Results";
 import { BeforeAfter } from "@/components/sections/BeforeAfter";
 import { Contact } from "@/components/sections/Contact";
@@ -16,6 +18,8 @@ export default function PreviewPage() {
   return (
     <>
       <Hero />
+      <Marquee />
+      <About />
       <Results />
       <BeforeAfter />
       <Contact />

@@ -35,6 +35,29 @@ export const site = {
     { value: "4", label: "National design awards" },
     { value: "5.5x", label: "Email list growth, 10K to 55K" },
   ],
+  // The scrolling band under the hero (components/shared/Marquee.tsx). The
+  // first two were the title card's corner tags in her deck; the rest keep the
+  // loop from reading as a two-word stutter on a wide screen.
+  marquee: [
+    "Open to Work",
+    "Moving to NYC",
+    "Brand · Marketing · Creative Strategy",
+    "Let's talk",
+    "Portfolio 2026",
+  ],
+  // "HI THERE!" — her deck's own introduction, verbatim. Deliberately hers and
+  // not the longer About in assets/maeve/docs/ellie-thompson-portfolio-copy.md;
+  // that fuller history (psychology degree, four promotions, the jcoco refresh,
+  // the exec team) is still unused and wants a section of its own.
+  about: {
+    heading: "Hi There!",
+    script: "Hello",
+    paragraphs: [
+      "My name is Ellie, I am a brand manager and marketing strategist looking to devote myself to a new team.",
+      "I led the rebrand of Seattle Chocolate into Maeve and spent 7 years at the business on the marketing team, most recently as the Marketing Director and before that as the Brand Manager.",
+      "I love color on color, refined absurdity and attempting to create original experiences for myself and others.",
+    ],
+  },
   // Nothing renders these right now — the floating header was removed. Kept as
   // config for whatever navigation comes back; keep the hrefs matching real
   // section ids so it can't drift out of sync again.

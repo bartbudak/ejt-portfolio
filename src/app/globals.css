@@ -11,6 +11,7 @@
   --font-mono: var(--font-jetbrains);
   --font-heading: var(--font-hanken); /* was Gabarito; one sans does both */
   --font-display: var(--font-fraunces);
+  --font-script: var(--font-beth-ellen);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -231,4 +232,56 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .cs-blob, .animate-fade-up { animation: none; }
+}
+
+/* ── Marquee — a port of the live Maeve theme's `.c-marquee--text`
+   (github: maeve/styles/_c-marquee.scss), recoloured for Ellie's deck palette.
+   Faithful to the original: two identical copies of the content scroll a full
+   -100% so the loop is seamless; the band is a coloured ground with a soft-ink
+   hairline top and bottom, wrapped in a ring drawn as box-shadow spread and
+   clipped left/right so the ring only ever reads as a horizontal band. ─────── */
+@keyframes ejt-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-100%, 0, 0); }
+}
+.ejt-marquee {
+  --ejt-marquee-frame: 7px;
+  border-top: var(--mv-stroke) solid var(--ejd-ink);
+  border-bottom: var(--mv-stroke) solid var(--ejd-ink);
+  margin-block: var(--ejt-marquee-frame);
+  box-shadow:
+    0 0 0 var(--ejt-marquee-frame) var(--ejt-marquee-ring),
+    0 0 0 calc(var(--ejt-marquee-frame) + var(--mv-stroke)) var(--ejd-ink);
+  clip-path: inset(
+    calc(-1 * (var(--ejt-marquee-frame) + var(--mv-stroke))) 0
+    calc(-1 * (var(--ejt-marquee-frame) + var(--mv-stroke))) 0
+  );
+}
+.ejt-marquee__track {
+  animation: ejt-marquee 40s 0.5s linear infinite;
+}
+/* Maeve separates blocks with a dot sitting in the middle of the trailing gap. */
+.ejt-marquee__item {
+  --ejt-dot: 9px;
+  --ejt-gap: 36px;
+  position: relative;
+  padding-right: var(--ejt-gap);
+}
+.ejt-marquee__item::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: calc((var(--ejt-gap) - var(--ejt-dot)) / 2);
+  width: var(--ejt-dot);
+  height: var(--ejt-dot);
+  border-radius: 100%;
+  background-color: var(--ejd-ink);
+  transform: translateY(-50%);
+}
+@media (max-width: 767px) {
+  .ejt-marquee { --ejt-marquee-frame: 5px; }
+  .ejt-marquee__item { --ejt-dot: 7px; --ejt-gap: 26px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ejt-marquee__track { animation: none; }
 }
