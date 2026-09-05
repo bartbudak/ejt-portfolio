@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 // Before/after product showcase, built in the live Maeve theme's own section
@@ -93,6 +93,18 @@ export function BeforeAfter() {
   const dragging = useRef(false);
 
   const pair = PAIRS[active];
+
+  // Doherty Threshold. Only the active pair is in the DOM, so clicking an
+  // unvisited tile otherwise fetches two PNGs on demand — measured at ~120 KB,
+  // which blows past 400 ms on a real connection. Warm the cache after paint.
+  useEffect(() => {
+    for (const p of PAIRS) {
+      for (const side of ["before", "after"] as const) {
+        const img = new window.Image();
+        img.src = `/work/before-after/${p.slug}-${side}.png`;
+      }
+    }
+  }, []);
   // Clip BOTH sides at the seam. Clipping only the "after" image leaves the
   // "before" one painting underneath, which is invisible when the two packs are
   // the same silhouette (the bars) but obvious when they aren't — the small
@@ -218,6 +230,12 @@ export function BeforeAfter() {
 
             </div>
 
+            {/* Switching pairs changes the art but nothing textual, so a
+                screen reader hears nothing without this. */}
+            <p aria-live="polite" className="sr-only">
+              Showing {pair.after}, which replaced {pair.before}.
+            </p>
+
             {/* ── Panel two: the picker — new packaging only, no labels ── */}
             <ul className="grid grid-cols-2 gap-[var(--mv-stroke)]">
               {PAIRS.map((p, i) => {
@@ -229,6 +247,7 @@ export function BeforeAfter() {
                       onClick={() => { setActive(i); setPos(50); }}
                       aria-pressed={on}
                       aria-label={`${p.after}, was ${p.before}`}
+                      title={`${p.after} — was ${p.before}`}
                       className="grid h-full w-full place-items-center p-3 transition-colors"
                       style={{ backgroundColor: on ? p.afterBg : "var(--mv-paper)" }}
                     >

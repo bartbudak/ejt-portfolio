@@ -3,6 +3,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { Results } from "@/components/sections/Results";
 import { BeforeAfter } from "@/components/sections/BeforeAfter";
+import { Contact } from "@/components/sections/Contact";
 
 // Local-only preview of the home while the live site stays on the coming-soon
 // holding page (site.comingSoon). noindex as defense-in-depth — do NOT deploy
@@ -21,6 +22,7 @@ export default function PreviewPage() {
       <Hero />
       <Results />
       <BeforeAfter />
+      <Contact />
     </>
   );
 }

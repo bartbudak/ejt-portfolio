@@ -36,8 +36,8 @@ export const site = {
     { value: "5.5x", label: "Email list growth, 10K to 55K" },
   ],
   nav: [
-    { label: "Work", href: "#work" },
-    { label: "About", href: "#about" },
+    { label: "Results", href: "#results" },
+    { label: "Work", href: "#before-after" },
     { label: "Contact", href: "#contact" },
   ],
   social: {

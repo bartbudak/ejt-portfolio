@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 
+// Must match the sections actually rendered — dead anchors leave the scroll-spy
+// with nothing to observe and send clicks nowhere.
 const ITEMS = [
   { label: "Home", id: "top" },
-  { label: "Work", id: "work" },
-  { label: "About", id: "about" },
+  { label: "Results", id: "results" },
+  { label: "Work", id: "before-after" },
   { label: "Contact", id: "contact" },
 ];
 
