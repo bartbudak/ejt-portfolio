@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { site } from "@/lib/site";
+import { ParticleWordmark } from "@/components/shared/ParticleWordmark";
 
 // Opening hero — a direct translation of Ellie's own Canva deck (2026-09-04),
 // which is the source of truth over HANDOFF.md §11's "Welcome, I'm Ellie"
@@ -58,18 +59,40 @@ export function Hero() {
             cut, so a slight scaleX recovers the proportion without needing a
             licensed face. Mobile stacks the two words and stretches them
             vertically so the type still carries a narrow viewport. */}
+        {/* The holding page's fluid pixel field, now carrying her name. The
+            heading keeps the real text for screen readers and for search; the
+            canvas beside it is decorative and pointer-transparent, so the dots
+            never intercept a click.
+            Height is derived from the same fitted size the CSS wordmark used,
+            so the hero's layout — and the roles crossing her cap below — are
+            unchanged. */}
         <h1
-          className="block origin-center scale-x-[0.96] scale-y-[1.18] text-center font-display font-black uppercase leading-[0.82] tracking-[-0.03em] [--wm-advance:5.6] sm:scale-x-[0.94] sm:scale-y-100 sm:whitespace-nowrap sm:leading-[0.86] sm:[--wm-advance:8.58]"
-          style={{
-            ...WORDMARK_AXES,
-            ...WORDMARK_FIT,
-            color: "var(--ejd-vermilion)",
-            // scaleX + negative tracking crush the word space; put it back.
-            wordSpacing: "0.12em",
-          }}
+          className="relative block [--wm-advance:5.6] sm:[--wm-advance:8.58]"
         >
-          <span className="block sm:inline">Ellie</span>{" "}
-          <span className="block sm:inline">Thompson</span>
+          <span className="sr-only">Ellie Thompson</span>
+          {/* Two mounts rather than one reflowing mount: the mobile field
+              stacks the name over two lines and the desktop one runs it across
+              a single line, and each needs its own height. */}
+          <span
+            className="block sm:hidden"
+            style={{ height: "calc(min(11.5rem, (100vw - 2rem) / var(--wm-advance)) * 2.1)" }}
+          >
+            <ParticleWordmark
+              lines={["ELLIE", "THOMPSON"]}
+              color="var(--ejd-vermilion)"
+              scaleX={0.96}
+            />
+          </span>
+          <span
+            className="hidden sm:block"
+            style={{ height: "calc(min(11.5rem, (100vw - 2rem) / var(--wm-advance)) * 1.05)" }}
+          >
+            <ParticleWordmark
+              lines={["ELLIE THOMPSON"]}
+              color="var(--ejd-vermilion)"
+              scaleX={0.94}
+            />
+          </span>
         </h1>
 
         {/* Roles sit level with her head so the cut-out overlaps them, as the

@@ -163,12 +163,29 @@ export const seasons: Collection[] = [
     motifAlt: "An illustrated yellow daffodil",
     showcase: {
       src: "/motifs/spring-lineup.webp",
-      alt: "The Spring Mix collection: her flower border, the Spring Mix logotype, three bars, and the garden-party editorial shoot",
+      alt: "The Spring Mix collection: the Spring Mix logotype, three bars, and the garden-party editorial shoot",
     },
     // Her flower border / coaster live in the showcase crop below, and her brief
     // band carries no decoration of its own — so no frame art, rather than
     // falling back to a motif she never put there.
     frame: [],
+    floatArt: [
+      // Her flower border, halved and floated to either edge. As one strip it
+      // could only run across the band and get clipped by the crop; split, it
+      // frames the copy the way the garland frames Holiday's.
+      {
+        src: "/motifs/spring-border-left.png",
+        side: "left",
+        className: "mt-0 -ml-[10%] w-[42%] sm:-ml-[5%] sm:w-[28%]",
+        shapeMargin: "0.8rem",
+      },
+      {
+        src: "/motifs/spring-border-right.png",
+        side: "right",
+        className: "mt-0 -mr-[10%] w-[42%] sm:-mr-[5%] sm:w-[28%]",
+        shapeMargin: "0.8rem",
+      },
+    ],
     layout: { align: "left", nutshell: "inline", motifs: "bottom-row", reserve: "none" },
     rows: [
       {
