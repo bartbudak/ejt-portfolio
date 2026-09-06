@@ -16,6 +16,9 @@ export const scope: string[] = [
 ];
 
 // ── Everyday Launch ──────────────────────────────────────────────────────────
+// Neither of these renders any more — the section is the display heading and the
+// wall of posts, with "Everyday Launch · Maeve" running in the marquee above it.
+// Kept because they are her deck's own framing of the two-pronged launch.
 export const everydayIntro =
   "We had a two-pronged approach to Maeve's launch; one campaign focused on converting local Seattle Chocolate fans into Maevens, and one aimed at capturing new members of our target audience across the country.";
 

@@ -37,10 +37,13 @@ export function WhatIDid() {
           </ul>
 
           <Image
-            src="/awards/what-i-did.webp"
+            // Her illustration lifted from the PDF as its own object, with its
+            // alpha intact — the first pass cropped it off the rendered page,
+            // which baked fragments of the surrounding copy into the picture.
+            src="/awards/what-i-did.png"
             alt="An illustration of Ellie sitting cross-legged, a whole world of forests, city blocks and ships growing out of her lap"
-            width={1100}
-            height={707}
+            width={1200}
+            height={743}
             className="order-1 mx-auto block h-auto w-[min(90vw,26rem)] lg:order-2 lg:w-[24rem]"
           />
 

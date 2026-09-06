@@ -29,12 +29,21 @@ export function Marquee({
 }: MarqueeProps) {
   // The two-copy trick only stays seamless while ONE copy is at least as wide
   // as the viewport: copy A runs 0 → -W while copy B runs W → 0, so the pair
-  // spans [-W, 2W-t·W], which still reaches the right edge at the end of the
-  // cycle only if W ≥ viewport. The phrase list on its own does not clear that
-  // bar, and it cannot grow into it either — the font size stops scaling at its
-  // 2rem clamp around 1830px, so W is FIXED above that width no matter how wide
-  // the display is. Three passes of the list measures ~3985px, which covers
-  // 4K and ultrawide; two passes measured 2657px and tore past 2657.
+  // spans [-W, 2W-t·W], which reaches the right edge at the end of the cycle
+  // only if W ≥ viewport. A short list cannot get there on its own, and it
+  // cannot grow into it either — the font size stops scaling at its 2rem clamp
+  // around 1830px, so W is FIXED above that width however wide the display is.
+  //
+  // So the list is repeated until a copy is wide enough. The width is estimated
+  // from character count rather than measured, because this renders on the
+  // server: roughly 0.55em per character at the 2rem ceiling, plus each item's
+  // trailing gap. Two words ("Everyday Launch · Maeve") need far more passes
+  // than five phrases do, which a fixed repeat count got wrong.
+  const perPass = items.reduce((w, i) => w + i.length * 18 + 36, 0);
+  const passes = Math.min(24, Math.max(2, Math.ceil(4200 / Math.max(perPass, 1))));
+
+  // Always exactly TWO copies — that is what makes the loop seamless — each
+  // carrying `passes` repetitions of the list so a single copy is wide enough.
   const run = (copy: number) => (
     <div
       key={copy}
@@ -43,7 +52,7 @@ export function Marquee({
       aria-hidden={copy > 0 || undefined}
       className="ejt-marquee__track flex flex-none items-center whitespace-nowrap"
     >
-      {[0, 1, 2].map((pass) =>
+      {Array.from({ length: passes }, (_, pass) =>
         items.map((item) => (
           <span key={`${pass}-${item}`} className="ejt-marquee__item">
             {item}

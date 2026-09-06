@@ -6,7 +6,7 @@ import { About } from "@/components/sections/About";
 import { Results } from "@/components/sections/Results";
 import { BeforeAfter } from "@/components/sections/BeforeAfter";
 import { WhatIDid } from "@/components/sections/WhatIDid";
-import { EverydayLaunch } from "@/components/sections/EverydayLaunch";
+import { LocalLaunch } from "@/components/sections/LocalLaunch";
 import { Launch } from "@/components/sections/Launch";
 import { Awards } from "@/components/sections/Awards";
 import { Contact } from "@/components/sections/Contact";
@@ -33,7 +33,14 @@ export default function PreviewPage() {
       <Results />
       <BeforeAfter />
       <WhatIDid />
-      <EverydayLaunch />
+      {/* The framing copy this section used to carry now runs as a band above
+          it, so "Local Launch" gets the display type to itself. */}
+      <Marquee
+        items={["Everyday Launch", "Maeve"]}
+        background="var(--ejd-vermilion)"
+        ring="var(--ejd-marigold)"
+      />
+      <LocalLaunch />
       <Launch />
       <Awards />
       <Marquee />
