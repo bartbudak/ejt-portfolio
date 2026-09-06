@@ -46,6 +46,22 @@ export function Contact() {
           Let&apos;s talk
         </h2>
 
+        {/* Everything under the heading sits in its own framed enclosure — the
+            Maeve frame again, on blush, so the closing band reads as a card
+            pinned to the vermilion rather than type floating on it. The ring is
+            marigold because a vermilion one would vanish into the ground. */}
+        <div
+          className="flex w-full flex-col items-center gap-8 px-6 py-10 sm:px-10 sm:py-12"
+          style={{
+            backgroundColor: "var(--ejd-blush)",
+            border: "var(--mv-stroke) solid var(--ejd-ink)",
+            boxShadow:
+              "0 0 0 var(--mv-frame) var(--ejd-marigold), 0 0 0 calc(var(--mv-frame) + var(--mv-stroke)) var(--ejd-ink)",
+            borderRadius: 24,
+            margin: "calc(var(--mv-frame) + var(--mv-stroke))",
+          }}
+        >
+
         <p
           className="max-w-[46ch] text-base leading-relaxed sm:text-lg"
           style={{ color: "var(--ejd-ink)" }}
@@ -74,6 +90,7 @@ export function Contact() {
         >
           {site.availability}
         </p>
+        </div>
       </div>
     </section>
   );
