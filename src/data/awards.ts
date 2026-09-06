@@ -1,0 +1,53 @@
+// Recognition — from her copy doc §7, with the links Bart supplied.
+//
+// Two accuracy notes:
+//
+// 1. The Webby level is now confirmed: PEOPLE'S VOICE WINNER. That had been an
+//    open question since the June research — the winners page is JS-walled, so
+//    the level could not be read off it — and it must not be softened to "a
+//    Webby" or hardened to an outright "Winner". Agency readers check.
+// 2. Her copy doc claims 3 Dieline awards. Earlier web research turned up more
+//    placements than that across 2025 and 2026. Hers is the number used here;
+//    if she wants the fuller record it needs her confirmation first, not mine.
+//
+// The Webby is for the Maeve website, which View Source built. Crediting the
+// agency is a standing rule on this site (HANDOFF §1): she directed the work,
+// they executed it, and the copy has to say so.
+
+export interface Award {
+  name: string;
+  detail: string;
+  /** Who else is on the credit, where it is not hers alone. */
+  credit?: string;
+  href?: string;
+  /** Link text, when the destination is not obvious from the award. */
+  linkLabel?: string;
+}
+
+export const awards: Award[] = [
+  {
+    name: "Webby Awards",
+    detail: "People's Voice Winner — Food & Drink, for the Maeve website",
+    credit: "Built with View Source",
+    href: "https://winners.webbyawards.com/2026/websites-and-mobile-sites/general-desktop-mobile-sites/food-drink/364780/maeve-chocolate",
+    linkLabel: "See the win",
+  },
+  {
+    name: "Dieline Awards",
+    detail:
+      "Three awards — 2nd place for the everyday bar line, plus two for seasonal collections. All three conceived and led personally.",
+    href: "https://thedieline.com/occasion-driven-chocolate-packaging-for-everyday-gifting-with-maeve/",
+    linkLabel: "Read the feature",
+  },
+  {
+    name: "Dungeon Crawler Carl",
+    detail:
+      "The collaboration became the first playable Dungeon Crawler game, covered by IGN.",
+    href: "https://www.ign.com/articles/a-free-dungeon-crawler-carl-flash-game-is-now-available-to-play-online",
+    linkLabel: "Read on IGN",
+  },
+  {
+    name: "NEXTY Awards",
+    detail: "Finalist — Natural Products Expo West 2025",
+  },
+];
