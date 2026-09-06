@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Marquee } from "@/components/shared/Marquee";
 import { site } from "@/lib/site";
 
 // The page's ending. Peak-End: the showcase is the peak, and a page that stops
@@ -18,10 +19,21 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="relative isolate w-full overflow-hidden px-3 py-20 sm:px-10 sm:py-28"
+      // A full screen tall so the closing band gets the header slot to itself.
+      // At 740px in a 900px viewport the page ran out before the Awards band had
+      // finished leaving, so the two were always on screen together. She grows
+      // with the section — her height is the section's — so the extra room is
+      // hers.
+      className="relative isolate min-h-[100svh] w-full"
       style={{ backgroundColor: "var(--ejd-vermilion)" }}
     >
+      {/* The closing band, pinned under the header for as long as this section
+          is on screen — the same treatment the launch and awards sections get.
+          It carries the availability copy rather than the section's name,
+          because that is the line worth repeating at the end of the page. */}
+      <Marquee className="sticky top-[var(--ejt-header)] z-30" />
 
+      <div className="px-3 py-20 sm:px-10 sm:py-28">
       <div // Centred in the space beside her, not in the whole section — `mx-auto` alone
       // kept the column over her feet.
       className="relative mx-auto flex w-full max-w-4xl flex-col items-center gap-8 text-center lg:ml-0 lg:mr-auto lg:max-w-[60%]">
@@ -91,6 +103,7 @@ export function Contact() {
         </p>
         </div>
         </div>
+      </div>
       </div>
       {/* The astronaut again, closing the page as she opened it. Same framing
           as "Hi There!": pinned to the section's top, right and bottom so she

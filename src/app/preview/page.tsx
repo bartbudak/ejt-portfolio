@@ -33,17 +33,9 @@ export default function PreviewPage() {
       <Results />
       <BeforeAfter />
       <WhatIDid />
-      {/* The framing copy this section used to carry now runs as a band above
-          it, so "Local Launch" gets the display type to itself. */}
-      <Marquee
-        items={["Everyday Launch", "Maeve"]}
-        background="var(--ejd-vermilion)"
-        ring="var(--ejd-marigold)"
-      />
       <LocalLaunch />
       <Launch />
       <Awards />
-      <Marquee />
       <Contact />
     </>
   );

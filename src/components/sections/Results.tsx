@@ -1,3 +1,4 @@
+import { Marquee } from "@/components/shared/Marquee";
 import { site } from "@/lib/site";
 
 // "THE RESULTS" — recreated from Ellie's Canva deck, where a full-bleed panel
@@ -31,13 +32,24 @@ export function Results() {
   return (
     <section
       id="results"
-      className="relative isolate w-full overflow-hidden px-5 pb-10 pt-20 sm:px-10 sm:pb-14 sm:pt-28"
+      className="relative isolate w-full"
       // The hero's blush, not the Maeve paper. That paper (#fff3e5) is a pale
       // peach, and sitting under the vermilion "Hi There!" it read as skin
       // rather than as a ground (Bart, 2026-09-05). Blush also puts the section
       // back on the same vermilion-on-blush pairing as the title card.
       style={{ backgroundColor: "var(--ejd-blush)" }}
     >
+      {/* This section's own name, pinned under the header while the section
+          is on screen; it leaves with the section and the next one takes the
+          slot. */}
+      <Marquee
+        items={["The Results", "Maeve"]}
+        background="var(--ejd-vermilion)"
+        ring="var(--ejd-marigold)"
+        className="sticky top-[var(--ejt-header)] z-30"
+      />
+
+      <div className="relative px-5 pb-10 pt-20 sm:px-10 sm:pb-14 sm:pt-28">
       <Burst className="pointer-events-none absolute -left-8 top-6 h-24 w-24 sm:-left-4 sm:h-40 sm:w-40" />
       <Burst className="pointer-events-none absolute -right-6 bottom-4 h-16 w-16 sm:h-28 sm:w-28" />
 
@@ -77,6 +89,7 @@ export function Results() {
             </div>
           ))}
         </dl>
+      </div>
       </div>
     </section>
   );

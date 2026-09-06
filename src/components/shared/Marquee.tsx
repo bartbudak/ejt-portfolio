@@ -20,12 +20,15 @@ type MarqueeProps = {
   background?: string;
   /** The ring drawn outside the hairline border. */
   ring?: string;
+  /** Extra positioning classes — used to pin a band under the sticky header. */
+  className?: string;
 };
 
 export function Marquee({
   items = site.marquee,
   background = "var(--ejd-marigold)",
   ring = "var(--ejd-vermilion)",
+  className = "",
 }: MarqueeProps) {
   // The two-copy trick only stays seamless while ONE copy is at least as wide
   // as the viewport: copy A runs 0 → -W while copy B runs W → 0, so the pair
@@ -64,7 +67,7 @@ export function Marquee({
 
   return (
     <div
-      className="ejt-marquee relative z-10 flex w-full flex-none items-center overflow-hidden py-1 font-display uppercase"
+      className={`ejt-marquee relative z-10 flex w-full flex-none items-center overflow-hidden py-1 font-display uppercase ${className}`}
       style={
         {
           backgroundColor: background,

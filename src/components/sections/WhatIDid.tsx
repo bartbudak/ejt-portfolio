@@ -1,3 +1,4 @@
+import { Marquee } from "@/components/shared/Marquee";
 import Image from "next/image";
 import { scope, scopeIntro } from "@/data/scope";
 
@@ -15,10 +16,20 @@ export function WhatIDid() {
   return (
     <section
       id="scope"
-      className="w-full px-5 py-16 sm:px-10 sm:py-24"
+      className="relative w-full"
       style={{ backgroundColor: "var(--ejd-marigold)" }}
     >
-      <div className="mx-auto w-full max-w-6xl">
+      {/* This section's own name, pinned under the header while the section
+          is on screen; it leaves with the section and the next one takes the
+          slot. */}
+      <Marquee
+        items={["So, What Exactly Did I Do?", "Maeve"]}
+        background="var(--ejd-vermilion)"
+        ring="var(--ejd-marigold)"
+        className="sticky top-[var(--ejt-header)] z-30"
+      />
+
+      <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-10 sm:py-24">
         <h2
           className="text-center font-display font-black uppercase leading-[0.84] tracking-[-0.03em]"
           style={{ ...WONK, color: "var(--ejd-vermilion)", fontSize: "clamp(2.6rem,9vw,7rem)" }}

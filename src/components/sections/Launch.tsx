@@ -1,3 +1,4 @@
+import { Marquee } from "@/components/shared/Marquee";
 import { PostCard } from "@/components/shared/PostCard";
 import { embedUrl, launchPosts } from "@/data/launch";
 
@@ -28,10 +29,21 @@ export function Launch() {
   return (
     <section
       id="launch"
-      className="w-full px-5 py-16 sm:px-10 sm:py-24"
+      className="relative w-full"
       style={{ backgroundColor: "var(--ejd-marigold)" }}
     >
-      <div className="mx-auto w-full max-w-6xl">
+      {/* The section's own name, pinned under the header for as long as the
+          section is on screen. Sticky resolves against this section, so when it
+          scrolls away the band goes with it and the next section's band takes
+          the slot. */}
+      <Marquee
+        items={["National Launch", "Maeve"]}
+        background="var(--ejd-vermilion)"
+        ring="var(--ejd-marigold)"
+        className="sticky top-[var(--ejt-header)] z-30"
+      />
+
+      <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-10 sm:py-24">
         <h2
           className="text-center font-display font-black uppercase leading-[0.84] tracking-[-0.03em]"
           style={{ ...WONK, color: "var(--ejd-vermilion)", fontSize: "clamp(3rem,10.5vw,8rem)" }}

@@ -269,7 +269,10 @@ html {
   );
 }
 .ejt-marquee__track {
-  animation: ejt-marquee 40s 0.5s linear infinite;
+  /* Slower than the Maeve original's 40s. The bands are section labels now
+     rather than a single decorative strip, so they read better at a pace you
+     can follow without chasing. */
+  animation: ejt-marquee 75s 0.5s linear infinite;
 }
 /* Maeve separates blocks with a dot sitting in the middle of the trailing gap. */
 .ejt-marquee__item {
