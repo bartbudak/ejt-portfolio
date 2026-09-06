@@ -20,6 +20,10 @@ type Props = {
   scaleX?: number;
   /** Fraction of the canvas width the longest line fills. */
   fill?: number;
+  /** Where the text block's centre sits vertically, 0 (top) to 1 (bottom). */
+  anchorY?: number;
+  /** Colour the dots settle to as the page scrolls past. Enables the dissolve. */
+  dissolveTo?: string;
   className?: string;
 };
 
@@ -59,6 +63,8 @@ export function ParticleWordmark({
   color,
   scaleX = 1,
   fill = 0.97,
+  anchorY = 0.5,
+  dissolveTo,
   className = "",
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -93,6 +99,30 @@ export function ParticleWordmark({
     // pointer move. Without this a 30k-dot canvas repaints an identical image
     // sixty times a second for the whole visit.
     let settled = false;
+    // 0 at rest, 1 once the hero has scrolled away. Drives the dissolve: the
+    // dots are pushed down into the open ground around her and lerped toward
+    // that ground's colour, so the wordmark sinks into the page rather than
+    // scrolling off it.
+    let progress = 0;
+
+    const ground = dissolveTo
+      ? (dissolveTo.startsWith("var(")
+          ? cs.getPropertyValue(dissolveTo.slice(4, -1).trim()).trim()
+          : dissolveTo) || null
+      : null;
+
+    const rgb = (c: string): [number, number, number] => {
+      const probe = document.createElement("canvas").getContext("2d");
+      if (!probe) return [0, 0, 0];
+      probe.fillStyle = c;
+      const hex = probe.fillStyle as string;
+      const m = hex.match(/^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i);
+      return m
+        ? [parseInt(m[1], 16), parseInt(m[2], 16), parseInt(m[3], 16)]
+        : [0, 0, 0];
+    };
+    const inkRGB = rgb(color.startsWith("var(") ? (cs.getPropertyValue(color.slice(4, -1).trim()).trim() || "#000") : color);
+    const groundRGB = ground ? rgb(ground) : inkRGB;
     const pointer = { x: -9999, y: -9999, active: false };
 
     // Paint the lines once into an offscreen canvas, then read back the alpha:
@@ -115,7 +145,8 @@ export function ParticleWordmark({
       octx.transform(scaleX, 0, 0, 1, (cw * (1 - scaleX)) / 2, 0);
 
       const lineH = size * 1.02;
-      const top = (ch - lineH * lines.length) / 2 + lineH / 2;
+      const blockH = lineH * lines.length;
+      const top = (ch - blockH) * anchorY + lineH / 2;
       lines.forEach((line, i) => octx.fillText(line, cw / 2, top + lineH * i));
 
       const data = octx.getImageData(0, 0, W, H).data;
@@ -183,12 +214,23 @@ export function ParticleWordmark({
 
     function frame() {
       ctx.clearRect(0, 0, cw, ch);
-      ctx.fillStyle = ink;
+      // Fill lerps toward the ground colour, so by the time the dots have been
+      // pushed down they are the same colour as the field they are sitting in.
+      const t = progress;
+      ctx.fillStyle = ground
+        ? `rgb(${Math.round(inkRGB[0] + (groundRGB[0] - inkRGB[0]) * t)},${Math.round(
+            inkRGB[1] + (groundRGB[1] - inkRGB[1]) * t,
+          )},${Math.round(inkRGB[2] + (groundRGB[2] - inkRGB[2]) * t)})`
+        : ink;
       ctx.beginPath();
       let moving = false;
       for (const p of particles) {
-        let ax = (p.hx - p.x) * SPRING;
-        let ay = (p.hy - p.y) * SPRING;
+        // Home slides down and inward as the page scrolls: down into the space
+        // around her, inward so the field packs tighter as that space closes.
+        const tx = ground ? p.hx + (cw / 2 - p.hx) * t * 0.3 : p.hx;
+        const ty = ground ? p.hy + (ch - p.hy) * t * 0.92 : p.hy;
+        let ax = (tx - p.x) * SPRING;
+        let ay = (ty - p.y) * SPRING;
         if (pointer.active) {
           const dx = p.x - pointer.x;
           const dy = p.y - pointer.y;
@@ -209,7 +251,7 @@ export function ParticleWordmark({
         ctx.moveTo(p.x + dotR, p.y);
         ctx.arc(p.x, p.y, dotR, 0, Math.PI * 2);
         const rest = Math.abs(p.vx) + Math.abs(p.vy)
-          + Math.abs(p.hx - p.x) + Math.abs(p.hy - p.y);
+          + Math.abs(tx - p.x) + Math.abs(ty - p.y);
         if (rest > 0.08) moving = true;
       }
       ctx.fill();
@@ -264,6 +306,20 @@ export function ParticleWordmark({
     window.addEventListener("pointermove", onPointer, { passive: true });
     window.addEventListener("pointerleave", onLeave);
 
+    // Scroll drives the dissolve. The first screenful maps to 0 → 1, which is
+    // the stretch where the hero is leaving and the marquee is arriving.
+    const onScroll = () => {
+      if (!ground || reduce) return;
+      const next = Math.min(1, Math.max(0, window.scrollY / (window.innerHeight * 0.85)));
+      if (Math.abs(next - progress) < 0.002) return;
+      progress = next;
+      if (settled) {
+        settled = false;
+        raf = requestAnimationFrame(frame);
+      }
+    };
+    if (ground) window.addEventListener("scroll", onScroll, { passive: true });
+
     const ro = new ResizeObserver(() => start());
     ro.observe(canvas);
 
@@ -281,8 +337,9 @@ export function ParticleWordmark({
       ro.disconnect();
       window.removeEventListener("pointermove", onPointer);
       window.removeEventListener("pointerleave", onLeave);
+      window.removeEventListener("scroll", onScroll);
     };
-  }, [lines, color, scaleX, fill]);
+  }, [lines, color, scaleX, fill, anchorY, dissolveTo]);
 
   return (
     <canvas

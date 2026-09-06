@@ -54,46 +54,40 @@ export function Hero() {
       className="relative isolate flex min-h-0 w-full flex-1 flex-col overflow-hidden"
       style={{ backgroundColor: "var(--ejd-blush)" }}
     >
+      {/* Two mounts: the phone stacks her name over two lines, the desktop one
+          runs it across a single line, and each needs its own fit. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-0 sm:hidden">
+        <ParticleWordmark
+          lines={["ELLIE", "THOMPSON"]}
+          color="var(--ejd-vermilion)"
+          dissolveTo="var(--ejd-blush)"
+          scaleX={0.96}
+          fill={0.92}
+          anchorY={0.13}
+        />
+      </div>
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-0 hidden sm:block">
+        <ParticleWordmark
+          lines={["ELLIE THOMPSON"]}
+          color="var(--ejd-vermilion)"
+          dissolveTo="var(--ejd-blush)"
+          scaleX={0.94}
+          fill={0.94}
+          anchorY={0.1}
+        />
+      </div>
+
       <div className="relative z-20 mx-auto w-full max-w-[1600px] px-4 pt-12 sm:pt-16">
         {/* The deck sets this in Benguiat *Condensed*. Fraunces has no condensed
             cut, so a slight scaleX recovers the proportion without needing a
             licensed face. Mobile stacks the two words and stretches them
             vertically so the type still carries a narrow viewport. */}
-        {/* The holding page's fluid pixel field, now carrying her name. The
-            heading keeps the real text for screen readers and for search; the
-            canvas beside it is decorative and pointer-transparent, so the dots
-            never intercept a click.
-            Height is derived from the same fitted size the CSS wordmark used,
-            so the hero's layout — and the roles crossing her cap below — are
-            unchanged. */}
-        <h1
-          className="relative block [--wm-advance:5.6] sm:[--wm-advance:8.58]"
-        >
-          <span className="sr-only">Ellie Thompson</span>
-          {/* Two mounts rather than one reflowing mount: the mobile field
-              stacks the name over two lines and the desktop one runs it across
-              a single line, and each needs its own height. */}
-          <span
-            className="block sm:hidden"
-            style={{ height: "calc(min(11.5rem, (100vw - 2rem) / var(--wm-advance)) * 2.1)" }}
-          >
-            <ParticleWordmark
-              lines={["ELLIE", "THOMPSON"]}
-              color="var(--ejd-vermilion)"
-              scaleX={0.96}
-            />
-          </span>
-          <span
-            className="hidden sm:block"
-            style={{ height: "calc(min(11.5rem, (100vw - 2rem) / var(--wm-advance)) * 1.05)" }}
-          >
-            <ParticleWordmark
-              lines={["ELLIE THOMPSON"]}
-              color="var(--ejd-vermilion)"
-              scaleX={0.94}
-            />
-          </span>
-        </h1>
+        {/* The wordmark is a full-section canvas, not a canvas the size of the
+            heading. It has to be: the dots travel DOWN into the open blush
+            around her as the page scrolls, and they need somewhere to go. The
+            heading itself keeps the real text for screen readers and search;
+            the canvas is decorative and pointer-transparent. */}
+        <h1 className="sr-only">Ellie Thompson</h1>
 
         {/* Roles sit level with her head so the cut-out overlaps them, as the
             deck stacks them. */}
