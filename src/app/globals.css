@@ -164,6 +164,15 @@
   --mv-soft-black: #2d2926; /* --cr-black-soft — every rule + stroke */
   --mv-stroke: 2px; /* --stroke-width */
   --mv-frame: 7px; /* frame() mixin ring width; 5px under 768 */
+
+  /* Height of the sticky header (components/layout/Header.tsx). The hero
+     subtracts it so the title card still fits one screen, and scroll-padding
+     keeps the nav from parking on top of whichever section it just jumped to. */
+  --ejt-header: 4rem;
+}
+
+html {
+  scroll-padding-top: var(--ejt-header);
 }
 
 @media (max-width: 767px) {

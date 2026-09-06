@@ -50,7 +50,7 @@ export function Results() {
           className="max-w-[48ch] text-base leading-relaxed sm:text-lg"
           style={{ color: "var(--ejd-ink)" }}
         >
-          Ellie pitched the reinvention of a 25-year-old chocolate company and saw it
+          I pitched the reinvention of a 25-year-old chocolate company and saw it
           through — 75+ products redrawn, a new name, a new world. In the first year
           after launch:
         </p>

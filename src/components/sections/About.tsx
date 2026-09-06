@@ -60,11 +60,15 @@ export function About() {
   return (
     <section
       id="about"
-      className="relative isolate w-full overflow-hidden px-5 py-16 sm:px-10 sm:py-24"
+      className="relative isolate w-full overflow-hidden"
       style={{ backgroundColor: "var(--ejd-vermilion)" }}
     >
-      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-10 md:grid-cols-[1.15fr_1fr] md:gap-14">
-        <div>
+      {/* The padding lives on the text column, not the section, so the photo can
+          run edge to edge vertically — `items-stretch` hands the image cell the
+          full row height and it bleeds to the panel's top and bottom, the way
+          the deck sets it. */}
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-stretch lg:grid-cols-[1.15fr_1fr]">
+        <div className="self-center px-5 py-16 sm:px-10 sm:py-24 lg:pr-4">
           <h2
             className="font-display font-black uppercase leading-[0.84] tracking-[-0.03em]"
             style={{ ...WONK, color: "var(--ejd-marigold)", fontSize: "clamp(3rem,9vw,7rem)" }}
@@ -93,15 +97,31 @@ export function About() {
           </div>
         </div>
 
-        <div className="relative">
-          <Star className="pointer-events-none absolute -left-2 top-8 z-10 h-16 w-16 sm:h-24 sm:w-24" />
+        {/* `md:static` is doing the work: it drops this cell out of the
+            positioning chain so the photo below resolves against the SECTION
+            instead of the centred container, and its right edge lands on the
+            viewport edge rather than the container's.
+            The split itself waits for `lg`. At tablet widths two columns leave
+            them both too narrow — she overhung the copy by 157px at 768 and the
+            cell clipped a straight vertical line through her body. Below lg the
+            layout stacks instead, which is the arrangement that already reads
+            well on a phone: full-width copy, then her bleeding off both edges
+            of her own block. */}
+        <div className="relative min-h-[26rem] overflow-hidden lg:min-h-0 lg:static">
+          <Star className="pointer-events-none absolute left-1 top-8 z-10 h-16 w-16 sm:h-24 sm:w-24 lg:left-auto lg:right-[42%]" />
+          {/* Height-driven, not width-driven: `inset-y-0` pins her to the top
+              and bottom of the panel and `w-auto` lets her own ratio set the
+              width, so her top, right and bottom edges all sit on the viewport
+              and she reads as walking off the screen. Right-hung at every size —
+              centring her on mobile broke that read, leaving her floating in
+              the middle of the panel with vermilion on both sides. */}
           <Image
-            src="/hero/ellie-astronaut.png"
+            src="/hero/ellie-astronaut.webp"
             alt="Ellie in a toy space helmet, throwing peace signs among hanging paper confetti"
-            width={760}
-            height={1097}
-            sizes="(min-width: 768px) 40vw, 80vw"
-            className="mx-auto h-auto w-[min(80vw,26rem)] max-w-none object-contain md:w-full"
+            width={1100}
+            height={1588}
+            sizes="(min-width: 768px) 40vw, 90vw"
+            className="absolute inset-y-0 right-0 h-full w-auto max-w-none object-contain object-bottom"
           />
         </div>
       </div>

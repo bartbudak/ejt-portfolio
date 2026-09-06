@@ -22,7 +22,7 @@ export const site = {
   intro:
     "Seven years growing consumer food brands from the inside out. Most notably, I led the from-scratch reinvention of a 25-year-old chocolate company into Maeve — a brand now winning national design awards and selling out in record time. I'm a psychology grad with a serious design habit, and right now I'm looking for my next brand home in NYC.",
   description:
-    "Portfolio of Ellie Thompson — the brand and marketing leader behind Maeve, the reinvention of Seattle Chocolate Company.",
+    "I'm Ellie Thompson — the brand and marketing leader behind Maeve, the reinvention of Seattle Chocolate Company.",
   // While the full site is in progress, render the coming-soon holding page.
   // Flip to false to launch the full multi-section site.
   comingSoon: true,
@@ -57,14 +57,23 @@ export const site = {
       "I love color on color, refined absurdity and attempting to create original experiences for myself and others.",
     ],
   },
-  // Nothing renders these right now — the floating header was removed. Kept as
-  // config for whatever navigation comes back; keep the hrefs matching real
-  // section ids so it can't drift out of sync again.
+  // Sticky top nav (components/layout/Header.tsx). These are ROUTES, not
+  // anchors — the tabs switch pages, and the header derives the active tab from
+  // the pathname, so these strings must stay exact.
+  //
+  // ⚠️ They point into /preview because that is where the site is being built
+  // while the live domain still serves the coming-soon page. At launch they
+  // become "/" and "/campaigns".
   nav: [
-    { label: "Results", href: "#results" },
-    { label: "Work", href: "#before-after" },
-    { label: "Contact", href: "#contact" },
+    { label: "About", href: "/preview", external: false },
+    { label: "Campaigns", href: "/preview/campaigns", external: false },
+    { label: "Resume", href: "", external: true },
   ],
+  // Her hand-drawn "ejt" monogram, used as the logo in the header. Extracted
+  // from the Procreate PDF she supplied: a 2388x1668 JPEG of black ink on
+  // white, knocked out to alpha off its own luminance and tinted to --ejd-ink.
+  // Set to "" to fall back to her name in the script face.
+  signature: "/brand/ellie-signature.png",
   social: {
     instagram: "https://instagram.com/elliejthompson",
     linkedin: "https://www.linkedin.com/in/ellie-thompson-aa405116a/",

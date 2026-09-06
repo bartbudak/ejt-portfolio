@@ -47,7 +47,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative isolate flex min-h-[100svh] w-full flex-col overflow-hidden"
+      className="relative isolate flex min-h-[calc(100svh-var(--ejt-header))] w-full flex-col overflow-hidden"
       style={{ backgroundColor: "var(--ejd-blush)" }}
     >
       <div className="relative z-20 mx-auto w-full max-w-[1600px] px-4 pt-12 sm:pt-16">
@@ -88,12 +88,16 @@ export function Hero() {
           so she can never grow up into the words. Previously she cleared
           "Creative Strategist" by 2px at 900px tall and covered it outright on
           any shorter window — which is exactly what Bart saw. */}
-      <div className="pointer-events-none relative z-30 mt-4 flex min-h-0 flex-1 items-end justify-center">
+      {/* Below the type now, not above it (z-10 vs the copy's z-20): she is
+          oversized past the space left for her, so the roles have to sit in
+          front or the middle one goes back under her cap. Bart is fine with the
+          labels crossing the cap a little — that is how the deck reads. */}
+      <div className="pointer-events-none relative z-10 min-h-0 flex-1">
         <Image
-          src="/hero/ellie-cutout.png"
+          src="/hero/ellie-cutout.webp"
           alt="Ellie Thompson, wearing a blue beanie and a cloud-print sweater, biting into a wrapped chocolate"
-          width={700}
-          height={809}
+          width={1100}
+          height={1271}
           // Next 16 deprecated `priority` in favour of `preload`; this is the
           // above-the-fold LCP element.
           preload
@@ -106,7 +110,20 @@ export function Hero() {
           // line. From `sm` up only: on mobile she is deliberately wider than
           // the viewport and bleeding off both edges, and shifting a bleeding
           // image just clips 100px off one arm.
-          className="h-full w-auto max-w-[min(124vw,34rem)] object-contain object-bottom sm:max-w-[min(84vw,34rem)] sm:-translate-x-[12%]"
+          // Absolutely positioned on purpose. In flow she was sized by
+          // `max-width` instead of height — 666px tall at every viewport — so
+          // the hero outgrew the screen on short windows and the fit was lost.
+          // Out of flow, `h-[105%]` resolves against the flex track's real
+          // height and she cannot add to it, so the section stays exactly one
+          // screen at any size.
+          //
+          // 105%, not 100%: the sticky header takes 4rem off the hero, which
+          // shrank her. The extra grows upward from the bottom edge, so she
+          // keeps sitting on the fold and only her cap reaches the roles.
+          //
+          // The centring translate carries her head offset too — 50% to centre
+          // plus the 12% her head sits right of the cut-out's middle.
+          className="absolute bottom-0 left-1/2 h-[105%] w-auto max-w-none -translate-x-1/2 object-contain object-bottom sm:-translate-x-[62%]"
         />
       </div>
     </section>

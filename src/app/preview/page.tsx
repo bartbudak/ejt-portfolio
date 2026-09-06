@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Header } from "@/components/layout/Header";
 import { Hero } from "@/components/sections/Hero";
 import { Marquee } from "@/components/shared/Marquee";
 import { About } from "@/components/sections/About";
@@ -17,6 +18,7 @@ export const metadata: Metadata = {
 export default function PreviewPage() {
   return (
     <>
+      <Header />
       <Hero />
       <Marquee />
       <About />
