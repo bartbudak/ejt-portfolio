@@ -31,6 +31,17 @@ export interface BandLayout {
   motifs: "right" | "top-row" | "bottom-row" | "corners" | "scatter";
   /** The deck breaks the longer headings over two lines. */
   headingLines?: string[];
+  /** Which edge the framing art occupies, so the copy column can keep clear of
+   *  it instead of running underneath. */
+  reserve?: "right" | "top" | "bottom" | "none";
+}
+
+/** A piece of the band's framing artwork, lifted from the deck with its alpha
+ *  mask and placed where she places it. Purely decorative. */
+export interface FramePiece {
+  src: string;
+  /** Absolute-position classes, relative to the view box. */
+  className: string;
 }
 
 export interface Collection {
@@ -51,6 +62,12 @@ export interface Collection {
   motif: string;
   motifAlt: string;
   layout: BandLayout;
+  /** Her own band artwork. Falls back to `motif` when a band has none. */
+  frame?: FramePiece[];
+  /** The product lineup that runs under the brief in her deck, under the
+   *  collection's own logotype. Cropped from the deck at full resolution — the
+   *  ground is the same blush/sage/etc. as the band, so it sits seamlessly. */
+  showcase?: { src: string; alt: string };
 }
 
 const AUDIENCE =
@@ -70,7 +87,22 @@ export const seasons: Collection[] = [
     body: "var(--ejd-ink)",
     motif: "/motifs/valentines-heart.png",
     motifAlt: "A purple candy heart reading “M'Lady (Tips Fedora)”",
-    layout: { align: "left", nutshell: "inline", motifs: "right", headingLines: ["Valentine's Day", "Brief"] },
+    layout: { align: "left", nutshell: "inline", motifs: "right", reserve: "right", headingLines: ["Valentine's Day", "Brief"] },
+    showcase: {
+      src: "/motifs/valentines-lineup.webp",
+      alt: "The Valentine's collection: the Bonbons of Desire box, the Forbidden Fruits, Peanut Butter Banana Affair and Heat & Honey bars, three romance-postcard cards, a rose-covered heart box, candy hearts and the Maeve Books mark",
+    },
+    frame: [
+      // The rose spray descends the right edge and bleeds off the top, with her
+      // scattered purple hearts already part of the same artwork.
+      {
+        // Sized by WIDTH, not panel height: the panel grew a whole product
+        // lineup underneath, and a percentage height scaled the rose with it.
+        // In the deck the spray covers about 28% of the band's width.
+        src: "/motifs/valentines-roses.png",
+        className: "-top-[3%] -right-[4%] w-[30%] h-auto",
+      },
+    ],
     rows: [
       {
         label: "Theme",
@@ -100,7 +132,10 @@ export const seasons: Collection[] = [
     body: "var(--ejd-ink)",
     motif: "/motifs/spring-daffodil.png",
     motifAlt: "An illustrated yellow daffodil",
-    layout: { align: "left", nutshell: "inline", motifs: "bottom-row" },
+    layout: { align: "left", nutshell: "inline", motifs: "bottom-row", reserve: "bottom" },
+    frame: [
+      { src: "/motifs/spring-border.png", className: "-bottom-[4%] left-0 w-[118%] max-w-none h-auto" },
+    ],
     rows: [
       {
         label: "Theme",
@@ -123,6 +158,10 @@ export const seasons: Collection[] = [
     motif: "/motifs/summer-star.png",
     motifAlt: "An illustrated yellow star",
     layout: { align: "left", nutshell: "inline", motifs: "scatter" },
+    frame: [
+      { src: "/motifs/summer-coaster.png", className: "-bottom-[6%] -left-[4%] w-[54%] max-w-none h-auto" },
+      { src: "/motifs/summer-sign.png", className: "bottom-[8%] right-[6%] w-[26%] max-w-none h-auto" },
+    ],
     rows: [
       {
         label: "Theme",
@@ -149,7 +188,10 @@ export const seasons: Collection[] = [
     body: "var(--ejd-ink)",
     motif: "/motifs/fall-leaf.png",
     motifAlt: "An illustrated orange maple leaf",
-    layout: { align: "center", nutshell: "below", motifs: "top-row" },
+    layout: { align: "center", nutshell: "below", motifs: "top-row", reserve: "top" },
+    frame: [
+      { src: "/motifs/fall-apples.png", className: "-top-[3%] left-0 w-full max-w-none h-auto" },
+    ],
     rows: [
       {
         label: "Theme",
@@ -179,7 +221,10 @@ export const seasons: Collection[] = [
     body: "var(--ejd-ink)",
     motif: "/motifs/holiday-bird.png",
     motifAlt: "An illustrated bird wearing a santa hat",
-    layout: { align: "center", nutshell: "above", motifs: "corners" },
+    layout: { align: "center", nutshell: "above", motifs: "corners", reserve: "top" },
+    frame: [
+      { src: "/motifs/holiday-lights.png", className: "-top-[2%] left-0 w-full max-w-none h-auto" },
+    ],
     rows: [
       {
         label: "Theme",
@@ -219,7 +264,7 @@ export const collabs: Collection[] = [
     body: "var(--ejd-ink)",
     motif: "/motifs/dcc-donut.png",
     motifAlt: "Princess Donut, an illustrated cat in a crown holding a drink",
-    layout: { align: "left", nutshell: "inline", motifs: "right" },
+    layout: { align: "left", nutshell: "inline", motifs: "right", reserve: "right" },
     rows: [
       {
         label: "Theme",

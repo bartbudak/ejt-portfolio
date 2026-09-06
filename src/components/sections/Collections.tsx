@@ -66,74 +66,71 @@ type Props = {
   crossLink: { href: string; label: string };
 };
 
-function Nutshell({ collection }: { collection: Collection }) {
+function Nutshell({ collection, className = "" }: { collection: Collection; className?: string }) {
   return (
-    <p
-      className="font-script text-xl sm:text-2xl"
+    <span
+      className={`block pb-1 font-script text-xl normal-case tracking-normal sm:pb-2 sm:text-2xl ${className}`}
       style={{ color: collection.display }}
     >
       In a nutshell
-    </p>
+    </span>
   );
 }
 
-// Her motif art, placed the way each band places it: Fall runs apples across
-// the top, Spring borders the bottom with flowers, Holiday hangs lights from
-// both top corners, Summer scatters stars. Decorative — behind the copy and out
-// of the accessibility tree.
-function Motifs({ collection }: { collection: Collection }) {
-  const { motif, layout } = collection;
-  const img = (className: string, key: string, flip = false) => (
-    <Image
-      key={key}
-      src={motif}
-      alt=""
-      width={360}
-      height={400}
-      aria-hidden
-      loading="eager"
-      className={`pointer-events-none absolute -z-10 w-auto object-contain ${className}`}
-      style={flip ? { transform: "scaleX(-1)" } : undefined}
-    />
-  );
+// Her own band artwork, placed where she places it: the rose spray down
+// Valentine's right edge, the flower border along Spring's bottom, apples across
+// Fall's top, lights strung over Holiday, the coaster and the FAIR FOOD sign
+// under Summer. All of it is decorative, so it sits behind the copy and out of
+// the accessibility tree. Bands with no artwork of their own fall back to their
+// single motif in the top-right corner.
+function Frame({ collection }: { collection: Collection }) {
+  const pieces =
+    collection.frame ??
+    [{ src: collection.motif, className: "-right-8 -top-8 h-40 rotate-12 sm:h-64 w-auto" }];
 
-  switch (layout.motifs) {
-    case "top-row":
-      return (
-        <>
-          {img("-top-6 left-[6%] h-16 -rotate-12 sm:h-24", "a")}
-          {img("-top-8 left-[38%] h-20 rotate-6 sm:h-28", "b")}
-          {img("-top-5 right-[10%] h-16 rotate-12 sm:h-24", "c", true)}
-        </>
-      );
-    case "bottom-row":
-      return (
-        <>
-          {img("-bottom-8 left-[4%] h-20 -rotate-6 sm:h-28", "a")}
-          {img("-bottom-10 left-[36%] h-24 rotate-3 sm:h-32", "b")}
-          {img("-bottom-8 right-[6%] h-20 rotate-12 sm:h-28", "c", true)}
-        </>
-      );
-    case "corners":
-      return (
-        <>
-          {img("-left-6 -top-6 h-24 -rotate-12 sm:h-36", "a")}
-          {img("-right-6 -top-6 h-24 rotate-12 sm:h-36", "b", true)}
-        </>
-      );
-    case "scatter":
-      return (
-        <>
-          {img("-right-6 top-6 h-24 rotate-12 opacity-95 sm:h-36", "a")}
-          {img("bottom-8 left-[2%] h-16 -rotate-12 opacity-80 sm:h-24", "b")}
-          {img("right-[18%] -bottom-6 h-14 rotate-6 opacity-70 sm:h-20", "c")}
-        </>
-      );
-    case "right":
-    default:
-      return img("-right-8 -top-8 h-40 rotate-12 sm:h-64", "a");
-  }
+  return (
+    <>
+      {pieces.map((piece) => (
+        <Image
+          key={piece.src + piece.className}
+          src={piece.src}
+          alt=""
+          width={1500}
+          height={1500}
+          aria-hidden
+          loading="eager"
+          className={`pointer-events-none absolute -z-10 max-w-none object-contain ${piece.className}`}
+        />
+      ))}
+    </>
+  );
 }
+
+// How much room the copy has to leave for that artwork.
+const RESERVE: Record<string, string> = {
+  right: "lg:max-w-[70%]",
+  top: "",
+  bottom: "",
+  none: "",
+};
+
+// The heading row stops further short of the artwork than the copy does — in
+// the deck the script line clears the roses by a wide margin while the body text
+// runs almost up to the stem.
+const HEADING_RESERVE: Record<string, string> = {
+  right: "lg:max-w-[62%]",
+  top: "",
+  bottom: "",
+  none: "",
+};
+
+const PANEL_PADDING: Record<string, string> = {
+  right: "px-6 pb-12 pt-12 sm:px-14 sm:pb-14 sm:pt-16",
+  // Her artwork bleeds into these edges, so the band opens up to make room.
+  top: "px-6 pb-12 pt-24 sm:px-14 sm:pb-16 sm:pt-32",
+  bottom: "px-6 pb-32 pt-12 sm:px-14 sm:pb-44 sm:pt-16",
+  none: "px-6 py-12 sm:px-14 sm:py-16",
+};
 
 export function Collections({ title, intro, items, tone, crossLink }: Props) {
   const [open, setOpen] = useState(items[0].slug);
@@ -226,13 +223,17 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
           id="collection-panel"
           role="tabpanel"
           aria-labelledby={`collection-tab-${current.slug}`}
-          className="relative isolate mt-4 overflow-hidden rounded-lg px-6 py-12 sm:px-14 sm:py-16"
+          className={`relative isolate mt-4 overflow-hidden rounded-lg ${
+            PANEL_PADDING[current.layout.reserve ?? "none"]
+          }`}
           style={{
             backgroundColor: current.ground,
-            border: `var(--mv-stroke) solid ${tone.line}`,
+            // The deck frames each brief in its own display colour rather than a
+            // neutral rule.
+            border: `var(--mv-stroke) solid ${current.display}`,
           }}
         >
-          <Motifs collection={current} />
+          <Frame collection={current} />
 
           <div
             className={`relative ${current.layout.align === "center" ? "text-center" : ""}`}
@@ -240,35 +241,53 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
             {/* Holiday hangs the script line ABOVE its heading. */}
             {current.layout.nutshell === "above" && <Nutshell collection={current} />}
 
-            <div
-              className={`flex flex-wrap items-baseline gap-x-8 gap-y-1 ${
-                current.layout.align === "center" ? "justify-center" : ""
-              }`}
+            {/* The heading carries the same width limit as the copy, so neither
+                runs under the framing artwork. The script line rides on the LAST
+                heading line and is pushed to that column's right edge — in the
+                deck it sits beside the short second word ("BRIEF"), not out past
+                the longest line. */}
+            <h2
+              className={`font-display font-black uppercase leading-[0.86] tracking-[-0.02em] ${
+                HEADING_RESERVE[current.layout.reserve ?? "none"]
+              } ${current.layout.align === "center" ? "mx-auto" : ""}`}
+              style={{
+                ...WONK,
+                color: current.display,
+                fontSize: "clamp(2.2rem,6vw,4.6rem)",
+              }}
             >
-              <h2
-                className="font-display font-black uppercase leading-[0.86] tracking-[-0.02em]"
-                style={{
-                  ...WONK,
-                  color: current.display,
-                  fontSize: "clamp(1.9rem,5vw,3.6rem)",
-                }}
-              >
-                {/* The deck breaks the long ones over two lines. */}
-                {(current.layout.headingLines ?? [current.briefTitle]).map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-              </h2>
-              {current.layout.nutshell === "inline" && <Nutshell collection={current} />}
-            </div>
+              {(() => {
+                const lines = current.layout.headingLines ?? [current.briefTitle];
+                return lines.map((line, i) => {
+                  const last = i === lines.length - 1;
+                  if (last && current.layout.nutshell === "inline") {
+                    return (
+                      <span key={line} className="flex w-full items-end justify-between gap-8">
+                        <span className="whitespace-nowrap">{line}</span>
+                        <Nutshell collection={current} className="shrink-0" />
+                      </span>
+                    );
+                  }
+                  return (
+                    <span key={line} className="block whitespace-nowrap">
+                      {line}
+                    </span>
+                  );
+                });
+              })()}
+            </h2>
 
             {current.layout.nutshell === "below" && <Nutshell collection={current} />}
           </div>
 
           {/* She indents the body block well in from the heading on every band,
               and never runs it the full width of the panel. */}
-          <dl className="relative mt-10 max-w-[68ch] space-y-4 text-left sm:ml-[8%]">
+          <dl
+            // Flush with the heading, not indented from it.
+            className={`relative mt-10 max-w-[68ch] space-y-4 text-left ${
+              RESERVE[current.layout.reserve ?? "none"]
+            }`}
+          >
             {current.rows.map((row) => (
               <div key={row.label} className="text-sm leading-relaxed sm:text-base">
                 <dt className="inline font-semibold" style={{ color: current.body }}>
@@ -281,15 +300,31 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
             ))}
           </dl>
 
+          {/* The collection's own logotype, then its product lineup — the half
+              of the band that sits under the brief in her deck. The lineup is
+              cropped from the deck itself and carries the same ground colour as
+              the panel, so it reads as part of the band rather than a pasted-in
+              picture. It is full-bleed because that is how she runs it. */}
           {current.wordmark && (
             <p
-              className={`relative mt-12 font-display font-black uppercase leading-none tracking-[-0.02em] ${
+              className={`relative mt-14 font-display font-black uppercase leading-none tracking-[-0.02em] ${
                 current.layout.align === "center" ? "text-center" : ""
               }`}
-              style={{ ...WONK, color: current.display, fontSize: "clamp(1.6rem,4.5vw,3rem)" }}
+              style={{ ...WONK, color: current.display, fontSize: "clamp(1.8rem,5.4vw,4rem)" }}
             >
               {current.wordmark}
             </p>
+          )}
+
+          {current.showcase && (
+            <Image
+              src={current.showcase.src}
+              alt={current.showcase.alt}
+              width={1700}
+              height={701}
+              loading="eager"
+              className="relative mt-6 block h-auto w-[calc(100%+3rem)] max-w-none -translate-x-6 sm:w-[calc(100%+7rem)] sm:-translate-x-14"
+            />
           )}
 
           {/* Honesty marker: some rows were blank in her deck and are written
@@ -297,7 +332,7 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
               only in the source. */}
           {current.rows.some((r) => r.drafted) && (
             <p
-              className="relative mt-8 font-mono text-[0.65rem] uppercase tracking-[0.14em] opacity-60 sm:ml-[8%]"
+              className="relative mt-8 font-mono text-[0.65rem] uppercase tracking-[0.14em] opacity-60"
               style={{ color: current.body }}
             >
               Draft copy — {current.rows.filter((r) => r.drafted).map((r) => r.label).join(", ")} pending Ellie&apos;s review
