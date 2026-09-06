@@ -66,7 +66,14 @@ export const site = {
   // become "/" and "/campaigns".
   nav: [
     { label: "About", href: "/preview", external: false },
-    { label: "Campaigns", href: "/preview/campaigns", external: false },
+    // Collabs is reached from the Campaigns page and is the other half of the
+    // same body of work, so the tab stays lit while the reader is over there.
+    {
+      label: "Campaigns",
+      href: "/preview/campaigns",
+      external: false,
+      alsoActiveOn: ["/preview/collabs"],
+    },
     { label: "Resume", href: "", external: true },
   ],
   // Her hand-drawn "ejt" monogram, used as the logo in the header. Extracted

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -22,7 +21,13 @@ import { site } from "@/lib/site";
 // prove branches unreachable from today's config values alone — with the Resume
 // href still empty it decided the external branch was `never`. Widening here
 // keeps the config frozen while letting the component handle any entry.
-type NavItem = { label: string; href: string; external: boolean };
+type NavItem = {
+  label: string;
+  href: string;
+  external: boolean;
+  /** Extra routes that should keep this tab lit. */
+  alsoActiveOn?: readonly string[];
+};
 
 // next.config sets `trailingSlash: true`, so the live pathname is "/preview/"
 // while the config above holds "/preview". Compare them trimmed or the active
@@ -30,8 +35,20 @@ type NavItem = { label: string; href: string; external: boolean };
 const samePath = (a: string, b: string) =>
   a.replace(/\/+$/, "") === b.replace(/\/+$/, "");
 
+// The band takes each page's own ground, so it reads as the top edge of that
+// page rather than a fixture bolted over it — the same reason it is blush on
+// About, where it disappears into the title card.
+const TONES: Record<string, { bg: string; ink: string }> = {
+  "/preview": { bg: "var(--ejd-blush)", ink: "var(--ejd-ink)" },
+  "/preview/campaigns": { bg: "var(--mv-paper)", ink: "var(--ejd-ink)" },
+  "/preview/collabs": { bg: "var(--ejd-burnt)", ink: "var(--mv-paper)" },
+};
+const DEFAULT_TONE = TONES["/preview"];
+
 export function Header() {
   const pathname = usePathname();
+  const tone =
+    Object.entries(TONES).find(([p]) => samePath(pathname, p))?.[1] ?? DEFAULT_TONE;
 
   // The shadow is the cue that the page has moved under the header, so it has
   // nothing to say while the header is still sitting on the hero. It fades in
@@ -49,11 +66,12 @@ export function Header() {
       className="sticky top-0 z-50 w-full"
       style={{
         height: "var(--ejt-header)",
-        backgroundColor: "var(--ejd-blush)",
+        backgroundColor: tone.bg,
+        color: tone.ink,
         boxShadow: scrolled
           ? "0 1px 2px rgb(26 18 16 / 0.05), 0 10px 24px -14px rgb(26 18 16 / 0.16)"
           : "none",
-        transition: "box-shadow 0.25s ease",
+        transition: "box-shadow 0.25s ease, background-color 0.25s ease",
       }}
     >
       <nav
@@ -70,27 +88,33 @@ export function Header() {
           className="inline-flex shrink-0 items-center justify-self-start"
         >
           {site.signature ? (
-            <Image
-              src={site.signature}
-              alt=""
-              width={900}
-              height={801}
-              // An explicit height, NOT h-full: the grid centres its items
-              // rather than stretching them, so a percentage height has no
-              // definite parent to resolve against and the mark falls back to
-              // its intrinsic 900px, which tears the header open. The gap to
-              // 4rem is the mark's breathing room — it is cropped tight to its
-              // ink, so without it the ascenders and the j's descender sit
-              // right on the band's edges.
-              className="h-9 w-auto object-contain sm:h-10"
-              // Next 16 deprecated `priority` in favour of `preload`.
-              preload
+            // Masked, not <img>: the mark is a single-colour shape with an
+            // alpha channel, so painting it through a mask lets it take the
+            // header's own ink. Tinted into the PNG instead, it would be a
+            // near-black monogram sitting invisibly on the dark Collabs band.
+            <span
+              role="img"
+              aria-label={`${site.name} monogram`}
+              className="block h-9 w-auto sm:h-10"
+              style={{
+                aspectRatio: "900 / 801",
+                backgroundColor: tone.ink,
+                transition: "background-color 0.25s ease",
+                WebkitMaskImage: `url(${site.signature})`,
+                maskImage: `url(${site.signature})`,
+                WebkitMaskSize: "contain",
+                maskSize: "contain",
+                WebkitMaskRepeat: "no-repeat",
+                maskRepeat: "no-repeat",
+                WebkitMaskPosition: "center",
+                maskPosition: "center",
+              }}
             />
           ) : (
             // Fallback if the mark is ever cleared: her name in the script face.
             <span
               className="font-script text-xl leading-none sm:text-2xl"
-              style={{ color: "var(--ejd-ink)" }}
+              style={{ color: tone.ink }}
             >
               {site.name}
             </span>
@@ -99,10 +123,14 @@ export function Header() {
 
         <ul
           className="flex items-center justify-center gap-5 font-display uppercase tracking-[0.08em] sm:gap-9"
-          style={{ color: "var(--ejd-ink)", fontSize: "clamp(0.72rem,1.15vw,0.95rem)" }}
+          style={{ color: tone.ink, fontSize: "clamp(0.72rem,1.15vw,0.95rem)" }}
         >
           {(site.nav as readonly NavItem[]).map((item) => {
-            const active = !item.external && !!item.href && samePath(pathname, item.href);
+            const active =
+              !item.external &&
+              !!item.href &&
+              (samePath(pathname, item.href) ||
+                (item.alsoActiveOn ?? []).some((p) => samePath(pathname, p)));
             return (
               <li key={item.label}>
                 {!item.href ? (

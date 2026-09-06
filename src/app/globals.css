@@ -53,6 +53,7 @@
   --color-ejd-burnt: var(--ejd-burnt);
   --color-ejd-deep: var(--ejd-deep);
   --color-ejd-ink: var(--ejd-ink);
+  --color-ejd-violet: var(--ejd-violet);
   --color-mv-paper: var(--mv-paper);
   --color-mv-red: var(--mv-red);
   --color-mv-pink: var(--mv-pink);
@@ -154,6 +155,7 @@
   --ejd-burnt: #cc4e00;
   --ejd-deep: #7a1a00; /* deepened vermilion, for small text on colour */
   --ejd-ink: #1a1210; /* warm near-black — her deck's body colour */
+  --ejd-violet: #825dc6; /* the Valentine's band's display type, sampled from the deck */
 
   /* Lifted from the live Maeve theme (github: maeve/styles/__base.scss) so the
      case-study furniture matches the site she actually shipped. */

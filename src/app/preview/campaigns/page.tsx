@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Marquee } from "@/components/shared/Marquee";
-import { Seasons } from "@/components/sections/Seasons";
+import { Collections, LIGHT_TONE } from "@/components/sections/Collections";
 import { Contact } from "@/components/sections/Contact";
+import { seasons, seasonsIntro } from "@/data/campaigns";
 
 // Campaigns — the second tab. Starts at the Valentine's Day brief and runs
 // through the seasonal collections (Bart, 2026-09-05).
@@ -18,7 +19,13 @@ export default function CampaignsPage() {
   return (
     <>
       <Header />
-      <Seasons />
+      <Collections
+        title="Seasonal Collections"
+        intro={seasonsIntro}
+        items={seasons}
+        tone={LIGHT_TONE}
+        crossLink={{ href: "/preview/collabs", label: "click here for collaborations" }}
+      />
       <Marquee />
       <Contact />
     </>
