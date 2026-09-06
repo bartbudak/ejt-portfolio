@@ -1,4 +1,4 @@
-import { embedUrl, launchIntro, launchPosts } from "@/data/launch";
+import { embedUrl, launchPosts } from "@/data/launch";
 
 // "NATIONAL LAUNCH" — the partner campaign, shown through the posts it produced.
 //
@@ -48,7 +48,7 @@ export function Launch() {
         </h2>
 
 
-        <ul className="mt-12 grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-14 grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-4">
           {launchPosts.map((p) => {
             const src = embedUrl(p.post);
             return (
@@ -149,12 +149,6 @@ export function Launch() {
           })}
         </ul>
 
-        <p
-          className="mx-auto mt-14 max-w-[60ch] text-center text-base leading-relaxed sm:text-lg"
-          style={{ color: "var(--ejd-ink)" }}
-        >
-          {launchIntro}
-        </p>
       </div>
     </section>
   );

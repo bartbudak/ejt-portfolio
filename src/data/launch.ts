@@ -22,8 +22,8 @@ export interface LaunchPost {
   handle?: string;
 }
 
-// First sentence only — the second described the mechanics of the national
-// campaign, which the cards underneath now show.
+// Not rendered — the section is the heading and the posts alone. Kept because
+// it is her deck's own framing of the campaign.
 export const launchIntro =
   "We had a two-pronged approach to Maeve's launch; one campaign focused on converting local Seattle Chocolate fans into Maevens, and one aimed at capturing new members of our target audience across the country.";
 
