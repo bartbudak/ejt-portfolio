@@ -5,6 +5,8 @@ import { Marquee } from "@/components/shared/Marquee";
 import { About } from "@/components/sections/About";
 import { Results } from "@/components/sections/Results";
 import { BeforeAfter } from "@/components/sections/BeforeAfter";
+import { WhatIDid } from "@/components/sections/WhatIDid";
+import { EverydayLaunch } from "@/components/sections/EverydayLaunch";
 import { Launch } from "@/components/sections/Launch";
 import { Awards } from "@/components/sections/Awards";
 import { Contact } from "@/components/sections/Contact";
@@ -30,6 +32,8 @@ export default function PreviewPage() {
       <About />
       <Results />
       <BeforeAfter />
+      <WhatIDid />
+      <EverydayLaunch />
       <Launch />
       <Awards />
       <Marquee />

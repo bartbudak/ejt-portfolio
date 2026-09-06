@@ -1,3 +1,4 @@
+import { PostCard } from "@/components/shared/PostCard";
 import { embedUrl, launchPosts } from "@/data/launch";
 
 // "NATIONAL LAUNCH" — the partner campaign, shown through the posts it produced.
@@ -10,8 +11,8 @@ import { embedUrl, launchPosts } from "@/data/launch";
 // So the embed is CROPPED rather than styled. The iframe is made taller than its
 // window and pulled up by the height of Instagram's header, leaving only the
 // media band visible; the footer falls past the bottom edge and
-// `overflow: hidden` does the rest. The post card around it — avatar, handle,
-// caption — is then entirely ours, in the Maeve frame the rest of the site uses.
+// `overflow: hidden` does the rest. The card around it is <PostCard/>, the same
+// one the local wall uses, so the two sections stay one system.
 
 const WONK = { fontVariationSettings: '"SOFT" 0, "WONK" 1' } as const;
 
@@ -22,15 +23,6 @@ const IG_HEADER = 54;
 const IG_FOOTER = 210;
 // The embed presents media in a 4:5 window whatever shape the post itself is.
 const MEDIA_ASPECT = "4 / 5";
-
-const FRAME: React.CSSProperties = {
-  border: "var(--mv-stroke) solid var(--ejd-ink)",
-  boxShadow:
-    "0 0 0 var(--mv-frame) var(--ejd-vermilion), 0 0 0 calc(var(--mv-frame) + var(--mv-stroke)) var(--ejd-ink)",
-  borderRadius: 20,
-  margin: "calc(var(--mv-frame) + var(--mv-stroke))",
-  backgroundColor: "var(--mv-paper)",
-};
 
 export function Launch() {
   return (
@@ -47,108 +39,63 @@ export function Launch() {
           National Launch
         </h2>
 
-
         <ul className="mt-14 grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-4">
           {launchPosts.map((p) => {
             const src = embedUrl(p.post);
             return (
               <li key={p.partner}>
-                <div style={FRAME} className="overflow-hidden">
-                  {/* Our header, in place of Instagram's. */}
-                  <div
-                    className="flex items-center gap-2 px-3 py-2"
-                    style={{ borderBottom: "var(--mv-stroke) solid var(--ejd-ink)" }}
-                  >
-                    <span
-                      aria-hidden
-                      className="grid h-7 w-7 flex-none place-items-center rounded-full font-display text-xs font-black"
-                      style={{
-                        backgroundColor: "var(--ejd-vermilion)",
-                        color: "var(--ejd-marigold)",
-                        border: "var(--mv-stroke) solid var(--ejd-ink)",
-                        ...WONK,
-                      }}
-                    >
-                      {p.partner.charAt(0)}
-                    </span>
-                    <span
-                      className="min-w-0 flex-1 truncate text-sm font-bold"
-                      style={{ color: "var(--ejd-ink)" }}
-                    >
-                      {p.handle}
-                    </span>
-                  </div>
-
-                  {src ? (
-                    <div
-                      className="relative w-full overflow-hidden"
-                      style={{ aspectRatio: MEDIA_ASPECT, backgroundColor: "var(--ejd-ink)" }}
-                    >
-                      <iframe
-                        src={src}
-                        title={`${p.partner} on Instagram`}
-                        loading="lazy"
-                        scrolling="no"
-                        allow="encrypted-media"
-                        className="absolute left-0 w-full"
-                        style={{
-                          top: `-${IG_HEADER}px`,
-                          height: `calc(100% + ${IG_HEADER + IG_FOOTER}px)`,
-                          border: 0,
-                        }}
-                      />
-                    </div>
-                  ) : (
-                    // No link yet: a labelled placeholder holds the shape rather
-                    // than an empty frame that reads as a broken embed.
-                    <div
-                      className="flex flex-col justify-between gap-6 p-5"
-                      style={{ aspectRatio: MEDIA_ASPECT, color: "var(--ejd-ink)" }}
-                    >
-                      <span
-                        className="font-display text-lg font-black uppercase leading-[0.95]"
-                        style={WONK}
+                <PostCard
+                  handle={p.handle ?? p.partner}
+                  caption={
+                    <>
+                      <span className="font-bold">{p.partner}</span> {p.what}.
+                    </>
+                  }
+                  href={src ? p.post : undefined}
+                  media={
+                    src ? (
+                      <div
+                        className="relative w-full overflow-hidden"
+                        style={{ aspectRatio: MEDIA_ASPECT, backgroundColor: "var(--ejd-ink)" }}
                       >
-                        {p.partner}
-                      </span>
-                      <span className="text-sm leading-snug opacity-80">{p.what}</span>
-                      <span className="font-mono text-[0.6rem] uppercase tracking-[0.14em] opacity-50">
-                        Awaiting post link
-                      </span>
-                    </div>
-                  )}
-
-                  {/* The description, where Instagram puts a caption. The words
-                      are ours — the partner and what the collaboration was, from
-                      her deck — never an invented version of what these brands
-                      actually posted. */}
-                  <div
-                    className="px-3 py-3"
-                    style={{
-                      borderTop: "var(--mv-stroke) solid var(--ejd-ink)",
-                      color: "var(--ejd-ink)",
-                    }}
-                  >
-                    <p className="text-sm leading-snug">
-                      <span className="font-bold">{p.handle}</span> {p.what}.
-                    </p>
-                    {src && (
-                      <a
-                        href={p.post}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="mt-2 inline-block font-mono text-[0.6rem] uppercase tracking-[0.14em] opacity-60 hover:opacity-100"
+                        <iframe
+                          src={src}
+                          title={`${p.partner} on Instagram`}
+                          loading="lazy"
+                          scrolling="no"
+                          allow="encrypted-media"
+                          className="absolute left-0 w-full"
+                          style={{
+                            top: `-${IG_HEADER}px`,
+                            height: `calc(100% + ${IG_HEADER + IG_FOOTER}px)`,
+                            border: 0,
+                          }}
+                        />
+                      </div>
+                    ) : (
+                      // No link yet: a labelled placeholder holds the shape
+                      // rather than an empty frame that reads as broken.
+                      <div
+                        className="flex flex-col justify-between gap-6 p-5"
+                        style={{ aspectRatio: MEDIA_ASPECT, color: "var(--ejd-ink)" }}
                       >
-                        View on Instagram ↗
-                      </a>
-                    )}
-                  </div>
-                </div>
+                        <span
+                          className="font-display text-lg font-black uppercase leading-[0.95]"
+                          style={WONK}
+                        >
+                          {p.partner}
+                        </span>
+                        <span className="font-mono text-[0.6rem] uppercase tracking-[0.14em] opacity-50">
+                          Awaiting post link
+                        </span>
+                      </div>
+                    )
+                  }
+                />
               </li>
             );
           })}
         </ul>
-
       </div>
     </section>
   );
