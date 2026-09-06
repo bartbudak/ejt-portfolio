@@ -71,5 +71,7 @@ export const awards: Award[] = [
   {
     name: "NEXTY Awards",
     detail: "Finalist — Natural Products Expo West 2025",
+    href: "https://www.newhope.com/nexty-awards/presenting-the-2025-natural-products-expo-west-nexty-awards-finalists",
+    linkLabel: "See the finalists",
   },
 ];
