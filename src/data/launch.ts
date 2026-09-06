@@ -22,8 +22,10 @@ export interface LaunchPost {
   handle?: string;
 }
 
+// First sentence only — the second described the mechanics of the national
+// campaign, which the cards underneath now show.
 export const launchIntro =
-  "We had a two-pronged approach to Maeve's launch; one campaign focused on converting local Seattle Chocolate fans into Maevens, and one aimed at capturing new members of our target audience across the country. The national campaign targeted influential stores in key markets, pitched Maeve, and then ran collaborations, pop-ups and events with them — plus a few unexpected individuals.";
+  "We had a two-pronged approach to Maeve's launch; one campaign focused on converting local Seattle Chocolate fans into Maevens, and one aimed at capturing new members of our target audience across the country.";
 
 export const launchPosts: LaunchPost[] = [
   {
@@ -66,5 +68,8 @@ export function embedUrl(post: string): string | null {
   if (!post) return null;
   const match = post.match(/instagram\.com\/(?:p|reel|reels|tv)\/([A-Za-z0-9_-]+)/);
   const code = match ? match[1] : /^[A-Za-z0-9_-]+$/.test(post) ? post : null;
-  return code ? `https://www.instagram.com/p/${code}/embed/captioned/` : null;
+  // Plain `/embed/`, not `/embed/captioned/` — the caption is rebuilt in our
+  // own chrome, and the shorter the embed's own furniture the less of it has
+  // to be cropped away.
+  return code ? `https://www.instagram.com/p/${code}/embed/` : null;
 }
