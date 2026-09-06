@@ -30,8 +30,21 @@ export default function PreviewPage() {
         <Marquee />
       </div>
       <About />
-      <Results />
-      <BeforeAfter />
+      {/* One band across both: the numbers and the before/after are a single
+          argument — here is what changed, and here is what it looked like — so
+          the label stays pinned for the whole of it rather than dropping out
+          halfway through. Sticky resolves against this wrapper, which is why
+          the band lives here rather than inside either section. */}
+      <div className="relative">
+        <Marquee
+          items={["The Results", "Maeve"]}
+          background="var(--ejd-vermilion)"
+          ring="var(--ejd-marigold)"
+          className="sticky top-[var(--ejt-header)] z-30"
+        />
+        <Results />
+        <BeforeAfter />
+      </div>
       <WhatIDid />
       <LocalLaunch />
       <Launch />
