@@ -44,7 +44,7 @@ export function Launch() {
           {launchIntro}
         </p>
 
-        <ul className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2">
           {launchPosts.map((p) => {
             const src = embedUrl(p.post);
             return (
@@ -87,12 +87,46 @@ export function Launch() {
                   )}
                 </div>
                 {src && (
-                  <p
-                    className="mt-4 px-2 text-sm leading-snug"
-                    style={{ color: "var(--ejd-ink)" }}
-                  >
-                    <strong className="font-semibold">{p.partner}</strong> — {p.what}
-                  </p>
+                  // A caption block in Instagram's shape — avatar, handle, then
+                  // the description — but the words are ours: the partner and
+                  // what the collaboration actually was, from her deck. The real
+                  // post's own caption is inside the embed above; nothing here
+                  // is put in these brands' mouths.
+                  <div className="mt-5 px-3" style={{ color: "var(--ejd-ink)" }}>
+                    <div className="flex items-center gap-2">
+                      <span
+                        aria-hidden
+                        className="grid h-7 w-7 flex-none place-items-center rounded-full font-display text-xs font-black"
+                        style={{
+                          backgroundColor: "var(--ejd-vermilion)",
+                          color: "var(--ejd-marigold)",
+                          border: "var(--mv-stroke) solid var(--ejd-ink)",
+                          ...WONK,
+                        }}
+                      >
+                        {p.partner.charAt(0)}
+                      </span>
+                      <a
+                        href={p.post}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-sm font-bold underline-offset-2 hover:underline"
+                      >
+                        {p.handle}
+                      </a>
+                    </div>
+                    <p className="mt-2 text-sm leading-snug">
+                      <span className="font-bold">{p.partner}</span> {p.what}.
+                    </p>
+                    <a
+                      href={p.post}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-2 inline-block font-mono text-[0.65rem] uppercase tracking-[0.14em] opacity-60 hover:opacity-100"
+                    >
+                      View on Instagram ↗
+                    </a>
+                  </div>
                 )}
               </li>
             );
