@@ -105,8 +105,14 @@ export const seasons: Collection[] = [
         // stops them being sliced. Bigger on a phone, where 30% of a narrow
         // column left it as a smudge. Centred on the BRIEF section rather than
         // pinned to its top, which is where the deck sits it.
+        //
+        // It bleeds rather than sitting flush because the asset's right 30% is
+        // nearly empty — sampling its alpha finds only scattered hearts out
+        // there, so a flush right edge parked the petals and stem well inside
+        // the panel. Letting the sparse edge run off brings the flower to the
+        // border, which is where the deck has it.
         src: "/motifs/valentines-roses.png",
-        className: "top-1/2 -translate-y-1/2 right-0 w-[52%] sm:w-[30%] h-auto",
+        className: "top-1/2 -translate-y-1/2 -right-[10%] sm:-right-[5%] w-[52%] sm:w-[30%] h-auto",
       },
     ],
     rows: [
@@ -132,16 +138,20 @@ export const seasons: Collection[] = [
     slug: "spring",
     label: "Spring",
     briefTitle: "Spring Brief",
-    wordmark: "Spring Mix",
     ground: "var(--ejd-sage)",
     display: "var(--mv-paper)",
     body: "var(--ejd-ink)",
     motif: "/motifs/spring-daffodil.png",
     motifAlt: "An illustrated yellow daffodil",
-    layout: { align: "left", nutshell: "inline", motifs: "bottom-row", reserve: "bottom" },
-    frame: [
-      { src: "/motifs/spring-border.png", className: "-bottom-[4%] left-0 w-[118%] max-w-none h-auto" },
-    ],
+    showcase: {
+      src: "/motifs/spring-lineup.webp",
+      alt: "The Spring Mix collection: her flower border, the Spring Mix logotype, three bars, and the garden-party editorial shoot",
+    },
+    // Her flower border / coaster live in the showcase crop below, and her brief
+    // band carries no decoration of its own — so no frame art, rather than
+    // falling back to a motif she never put there.
+    frame: [],
+    layout: { align: "left", nutshell: "inline", motifs: "bottom-row", reserve: "none" },
     rows: [
       {
         label: "Theme",
@@ -157,17 +167,20 @@ export const seasons: Collection[] = [
     slug: "summer",
     label: "Summer",
     briefTitle: "Summer Brief",
-    wordmark: "Fair Food",
     ground: "var(--ejd-ice)",
     display: "var(--mv-paper)",
     body: "var(--ejd-ink)",
     motif: "/motifs/summer-star.png",
     motifAlt: "An illustrated yellow star",
+    showcase: {
+      src: "/motifs/summer-lineup.webp",
+      alt: "The Fair Food collection: the rollercoaster, the Fair Food sign, three bars and the Summer Medley bonbon box",
+    },
+    // Her flower border / coaster live in the showcase crop below, and her brief
+    // band carries no decoration of its own — so no frame art, rather than
+    // falling back to a motif she never put there.
+    frame: [],
     layout: { align: "left", nutshell: "inline", motifs: "scatter" },
-    frame: [
-      { src: "/motifs/summer-coaster.png", className: "-bottom-[6%] -left-[4%] w-[54%] max-w-none h-auto" },
-      { src: "/motifs/summer-sign.png", className: "bottom-[8%] right-[6%] w-[26%] max-w-none h-auto" },
-    ],
     rows: [
       {
         label: "Theme",
@@ -188,13 +201,16 @@ export const seasons: Collection[] = [
     slug: "fall",
     label: "Fall",
     briefTitle: "Fall Brief",
-    wordmark: "Fall Friends-y",
     ground: "var(--ejd-burnt)",
     display: "var(--mv-paper)",
     body: "var(--ejd-ink)",
     motif: "/motifs/fall-leaf.png",
     motifAlt: "An illustrated orange maple leaf",
-    layout: { align: "center", nutshell: "below", motifs: "top-row", reserve: "top" },
+    showcase: {
+      src: "/motifs/fall-lineup.webp",
+      alt: "The Fall Friends-y collection: the logotype, three bars, the Harvest Kounty box and the countryside shoot",
+    },
+    layout: { align: "center", nutshell: "below", motifs: "top-row", reserve: "none" },
     frame: [
       { src: "/motifs/fall-apples.png", className: "-top-[3%] left-0 w-full max-w-none h-auto" },
     ],
@@ -221,12 +237,15 @@ export const seasons: Collection[] = [
     slug: "holiday",
     label: "Holiday",
     briefTitle: "Holiday Brief",
-    wordmark: "Happy Holidays",
     ground: "var(--ejd-red)",
     display: "var(--mv-paper)",
     body: "var(--ejd-ink)",
     motif: "/motifs/holiday-bird.png",
     motifAlt: "An illustrated bird wearing a santa hat",
+    showcase: {
+      src: "/motifs/holiday-lineup.webp",
+      alt: "The Happy Holidays collection: the logotype, three bars, the advent calendar and the night-sky film still",
+    },
     layout: { align: "center", nutshell: "above", motifs: "corners", reserve: "top" },
     frame: [
       { src: "/motifs/holiday-lights.png", className: "-top-[2%] left-0 w-full max-w-none h-auto" },
