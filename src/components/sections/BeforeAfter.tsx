@@ -131,7 +131,10 @@ export function BeforeAfter() {
     <section
       id="before-after"
       className="w-full px-3 py-14 sm:px-6 sm:py-20"
-      style={{ backgroundColor: "var(--mv-paper)" }}
+      // Blush, matching the hero and the results band above. Maeve's own paper
+      // (#fff3e5) is the pale peach Bart read as skin; the frame furniture below
+      // still follows the theme, but the ground it sits on is Ellie's.
+      style={{ backgroundColor: "var(--ejd-blush)" }}
     >
       <div className="mx-auto w-full max-w-6xl">
         <div style={FRAME} className="overflow-hidden">
@@ -249,7 +252,7 @@ export function BeforeAfter() {
                       aria-label={`${p.after}, was ${p.before}`}
                       title={`${p.after} — was ${p.before}`}
                       className="grid h-full w-full place-items-center p-3 transition-colors"
-                      style={{ backgroundColor: on ? p.afterBg : "var(--mv-paper)" }}
+                      style={{ backgroundColor: on ? p.afterBg : "var(--ejd-blush)" }}
                     >
                       <Image
                         src={`/work/before-after/${p.slug}-thumb.png`}
@@ -263,7 +266,7 @@ export function BeforeAfter() {
                 );
               })}
               {/* Filler keeps the rules running to the edge, as the theme does. */}
-              <li aria-hidden style={{ backgroundColor: "var(--mv-paper)" }} />
+              <li aria-hidden style={{ backgroundColor: "var(--ejd-blush)" }} />
             </ul>
           </div>
         </div>
