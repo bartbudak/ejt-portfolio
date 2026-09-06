@@ -321,7 +321,7 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
               src={current.showcase.src}
               alt={current.showcase.alt}
               width={1700}
-              height={701}
+              height={865}
               loading="eager"
               className="relative mt-6 block h-auto w-[calc(100%+3rem)] max-w-none -translate-x-6 sm:w-[calc(100%+7rem)] sm:-translate-x-14"
             />
