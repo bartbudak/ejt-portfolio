@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { awards } from "@/data/awards";
 
 // "AWARDS" — her deck sets this on marigold, but National Launch immediately
@@ -33,10 +34,22 @@ export function Awards() {
         <ul className="mt-14 grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-4">
           {awards.map((a) => (
             <li key={a.name}>
-              <div
-                style={FRAME}
-                className="flex h-full flex-col gap-3 p-5"
-              >
+              <div style={FRAME} className="flex h-full flex-col overflow-hidden">
+                {a.preview && (
+                  // The preview is the work, not the article: her site for the
+                  // Webby, her on the Dieline stage, the game's own character
+                  // for the IGN piece. Screenshots of other people's pages would
+                  // put their layouts on her portfolio to no purpose.
+                  <Image
+                    src={a.preview.src}
+                    alt={a.preview.alt}
+                    width={720}
+                    height={540}
+                    className="block h-auto w-full"
+                    style={{ borderBottom: "var(--mv-stroke) solid var(--ejd-ink)" }}
+                  />
+                )}
+                <div className="flex flex-1 flex-col gap-3 p-5">
                 <h3
                   className="font-display text-xl font-black uppercase leading-[0.95] tracking-[-0.01em]"
                   style={{ ...WONK, color: "var(--ejd-vermilion)" }}
@@ -67,6 +80,18 @@ export function Awards() {
                     {a.linkLabel ?? "Read more"} ↗
                   </a>
                 )}
+                {a.extra && (
+                  <a
+                    href={a.extra.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-mono text-[0.62rem] uppercase tracking-[0.14em] underline-offset-4 opacity-70 hover:underline hover:opacity-100"
+                    style={{ color: "var(--ejd-ink)" }}
+                  >
+                    {a.extra.label} ↗
+                  </a>
+                )}
+                </div>
               </div>
             </li>
           ))}
