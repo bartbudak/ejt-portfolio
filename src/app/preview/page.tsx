@@ -19,11 +19,16 @@ export default function PreviewPage() {
   return (
     <>
       <Header />
-      <Hero />
-      <Marquee />
+      {/* One screen: the header sits above it, the hero takes what is left, and
+          the marquee closes the fold rather than hanging below it. */}
+      <div className="flex h-[calc(100svh-var(--ejt-header))] w-full flex-col">
+        <Hero />
+        <Marquee />
+      </div>
       <About />
       <Results />
       <BeforeAfter />
+      <Marquee />
       <Contact />
     </>
   );

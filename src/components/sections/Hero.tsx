@@ -47,7 +47,10 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative isolate flex min-h-[calc(100svh-var(--ejt-header))] w-full flex-col overflow-hidden"
+      // Fills the first-screen block rather than measuring itself: the marquee
+      // is inside that block now, so the two share one viewport height and the
+      // hero takes whatever is left after the band.
+      className="relative isolate flex min-h-0 w-full flex-1 flex-col overflow-hidden"
       style={{ backgroundColor: "var(--ejd-blush)" }}
     >
       <div className="relative z-20 mx-auto w-full max-w-[1600px] px-4 pt-12 sm:pt-16">
