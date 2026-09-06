@@ -5,6 +5,7 @@ import { Marquee } from "@/components/shared/Marquee";
 import { About } from "@/components/sections/About";
 import { Results } from "@/components/sections/Results";
 import { BeforeAfter } from "@/components/sections/BeforeAfter";
+import { Launch } from "@/components/sections/Launch";
 import { Contact } from "@/components/sections/Contact";
 
 // Local-only preview of the home while the live site stays on the coming-soon
@@ -28,6 +29,7 @@ export default function PreviewPage() {
       <About />
       <Results />
       <BeforeAfter />
+      <Launch />
       <Marquee />
       <Contact />
     </>
