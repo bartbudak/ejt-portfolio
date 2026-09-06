@@ -30,25 +30,25 @@ export const launchPosts: LaunchPost[] = [
     partner: "Butterfield Market",
     what: "Frozen yogurt s'mores using Maeve's chocolate",
     handle: "@butterfieldnyc",
-    post: "",
+    post: "https://www.instagram.com/p/Db3cky_R3vJ/",
   },
   {
     partner: "Books Are Magic",
     what: "Chocolate and book pairings in all their stores",
     handle: "@booksaremagicbk",
-    post: "",
+    post: "https://www.instagram.com/p/DcCPZcUGruv/?img_index=1",
   },
   {
     partner: "Valheria Rocha",
     what: "Artist collaboration — Maeve, Certified Magic",
     handle: "@maevechocolate",
-    post: "",
+    post: "https://www.instagram.com/p/DcJ2qYnSO68/",
   },
   {
     partner: "Soundbooth Theater",
     what: "Mama's Night Off — the Dungeon Crawler Carl webgame",
     handle: "@maevechocolate",
-    post: "",
+    post: "https://www.instagram.com/p/Da0cujESC6-/",
   },
 ];
 

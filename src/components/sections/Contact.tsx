@@ -18,23 +18,9 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="relative isolate w-full overflow-hidden px-5 py-20 sm:px-10 sm:py-28"
+      className="relative isolate w-full overflow-hidden px-3 py-20 sm:px-10 sm:py-28"
       style={{ backgroundColor: "var(--ejd-vermilion)" }}
     >
-      {/* The astronaut again, closing the page as she opened it. Same framing
-          as "Hi There!": pinned to the section's top, right and bottom so she
-          reads as walking off the screen. Only from `lg` — below that the two
-          columns are too narrow and she would reach back over the copy, so she
-          stacks under it instead. */}
-      <Image
-        src="/hero/ellie-astronaut.webp"
-        alt=""
-        width={1100}
-        height={1588}
-        aria-hidden
-        sizes="(min-width: 1024px) 34vw, 70vw"
-        className="pointer-events-none order-last mx-auto mt-12 block h-auto w-[min(70vw,18rem)] object-contain lg:absolute lg:inset-y-0 lg:right-0 lg:mx-0 lg:mt-0 lg:h-full lg:w-auto lg:max-w-none lg:object-bottom"
-      />
 
       <div // Centred in the space beside her, not in the whole section — `mx-auto` alone
       // kept the column over her feet.
@@ -42,12 +28,15 @@ export function Contact() {
         {/* `w-fit` makes this column hug its widest child — the heading — so
             the card below can take `w-full` and come out exactly as wide as
             "Let's talk" rather than as wide as the section. */}
-        <div className="mx-auto flex w-fit max-w-full flex-col items-center gap-6">
+        <div className="mx-auto flex w-full max-w-full flex-col items-center gap-6 sm:w-fit">
         <h2
           className="font-display font-black uppercase leading-[0.86] tracking-[-0.03em]"
           style={{ ...WONK, color: "var(--ejd-marigold)", fontSize: "clamp(2.6rem,9vw,6.5rem)" }}
         >
-          Let&apos;s talk
+          {/* Stacked on a phone, one line from `sm` — at 9vw the two words
+              together crowd a narrow viewport. */}
+          <span className="block sm:inline">Let&apos;s</span>{" "}
+          <span className="block sm:inline">talk</span>
         </h2>
 
         {/* Everything under the heading sits in its own framed enclosure — the
@@ -103,6 +92,20 @@ export function Contact() {
         </div>
         </div>
       </div>
+      {/* The astronaut again, closing the page as she opened it. Same framing
+          as "Hi There!": pinned to the section's top, right and bottom so she
+          reads as walking off the screen. Only from `lg` — below that the two
+          columns are too narrow and she would reach back over the copy, so she
+          stacks under it instead. */}
+      <Image
+        src="/hero/ellie-astronaut.webp"
+        alt=""
+        width={1100}
+        height={1588}
+        aria-hidden
+        sizes="(min-width: 1024px) 34vw, 70vw"
+        className="pointer-events-none mx-auto mt-12 block h-auto w-[min(70vw,18rem)] object-contain lg:absolute lg:inset-y-0 lg:right-0 lg:mx-0 lg:mt-0 lg:h-full lg:w-auto lg:max-w-none lg:object-bottom"
+      />
     </section>
   );
 }
