@@ -39,6 +39,10 @@ export function Contact() {
       <div // Centred in the space beside her, not in the whole section — `mx-auto` alone
       // kept the column over her feet.
       className="relative mx-auto flex w-full max-w-4xl flex-col items-center gap-8 text-center lg:ml-0 lg:mr-auto lg:max-w-[60%]">
+        {/* `w-fit` makes this column hug its widest child — the heading — so
+            the card below can take `w-full` and come out exactly as wide as
+            "Let's talk" rather than as wide as the section. */}
+        <div className="mx-auto flex w-fit max-w-full flex-col items-center gap-6">
         <h2
           className="font-display font-black uppercase leading-[0.86] tracking-[-0.03em]"
           style={{ ...WONK, color: "var(--ejd-marigold)", fontSize: "clamp(2.6rem,9vw,6.5rem)" }}
@@ -51,7 +55,13 @@ export function Contact() {
             pinned to the vermilion rather than type floating on it. The ring is
             marigold because a vermilion one would vanish into the ground. */}
         <div
-          className="flex w-full flex-col items-center gap-8 px-6 py-10 sm:px-10 sm:py-12"
+          // `w-0 min-w-full` rather than `w-full`: the parent is `w-fit`, so it
+          // sizes to its widest child's max-content — and the paragraph inside
+          // this card is wider than the heading, so a plain `w-full` made the
+          // card set the width it was supposed to be taking. At zero width it
+          // contributes nothing to that measurement, the heading wins, and
+          // `min-w-full` then fills whatever the heading decided.
+          className="flex w-0 min-w-full flex-col items-center gap-5 px-5 py-7 sm:px-8 sm:py-8"
           style={{
             backgroundColor: "var(--ejd-blush)",
             border: "var(--mv-stroke) solid var(--ejd-ink)",
@@ -90,6 +100,7 @@ export function Contact() {
         >
           {site.availability}
         </p>
+        </div>
         </div>
       </div>
     </section>
