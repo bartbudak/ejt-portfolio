@@ -30,29 +30,38 @@ export interface LocalPost {
   alt: string;
 }
 
-// The six pieces of her Local Launch board, cropped from the deck and captioned
-// from her own list of what the local campaign consisted of.
+// The six pieces of her Local Launch board. The photographs are her ORIGINALS
+// out of assets/maeve/launch/ — 3000-5700px sources rather than crops off the
+// deck render, which is what these were at first and why they were soft.
+//
+// One swap: the deck's board includes a painted Maeve mural, and there is no
+// mural photograph anywhere in her drop. Tradeshow takes that slot instead —
+// it is on her own list of what the local campaign consisted of, and the
+// original is there. Worth chasing the mural shot from her separately.
+//
+// Captions are her list of what the local campaign consisted of, not invented
+// post copy.
 export const localPosts: LocalPost[] = [
   {
     slug: "storefront",
     label: "Flagship store",
     caption: "The flagship store and factory tour, reimagined — concept, script, run of show and the physical build-out.",
     image: "/local/storefront.webp",
-    alt: "The Maeve flagship launch event, product wall behind the guests",
+    alt: "The Maeve flagship store, its product wall stacked behind",
   },
   {
     slug: "billboard",
     label: "Billboard",
-    caption: "Seattle Chocolate is now Maeve. A city billboard doing the announcing, with Gretchen the Blackberry Bear fronting it.",
+    caption: "Seattle Chocolate is now Maeve — announced on a city billboard, with Gretchen the Blackberry Bear fronting it.",
     image: "/local/billboard.webp",
-    alt: "A pink Maeve billboard reading “Seattle Chocolate is now Maeve” with the bear character",
+    alt: "A Maeve bar held up in front of the pink city billboard announcing the rebrand",
   },
   {
-    slug: "mural",
-    label: "Mural",
-    caption: "A painted wall in the Magical World of Maeve, scaled up to the size of a building.",
-    image: "/local/mural.webp",
-    alt: "A large colourful Maeve mural with someone holding product in front of it",
+    slug: "tradeshow",
+    label: "Tradeshow",
+    caption: "Booths and activations built with the sales team — the brand out in front of buyers, not just shoppers.",
+    image: "/local/tradeshow.webp",
+    alt: "Ellie at a Maeve tradeshow booth, product wall behind her",
   },
   {
     slug: "wheatpaste",
