@@ -20,6 +20,18 @@ import type { Collection } from "@/data/campaigns";
 
 const WONK = { fontVariationSettings: '"SOFT" 0, "WONK" 1' } as const;
 
+// `paint-order: stroke fill` puts the stroke UNDER the fill, so the letterform
+// keeps its full weight and only gains an edge — a plain text-stroke is drawn
+// centred and eats into thin strokes like the script face's.
+const outlined = (on?: boolean) =>
+  on
+    ? ({
+        WebkitTextStrokeWidth: "clamp(1.5px, 0.035em, 4px)",
+        WebkitTextStrokeColor: "var(--ejd-ink)",
+        paintOrder: "stroke fill",
+      } as const)
+    : null;
+
 type Tone = {
   /** Page ground. */
   ground: string;
@@ -69,8 +81,8 @@ type Props = {
 function Nutshell({ collection, className = "" }: { collection: Collection; className?: string }) {
   return (
     <span
-      className={`block pb-1 font-script text-xl normal-case tracking-normal sm:pb-2 sm:text-2xl ${className}`}
-      style={{ color: collection.display }}
+      className={`block pb-1 font-script text-sm normal-case tracking-normal sm:pb-2 sm:text-2xl ${className}`}
+      style={{ color: collection.display, ...outlined(collection.outlineDisplay) }}
     >
       In a nutshell
     </span>
@@ -235,9 +247,17 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
           className="relative isolate mt-4 overflow-hidden rounded-lg"
           style={{
             backgroundColor: current.ground,
-            // The deck frames each brief in its own display colour rather than a
-            // neutral rule.
-            border: `var(--mv-stroke) solid ${current.display}`,
+            // The Maeve frame from the compare section — soft-black hairline, a
+            // 7px ring, then a second hairline outside it — but ringed in the
+            // collection's own display colour rather than Maeve's red, so each
+            // band is framed in its own palette.
+            border: "var(--mv-stroke) solid var(--ejd-ink)",
+            boxShadow: `0 0 0 var(--mv-frame) ${current.display}, 0 0 0 calc(var(--mv-frame) + var(--mv-stroke)) var(--ejd-ink)`,
+            borderRadius: 28,
+            // The ring is drawn outside the border box, so the panel has to hold
+            // it off its neighbours itself.
+            margin: "calc(var(--mv-frame) + var(--mv-stroke))",
+            marginTop: "calc(var(--mv-frame) + var(--mv-stroke) + 1.25rem)",
           }}
         >
           {/* The brief section. It is the artwork's positioning context, not
@@ -268,6 +288,7 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
               } ${current.layout.align === "center" ? "mx-auto" : ""}`}
               style={{
                 ...WONK,
+                ...outlined(current.outlineDisplay),
                 color: current.display,
                 fontSize: "clamp(2.2rem,6vw,4.6rem)",
               }}
@@ -298,10 +319,41 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
 
           {/* She indents the body block well in from the heading on every band,
               and never runs it the full width of the panel. */}
+          {/* In the flow, not behind it: floating the artwork with
+              `shape-outside` pointed at the same PNG makes the copy wrap to the
+              petals and the stem rather than stopping at a rectangular column.
+              The browser reads the alpha channel, so the silhouette is exact and
+              costs no script. */}
+          {current.floatArt && (
+            <Image
+              src={current.floatArt.src}
+              alt=""
+              width={700}
+              height={1312}
+              aria-hidden
+              loading="eager"
+              className={`relative float-right ml-6 h-auto max-w-none ${current.floatArt.className}`}
+              style={{
+                shapeOutside: `url(${current.floatArt.src})`,
+                shapeImageThreshold: 0.5,
+                shapeMargin: current.floatArt.shapeMargin,
+              }}
+            />
+          )}
+
           <dl
-            // Flush with the heading, not indented from it.
-            className={`relative mt-10 max-w-[68ch] space-y-4 text-left ${
-              RESERVE[current.layout.reserve ?? "none"]
+            // Flush with the heading, not indented from it. A band whose artwork
+            // floats needs no column limit — the shape does that job, and a
+            // max-width would just stop the text short of the silhouette.
+            className={`relative mt-10 space-y-4 text-left ${
+              current.floatArt
+                ? // No measure cap when the artwork floats. The cap was the
+                  // reason the wrap looked inert: at 68ch the copy stopped well
+                  // short of the float and never met its shape at all. The
+                  // float itself sets the measure here, and it runs the full
+                  // height of the copy, so no line escapes it.
+                  "max-w-none"
+                : `max-w-[68ch] ${RESERVE[current.layout.reserve ?? "none"]}`
             }`}
           >
             {current.rows.map((row) => (
@@ -332,17 +384,6 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
             </p>
           )}
 
-          {/* Honesty marker: some rows were blank in her deck and are written
-              here from the collection's imagery. Say so on the page rather than
-              only in the source. */}
-          {current.rows.some((r) => r.drafted) && (
-            <p
-              className="relative mt-8 font-mono text-[0.65rem] uppercase tracking-[0.14em] opacity-60"
-              style={{ color: current.body }}
-            >
-              Draft copy — {current.rows.filter((r) => r.drafted).map((r) => r.label).join(", ")} pending Ellie&apos;s review
-            </p>
-          )}
           </div>
 
           {/* Full-bleed and flush with the panel's floor, so the book down its

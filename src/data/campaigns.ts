@@ -44,6 +44,17 @@ export interface FramePiece {
   className: string;
 }
 
+/** Artwork that sits IN the text flow rather than behind it, so the copy wraps
+ *  to its silhouette. `shape-outside` reads the same alpha the image draws with,
+ *  so the wrap follows the actual petals and stem — no JS, no traced polygon. */
+export interface FloatArt {
+  src: string;
+  /** Width and offset classes. */
+  className: string;
+  /** Gap held between the silhouette and the text. */
+  shapeMargin: string;
+}
+
 export interface Collection {
   slug: string;
   /** Card label. */
@@ -64,6 +75,10 @@ export interface Collection {
   layout: BandLayout;
   /** Her own band artwork. Falls back to `motif` when a band has none. */
   frame?: FramePiece[];
+  /** Artwork the copy flows around instead of stopping short of. */
+  floatArt?: FloatArt;
+  /** Outline the display type — Summer's white on ice needs the edge. */
+  outlineDisplay?: boolean;
   /** The product lineup that runs under the brief in her deck, under the
    *  collection's own logotype. Cropped from the deck at full resolution — the
    *  ground is the same blush/sage/etc. as the band, so it sits seamlessly. */
@@ -92,30 +107,23 @@ export const seasons: Collection[] = [
       src: "/motifs/valentines-lineup.webp",
       alt: "The Valentine's collection: the Bonbons of Desire box, the Forbidden Fruits, Peanut Butter Banana Affair and Heat & Honey bars, three romance-postcard cards, a rose-covered heart box, candy hearts and the Maeve Books mark",
     },
-    frame: [
-      // The rose spray descends the right edge and bleeds off the top, with her
-      // scattered purple hearts already part of the same artwork.
-      {
-        // Sized by WIDTH, not panel height: the panel grew a whole product
-        // lineup underneath, and a percentage height scaled the rose with it.
-        // In the deck the spray covers about 28% of the band's width.
-        //
-        // Flush right, not bled past it — the artwork's own black hatch lines
-        // are its right boundary, so aligning that edge to the panel's is what
-        // stops them being sliced. Bigger on a phone, where 30% of a narrow
-        // column left it as a smudge. Centred on the BRIEF section rather than
-        // pinned to its top, which is where the deck sits it.
-        //
-        // It bleeds rather than sitting flush because the asset's right 30% is
-        // nearly empty — sampling its alpha finds only scattered hearts out
-        // there, so a flush right edge parked the petals and stem well inside
-        // the panel. Letting the sparse edge run off brings the flower to the
-        // border, which is where the deck has it.
-        src: "/motifs/valentines-roses.png",
-        className: "top-1/2 -translate-y-1/2 -right-[10%] sm:-right-[5%] w-[52%] sm:w-[30%] h-auto",
-      },
-    ],
-    rows: [
+    // No absolute frame art: the rose floats in the copy instead, and without
+    // this the fallback would drop her M'Lady heart into the corner — a motif
+    // the deck does not put there.
+    frame: [],
+    floatArt: {
+      // The copy wraps to the rose instead of stopping at a rigid column. The
+      // asset's right side is mostly empty — scattered hearts — so it is pulled
+      // right, which brings the dense flower to the border and lets the sparse
+      // edge run off, as the deck has it.
+      //
+      // `mt-10` matches the copy's own top margin, so the rose starts level with
+      // the first line of the brief instead of riding up into the heading.
+      src: "/motifs/valentines-roses.png",
+      className: "mt-10 -mr-[12%] w-[52%] sm:-mr-[6%] sm:w-[34%]",
+      shapeMargin: "0.9rem",
+    },
+        rows: [
       {
         label: "Theme",
         body: "your favorite romance novel or clinch cover wrapped up in a humorous and delicious treat.",
@@ -180,6 +188,7 @@ export const seasons: Collection[] = [
     // band carries no decoration of its own — so no frame art, rather than
     // falling back to a motif she never put there.
     frame: [],
+    outlineDisplay: true,
     layout: { align: "left", nutshell: "inline", motifs: "scatter" },
     rows: [
       {

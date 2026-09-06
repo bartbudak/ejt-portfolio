@@ -74,7 +74,10 @@ export const site = {
       external: false,
       alsoActiveOn: ["/preview/collabs"],
     },
-    { label: "Resume", href: "", external: true },
+    // Self-hosted rather than a Drive link: no sign-in wall, no sharing
+    // settings to get wrong, and it ships with the site. `external: true` still
+    // opens it in a new tab so the portfolio stays put behind it.
+    { label: "Resume", href: "/ellie-thompson-resume.pdf", external: true },
   ],
   // Her hand-drawn "ejt" monogram, used as the logo in the header. Extracted
   // from the Procreate PDF she supplied: a 2388x1668 JPEG of black ink on

@@ -88,7 +88,9 @@ const FRAME: React.CSSProperties = {
 
 export function BeforeAfter() {
   const [active, setActive] = useState(0);
-  const [pos, setPos] = useState(50);
+  // Opens at 10%: the old pack shows as a sliver rather than half the panel, so
+  // the first read is the new brand, and the reveal is something you go and get.
+  const [pos, setPos] = useState(10);
   const panel = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
 
@@ -220,14 +222,19 @@ export function BeforeAfter() {
                 className="pointer-events-none absolute inset-x-0 top-5 flex justify-center"
               >
                 <span
-                  className="flex items-center gap-[6px] rounded-full px-3 py-[2px] text-xs font-bold uppercase tracking-[0.08em] sm:text-sm"
+                  className="flex flex-col items-center gap-0 rounded-full px-4 py-1 text-xs font-bold uppercase leading-tight tracking-[0.08em] sm:text-sm"
                   style={{
                     backgroundColor: "#fff",
                     border: "var(--mv-stroke) solid var(--mv-soft-black)",
                     color: "var(--mv-soft-black)",
                   }}
                 >
-                  <Dot /> Before &amp; after <Dot />
+                  <span className="flex items-center gap-[6px]">
+                    <Dot /> Before &amp; after <Dot />
+                  </span>
+                  <span className="text-[0.6rem] font-semibold normal-case tracking-[0.06em] opacity-70 sm:text-[0.65rem]">
+                    slide to see the magic
+                  </span>
                 </span>
               </span>
 
@@ -247,12 +254,12 @@ export function BeforeAfter() {
                   <li key={p.slug} className="min-w-0">
                     <button
                       type="button"
-                      onClick={() => { setActive(i); setPos(50); }}
+                      onClick={() => { setActive(i); setPos(10); }}
                       aria-pressed={on}
                       aria-label={`${p.after}, was ${p.before}`}
                       title={`${p.after} — was ${p.before}`}
                       className="grid h-full w-full place-items-center p-3 transition-colors"
-                      style={{ backgroundColor: on ? p.afterBg : "var(--ejd-blush)" }}
+                      style={{ backgroundColor: on ? p.afterBg : "var(--mv-paper)" }}
                     >
                       <Image
                         src={`/work/before-after/${p.slug}-thumb.png`}
@@ -266,7 +273,7 @@ export function BeforeAfter() {
                 );
               })}
               {/* Filler keeps the rules running to the edge, as the theme does. */}
-              <li aria-hidden style={{ backgroundColor: "var(--ejd-blush)" }} />
+              <li aria-hidden style={{ backgroundColor: "var(--mv-paper)" }} />
             </ul>
           </div>
         </div>
