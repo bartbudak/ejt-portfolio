@@ -1,18 +1,16 @@
-import { Marquee } from "@/components/shared/Marquee";
 import Image from "next/image";
+import { Marquee } from "@/components/shared/Marquee";
 import { scope, scopeIntro } from "@/data/scope";
 
-// "So, what exactly did I do?" — her deck scatters the answer around a central
-// illustration of her. A scatter does not survive a narrow screen, so the same
-// lines run as a two-column list flanking the illustration on desktop and stack
-// under it on a phone. The words are hers, verbatim.
+// "So, what exactly did I do?" — her deck scatters the answer as fragments
+// around an illustration of her. Here the illustration holds the centre and the
+// work groups underneath it, each fragment given a heading so the section can be
+// scanned rather than read. The substance is hers; the wording is tightened so
+// each reads as a sentence rather than a caption.
 
 const WONK = { fontVariationSettings: '"SOFT" 0, "WONK" 1' } as const;
 
 export function WhatIDid() {
-  const half = Math.ceil(scope.length / 2);
-  const columns = [scope.slice(0, half), scope.slice(half)];
-
   return (
     <section
       id="scope"
@@ -37,36 +35,32 @@ export function WhatIDid() {
           {scopeIntro}
         </h2>
 
-        <div className="mt-12 grid grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_auto_1fr] lg:gap-10">
-          <ul
-            className="order-2 space-y-6 text-sm leading-snug sm:text-base lg:order-1 lg:text-right"
-            style={{ color: "var(--ejd-ink)" }}
-          >
-            {columns[0].map((line) => (
-              <li key={line}>{line}</li>
-            ))}
-          </ul>
+        <Image
+          src="/awards/what-i-did.png"
+          alt="An illustration of Ellie sitting cross-legged, a whole world of forests, city blocks and ships growing out of her lap"
+          width={1200}
+          height={743}
+          className="mx-auto mt-10 block h-auto w-[min(90vw,34rem)]"
+        />
 
-          <Image
-            // Her illustration lifted from the PDF as its own object, with its
-            // alpha intact — the first pass cropped it off the rendered page,
-            // which baked fragments of the surrounding copy into the picture.
-            src="/awards/what-i-did.png"
-            alt="An illustration of Ellie sitting cross-legged, a whole world of forests, city blocks and ships growing out of her lap"
-            width={1200}
-            height={743}
-            className="order-1 mx-auto block h-auto w-[min(90vw,26rem)] lg:order-2 lg:w-[24rem]"
-          />
-
-          <ul
-            className="order-3 space-y-6 text-sm leading-snug sm:text-base"
-            style={{ color: "var(--ejd-ink)" }}
-          >
-            {columns[1].map((line) => (
-              <li key={line}>{line}</li>
-            ))}
-          </ul>
-        </div>
+        <ul className="mt-14 grid grid-cols-1 gap-x-8 gap-y-9 sm:grid-cols-2 lg:grid-cols-4">
+          {scope.map((c) => (
+            <li key={c.heading}>
+              <h3
+                className="font-display text-lg font-black uppercase leading-[0.95] tracking-[-0.01em] sm:text-xl"
+                style={{ ...WONK, color: "var(--ejd-vermilion)" }}
+              >
+                {c.heading}
+              </h3>
+              <p
+                className="mt-2 text-sm leading-snug sm:text-base"
+                style={{ color: "var(--ejd-ink)" }}
+              >
+                {c.body}
+              </p>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
