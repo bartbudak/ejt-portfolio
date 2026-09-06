@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { site } from "@/lib/site";
 
 // The page's ending. Peak-End: the showcase is the peak, and a page that stops
@@ -17,10 +18,27 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="w-full px-5 py-20 sm:px-10 sm:py-28"
+      className="relative isolate w-full overflow-hidden px-5 py-20 sm:px-10 sm:py-28"
       style={{ backgroundColor: "var(--ejd-vermilion)" }}
     >
-      <div className="mx-auto flex w-full max-w-4xl flex-col items-center gap-8 text-center">
+      {/* The astronaut again, closing the page as she opened it. Same framing
+          as "Hi There!": pinned to the section's top, right and bottom so she
+          reads as walking off the screen. Only from `lg` — below that the two
+          columns are too narrow and she would reach back over the copy, so she
+          stacks under it instead. */}
+      <Image
+        src="/hero/ellie-astronaut.webp"
+        alt=""
+        width={1100}
+        height={1588}
+        aria-hidden
+        sizes="(min-width: 1024px) 34vw, 70vw"
+        className="pointer-events-none order-last mx-auto mt-12 block h-auto w-[min(70vw,18rem)] object-contain lg:absolute lg:inset-y-0 lg:right-0 lg:mx-0 lg:mt-0 lg:h-full lg:w-auto lg:max-w-none lg:object-bottom"
+      />
+
+      <div // Centred in the space beside her, not in the whole section — `mx-auto` alone
+      // kept the column over her feet.
+      className="relative mx-auto flex w-full max-w-4xl flex-col items-center gap-8 text-center lg:ml-0 lg:mr-auto lg:max-w-[60%]">
         <h2
           className="font-display font-black uppercase leading-[0.86] tracking-[-0.03em]"
           style={{ ...WONK, color: "var(--ejd-marigold)", fontSize: "clamp(2.6rem,9vw,6.5rem)" }}

@@ -49,6 +49,9 @@ export interface FramePiece {
  *  so the wrap follows the actual petals and stem — no JS, no traced polygon. */
 export interface FloatArt {
   src: string;
+  /** Which edge it floats to. Holiday uses both, so the copy runs between the
+   *  two garland strands the way the deck frames it. */
+  side: "left" | "right";
   /** Width and offset classes. */
   className: string;
   /** Gap held between the silhouette and the text. */
@@ -76,7 +79,7 @@ export interface Collection {
   /** Her own band artwork. Falls back to `motif` when a band has none. */
   frame?: FramePiece[];
   /** Artwork the copy flows around instead of stopping short of. */
-  floatArt?: FloatArt;
+  floatArt?: FloatArt[];
   /** Outline the display type — Summer's white on ice needs the edge. */
   outlineDisplay?: boolean;
   /** The product lineup that runs under the brief in her deck, under the
@@ -111,7 +114,7 @@ export const seasons: Collection[] = [
     // this the fallback would drop her M'Lady heart into the corner — a motif
     // the deck does not put there.
     frame: [],
-    floatArt: {
+    floatArt: [{
       // The copy wraps to the rose instead of stopping at a rigid column. The
       // asset's right side is mostly empty — scattered hearts — so it is pulled
       // right, which brings the dense flower to the border and lets the sparse
@@ -119,10 +122,17 @@ export const seasons: Collection[] = [
       //
       // `mt-10` matches the copy's own top margin, so the rose starts level with
       // the first line of the brief instead of riding up into the heading.
+      //
+      // Width is the only lever on its height — the art is 700x1312, so height
+      // is width x 1.87, and a max-height would distort the shape rather than
+      // scale it (shape-outside maps the image to the element's box, while
+      // object-contain letterboxes what you see). 26% lands its height close to
+      // the copy's, and `clear-both` on the logotype absorbs any remainder.
       src: "/motifs/valentines-roses.png",
-      className: "mt-10 -mr-[12%] w-[52%] sm:-mr-[6%] sm:w-[34%]",
+      side: "right",
+      className: "mt-10 -mr-[12%] w-[46%] sm:-mr-[6%] sm:w-[22%]",
       shapeMargin: "0.9rem",
-    },
+    }],
         rows: [
       {
         label: "Theme",
@@ -255,11 +265,28 @@ export const seasons: Collection[] = [
       src: "/motifs/holiday-lineup.webp",
       alt: "The Happy Holidays collection: the logotype, three bars, the advent calendar and the night-sky film still",
     },
-    layout: { align: "center", nutshell: "above", motifs: "corners", reserve: "top" },
-    frame: [
-      { src: "/motifs/holiday-lights.png", className: "-top-[2%] left-0 w-full max-w-none h-auto" },
+    layout: { align: "center", nutshell: "above", motifs: "corners", reserve: "none" },
+    // No absolute frame art — the garland floats now. Without this the fallback
+    // drops her santa-hat bird into the corner.
+    frame: [],
+    floatArt: [
+      // Her garland, split at its apex into two strands. Floated to opposite
+      // edges with `shape-outside` on each, the copy runs down the channel
+      // between them — framed by the lights rather than printed over them.
+      {
+        src: "/motifs/holiday-lights-left.png",
+        side: "left",
+        className: "mt-0 -ml-[8%] w-[40%] sm:-ml-[4%] sm:w-[30%]",
+        shapeMargin: "0.8rem",
+      },
+      {
+        src: "/motifs/holiday-lights-right.png",
+        side: "right",
+        className: "mt-0 -mr-[8%] w-[40%] sm:-mr-[4%] sm:w-[30%]",
+        shapeMargin: "0.8rem",
+      },
     ],
-    rows: [
+        rows: [
       {
         label: "Theme",
         body: "Baby, it's warm in here! A nostalgic line reminiscent of walking down a cold city street and looking into cozy, glowing windows filled with loved ones and fond traditions.",

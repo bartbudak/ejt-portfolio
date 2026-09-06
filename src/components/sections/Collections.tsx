@@ -200,7 +200,7 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
           role="tablist"
           aria-label={title}
           onKeyDown={onKeyDown}
-          className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5"
+          className="mt-12 grid grid-cols-2 gap-5 sm:grid-cols-3 sm:gap-6 lg:grid-cols-5"
         >
           {items.map((c) => {
             const active = c.slug === open;
@@ -214,13 +214,18 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
                 aria-controls="collection-panel"
                 tabIndex={active ? 0 : -1}
                 onClick={() => setOpen(c.slug)}
-                className="group flex min-h-[5rem] flex-col items-center justify-center gap-2 rounded-lg p-4 transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2"
+                className="group flex min-h-[5rem] flex-col items-center justify-center gap-2 p-4 transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2"
                 style={{
                   // The selected card wears its own collection's colours, so
                   // the row previews the palette the view box is about to open in.
                   backgroundColor: active ? c.ground : tone.card,
                   color: active ? c.body : tone.body,
+                  // The same framed treatment as the view box, at card scale:
+                  // hairline, ring, hairline. The selected card rings itself in
+                  // its collection's display colour.
                   border: `var(--mv-stroke) solid ${tone.line}`,
+                  boxShadow: `0 0 0 5px ${active ? c.display : tone.card}, 0 0 0 7px ${tone.line}`,
+                  borderRadius: 14,
                 }}
               >
                 <span
@@ -324,22 +329,25 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
               petals and the stem rather than stopping at a rectangular column.
               The browser reads the alpha channel, so the silhouette is exact and
               costs no script. */}
-          {current.floatArt && (
+          {current.floatArt?.map((art) => (
             <Image
-              src={current.floatArt.src}
+              key={art.src}
+              src={art.src}
               alt=""
-              width={700}
+              width={760}
               height={1312}
               aria-hidden
               loading="eager"
-              className={`relative float-right ml-6 h-auto max-w-none ${current.floatArt.className}`}
+              className={`relative h-auto max-w-none ${
+                art.side === "left" ? "float-left mr-6" : "float-right ml-6"
+              } ${art.className}`}
               style={{
-                shapeOutside: `url(${current.floatArt.src})`,
+                shapeOutside: `url(${art.src})`,
                 shapeImageThreshold: 0.5,
-                shapeMargin: current.floatArt.shapeMargin,
+                shapeMargin: art.shapeMargin,
               }}
             />
-          )}
+          ))}
 
           <dl
             // Flush with the heading, not indented from it. A band whose artwork
@@ -375,7 +383,10 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
               picture. It is full-bleed because that is how she runs it. */}
           {current.wordmark && (
             <p
-              className={`relative mt-14 font-display font-black uppercase leading-none tracking-[-0.02em] ${
+              // `clear-both` keeps the floated artwork contained to the brief:
+              // a float does not extend its parent, so without this the rose ran
+              // on past this logotype and into the lineup below.
+              className={`relative clear-both mt-14 font-display font-black uppercase leading-none tracking-[-0.02em] ${
                 current.layout.align === "center" ? "text-center" : ""
               }`}
               style={{ ...WONK, color: current.display, fontSize: "clamp(1.8rem,5.4vw,4rem)" }}
