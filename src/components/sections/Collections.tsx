@@ -230,12 +230,9 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
           id="collection-panel"
           role="tabpanel"
           aria-labelledby={`collection-tab-${current.slug}`}
-          // A band with a product lineup has no bottom padding: the lineup runs
-          // to the panel's floor, which is what lets the book down its left edge
-          // reach the bottom and frame the scene the way it does in the deck.
-          className={`relative isolate mt-4 overflow-hidden rounded-lg ${
-            PANEL_PADDING[current.layout.reserve ?? "none"]
-          } ${current.showcase ? "pb-0" : PANEL_BOTTOM[current.layout.reserve ?? "none"]}`}
+          // The panel is a bare frame; the brief section inside it carries the
+          // padding and the product lineup runs full-bleed beneath it.
+          className="relative isolate mt-4 overflow-hidden rounded-lg"
           style={{
             backgroundColor: current.ground,
             // The deck frames each brief in its own display colour rather than a
@@ -243,7 +240,16 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
             border: `var(--mv-stroke) solid ${current.display}`,
           }}
         >
-          <Frame collection={current} />
+          {/* The brief section. It is the artwork's positioning context, not
+              the panel — with a product lineup below, "centred in the panel"
+              and "centred in the brief" are very different places, and the deck
+              means the second. */}
+          <div
+            className={`relative ${PANEL_PADDING[current.layout.reserve ?? "none"]} ${
+              current.showcase ? "pb-0" : PANEL_BOTTOM[current.layout.reserve ?? "none"]
+            }`}
+          >
+            <Frame collection={current} />
 
           <div
             className={`relative ${current.layout.align === "center" ? "text-center" : ""}`}
@@ -326,17 +332,6 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
             </p>
           )}
 
-          {current.showcase && (
-            <Image
-              src={current.showcase.src}
-              alt={current.showcase.alt}
-              width={1700}
-              height={865}
-              loading="eager"
-              className="relative mt-6 -mb-px block h-auto w-[calc(100%+3rem)] max-w-none -translate-x-6 sm:w-[calc(100%+7rem)] sm:-translate-x-14"
-            />
-          )}
-
           {/* Honesty marker: some rows were blank in her deck and are written
               here from the collection's imagery. Say so on the page rather than
               only in the source. */}
@@ -347,6 +342,20 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
             >
               Draft copy — {current.rows.filter((r) => r.drafted).map((r) => r.label).join(", ")} pending Ellie&apos;s review
             </p>
+          )}
+          </div>
+
+          {/* Full-bleed and flush with the panel's floor, so the book down its
+              left edge frames the scene the way it does in the deck. */}
+          {current.showcase && (
+            <Image
+              src={current.showcase.src}
+              alt={current.showcase.alt}
+              width={1700}
+              height={865}
+              loading="eager"
+              className="relative -mb-px block h-auto w-full"
+            />
           )}
         </div>
       </div>

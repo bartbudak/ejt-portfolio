@@ -103,9 +103,10 @@ export const seasons: Collection[] = [
         // Flush right, not bled past it — the artwork's own black hatch lines
         // are its right boundary, so aligning that edge to the panel's is what
         // stops them being sliced. Bigger on a phone, where 30% of a narrow
-        // column left it as a smudge.
+        // column left it as a smudge. Centred on the BRIEF section rather than
+        // pinned to its top, which is where the deck sits it.
         src: "/motifs/valentines-roses.png",
-        className: "-top-[3%] right-0 w-[52%] sm:w-[30%] h-auto",
+        className: "top-1/2 -translate-y-1/2 right-0 w-[52%] sm:w-[30%] h-auto",
       },
     ],
     rows: [
