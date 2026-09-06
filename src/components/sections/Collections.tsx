@@ -125,11 +125,18 @@ const HEADING_RESERVE: Record<string, string> = {
 };
 
 const PANEL_PADDING: Record<string, string> = {
-  right: "px-6 pb-12 pt-12 sm:px-14 sm:pb-14 sm:pt-16",
+  right: "px-6 pt-12 sm:px-14 sm:pt-16",
   // Her artwork bleeds into these edges, so the band opens up to make room.
-  top: "px-6 pb-12 pt-24 sm:px-14 sm:pb-16 sm:pt-32",
-  bottom: "px-6 pb-32 pt-12 sm:px-14 sm:pb-44 sm:pt-16",
-  none: "px-6 py-12 sm:px-14 sm:py-16",
+  top: "px-6 pt-24 sm:px-14 sm:pt-32",
+  bottom: "px-6 pt-12 sm:px-14 sm:pt-16",
+  none: "px-6 pt-12 sm:px-14 sm:pt-16",
+};
+
+const PANEL_BOTTOM: Record<string, string> = {
+  right: "pb-12 sm:pb-14",
+  top: "pb-12 sm:pb-16",
+  bottom: "pb-32 sm:pb-44",
+  none: "pb-12 sm:pb-16",
 };
 
 export function Collections({ title, intro, items, tone, crossLink }: Props) {
@@ -223,9 +230,12 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
           id="collection-panel"
           role="tabpanel"
           aria-labelledby={`collection-tab-${current.slug}`}
+          // A band with a product lineup has no bottom padding: the lineup runs
+          // to the panel's floor, which is what lets the book down its left edge
+          // reach the bottom and frame the scene the way it does in the deck.
           className={`relative isolate mt-4 overflow-hidden rounded-lg ${
             PANEL_PADDING[current.layout.reserve ?? "none"]
-          }`}
+          } ${current.showcase ? "pb-0" : PANEL_BOTTOM[current.layout.reserve ?? "none"]}`}
           style={{
             backgroundColor: current.ground,
             // The deck frames each brief in its own display colour rather than a
@@ -323,7 +333,7 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
               width={1700}
               height={865}
               loading="eager"
-              className="relative mt-6 block h-auto w-[calc(100%+3rem)] max-w-none -translate-x-6 sm:w-[calc(100%+7rem)] sm:-translate-x-14"
+              className="relative mt-6 -mb-px block h-auto w-[calc(100%+3rem)] max-w-none -translate-x-6 sm:w-[calc(100%+7rem)] sm:-translate-x-14"
             />
           )}
 

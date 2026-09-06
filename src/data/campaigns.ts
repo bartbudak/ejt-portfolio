@@ -99,8 +99,13 @@ export const seasons: Collection[] = [
         // Sized by WIDTH, not panel height: the panel grew a whole product
         // lineup underneath, and a percentage height scaled the rose with it.
         // In the deck the spray covers about 28% of the band's width.
+        //
+        // Flush right, not bled past it — the artwork's own black hatch lines
+        // are its right boundary, so aligning that edge to the panel's is what
+        // stops them being sliced. Bigger on a phone, where 30% of a narrow
+        // column left it as a smudge.
         src: "/motifs/valentines-roses.png",
-        className: "-top-[3%] -right-[4%] w-[30%] h-auto",
+        className: "-top-[3%] right-0 w-[52%] sm:w-[30%] h-auto",
       },
     ],
     rows: [
