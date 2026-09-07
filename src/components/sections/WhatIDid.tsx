@@ -47,13 +47,13 @@ export function WhatIDid() {
           {scope.map((c) => (
             <li key={c.heading}>
               <h3
-                className="font-display text-lg font-black uppercase leading-[0.95] tracking-[-0.01em] sm:text-xl"
+                className="font-display text-xl font-black uppercase leading-[0.95] tracking-[-0.01em]"
                 style={{ ...WONK, color: "var(--ejd-vermilion)" }}
               >
                 {c.heading}
               </h3>
               <p
-                className="mt-2 text-sm leading-snug sm:text-base"
+                className="mt-2 text-base leading-snug"
                 style={{ color: "var(--ejd-ink)" }}
               >
                 {c.body}

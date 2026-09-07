@@ -92,12 +92,12 @@ export function Launch() {
                         style={{ aspectRatio: MEDIA_ASPECT, color: "var(--ejd-ink)" }}
                       >
                         <span
-                          className="font-display text-lg font-black uppercase leading-[0.95]"
+                          className="font-display text-xl font-black uppercase leading-[0.95]"
                           style={WONK}
                         >
                           {p.partner}
                         </span>
-                        <span className="font-mono text-[0.6rem] uppercase tracking-[0.14em] opacity-50">
+                        <span className="font-mono text-xs uppercase tracking-[0.14em] opacity-50">
                           Awaiting post link
                         </span>
                       </div>

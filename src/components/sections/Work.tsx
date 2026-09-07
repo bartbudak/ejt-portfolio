@@ -28,7 +28,7 @@ export function Work() {
               {String(i + 1).padStart(2, "0")}
             </span>
             <div>
-              <h3 className="font-display text-3xl font-medium leading-tight sm:text-4xl">
+              <h3 className="font-display text-[2rem] font-medium leading-tight sm:text-4xl">
                 {c.title}
               </h3>
               <p className="mt-2 max-w-xl leading-relaxed text-muted-foreground">
@@ -38,7 +38,7 @@ export function Work() {
                 {c.disciplines.map((d) => (
                   <span
                     key={d}
-                    className="rounded-full border border-border/70 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-muted-foreground"
+                    className="rounded-full border border-border/70 px-3 py-1 font-mono text-xs uppercase tracking-[0.1em] text-muted-foreground"
                   >
                     {d}
                   </span>
@@ -65,7 +65,7 @@ export function Work() {
                 key={p.title}
                 className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-border/50 py-4"
               >
-                <span className="font-heading text-lg font-medium">{p.title}</span>
+                <span className="font-heading text-xl font-medium">{p.title}</span>
                 <span className="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">
                   {meta} · {p.year}
                 </span>

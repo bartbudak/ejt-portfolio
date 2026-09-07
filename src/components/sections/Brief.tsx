@@ -45,7 +45,7 @@ export function Brief() {
         {/* The deck's aside, in her hand, sitting straight under the title —
             the same move "Hi There! / Hello" makes further up the page. */}
         <p
-          className="mt-2 text-center font-script text-3xl sm:text-4xl"
+          className="mt-2 text-center font-script text-[2rem] sm:text-4xl"
           style={{ color: "var(--ejd-ink)" }}
         >
           {briefScript}
@@ -56,7 +56,7 @@ export function Brief() {
             centred column — two paragraphs of centred prose are hard to track
             back to the start of the next line. */}
         <div
-          className="mx-auto mt-9 max-w-[58ch] space-y-5 text-lg leading-relaxed sm:mt-11 sm:text-xl"
+          className="mx-auto mt-9 max-w-[58ch] space-y-5 text-xl leading-relaxed sm:mt-11"
           style={{ color: "var(--ejd-ink)" }}
         >
           {briefLead.map((para) => (
@@ -77,7 +77,7 @@ export function Brief() {
               <div className="flex items-baseline gap-3">
                 <span
                   aria-hidden
-                  className="font-display text-2xl font-black leading-none tabular-nums sm:text-3xl"
+                  className="font-display text-2xl font-black leading-none tabular-nums sm:text-[2rem]"
                   style={{ ...WONK, color: "var(--ejd-vermilion)", opacity: 0.45 }}
                 >
                   {String(i + 1).padStart(2, "0")}

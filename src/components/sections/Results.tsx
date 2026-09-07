@@ -88,7 +88,7 @@ export function Results() {
         </div>
 
         <p
-          className="max-w-[48ch] text-base leading-relaxed sm:text-lg"
+          className="max-w-[48ch] text-base leading-relaxed sm:text-xl"
           style={{ color: "var(--ejd-ink)" }}
         >
           And within the first year, post-launch, the business saw:
@@ -99,12 +99,12 @@ export function Results() {
             <div key={s.value} className="flex flex-col items-center gap-1">
               <dt
                 className="font-display font-black leading-none tracking-[-0.02em] tabular-nums"
-                style={{ ...WONK, color: "var(--ejd-vermilion)", fontSize: "clamp(2rem,4.5vw,3.2rem)" }}
+                style={{ ...WONK, color: "var(--ejd-vermilion)", fontSize: "clamp(2rem,4.5vw,3.25rem)" }}
               >
                 {s.value}
               </dt>
               <dd
-                className="max-w-[18ch] text-xs leading-snug sm:text-sm"
+                className="max-w-[18ch] text-xs leading-snug sm:text-base"
                 style={{ color: "var(--ejd-ink)" }}
               >
                 {s.label}

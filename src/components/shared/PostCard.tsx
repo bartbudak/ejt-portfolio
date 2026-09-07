@@ -49,7 +49,7 @@ export function PostCard({
           {handle.replace(/^@/, "").charAt(0).toUpperCase()}
         </span>
         <span
-          className="min-w-0 flex-1 truncate text-sm font-bold"
+          className="min-w-0 flex-1 truncate text-base font-bold"
           style={{ color: "var(--ejd-ink)" }}
         >
           {handle}
@@ -65,7 +65,7 @@ export function PostCard({
           color: "var(--ejd-ink)",
         }}
       >
-        <p className="flex-1 text-sm leading-snug">{caption}</p>
+        <p className="flex-1 text-base leading-snug">{caption}</p>
         {href && (
           <a
             href={href}
@@ -74,7 +74,7 @@ export function PostCard({
             // Was 0.6rem at 60% opacity — 4.1:1 and a 14px tap target, the
             // smallest on the page. Full ink, bolder, and padded out to a
             // reachable height.
-            className="-mx-1 mt-1 inline-block px-1 py-1.5 font-mono text-[0.72rem] font-bold uppercase tracking-[0.12em] underline underline-offset-4 opacity-80 hover:opacity-100"
+            className="-mx-1 mt-1 inline-block px-1 py-2 font-mono text-xs font-bold uppercase tracking-[0.12em] underline underline-offset-4 opacity-80 hover:opacity-100"
           >
             {linkLabel} ↗
           </a>

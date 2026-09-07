@@ -12,13 +12,13 @@ export function Footer() {
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-6 py-12 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="font-heading text-base font-medium">{site.name}</p>
-          <p className="text-sm text-muted-foreground">{site.role}</p>
+          <p className="text-base text-muted-foreground">{site.role}</p>
         </div>
 
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
           <a
             href={`mailto:${site.email}`}
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+            className="text-base text-muted-foreground transition-colors hover:text-foreground"
           >
             {site.email}
           </a>
@@ -28,7 +28,7 @@ export function Footer() {
               href={l.href}
               target="_blank"
               rel="noreferrer"
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              className="text-base text-muted-foreground transition-colors hover:text-foreground"
             >
               {l.label}
             </a>

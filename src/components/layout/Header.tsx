@@ -154,7 +154,7 @@ export function Header() {
 
         <ul
           className="flex items-center justify-center gap-5 font-display uppercase tracking-[0.08em] sm:gap-9"
-          style={{ color: tone.ink, fontSize: "clamp(0.72rem,1.15vw,0.95rem)" }}
+          style={{ color: tone.ink, fontSize: "clamp(0.75rem,1.15vw,1rem)" }}
         >
           {(site.nav as readonly NavItem[]).map((item) => {
             const active =

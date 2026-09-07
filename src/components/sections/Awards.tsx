@@ -68,14 +68,14 @@ export function Awards() {
                 >
                   {a.name}
                 </h3>
-                <p className="flex-1 text-sm leading-snug" style={{ color: "var(--ejd-ink)" }}>
+                <p className="flex-1 text-base leading-snug" style={{ color: "var(--ejd-ink)" }}>
                   {a.detail}
                 </p>
                 {/* She directed the work; the agencies executed it. The credit
                     stays on the card rather than in a footnote. */}
                 {a.credit && (
                   <p
-                    className="font-mono text-[0.6rem] uppercase tracking-[0.14em] opacity-60"
+                    className="font-mono text-xs uppercase tracking-[0.14em] opacity-60"
                     style={{ color: "var(--ejd-ink)" }}
                   >
                     {a.credit}
@@ -90,7 +90,7 @@ export function Awards() {
                     // token measured 2.27:1 on the card, where 4.5 is the bar.
                     // Ink is the one token guaranteed readable on the ground in
                     // every theme, so this holds whichever palette is on.
-                    className="-mx-1 inline-block px-1 py-1.5 font-mono text-[0.72rem] font-bold uppercase tracking-[0.12em] underline underline-offset-4"
+                    className="-mx-1 inline-block px-1 py-2 font-mono text-xs font-bold uppercase tracking-[0.12em] underline underline-offset-4"
                     style={{ color: "var(--ejd-ink)" }}
                   >
                     {a.linkLabel ?? "Read more"} ↗
@@ -101,7 +101,7 @@ export function Awards() {
                     href={a.extra.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="-mx-1 inline-block px-1 py-1.5 font-mono text-[0.72rem] font-bold uppercase tracking-[0.12em] underline underline-offset-4 opacity-80 hover:opacity-100"
+                    className="-mx-1 inline-block px-1 py-2 font-mono text-xs font-bold uppercase tracking-[0.12em] underline underline-offset-4 opacity-80 hover:opacity-100"
                     style={{ color: "var(--ejd-ink)" }}
                   >
                     {a.extra.label} ↗

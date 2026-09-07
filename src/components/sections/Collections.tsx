@@ -81,7 +81,7 @@ type Props = {
 function Nutshell({ collection, className = "" }: { collection: Collection; className?: string }) {
   return (
     <span
-      className={`block pb-1 font-script text-sm normal-case tracking-normal sm:pb-2 sm:text-2xl ${className}`}
+      className={`block pb-1 font-script text-base normal-case tracking-normal sm:pb-2 sm:text-2xl ${className}`}
       style={{ color: collection.display, ...outlined(collection.outlineDisplay) }}
     >
       In a nutshell
@@ -174,7 +174,7 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
       <div className="mx-auto w-full max-w-6xl">
         <h1
           className="font-display font-black uppercase leading-[0.84] tracking-[-0.03em]"
-          style={{ ...WONK, color: tone.display, fontSize: "clamp(2.6rem,8vw,6rem)" }}
+          style={{ ...WONK, color: tone.display, fontSize: "clamp(2.5rem,8vw,6rem)" }}
         >
           {title}
         </h1>
@@ -183,14 +183,14 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
             across to the other half of the work, not a second heading. */}
         <Link
           href={crossLink.href}
-          className="mt-3 inline-block text-sm italic underline underline-offset-4 opacity-80 transition-opacity hover:opacity-100 sm:text-base"
+          className="mt-3 inline-block text-base italic underline underline-offset-4 opacity-80 transition-opacity hover:opacity-100 sm:text-base"
           style={{ color: tone.body }}
         >
           {crossLink.label}
         </Link>
 
         <p
-          className="mt-6 max-w-[62ch] text-base leading-relaxed sm:text-lg"
+          className="mt-6 max-w-[62ch] text-base leading-relaxed sm:text-xl"
           style={{ color: tone.body }}
         >
           {intro}
@@ -214,7 +214,7 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
                 aria-controls="collection-panel"
                 tabIndex={active ? 0 : -1}
                 onClick={() => setOpen(c.slug)}
-                className="group flex min-h-[5rem] flex-col items-center justify-center gap-2 p-4 transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2"
+                className="group flex min-h-[5rem] flex-col items-center justify-center gap-2 p-4 transition-transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2"
                 style={{
                   // The selected card wears its own collection's colours, so
                   // the row previews the palette the view box is about to open in.
@@ -225,11 +225,11 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
                   // its collection's display colour.
                   border: `var(--mv-stroke) solid ${tone.line}`,
                   boxShadow: `0 0 0 5px ${active ? c.display : tone.card}, 0 0 0 7px ${tone.line}`,
-                  borderRadius: 14,
+                  borderRadius: 16,
                 }}
               >
                 <span
-                  className="text-center font-display text-base font-black uppercase leading-[0.95] tracking-[-0.01em] sm:text-lg"
+                  className="text-center font-display text-base font-black uppercase leading-[0.95] tracking-[-0.01em] sm:text-xl"
                   style={WONK}
                 >
                   {c.label}
@@ -295,7 +295,7 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
                 ...WONK,
                 ...outlined(current.outlineDisplay),
                 color: current.display,
-                fontSize: "clamp(2.2rem,6vw,4.6rem)",
+                fontSize: "clamp(2.25rem,6vw,4.5rem)",
               }}
             >
               {(() => {
@@ -365,7 +365,7 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
             }`}
           >
             {current.rows.map((row) => (
-              <div key={row.label} className="text-sm leading-relaxed sm:text-base">
+              <div key={row.label} className="text-base leading-relaxed">
                 <dt className="inline font-semibold" style={{ color: current.body }}>
                   {row.label}:{" "}
                 </dt>
@@ -389,7 +389,7 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
               className={`relative clear-both mt-14 font-display font-black uppercase leading-none tracking-[-0.02em] ${
                 current.layout.align === "center" ? "text-center" : ""
               }`}
-              style={{ ...WONK, color: current.display, fontSize: "clamp(1.8rem,5.4vw,4rem)" }}
+              style={{ ...WONK, color: current.display, fontSize: "clamp(1.75rem,5.4vw,4rem)" }}
             >
               {current.wordmark}
             </p>

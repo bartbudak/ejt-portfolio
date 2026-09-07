@@ -199,12 +199,12 @@ export function BeforeAfter() {
               {/* seam runs the full height of the panel */}
               <span
                 aria-hidden
-                className="pointer-events-none absolute inset-y-0 w-[3px] -translate-x-1/2"
+                className="pointer-events-none absolute inset-y-0 w-1 -translate-x-1/2"
                 style={{ left: `${pos}%`, backgroundColor: "var(--mv-soft-black)" }}
               />
               <span
                 aria-hidden
-                className="pointer-events-none absolute top-1/2 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full text-sm font-bold"
+                className="pointer-events-none absolute top-1/2 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full text-base font-bold"
                 style={{
                   left: `${pos}%`,
                   backgroundColor: "var(--mv-paper)",
@@ -220,17 +220,17 @@ export function BeforeAfter() {
                 className="pointer-events-none absolute inset-x-0 top-5 flex justify-center"
               >
                 <span
-                  className="flex flex-col items-center gap-0 rounded-full px-4 py-1 text-xs font-bold uppercase leading-tight tracking-[0.08em] sm:text-sm"
+                  className="flex flex-col items-center gap-0 rounded-full px-4 py-1 text-xs font-bold uppercase leading-tight tracking-[0.08em] sm:text-base"
                   style={{
                     backgroundColor: "#fff",
                     border: "var(--mv-stroke) solid var(--mv-soft-black)",
                     color: "var(--mv-soft-black)",
                   }}
                 >
-                  <span className="flex items-center gap-[6px]">
+                  <span className="flex items-center gap-2">
                     <Dot /> Before &amp; after <Dot />
                   </span>
-                  <span className="text-[0.6rem] font-semibold normal-case tracking-[0.06em] opacity-70 sm:text-[0.65rem]">
+                  <span className="text-xs font-semibold normal-case tracking-[0.06em] opacity-70">
                     slide to see the magic
                   </span>
                 </span>
@@ -287,8 +287,8 @@ function Dot() {
       aria-hidden
       className="inline-block rounded-full"
       style={{
-        width: 10,
-        height: 10,
+        width: 12,
+        height: 12,
         backgroundColor: "var(--mv-red)",
         border: "var(--mv-stroke) solid var(--mv-soft-black)",
       }}

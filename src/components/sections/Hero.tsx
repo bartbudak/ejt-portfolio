@@ -99,7 +99,7 @@ export function Hero() {
             deck stacks them. */}
         <ul
           className="mt-6 flex flex-wrap items-baseline justify-center gap-x-[8vw] gap-y-2 text-center font-display font-semibold uppercase tracking-[0.04em]"
-          style={{ ...WONK, color: "var(--ejd-vermilion)", fontSize: "clamp(0.7rem,1.5vw,1.35rem)" }}
+          style={{ ...WONK, color: "var(--ejd-vermilion)", fontSize: "clamp(0.75rem,1.5vw,1.25rem)" }}
         >
           {site.roles.map((r) => (
             <li key={r}>{r}</li>

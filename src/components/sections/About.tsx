@@ -81,14 +81,14 @@ export function About() {
               accessibility tree rather than read out as a second greeting. */}
           <p
             aria-hidden
-            className="mt-2 pl-[8%] font-script text-2xl sm:text-3xl"
+            className="mt-2 pl-[8%] font-script text-2xl sm:text-[2rem]"
             style={{ color: "var(--ejd-marigold)" }}
           >
             {site.about.script}
           </p>
 
           <div
-            className="mt-7 max-w-[52ch] space-y-5 text-base leading-relaxed sm:text-lg"
+            className="mt-7 max-w-[52ch] space-y-5 text-base leading-relaxed sm:text-xl"
             style={{ color: "var(--ejd-ink)" }}
           >
             {site.about.paragraphs.map((p) => (

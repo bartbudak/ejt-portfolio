@@ -276,7 +276,7 @@ html {
 }
 /* Maeve separates blocks with a dot sitting in the middle of the trailing gap. */
 .ejt-marquee__item {
-  --ejt-dot: 9px;
+  --ejt-dot: 8px;
   --ejt-gap: 36px;
   position: relative;
   padding-right: var(--ejt-gap);
@@ -294,7 +294,7 @@ html {
 }
 @media (max-width: 767px) {
   .ejt-marquee { --ejt-marquee-frame: 5px; }
-  .ejt-marquee__item { --ejt-dot: 7px; --ejt-gap: 26px; }
+  .ejt-marquee__item { --ejt-dot: 8px; --ejt-gap: 24px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ejt-marquee__track { animation: none; }

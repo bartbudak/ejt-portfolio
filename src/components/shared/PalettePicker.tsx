@@ -77,7 +77,7 @@ function Picker({
                 <span
                   aria-hidden
                   {...{ [attr]: o.id || undefined }}
-                  className="flex flex-none gap-[3px] rounded-md p-[3px]"
+                  className="flex flex-none gap-1 rounded-md p-1"
                   style={{ border: "1.5px solid #1a1210" }}
                 >
                   {swatches.map((v) => (
@@ -86,13 +86,13 @@ function Picker({
                 </span>
                 <span className="min-w-0 flex-1">
                   <span
-                    className={`block text-[13px] leading-tight ${on ? "font-bold" : "font-medium"}`}
+                    className={`block text-xs leading-tight ${on ? "font-bold" : "font-medium"}`}
                     style={{ color: "#1a1210" }}
                   >
                     {o.name}
                     {on && " ✓"}
                   </span>
-                  <span className="block text-[11px] leading-tight opacity-60" style={{ color: "#1a1210" }}>
+                  <span className="block text-xs leading-tight opacity-60" style={{ color: "#1a1210" }}>
                     {o.note}
                   </span>
                 </span>
@@ -106,10 +106,10 @@ function Picker({
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="flex items-center gap-2 rounded-full px-3 py-2 text-[12px] font-bold shadow-lg"
+        className="flex items-center gap-2 rounded-full px-3 py-2 text-xs font-bold shadow-lg"
         style={{ backgroundColor: "#fffdf8", color: "#1a1210", border: "2px solid #1a1210" }}
       >
-        <span aria-hidden className="flex gap-[3px]">
+        <span aria-hidden className="flex gap-1">
           {swatches.map((v) => (
             <i key={v} className="h-3 w-3 rounded-full" style={{ background: `var(${v})` }} />
           ))}

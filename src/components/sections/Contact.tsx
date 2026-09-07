@@ -82,7 +82,7 @@ export function Contact() {
         >
 
         <p
-          className="max-w-[46ch] text-base leading-relaxed sm:text-lg"
+          className="max-w-[46ch] text-base leading-relaxed sm:text-xl"
           style={{ color: "var(--ejd-ink)" }}
         >
           {`I'm based in ${site.location} and looking for my next brand home — in-house building something from the ground up, or agency-side helping other brands find their story. If any of this resonates, I'd love to hear from you.`}
@@ -93,7 +93,7 @@ export function Contact() {
             <li key={l.label}>
               <a
                 href={l.href}
-                className="inline-flex rounded-full px-5 py-3 text-sm font-semibold tracking-[0.02em] transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2"
+                className="inline-flex rounded-full px-5 py-3 text-base font-semibold tracking-[0.02em] transition-transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2"
                 style={{ backgroundColor: "var(--ejd-marigold)", color: "var(--ejd-ink)" }}
               >
                 <span className="sr-only">{l.label}: </span>
