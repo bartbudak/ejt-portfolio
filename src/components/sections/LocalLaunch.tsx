@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Marquee } from "@/components/shared/Marquee";
 import { PostCard } from "@/components/shared/PostCard";
 import { localPosts } from "@/data/scope";
 
@@ -20,16 +19,6 @@ export function LocalLaunch() {
       className="relative w-full"
       style={{ backgroundColor: "var(--ejd-blush)" }}
     >
-      {/* The section's own name, pinned under the header for as long as the
-          section is on screen. Sticky resolves against this section, so when it
-          scrolls away the band goes with it and the next section's band takes
-          the slot. */}
-      <Marquee
-        items={["Some receipts for you"]}
-        background="var(--ejd-marigold)"
-        ring="var(--ejd-vermilion)"
-        className="sticky top-[var(--ejt-header)] z-30"
-      />
 
       <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-10 sm:py-24">
         <h2

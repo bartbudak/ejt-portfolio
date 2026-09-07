@@ -70,20 +70,23 @@ function Picker({
                 type="button"
                 onClick={() => pick(o.id)}
                 aria-pressed={on}
+                {...(swatches.length === 0 ? { [attr]: o.id || undefined } : {})}
                 className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-left transition-colors hover:bg-black/5"
               >
                 {/* The chips carry the option's own attribute, so each row
                     previews its palette without applying it to the page. */}
-                <span
-                  aria-hidden
-                  {...{ [attr]: o.id || undefined }}
-                  className="flex flex-none gap-1 rounded-md p-1"
-                  style={{ border: "1.5px solid #1a1210" }}
-                >
-                  {swatches.map((v) => (
-                    <i key={v} className="h-4 w-3 rounded-[2px]" style={{ background: `var(${v})` }} />
-                  ))}
-                </span>
+                {swatches.length > 0 && (
+                  <span
+                    aria-hidden
+                    {...{ [attr]: o.id || undefined }}
+                    className="flex flex-none gap-1 rounded-md p-1"
+                    style={{ border: "1.5px solid #1a1210" }}
+                  >
+                    {swatches.map((v) => (
+                      <i key={v} className="h-4 w-3 rounded-[2px]" style={{ background: `var(${v})` }} />
+                    ))}
+                  </span>
+                )}
                 <span className="min-w-0 flex-1">
                   <span
                     className={`block text-xs leading-tight ${on ? "font-bold" : "font-medium"}`}
@@ -109,11 +112,13 @@ function Picker({
         className="flex items-center gap-2 rounded-full px-3 py-2 text-xs font-bold shadow-lg"
         style={{ backgroundColor: "#fffdf8", color: "#1a1210", border: "2px solid #1a1210" }}
       >
-        <span aria-hidden className="flex gap-1">
-          {swatches.map((v) => (
-            <i key={v} className="h-3 w-3 rounded-full" style={{ background: `var(${v})` }} />
-          ))}
-        </span>
+        {swatches.length > 0 && (
+          <span aria-hidden className="flex gap-1">
+            {swatches.map((v) => (
+              <i key={v} className="h-3 w-3 rounded-full" style={{ background: `var(${v})` }} />
+            ))}
+          </span>
+        )}
         {label}: {current.name}
       </button>
     </div>
@@ -142,6 +147,35 @@ const THEMES: readonly Option[] = [
   { id: "maeve-live", name: "Maeve Live", note: "What the shipped site runs on" },
 ];
 
+
+const CURSORS: readonly Option[] = [
+  { id: "", name: "Off", note: "The system arrow" },
+  { id: "marigold-green", name: "Marigold & green", note: "Her original flower" },
+  { id: "vermilion-gold", name: "Vermilion & gold", note: "" },
+  { id: "blush-vermilion", name: "Blush & vermilion", note: "" },
+  { id: "ice-violet", name: "Ice & violet", note: "" },
+  { id: "sage-gold", name: "Sage & gold", note: "" },
+  { id: "red-ice", name: "Red & ice", note: "" },
+  { id: "violet-gold", name: "Violet & gold", note: "" },
+  { id: "paper-burnt", name: "Daisy", note: "White petals, burnt centre" },
+  { id: "gold-vermilion", name: "Gold & vermilion", note: "" },
+  { id: "teal-blush", name: "Teal & blush", note: "" },
+];
+
+export function CursorPicker() {
+  return (
+    <Picker
+      options={CURSORS}
+      attr="data-cursor"
+      storageKey="ejt-cursor-preview"
+      label="Cursor"
+      // The row's own attribute makes each chip show that colourway's cursor on
+      // hover, so the list previews itself.
+      swatches={[]}
+      offsetClass="bottom-28 left-4"
+    />
+  );
+}
 
 export function ThemeSwitcher() {
   return (

@@ -69,6 +69,19 @@ const PAIRS: Pair[] = [
     after: "Maeve assorted box",
   },
   {
+    // Ellie asked for a sixth box so the picker lands on an even number.
+    slug: "bonbon-2lb",
+    // Cobalt is the one she turned down for Pike Place, and the objection was
+    // pack-specific rather than about the colour: that pack is almost entirely
+    // white, so a dark ground swallowed it and read as a hole. This one is a
+    // saturated yellow box at L 81, which sings against it. Measured against
+    // the alternatives, coral sat 4.3 dE from the tangerine already on Coconut
+    // and would have read as a repeat; cobalt is 21.6 from every ground in use.
+    bg: "#2a3fb5",
+    before: "Seattle Chocolate 2lb assorted gravity feed",
+    after: "Maeve 2lb assorted bonbons",
+  },
+  {
     slug: "truffles",
     bg: "#9fc400", // chartreuse — sets off a pale blue box that fights both pink and blue
     before: "Seattle Chocolate truffles",
@@ -284,8 +297,13 @@ export function BeforeAfter() {
                   </li>
                 );
               })}
-              {/* Filler keeps the rules running to the edge, as the theme does. */}
-              <li aria-hidden style={{ backgroundColor: "var(--mv-paper)" }} />
+              {/* Filler keeps the rules running to the edge, as the theme does,
+                  but ONLY when the count is odd. With an even number it opened
+                  a fifth row holding one empty cell, which is the odd space
+                  Ellie spotted under the picker (2026-09-07). */}
+              {PAIRS.length % 2 === 1 && (
+                <li aria-hidden style={{ backgroundColor: "var(--mv-paper)" }} />
+              )}
             </ul>
           </div>
         </div>

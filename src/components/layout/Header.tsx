@@ -82,17 +82,6 @@ export function Header() {
   const tone =
     Object.entries(TONES).find(([p]) => samePath(pathname, p))?.[1] ?? DEFAULT_TONE;
 
-  // The shadow is the cue that the page has moved under the header, so it has
-  // nothing to say while the header is still sitting on the hero. It fades in
-  // on the first pixel of scroll and fades back out at the top.
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 4);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   // Published on <html> so a pinned band can paint the slot between itself and
   // the header in the header's own colour (Ellie, 2026-09-07). It has to go on
   // the root: the bands are siblings of the header, not descendants, so a
@@ -108,10 +97,10 @@ export function Header() {
         height: "var(--ejt-header)",
         backgroundColor: tone.bg,
         color: tone.ink,
-        boxShadow: scrolled
-          ? "0 1px 2px rgb(26 18 16 / 0.05), 0 10px 24px -14px rgb(26 18 16 / 0.16)"
-          : "none",
-        transition: "box-shadow 0.25s ease, background-color 0.25s ease",
+        // No shadow at all (Ellie, 2026-09-07). The band pinned underneath now
+        // carries the header's own colour up into its scallops, so the two read
+        // as one piece of furniture; a shadow cast across that join broke it.
+        transition: "background-color 0.25s ease",
       }}
     >
       <nav

@@ -31,7 +31,7 @@ export function Brief() {
         items={["The story of the Seattle Chocolate rebrand"]}
         background="var(--ejd-vermilion)"
         ring="var(--ejd-marigold)"
-        className="sticky top-[var(--ejt-header)] z-30"
+        className="sticky top-[var(--ejt-band-top,var(--ejt-header))] z-30"
       />
 
       <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-10 sm:py-24">

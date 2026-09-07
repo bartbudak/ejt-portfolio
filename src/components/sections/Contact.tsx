@@ -31,7 +31,7 @@ export function Contact() {
           is on screen — the same treatment the launch and awards sections get.
           It carries the availability copy rather than the section's name,
           because that is the line worth repeating at the end of the page. */}
-      <Marquee className="sticky top-[var(--ejt-header)] z-30" />
+      <Marquee className="sticky top-[var(--ejt-band-top,var(--ejt-header))] z-30" />
 
       {/* No bottom padding while she is in flow beneath the card — that
           padding was the 79px gap holding her off it. It comes back at `lg`,
@@ -41,7 +41,7 @@ export function Contact() {
           the middle of her rather than riding the top edge with a screen of
           empty vermilion underneath. Below `lg` she is in flow beneath the copy
           and there is no leftover height to centre in, so it stays a stack. */}
-      <div className="px-3 pt-20 pb-0 sm:px-10 sm:pt-28 lg:flex lg:flex-1 lg:flex-col lg:justify-center lg:py-16">
+      <div className="relative z-10 px-3 pt-20 pb-0 sm:px-10 sm:pt-28 lg:flex lg:flex-1 lg:flex-col lg:justify-center lg:py-16">
       <div // Centred in the space beside her, not in the whole section — `mx-auto` alone
       // kept the column over her feet.
       className="relative mx-auto flex w-full max-w-4xl flex-col items-center gap-8 text-center lg:ml-0 lg:mr-auto lg:max-w-[60%]">
@@ -125,7 +125,10 @@ export function Contact() {
         height={1588}
         aria-hidden
         sizes="(min-width: 1024px) 34vw, 70vw"
-        className="pointer-events-none -mt-2 ml-auto block h-auto w-[min(76vw,20rem)] object-contain lg:absolute lg:mt-0 lg:inset-y-0 lg:right-0 lg:mx-0 lg:mt-0 lg:h-full lg:w-auto lg:max-w-none lg:object-bottom"
+        // Behind the card, not over it: at `lg` she reaches back across the
+        // copy column and was cutting the contact lines in half (Ellie,
+        // 2026-09-07).
+        className="pointer-events-none -mt-2 ml-auto block h-auto w-[min(76vw,20rem)] object-contain lg:absolute lg:inset-y-0 lg:right-0 lg:z-0 lg:mx-0 lg:mt-0 lg:h-full lg:w-auto lg:max-w-none lg:object-bottom"
       />
     </section>
   );

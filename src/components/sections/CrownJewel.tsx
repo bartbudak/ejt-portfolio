@@ -25,7 +25,7 @@ export function CrownJewel() {
         items={["The Maeve Rebrand", "My Crowning Achievement"]}
         background="var(--ejd-vermilion)"
         ring="var(--ejd-marigold)"
-        className="sticky top-[var(--ejt-header)] z-30"
+        className="sticky top-[var(--ejt-band-top,var(--ejt-header))] z-30"
       />
 
       <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-8 px-5 py-20 text-center sm:px-10 sm:py-28">

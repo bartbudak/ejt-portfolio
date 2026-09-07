@@ -6,6 +6,7 @@ import {
   BAND_FRAME,
   BAND_STROKE,
   bandEdge,
+  bandFlow,
   bandHeight,
   useMarqueeSettings,
 } from "@/components/shared/MarqueeSettings";
@@ -142,6 +143,9 @@ export function Marquee({
   // The band's own depth, plus the room the wave needs to swing in.
   const bandH = bandHeight(settings);
   const edgeRoom = bandEdge(settings);
+  // What the band takes in flow: the strip that is opaque whatever the wave is
+  // doing. The crests and troughs hang outside it, over the neighbours.
+  const flowH = bandFlow(settings);
   const height = bandH + edgeRoom * 2;
   const midY = height / 2;
   const topY = midY - bandH / 2;
@@ -181,16 +185,24 @@ export function Marquee({
   return (
     <div
       ref={hostRef}
-      className={`relative z-10 w-full flex-none ${className}`}
-      // The edge room is given back with negative margins, so the band consumes
-      // only its opaque body in flow and its transparent slivers sit OVER the
-      // sections either side. Without this the page background showed through
-      // above and below every band as a pale seam (Ellie, 2026-09-07).
-      style={{ height, marginTop: -edgeRoom, marginBottom: -edgeRoom }}
+      className={`z-10 w-full flex-none ${className}`}
+      // The band occupies only its opaque body in flow; the wave's swing room
+      // hangs outside that box so the sections either side meet underneath it
+      // rather than being parted by it.
+      //
+      // This was negative margins first, and that was wrong in a way worth
+      // recording: a negative margin-top on the FIRST CHILD of a section with
+      // no padding or border collapses THROUGH the section, so the section
+      // itself moved up and took its background with it. On the marigold bands
+      // that painted a strip of yellow over the beige above them. Positioning
+      // the drawing out of flow instead cannot collapse with anything.
+      style={{ height: flowH }}
     >
+      <div className="relative h-full w-full">
       <svg
         width={width}
         height={height}
+        style={{ position: "absolute", top: -(edgeRoom + amplitude), left: 0 }}
         viewBox={`0 0 ${width} ${height}`}
         // 1:1 with CSS pixels, so nothing is stretched.
         className="block"
@@ -240,6 +252,7 @@ export function Marquee({
           </text>
         </g>
       </svg>
+      </div>
     </div>
   );
 }

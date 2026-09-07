@@ -51,6 +51,15 @@ export const BAND_FRAME = 7;
 
 /** Height of the opaque band itself, ignoring the room the wave swings in. */
 export const bandHeight = (s: MarqueeSettings) => s.fontSize * 1.1 + s.padding * 2;
+/**
+ * The strip that is opaque at EVERY x, which is the body minus the wave's
+ * swing at both edges. This is what the band occupies in flow, so that two
+ * sections meeting under a band are always covered: at a trough the body's top
+ * edge dips by the amplitude, and anything relying on the full body height
+ * would show the page through that dip.
+ */
+export const bandFlow = (s: MarqueeSettings) =>
+  Math.max(0, bandHeight(s) - s.amplitude * 2);
 /** The transparent margin above and below it that the wave needs. */
 export const bandEdge = (s: MarqueeSettings) => s.amplitude + BAND_FRAME / 2 + BAND_STROKE;
 
@@ -64,8 +73,18 @@ export function MarqueeSettingsProvider({ children }: { children: React.ReactNod
   // them. The hero's first-screen calc subtracts this.
   useEffect(() => {
     const root = document.documentElement.style;
-    root.setProperty("--ejt-marquee-h", `${bandHeight(settings)}px`);
+    root.setProperty("--ejt-marquee-h", `${bandFlow(settings)}px`);
     root.setProperty("--ejt-marquee-edge", `${bandEdge(settings)}px`);
+    // Where a pinned band's sticky top goes. Offsetting by twice the amplitude
+    // puts the wave's CRESTS on the header's bottom edge rather than above it:
+    // pinned at the header line the whole wave hid behind the header and the
+    // band's top read as a flat clipped rule (Ellie, 2026-09-07). The scallops
+    // between the crests are painted in the header's own colour, so the two
+    // still read as one piece rather than as a gap.
+    root.setProperty(
+      "--ejt-band-top",
+      `calc(var(--ejt-header) + ${settings.amplitude * 2}px)`,
+    );
   }, [settings]);
   const set = (patch: Partial<MarqueeSettings>) =>
     setSettings((s) => ({ ...s, ...patch }));
