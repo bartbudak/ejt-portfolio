@@ -21,7 +21,11 @@ function Burst({ className }: { className?: string }) {
     <svg viewBox="0 0 100 100" aria-hidden className={className}>
       <path
         d="M50 0C55 35 65 45 100 50C65 55 55 65 50 100C45 65 35 55 0 50C35 45 45 35 50 0Z"
-        fill="var(--ejd-marigold)"
+        // The title's own colour, not the accent. The accent is a bright warm
+        // yellow and the ground here is a pale pink — close enough in value that
+        // the bursts sank into it. Her deck fills them with the display colour
+        // too, so this is also what the band is meant to look like.
+        fill="var(--ejd-vermilion)"
       />
     </svg>
   );
