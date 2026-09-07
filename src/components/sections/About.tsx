@@ -71,7 +71,7 @@ export function About() {
         <div className="self-center px-5 py-16 sm:px-10 sm:py-24 lg:pr-4">
           <h2
             className="font-display font-black uppercase leading-[0.84] tracking-[-0.03em]"
-            style={{ ...WONK, color: "var(--ejd-marigold)", fontSize: "clamp(3rem,9vw,7rem)" }}
+            style={{ ...WONK, color: "var(--ejd-marigold)", fontSize: "clamp(3.75rem,11.25vw,7rem)" }}
           >
             {site.about.heading}
           </h2>

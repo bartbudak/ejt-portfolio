@@ -30,7 +30,7 @@ export function WhatIDid() {
       <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-10 sm:py-24">
         <h2
           className="text-center font-display font-black uppercase leading-[0.84] tracking-[-0.03em]"
-          style={{ ...WONK, color: "var(--ejd-vermilion)", fontSize: "clamp(2.6rem,9vw,7rem)" }}
+          style={{ ...WONK, color: "var(--ejd-vermilion)", fontSize: "clamp(3.25rem,11.25vw,7rem)" }}
         >
           {scopeIntro}
         </h2>

@@ -299,3 +299,86 @@ html {
 @media (prefers-reduced-motion: reduce) {
   .ejt-marquee__track { animation: none; }
 }
+
+/* ── Theme previews ───────────────────────────────────────────────────────────
+   Every section paints from the `--ejd-*` tokens, so a theme is just a new set
+   of values for them — no component knows a theme exists. `data-theme` on <html>
+   selects one; absent, the deck palette in the :root block above stands, so the
+   default is untouched by any of this.
+
+   Each theme must define the same eleven tokens, because the campaign bands use
+   the seasonal five (ice/sage/burnt/red/violet) as their grounds and a missing
+   one would fall back to the deck's and break the set. `--ejd-ink` is the body
+   colour and carries the reading contrast; the display tokens are treated as
+   graphic, as they are in her deck. ─────────────────────────────────────────── */
+
+/* 1 · Maeve Live — the palette the shipped site actually runs on. */
+:root[data-theme="maeve-live"] {
+  --ejd-blush: #fb66e5; --ejd-vermilion: #ff4001; --ejd-marigold: #ffc72c;
+  --ejd-ink: #2d2926; --ejd-ice: #7ee8fa; --ejd-sage: #6fbf73;
+  --ejd-red: #e0201b; --ejd-burnt: #cc4e00; --ejd-deep: #7a1a00;
+  --ejd-violet: #8b5cf6; --mv-paper: #fff3e5;
+}
+/* 2 · Arcade — Princess Donut's midnight lounge: deep plum, acid, hot pink. */
+:root[data-theme="arcade"] {
+  --ejd-blush: #2b1b45; --ejd-vermilion: #ff2e88; --ejd-marigold: #c6ff4f;
+  --ejd-ink: #f6efff; --ejd-ice: #35d6ff; --ejd-sage: #7bdc8a;
+  --ejd-red: #ff2e88; --ejd-burnt: #6d2bb0; --ejd-deep: #170d26;
+  --ejd-violet: #b98cff; --mv-paper: #1f1233;
+}
+/* 3 · Cocoa — chocolate first: bitter brown, cream, gold leaf. */
+:root[data-theme="cocoa"] {
+  --ejd-blush: #efdcc4; --ejd-vermilion: #6b3a1f; --ejd-marigold: #d9a441;
+  --ejd-ink: #2a1b12; --ejd-ice: #cfe3d8; --ejd-sage: #7d8a5c;
+  --ejd-red: #8c2f22; --ejd-burnt: #a4551f; --ejd-deep: #3d2416;
+  --ejd-violet: #6b4a7a; --mv-paper: #f7eddd;
+}
+/* 4 · Chartreuse — acid green with ink, nothing warm anywhere. */
+:root[data-theme="chartreuse"] {
+  --ejd-blush: #e8f57c; --ejd-vermilion: #1c1c1c; --ejd-marigold: #b8e600;
+  --ejd-ink: #14170a; --ejd-ice: #d6f5e3; --ejd-sage: #7f9b2e;
+  --ejd-red: #d8412f; --ejd-burnt: #8a7a13; --ejd-deep: #3d4a06;
+  --ejd-violet: #6d4bd6; --mv-paper: #f7fbe2;
+}
+/* 5 · Ultraviolet — violet ground, lemon, cold white. */
+:root[data-theme="ultraviolet"] {
+  --ejd-blush: #d8c9ff; --ejd-vermilion: #4b1fb8; --ejd-marigold: #ffe14d;
+  --ejd-ink: #1b0f33; --ejd-ice: #b8e6ff; --ejd-sage: #8ea87c;
+  --ejd-red: #d4145a; --ejd-burnt: #6a2fb5; --ejd-deep: #2a0f5c;
+  --ejd-violet: #7b3ff2; --mv-paper: #f4efff;
+}
+/* 6 · Seafoam — the mural: mint, coral, hot pink. */
+:root[data-theme="seafoam"] {
+  --ejd-blush: #b9efe2; --ejd-vermilion: #ff5c4d; --ejd-marigold: #ffd166;
+  --ejd-ink: #10302a; --ejd-ice: #9ee6f5; --ejd-sage: #4fae8b;
+  --ejd-red: #e63946; --ejd-burnt: #c96a3f; --ejd-deep: #0d4038;
+  --ejd-violet: #6a5acd; --mv-paper: #f0fbf6;
+}
+/* 7 · Neon Noir — near-black ground with pink and cyan doing all the work. */
+:root[data-theme="neon-noir"] {
+  --ejd-blush: #14131a; --ejd-vermilion: #ff2d6f; --ejd-marigold: #00e5c7;
+  --ejd-ink: #f2f0ff; --ejd-ice: #00d5ff; --ejd-sage: #5ce07a;
+  --ejd-red: #ff2d6f; --ejd-burnt: #2a2740; --ejd-deep: #0a0910;
+  --ejd-violet: #a56bff; --mv-paper: #1c1a26;
+}
+/* 8 · Terracotta — clay, sand and forest; the quietest of the ten. */
+:root[data-theme="terracotta"] {
+  --ejd-blush: #f0d9c4; --ejd-vermilion: #b8482a; --ejd-marigold: #e0a458;
+  --ejd-ink: #2b1d16; --ejd-ice: #cddfd8; --ejd-sage: #6b7d54;
+  --ejd-red: #9e3b25; --ejd-burnt: #8c4a2b; --ejd-deep: #4a2a1c;
+  --ejd-violet: #7a5c8a; --mv-paper: #f8efe4;
+}
+/* 9 · Bubblegum — pink, baby blue, lemon; the sweetest reading of her deck. */
+:root[data-theme="bubblegum"] {
+  --ejd-blush: #ffd1e8; --ejd-vermilion: #ff4f9a; --ejd-marigold: #ffe066;
+  --ejd-ink: #2b1030; --ejd-ice: #a8e0ff; --ejd-sage: #92d6a8;
+  --ejd-red: #ff3d6e; --ejd-burnt: #d94f7a; --ejd-deep: #6b1f45;
+  --ejd-violet: #9d6bff; --mv-paper: #fff0f7;
+}
+/* 10 · Newsprint — ink on paper, one red. The severe option. */
+:root[data-theme="newsprint"] {
+  --ejd-blush: #ece7dd; --ejd-vermilion: #d1301f; --ejd-marigold: #e8e2d5;
+  --ejd-ink: #16150f; --ejd-ice: #dfe6e8; --ejd-sage: #8f9384;
+  --ejd-red: #a8241a; --ejd-burnt: #6f6558; --ejd-deep: #33302a;
+  --ejd-violet: #4a4a6a; --mv-paper: #f5f1e8;
+}

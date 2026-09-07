@@ -38,7 +38,7 @@ export function Awards() {
       <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-10 sm:py-24">
         <h2
           className="text-center font-display font-black uppercase leading-[0.84] tracking-[-0.03em]"
-          style={{ ...WONK, color: "var(--ejd-marigold)", fontSize: "clamp(3rem,10.5vw,8rem)" }}
+          style={{ ...WONK, color: "var(--ejd-marigold)", fontSize: "clamp(3.75rem,13vw,8rem)" }}
         >
           Awards
         </h2>

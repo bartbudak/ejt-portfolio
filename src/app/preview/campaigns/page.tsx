@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
-import { Marquee } from "@/components/shared/Marquee";
+import { ThemeSwitcher } from "@/components/shared/ThemeSwitcher";
 import { Collections, LIGHT_TONE } from "@/components/sections/Collections";
 import { Contact } from "@/components/sections/Contact";
 import { seasons, seasonsIntro } from "@/data/campaigns";
@@ -19,6 +19,8 @@ export default function CampaignsPage() {
   return (
     <>
       <Header />
+      {/* Preview-only palette picker; delete to remove. */}
+      <ThemeSwitcher />
       <Collections
         title="Seasonal Collections"
         intro={seasonsIntro}
@@ -26,7 +28,6 @@ export default function CampaignsPage() {
         tone={LIGHT_TONE}
         crossLink={{ href: "/preview/collabs", label: "click here for collaborations" }}
       />
-      <Marquee />
       <Contact />
     </>
   );

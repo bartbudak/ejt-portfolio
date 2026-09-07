@@ -33,7 +33,10 @@ export function Contact() {
           because that is the line worth repeating at the end of the page. */}
       <Marquee className="sticky top-[var(--ejt-header)] z-30" />
 
-      <div className="px-3 py-20 sm:px-10 sm:py-28">
+      {/* No bottom padding while she is in flow beneath the card — that
+          padding was the 79px gap holding her off it. It comes back at `lg`,
+          where she is absolutely positioned and the copy needs the room. */}
+      <div className="px-3 pt-20 pb-0 sm:px-10 sm:pt-28 lg:pb-28">
       <div // Centred in the space beside her, not in the whole section — `mx-auto` alone
       // kept the column over her feet.
       className="relative mx-auto flex w-full max-w-4xl flex-col items-center gap-8 text-center lg:ml-0 lg:mr-auto lg:max-w-[60%]">
@@ -43,7 +46,7 @@ export function Contact() {
         <div className="mx-auto flex w-full max-w-full flex-col items-center gap-6 sm:w-fit">
         <h2
           className="font-display font-black uppercase leading-[0.86] tracking-[-0.03em]"
-          style={{ ...WONK, color: "var(--ejd-marigold)", fontSize: "clamp(2.6rem,9vw,6.5rem)" }}
+          style={{ ...WONK, color: "var(--ejd-marigold)", fontSize: "clamp(3.25rem,11.25vw,6.5rem)" }}
         >
           {/* Stacked on a phone, one line from `sm` — at 9vw the two words
               together crowd a narrow viewport. */}
@@ -117,7 +120,7 @@ export function Contact() {
         height={1588}
         aria-hidden
         sizes="(min-width: 1024px) 34vw, 70vw"
-        className="pointer-events-none mx-auto mt-12 block h-auto w-[min(70vw,18rem)] object-contain lg:absolute lg:inset-y-0 lg:right-0 lg:mx-0 lg:mt-0 lg:h-full lg:w-auto lg:max-w-none lg:object-bottom"
+        className="pointer-events-none -mt-2 ml-auto block h-auto w-[min(76vw,20rem)] object-contain lg:absolute lg:mt-0 lg:inset-y-0 lg:right-0 lg:mx-0 lg:mt-0 lg:h-full lg:w-auto lg:max-w-none lg:object-bottom"
       />
     </section>
   );

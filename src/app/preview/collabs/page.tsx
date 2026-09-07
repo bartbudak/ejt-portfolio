@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
-import { Marquee } from "@/components/shared/Marquee";
+import { ThemeSwitcher } from "@/components/shared/ThemeSwitcher";
 import { Collections, DARK_TONE } from "@/components/sections/Collections";
 import { Contact } from "@/components/sections/Contact";
 import { collabs, collabsIntro } from "@/data/campaigns";
@@ -16,6 +16,8 @@ export default function CollabsPage() {
   return (
     <>
       <Header />
+      {/* Preview-only palette picker; delete to remove. */}
+      <ThemeSwitcher />
       <Collections
         title="Collaborations"
         intro={collabsIntro}
@@ -23,7 +25,6 @@ export default function CollabsPage() {
         tone={DARK_TONE}
         crossLink={{ href: "/preview/campaigns", label: "click here for seasonal collections" }}
       />
-      <Marquee />
       <Contact />
     </>
   );

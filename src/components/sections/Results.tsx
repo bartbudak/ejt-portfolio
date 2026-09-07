@@ -45,7 +45,7 @@ export function Results() {
       <div className="relative mx-auto flex w-full max-w-5xl flex-col items-center gap-8 text-center">
         <h2
           className="font-display font-black uppercase leading-[0.84] tracking-[-0.03em]"
-          style={{ ...WONK, color: "var(--ejd-vermilion)", fontSize: "clamp(2.8rem,10vw,7.5rem)" }}
+          style={{ ...WONK, color: "var(--ejd-vermilion)", fontSize: "clamp(3.5rem,12.5vw,7.5rem)" }}
         >
           <span className="block">The</span>
           <span className="block">Results</span>

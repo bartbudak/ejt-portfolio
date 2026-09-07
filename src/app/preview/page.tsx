@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
+import { ThemeSwitcher } from "@/components/shared/ThemeSwitcher";
 import { Hero } from "@/components/sections/Hero";
 import { Marquee } from "@/components/shared/Marquee";
 import { About } from "@/components/sections/About";
@@ -23,6 +24,8 @@ export default function PreviewPage() {
   return (
     <>
       <Header />
+      {/* Preview-only palette picker; delete to remove. */}
+      <ThemeSwitcher />
       {/* One screen: the header sits above it, the hero takes what is left, and
           the marquee closes the fold rather than hanging below it. */}
       <div className="flex h-[calc(100svh-var(--ejt-header))] w-full flex-col">
