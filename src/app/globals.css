@@ -492,3 +492,89 @@ html {
    cool grey sits them back without tinting them. The "new" grounds are NOT
    here: each Maeve pack gets its own, set on the pair in BeforeAfter.tsx. */
 :root { --cmp-old: #c8c7cc; }
+
+/* ── Between Meadow and Bubblegum ──────────────────────────────────────────
+   Ellie: "I like Meadow! The pink and yellow is more me though... stuck on
+   this part." (2026-09-07). These five walk the line between the two, in
+   order: Clover sits nearest Meadow, Rhubarb nearest Bubblegum.
+   Every one clears the pairings the site actually renders: display on the
+   hero ground and on marigold at 3:1 or better, ink on every ground and
+   paper on vermilion at 4.5:1 or better. Measured, not eyeballed. */
+/* Orchard: The literal midpoint: Meadow's pale green field carrying Bubblegum's hot pink. Pink and yellow still lead; the green stops them reading as candy. */
+:root[data-theme="orchard"] {
+  --ejd-blush: #dcecc4;
+  --ejd-vermilion: #d81e6a;
+  --ejd-marigold: #ffd42e;
+  --ejd-ink: #1f2a14;
+  --mv-paper: #f7faec;
+  --ejd-ice: #b9e2d8;
+  --ejd-sage: #7aa77c;
+  --ejd-red: #d83a3a;
+  --ejd-burnt: #b0692b;
+  --ejd-deep: #66123c;
+  --ejd-violet: #6a5bbd;
+}
+/* Watermelon: The midpoint inverted: Bubblegum's pink field with Meadow's forest green as the display type. Keeps the pink, loses almost all the sweetness. */
+:root[data-theme="watermelon"] {
+  --ejd-blush: #ffd1e0;
+  --ejd-vermilion: #2f6b2a;
+  --ejd-marigold: #ffd42e;
+  --ejd-ink: #22200f;
+  --mv-paper: #fff2f2;
+  --ejd-ice: #b9e2d8;
+  --ejd-sage: #7aa77c;
+  --ejd-red: #d83a3a;
+  --ejd-burnt: #b0692b;
+  --ejd-deep: #1f4218;
+  --ejd-violet: #6a5bbd;
+}
+/* Peony: Neither green nor pink as the ground: a warm oat field lets the pink and yellow be the only saturated things on the page, with green kept for the ink. */
+:root[data-theme="peony"] {
+  --ejd-blush: #f6ecd8;
+  --ejd-vermilion: #d81e6a;
+  --ejd-marigold: #ffcf2e;
+  --ejd-ink: #23301a;
+  --mv-paper: #fdf8ec;
+  --ejd-ice: #b9e2d8;
+  --ejd-sage: #7aa77c;
+  --ejd-red: #cf3b3b;
+  --ejd-burnt: #b0692b;
+  --ejd-deep: #5c1436;
+  --ejd-violet: #6a5bbd;
+}
+/* Rhubarb: Closest to Bubblegum. Same pink field, but the display pink is deepened to berry and the ink turns olive, which is most of what makes Bubblegum read young. */
+:root[data-theme="rhubarb"] {
+  --ejd-blush: #ffd9dc;
+  --ejd-vermilion: #b8265c;
+  --ejd-marigold: #ffd42e;
+  --ejd-ink: #20301b;
+  --mv-paper: #fff4f0;
+  --ejd-ice: #b9e2d8;
+  --ejd-sage: #7aa77c;
+  --ejd-red: #cf3b3b;
+  --ejd-burnt: #9a5a2a;
+  --ejd-deep: #4d2a18;
+  --ejd-violet: #6a5bbd;
+}
+/* Clover: Closest to Meadow. Green field and green ink, with a berry pink doing the work Meadow gave to forest green. */
+:root[data-theme="clover"] {
+  --ejd-blush: #e6f0cf;
+  --ejd-vermilion: #c92f68;
+  --ejd-marigold: #ffcf2e;
+  --ejd-ink: #1b2a12;
+  --mv-paper: #f8fbee;
+  --ejd-ice: #b9e2d8;
+  --ejd-sage: #7aa77c;
+  --ejd-red: #d64545;
+  --ejd-burnt: #b0692b;
+  --ejd-deep: #5e1638;
+  --ejd-violet: #6a5bbd;
+}
+
+/* The wavy band travels a whole number of wavelengths, so the wave lands back
+   on itself and only the type appears to move. The distance is set per band as
+   --ejt-travel, because it depends on that band's measured width. */
+@keyframes ejt-wave-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(var(--ejt-travel, -100%)); }
+}

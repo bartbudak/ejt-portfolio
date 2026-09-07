@@ -122,6 +122,12 @@ function Picker({
 
 const THEMES: readonly Option[] = [
   { id: "", name: "Bubblegum", note: "The default" },
+  // Between Meadow and Bubblegum, Meadow-most first.
+  { id: "orchard", name: "Orchard", note: "Meadow's ground, Bubblegum's pink" },
+  { id: "watermelon", name: "Watermelon", note: "Pink ground, forest display" },
+  { id: "peony", name: "Peony", note: "Warm oat, pink, green ink" },
+  { id: "rhubarb", name: "Rhubarb", note: "Soft pink, deep berry, olive ink" },
+  { id: "clover", name: "Clover", note: "Green ground, berry pink" },
   { id: "seaglass", name: "Seaglass", note: "Pale aqua, deep teal, citrus" },
   { id: "meadow", name: "Meadow", note: "Pale green, forest, butter" },
   { id: "cornflower", name: "Cornflower", note: "Periwinkle, indigo, marigold" },

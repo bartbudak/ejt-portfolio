@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PreviewGate } from "@/components/shared/PreviewGate";
+import { MarqueeSettingsProvider } from "@/components/shared/MarqueeSettings";
 
 // Everything under /preview is the unfinished site, so the whole subtree sits
 // behind the password rather than each page remembering to ask. See the header
@@ -12,5 +13,9 @@ export const metadata: Metadata = {
 };
 
 export default function PreviewLayout({ children }: { children: React.ReactNode }) {
-  return <PreviewGate>{children}</PreviewGate>;
+  return (
+    <PreviewGate>
+      <MarqueeSettingsProvider>{children}</MarqueeSettingsProvider>
+    </PreviewGate>
+  );
 }

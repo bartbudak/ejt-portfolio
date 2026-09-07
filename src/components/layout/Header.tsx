@@ -93,6 +93,14 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Published on <html> so a pinned band can paint the slot between itself and
+  // the header in the header's own colour (Ellie, 2026-09-07). It has to go on
+  // the root: the bands are siblings of the header, not descendants, so a
+  // variable set on <header> would never reach them.
+  useEffect(() => {
+    document.documentElement.style.setProperty("--ejt-header-bg", tone.bg);
+  }, [tone.bg]);
+
   return (
     <header
       className="sticky top-0 z-50 w-full"

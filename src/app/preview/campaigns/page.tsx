@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { ThemeSwitcher } from "@/components/shared/PalettePicker";
+import { MarqueeTuner } from "@/components/shared/MarqueeTuner";
 import { Collections, LIGHT_TONE } from "@/components/sections/Collections";
 import { Contact } from "@/components/sections/Contact";
 import { seasons, seasonsIntro } from "@/data/campaigns";
@@ -21,6 +22,7 @@ export default function CampaignsPage() {
       <Header />
       {/* Preview-only palette picker; delete to remove. */}
       <ThemeSwitcher />
+      <MarqueeTuner />
       <Collections
         title="Seasonal Collections"
         intro={seasonsIntro}
