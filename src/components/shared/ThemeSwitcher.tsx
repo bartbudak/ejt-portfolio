@@ -11,17 +11,19 @@ import { useEffect, useState } from "react";
 // palette in :root is the default and is never written by it.
 
 export const THEMES = [
-  { id: "", name: "Deck", note: "Her Canva palette — the default" },
+  { id: "", name: "Bubblegum", note: "The default" },
+  { id: "seaglass", name: "Seaglass", note: "Pale aqua, deep teal, citrus" },
+  { id: "meadow", name: "Meadow", note: "Pale green, forest, butter" },
+  { id: "cornflower", name: "Cornflower", note: "Periwinkle, indigo, marigold" },
+  { id: "citron", name: "Citron", note: "Lemon, olive, orange" },
+  { id: "lagoon", name: "Lagoon", note: "Turquoise, cobalt, coral" },
+  { id: "moss", name: "Moss", note: "Oat green, deep moss, gold" },
+  { id: "sky", name: "Sky", note: "Sky blue, navy, sunshine" },
+  { id: "pistachio", name: "Pistachio", note: "Pistachio, pine, apricot" },
+  { id: "butter", name: "Butter", note: "Butter, teal, tomato" },
+  { id: "glacier", name: "Glacier", note: "Ice blue, slate, chartreuse" },
+  { id: "deck", name: "Deck", note: "Her Canva palette, kept whole" },
   { id: "maeve-live", name: "Maeve Live", note: "What the shipped site runs on" },
-  { id: "arcade", name: "Arcade", note: "Princess Donut's midnight lounge" },
-  { id: "cocoa", name: "Cocoa", note: "Chocolate first — bitter, cream, gold" },
-  { id: "chartreuse", name: "Chartreuse", note: "Acid green and ink" },
-  { id: "ultraviolet", name: "Ultraviolet", note: "Violet, lemon, cold white" },
-  { id: "seafoam", name: "Seafoam", note: "The mural — mint and coral" },
-  { id: "neon-noir", name: "Neon Noir", note: "Near-black, pink, cyan" },
-  { id: "terracotta", name: "Terracotta", note: "Clay, sand, forest" },
-  { id: "bubblegum", name: "Bubblegum", note: "Pink, baby blue, lemon" },
-  { id: "newsprint", name: "Newsprint", note: "Ink on paper, one red" },
 ] as const;
 
 const KEY = "ejt-theme-preview";

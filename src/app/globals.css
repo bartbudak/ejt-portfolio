@@ -146,20 +146,20 @@
 
 /* ── Deck palette (Ellie's Canva deck) ───────────────────────────────────── */
 :root {
-  --ejd-marigold: #feb431; /* 15% of the deck — the dominant ground */
-  --ejd-vermilion: #f83e02; /* 13% — display type + the loud ground */
-  --ejd-blush: #f2b7b3; /* the hero field */
-  --ejd-ice: #99f0ff;
-  --ejd-sage: #8c9f5d;
-  --ejd-red: #cc0000;
-  --ejd-burnt: #cc4e00;
-  --ejd-deep: #7a1a00; /* deepened vermilion, for small text on colour */
-  --ejd-ink: #1a1210; /* warm near-black — her deck's body colour */
-  --ejd-violet: #825dc6; /* the Valentine's band's display type, sampled from the deck */
+  --ejd-marigold: #ffe066; /* 15% of the deck — the dominant ground */
+  --ejd-vermilion: #ff4f9a; /* 13% — display type + the loud ground */
+  --ejd-blush: #ffd1e8; /* the hero field */
+  --ejd-ice: #a8e0ff;
+  --ejd-sage: #92d6a8;
+  --ejd-red: #ff3d6e;
+  --ejd-burnt: #d94f7a;
+  --ejd-deep: #6b1f45; /* deepened vermilion, for small text on colour */
+  --ejd-ink: #2b1030; /* warm near-black — her deck's body colour */
+  --ejd-violet: #9d6bff; /* the Valentine's band's display type, sampled from the deck */
 
   /* Lifted from the live Maeve theme (github: maeve/styles/__base.scss) so the
      case-study furniture matches the site she actually shipped. */
-  --mv-paper: #fff3e5; /* --cr-paper */
+  --mv-paper: #fff0f7; /* Bubblegum's paper; the deck's #fff3e5 lives in the deck theme */
   --mv-red: #ff4001; /* --cr-red — the frame colour */
   --mv-pink: #fb66e5; /* --cr-pink — the showcase panel */
   --mv-yellow: #ffc72c; /* --cr-yellow */
@@ -301,84 +301,180 @@ html {
 }
 
 /* ── Theme previews ───────────────────────────────────────────────────────────
-   Every section paints from the `--ejd-*` tokens, so a theme is just a new set
-   of values for them — no component knows a theme exists. `data-theme` on <html>
-   selects one; absent, the deck palette in the :root block above stands, so the
-   default is untouched by any of this.
+   A theme is a new set of values for the same eleven tokens. `data-theme` on
+   <html> selects one; absent, Bubblegum above stands.
 
-   Each theme must define the same eleven tokens, because the campaign bands use
-   the seasonal five (ice/sage/burnt/red/violet) as their grounds and a missing
-   one would fall back to the deck's and break the set. `--ejd-ink` is the body
-   colour and carries the reading contrast; the display tokens are treated as
-   graphic, as they are in her deck. ─────────────────────────────────────────── */
+   Each theme must define all eleven, because the campaign bands use the
+   seasonal five (ice/sage/burnt/red/violet) as their grounds and a missing one
+   would fall back to the default's and break the set.
 
-/* 1 · Maeve Live — the palette the shipped site actually runs on. */
+   These ten hold Bubblegum's relationship — pale ground, saturated display,
+   bright accent, near-black ink tinted toward the ground — and move it through
+   blues, greens and yellows. A useful side effect: they measure far better than
+   the deck ever did. Ink reads 12-14:1 on every ground here, and the display
+   colour clears the large-text bar on all ten (4.0 to 8.8:1), where the deck's
+   display pairings sat between 1.18 and 2.82:1. ────────────────────────────── */
+
+/* Her Canva deck, kept whole. */
+:root[data-theme="deck"] {
+  --ejd-marigold: #feb431;
+  --ejd-vermilion: #f83e02;
+  --ejd-blush: #f2b7b3;
+  --ejd-ice: #99f0ff;
+  --ejd-sage: #8c9f5d;
+  --ejd-red: #cc0000;
+  --ejd-burnt: #cc4e00;
+  --ejd-deep: #7a1a00;
+  --ejd-ink: #1a1210;
+  --ejd-violet: #825dc6;
+  --mv-paper: #fff3e5;
+}
+
+/* The palette the shipped Maeve site actually runs on. */
 :root[data-theme="maeve-live"] {
   --ejd-blush: #fb66e5; --ejd-vermilion: #ff4001; --ejd-marigold: #ffc72c;
   --ejd-ink: #2d2926; --ejd-ice: #7ee8fa; --ejd-sage: #6fbf73;
   --ejd-red: #e0201b; --ejd-burnt: #cc4e00; --ejd-deep: #7a1a00;
   --ejd-violet: #8b5cf6; --mv-paper: #fff3e5;
 }
-/* 2 · Arcade — Princess Donut's midnight lounge: deep plum, acid, hot pink. */
-:root[data-theme="arcade"] {
-  --ejd-blush: #2b1b45; --ejd-vermilion: #ff2e88; --ejd-marigold: #c6ff4f;
-  --ejd-ink: #f6efff; --ejd-ice: #35d6ff; --ejd-sage: #7bdc8a;
-  --ejd-red: #ff2e88; --ejd-burnt: #6d2bb0; --ejd-deep: #170d26;
-  --ejd-violet: #b98cff; --mv-paper: #1f1233;
+
+/* Pale aqua, deep teal, citrus */
+:root[data-theme="seaglass"] {
+  --ejd-blush: #cfeee6;
+  --ejd-vermilion: #0f7d78;
+  --ejd-marigold: #ffd84d;
+  --ejd-ink: #102b2a;
+  --mv-paper: #eefaf6;
+  --ejd-ice: #a9e3ef;
+  --ejd-sage: #6fae7c;
+  --ejd-red: #d1495b;
+  --ejd-burnt: #c2703d;
+  --ejd-deep: #0a4a46;
+  --ejd-violet: #5b6bbf;
 }
-/* 3 · Cocoa — chocolate first: bitter brown, cream, gold leaf. */
-:root[data-theme="cocoa"] {
-  --ejd-blush: #efdcc4; --ejd-vermilion: #6b3a1f; --ejd-marigold: #d9a441;
-  --ejd-ink: #2a1b12; --ejd-ice: #cfe3d8; --ejd-sage: #7d8a5c;
-  --ejd-red: #8c2f22; --ejd-burnt: #a4551f; --ejd-deep: #3d2416;
-  --ejd-violet: #6b4a7a; --mv-paper: #f7eddd;
+/* Pale green, forest, butter */
+:root[data-theme="meadow"] {
+  --ejd-blush: #dcecc4;
+  --ejd-vermilion: #2f6b2a;
+  --ejd-marigold: #ffdb4a;
+  --ejd-ink: #16240f;
+  --mv-paper: #f4f8e6;
+  --ejd-ice: #b9e2d8;
+  --ejd-sage: #7aa77c;
+  --ejd-red: #c8402f;
+  --ejd-burnt: #b0692b;
+  --ejd-deep: #1f4218;
+  --ejd-violet: #6a5bbd;
 }
-/* 4 · Chartreuse — acid green with ink, nothing warm anywhere. */
-:root[data-theme="chartreuse"] {
-  --ejd-blush: #e8f57c; --ejd-vermilion: #1c1c1c; --ejd-marigold: #b8e600;
-  --ejd-ink: #14170a; --ejd-ice: #d6f5e3; --ejd-sage: #7f9b2e;
-  --ejd-red: #d8412f; --ejd-burnt: #8a7a13; --ejd-deep: #3d4a06;
-  --ejd-violet: #6d4bd6; --mv-paper: #f7fbe2;
+/* Periwinkle, indigo, marigold */
+:root[data-theme="cornflower"] {
+  --ejd-blush: #d6e2ff;
+  --ejd-vermilion: #2a3fb5;
+  --ejd-marigold: #ffc94d;
+  --ejd-ink: #111a3d;
+  --mv-paper: #eef2ff;
+  --ejd-ice: #a9d8ef;
+  --ejd-sage: #79ab7e;
+  --ejd-red: #d13b52;
+  --ejd-burnt: #c06a35;
+  --ejd-deep: #1b2a70;
+  --ejd-violet: #7a55c9;
 }
-/* 5 · Ultraviolet — violet ground, lemon, cold white. */
-:root[data-theme="ultraviolet"] {
-  --ejd-blush: #d8c9ff; --ejd-vermilion: #4b1fb8; --ejd-marigold: #ffe14d;
-  --ejd-ink: #1b0f33; --ejd-ice: #b8e6ff; --ejd-sage: #8ea87c;
-  --ejd-red: #d4145a; --ejd-burnt: #6a2fb5; --ejd-deep: #2a0f5c;
-  --ejd-violet: #7b3ff2; --mv-paper: #f4efff;
+/* Lemon, olive, orange */
+:root[data-theme="citron"] {
+  --ejd-blush: #f2f0c2;
+  --ejd-vermilion: #4f6b12;
+  --ejd-marigold: #ff8c2b;
+  --ejd-ink: #1e2208;
+  --mv-paper: #fbfae6;
+  --ejd-ice: #b7e0d2;
+  --ejd-sage: #7d9a3a;
+  --ejd-red: #c93b2c;
+  --ejd-burnt: #b26a1e;
+  --ejd-deep: #33450a;
+  --ejd-violet: #6d5aa8;
 }
-/* 6 · Seafoam — the mural: mint, coral, hot pink. */
-:root[data-theme="seafoam"] {
-  --ejd-blush: #b9efe2; --ejd-vermilion: #ff5c4d; --ejd-marigold: #ffd166;
-  --ejd-ink: #10302a; --ejd-ice: #9ee6f5; --ejd-sage: #4fae8b;
-  --ejd-red: #e63946; --ejd-burnt: #c96a3f; --ejd-deep: #0d4038;
-  --ejd-violet: #6a5acd; --mv-paper: #f0fbf6;
+/* Turquoise, cobalt, coral */
+:root[data-theme="lagoon"] {
+  --ejd-blush: #c9e9f2;
+  --ejd-vermilion: #0b5fa5;
+  --ejd-marigold: #ff7a4d;
+  --ejd-ink: #0b2436;
+  --mv-paper: #ebf8fb;
+  --ejd-ice: #9fdcef;
+  --ejd-sage: #5fa98d;
+  --ejd-red: #d6425a;
+  --ejd-burnt: #c26a3a;
+  --ejd-deep: #083c5e;
+  --ejd-violet: #5a63b8;
 }
-/* 7 · Neon Noir — near-black ground with pink and cyan doing all the work. */
-:root[data-theme="neon-noir"] {
-  --ejd-blush: #14131a; --ejd-vermilion: #ff2d6f; --ejd-marigold: #00e5c7;
-  --ejd-ink: #f2f0ff; --ejd-ice: #00d5ff; --ejd-sage: #5ce07a;
-  --ejd-red: #ff2d6f; --ejd-burnt: #2a2740; --ejd-deep: #0a0910;
-  --ejd-violet: #a56bff; --mv-paper: #1c1a26;
+/* Oat green, deep moss, gold */
+:root[data-theme="moss"] {
+  --ejd-blush: #e3e6cd;
+  --ejd-vermilion: #3d5230;
+  --ejd-marigold: #d9a63c;
+  --ejd-ink: #1b2113;
+  --mv-paper: #f5f6e8;
+  --ejd-ice: #b6d9cf;
+  --ejd-sage: #6f8f52;
+  --ejd-red: #b8402f;
+  --ejd-burnt: #9c6a2a;
+  --ejd-deep: #26331b;
+  --ejd-violet: #63588f;
 }
-/* 8 · Terracotta — clay, sand and forest; the quietest of the ten. */
-:root[data-theme="terracotta"] {
-  --ejd-blush: #f0d9c4; --ejd-vermilion: #b8482a; --ejd-marigold: #e0a458;
-  --ejd-ink: #2b1d16; --ejd-ice: #cddfd8; --ejd-sage: #6b7d54;
-  --ejd-red: #9e3b25; --ejd-burnt: #8c4a2b; --ejd-deep: #4a2a1c;
-  --ejd-violet: #7a5c8a; --mv-paper: #f8efe4;
+/* Sky blue, navy, sunshine */
+:root[data-theme="sky"] {
+  --ejd-blush: #d3e9ff;
+  --ejd-vermilion: #123a7a;
+  --ejd-marigold: #ffd23f;
+  --ejd-ink: #0d1f3d;
+  --mv-paper: #edf5ff;
+  --ejd-ice: #a5d9f5;
+  --ejd-sage: #6faa86;
+  --ejd-red: #d33f52;
+  --ejd-burnt: #bb6a33;
+  --ejd-deep: #0f2a55;
+  --ejd-violet: #6d5bc4;
 }
-/* 9 · Bubblegum — pink, baby blue, lemon; the sweetest reading of her deck. */
-:root[data-theme="bubblegum"] {
-  --ejd-blush: #ffd1e8; --ejd-vermilion: #ff4f9a; --ejd-marigold: #ffe066;
-  --ejd-ink: #2b1030; --ejd-ice: #a8e0ff; --ejd-sage: #92d6a8;
-  --ejd-red: #ff3d6e; --ejd-burnt: #d94f7a; --ejd-deep: #6b1f45;
-  --ejd-violet: #9d6bff; --mv-paper: #fff0f7;
+/* Pistachio, pine, apricot */
+:root[data-theme="pistachio"] {
+  --ejd-blush: #dcefcf;
+  --ejd-vermilion: #186a5a;
+  --ejd-marigold: #f5a13c;
+  --ejd-ink: #122417;
+  --mv-paper: #f0f9ea;
+  --ejd-ice: #aee0dd;
+  --ejd-sage: #66a06a;
+  --ejd-red: #c9414a;
+  --ejd-burnt: #ab6a2c;
+  --ejd-deep: #124238;
+  --ejd-violet: #5f5aa5;
 }
-/* 10 · Newsprint — ink on paper, one red. The severe option. */
-:root[data-theme="newsprint"] {
-  --ejd-blush: #ece7dd; --ejd-vermilion: #d1301f; --ejd-marigold: #e8e2d5;
-  --ejd-ink: #16150f; --ejd-ice: #dfe6e8; --ejd-sage: #8f9384;
-  --ejd-red: #a8241a; --ejd-burnt: #6f6558; --ejd-deep: #33302a;
-  --ejd-violet: #4a4a6a; --mv-paper: #f5f1e8;
+/* Butter, teal, tomato */
+:root[data-theme="butter"] {
+  --ejd-blush: #fbeec2;
+  --ejd-vermilion: #166a6a;
+  --ejd-marigold: #e8542f;
+  --ejd-ink: #241d08;
+  --mv-paper: #fdf8e4;
+  --ejd-ice: #a9dfe0;
+  --ejd-sage: #7f9c4a;
+  --ejd-red: #c33a2c;
+  --ejd-burnt: #a96a22;
+  --ejd-deep: #0f4444;
+  --ejd-violet: #6a5a9c;
+}
+/* Ice blue, slate, chartreuse */
+:root[data-theme="glacier"] {
+  --ejd-blush: #dbe9ef;
+  --ejd-vermilion: #26506e;
+  --ejd-marigold: #c8e04a;
+  --ejd-ink: #111d24;
+  --mv-paper: #eff6f9;
+  --ejd-ice: #a7d5e6;
+  --ejd-sage: #6c9b84;
+  --ejd-red: #c74152;
+  --ejd-burnt: #a96b3e;
+  --ejd-deep: #173547;
+  --ejd-violet: #5d5f9e;
 }
