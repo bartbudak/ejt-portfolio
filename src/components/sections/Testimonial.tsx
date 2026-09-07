@@ -24,14 +24,20 @@ export function Testimonial() {
         </h2>
 
         <figure
-          className="mt-12 px-6 py-10 sm:px-12 sm:py-14"
+          className="px-6 py-10 sm:px-12 sm:py-14"
           style={{
             backgroundColor: "var(--mv-paper)",
             border: "var(--mv-stroke) solid var(--ejd-ink)",
             boxShadow:
               "0 0 0 var(--mv-frame) var(--ejd-vermilion), 0 0 0 calc(var(--mv-frame) + var(--mv-stroke)) var(--ejd-ink)",
             borderRadius: 28,
+            // The ring is drawn outside the border box, so the frame holds
+            // itself off its neighbours with this margin. It has to carry the
+            // gap under the heading too: an inline `margin` shorthand beats a
+            // Tailwind `mt-*` class, so the mt-12 that used to be on this
+            // element was being silently reset to 9px (Ellie, 2026-09-07).
             margin: "calc(var(--mv-frame) + var(--mv-stroke))",
+            marginTop: "calc(var(--mv-frame) + var(--mv-stroke) + 3rem)",
           }}
         >
           <blockquote

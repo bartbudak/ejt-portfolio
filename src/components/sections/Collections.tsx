@@ -249,7 +249,7 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
           aria-labelledby={`collection-tab-${current.slug}`}
           // The panel is a bare frame; the brief section inside it carries the
           // padding and the product lineup runs full-bleed beneath it.
-          className="relative isolate mt-4 overflow-hidden rounded-lg"
+          className="relative isolate overflow-hidden rounded-lg"
           style={{
             backgroundColor: current.ground,
             // The Maeve frame from the compare section — soft-black hairline, a
