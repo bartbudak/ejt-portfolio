@@ -100,8 +100,9 @@ export const seasons: Collection[] = [
     label: "Valentine's Day",
     briefTitle: "Valentine's Day Brief",
     wordmark: "Chocolate is Love",
-    ground: "var(--ejd-blush)",
-    display: "var(--ejd-violet)",
+    // rose and violet, the deck's own Valentine pairing, with the violet deepened to carry display type (5.10:1)
+    ground: "#ff9ec9",
+    display: "#5d1f9e",
     body: "var(--ejd-ink)",
     motif: "/motifs/valentines-heart.png",
     motifAlt: "A purple candy heart reading “M'Lady (Tips Fedora)”",
@@ -156,8 +157,9 @@ export const seasons: Collection[] = [
     slug: "spring",
     label: "Spring",
     briefTitle: "Spring Brief",
-    ground: "var(--ejd-sage)",
-    display: "var(--mv-paper)",
+    // her lineup's garden green, brightened into Bubblegum's register; display is the same green at leaf depth
+    ground: "#7fc94a",
+    display: "#1f3d14",
     body: "var(--ejd-ink)",
     motif: "/motifs/spring-daffodil.png",
     motifAlt: "An illustrated yellow daffodil",
@@ -202,8 +204,9 @@ export const seasons: Collection[] = [
     slug: "summer",
     label: "Summer",
     briefTitle: "Summer Brief",
-    ground: "var(--ejd-ice)",
-    display: "var(--mv-paper)",
+    // the fair-tent sky from the lineup, over a deep navy taken from the same art
+    ground: "#63cbf2",
+    display: "#0d3b66",
     body: "var(--ejd-ink)",
     motif: "/motifs/summer-star.png",
     motifAlt: "An illustrated yellow star",
@@ -215,7 +218,6 @@ export const seasons: Collection[] = [
     // band carries no decoration of its own — so no frame art, rather than
     // falling back to a motif she never put there.
     frame: [],
-    outlineDisplay: true,
     layout: { align: "left", nutshell: "inline", motifs: "scatter" },
     rows: [
       {
@@ -237,9 +239,10 @@ export const seasons: Collection[] = [
     slug: "fall",
     label: "Fall",
     briefTitle: "Fall Brief",
-    ground: "var(--ejd-burnt)",
+    // the burnt orange that dominates her fall lineup — the one season the old palette turned pink
+    ground: "#b84800",
     display: "var(--mv-paper)",
-    body: "var(--ejd-ink)",
+    body: "var(--mv-paper)",
     motif: "/motifs/fall-leaf.png",
     motifAlt: "An illustrated orange maple leaf",
     showcase: {
@@ -273,9 +276,10 @@ export const seasons: Collection[] = [
     slug: "holiday",
     label: "Holiday",
     briefTitle: "Holiday Brief",
-    ground: "var(--ejd-red)",
+    // true holiday red, dark enough to sit a step below Fall so the two darks do not merge
+    ground: "#a30f24",
     display: "var(--mv-paper)",
-    body: "var(--ejd-ink)",
+    body: "var(--mv-paper)",
     motif: "/motifs/holiday-bird.png",
     motifAlt: "An illustrated bird wearing a santa hat",
     showcase: {
@@ -393,7 +397,9 @@ export const collabs: Collection[] = [
     briefTitle: "PAX West",
     wordmark: "Gretchen, Collectible",
     ground: "var(--ejd-sage)",
-    display: "var(--mv-paper)",
+    // Was --mv-paper, which measured 1.54:1 on sage — invisible. --ejd-deep is
+    // the same fix the seasonal bands got.
+    display: "var(--ejd-deep)",
     body: "var(--ejd-ink)",
     motif: "/motifs/summer-star.png",
     motifAlt: "An illustrated star",
