@@ -119,7 +119,14 @@ export function Marquee({
     // not being produced (a background tab, a hidden pane): the pending flag
     // never clears, so no further check ever runs. One getBoundingClientRect
     // during an event that has already forced layout is not worth that risk.
-    const check = () => setStuck(el.getBoundingClientRect().top <= HEADER_PX + 1);
+    // Compare against where the band actually PINS, not where the header ends.
+    // These stopped matching the moment pinned bands were offset by twice the
+    // amplitude to clear the header: the test still asked about 64, the band
+    // parked at 78, so it never read as pinned and the header-coloured fill
+    // above the wave never painted. That gap is what showed as white space
+    // between the header and the marquee (Ellie, 2026-09-07).
+    const check = () =>
+      setStuck(el.getBoundingClientRect().top <= HEADER_PX + amplitude * 2 + 1);
     check();
     window.addEventListener("scroll", check, { passive: true });
     window.addEventListener("resize", check);
@@ -134,7 +141,7 @@ export function Marquee({
       window.removeEventListener("resize", check);
       mq.removeEventListener("change", onChange);
     };
-  }, []);
+  }, [amplitude]);
 
   const STROKE = BAND_STROKE;
   const FRAME = BAND_FRAME;

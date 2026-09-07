@@ -126,11 +126,11 @@ function Picker({
 }
 
 const THEMES: readonly Option[] = [
-  { id: "", name: "Bubblegum", note: "The default" },
+  { id: "", name: "Peony", note: "The default" },
+  { id: "bubblegum", name: "Bubblegum", note: "The previous default" },
   // Between Meadow and Bubblegum, Meadow-most first.
   { id: "orchard", name: "Orchard", note: "Meadow's ground, Bubblegum's pink" },
   { id: "watermelon", name: "Watermelon", note: "Pink ground, forest display" },
-  { id: "peony", name: "Peony", note: "Warm oat, pink, green ink" },
   { id: "rhubarb", name: "Rhubarb", note: "Soft pink, deep berry, olive ink" },
   { id: "clover", name: "Clover", note: "Green ground, berry pink" },
   { id: "seaglass", name: "Seaglass", note: "Pale aqua, deep teal, citrus" },
@@ -150,6 +150,16 @@ const THEMES: readonly Option[] = [
 
 const CURSORS: readonly Option[] = [
   { id: "", name: "Off", note: "The system arrow" },
+  // Her own motif PNGs first, then the drawn colourways.
+  { id: "art-sun", name: "Smiley sun", note: "Her artwork" },
+  { id: "art-daisy-face", name: "Flower face", note: "Her artwork" },
+  { id: "art-daisy-blue", name: "Blue-eye daisy", note: "Her artwork" },
+  { id: "art-daisy-stem", name: "Daisy on a stem", note: "Her artwork" },
+  { id: "art-flower", name: "Yellow flower", note: "Her artwork" },
+  { id: "art-star-soft", name: "Soft star", note: "Her artwork" },
+  { id: "art-star-lime", name: "Lime star", note: "Her artwork" },
+  { id: "art-daisy", name: "White daisy", note: "Her artwork" },
+  { id: "art-ohs", name: "Honey nutty Ohs", note: "Her artwork" },
   { id: "marigold-green", name: "Marigold & green", note: "Her original flower" },
   { id: "vermilion-gold", name: "Vermilion & gold", note: "" },
   { id: "blush-vermilion", name: "Blush & vermilion", note: "" },

@@ -60,8 +60,18 @@ export const bandHeight = (s: MarqueeSettings) => s.fontSize * 1.1 + s.padding *
  */
 export const bandFlow = (s: MarqueeSettings) =>
   Math.max(0, bandHeight(s) - s.amplitude * 2);
-/** The transparent margin above and below it that the wave needs. */
-export const bandEdge = (s: MarqueeSettings) => s.amplitude + BAND_FRAME / 2 + BAND_STROKE;
+/**
+ * The transparent margin above and below the body that the wave needs.
+ *
+ * The edge is one path stroked twice, so its outermost ink reaches
+ * (BAND_FRAME + 2 x BAND_STROKE) / 2 beyond the centreline, and the centreline
+ * itself swings by the amplitude. The old figure used BAND_FRAME / 2 + STROKE,
+ * which is exactly that half-width, so at a crest the stroke's outer edge
+ * landed precisely on the SVG's boundary and antialiasing shaved the top of
+ * the ring off (Ellie: "still clipped", 2026-09-07). The +2 is headroom.
+ */
+export const bandEdge = (s: MarqueeSettings) =>
+  s.amplitude + (BAND_FRAME + BAND_STROKE * 2) / 2 + 2;
 
 export function MarqueeSettingsProvider({ children }: { children: React.ReactNode }) {
   const [settings, setSettings] = useState<MarqueeSettings>(MARQUEE_DEFAULTS);

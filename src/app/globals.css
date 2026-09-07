@@ -146,20 +146,24 @@
 
 /* ── Deck palette (Ellie's Canva deck) ───────────────────────────────────── */
 :root {
-  --ejd-marigold: #ffd42e; /* 15% of the deck — the dominant ground */
-  --ejd-vermilion: #ff4f9a; /* 13% — display type + the loud ground */
-  --ejd-blush: #ffd1e8; /* the hero field */
-  --ejd-ice: #a8e0ff;
-  --ejd-sage: #92d6a8;
-  --ejd-red: #ff3d6e;
-  --ejd-burnt: #d94f7a;
-  --ejd-deep: #6b1f45; /* deepened vermilion, for small text on colour */
-  --ejd-ink: #2b1030; /* warm near-black — her deck's body colour */
-  --ejd-violet: #9d6bff; /* the Valentine's band's display type, sampled from the deck */
+  /* PEONY is the default palette (Ellie, 2026-09-07): neither green nor pink
+     as the ground, so a warm oat field lets the pink and yellow be the only
+     saturated things on the page, with the green kept for the ink. It is one
+     of the five drawn between Meadow and Bubblegum. */
+  --ejd-marigold: #ffcf2e; /* 15% of the deck — the dominant ground */
+  --ejd-vermilion: #d81e6a; /* 13% — display type + the loud ground */
+  --ejd-blush: #f6ecd8; /* the hero field */
+  --ejd-ice: #b9e2d8;
+  --ejd-sage: #7aa77c;
+  --ejd-red: #cf3b3b;
+  --ejd-burnt: #b0692b;
+  --ejd-deep: #5c1436; /* deepened vermilion, for small text on colour */
+  --ejd-ink: #23301a; /* warm near-black — her deck's body colour */
+  --ejd-violet: #6a5bbd; /* the Valentine's band's display type, sampled from the deck */
 
   /* Lifted from the live Maeve theme (github: maeve/styles/__base.scss) so the
      case-study furniture matches the site she actually shipped. */
-  --mv-paper: #fff0f7; /* Bubblegum's paper; the deck's #fff3e5 lives in the deck theme */
+  --mv-paper: #fdf8ec; /* Bubblegum's paper; the deck's #fff3e5 lives in the deck theme */
   --mv-red: #ff4001; /* --cr-red — the frame colour */
   --mv-pink: #fb66e5; /* --cr-pink — the showcase panel */
   --mv-yellow: #ffc72c; /* --cr-yellow */
@@ -343,6 +347,21 @@ html {
 }
 
 /* Pale aqua, deep teal, citrus */
+/* Bubblegum: the previous default, kept because it is the reference point
+   everything since has been judged against. */
+:root[data-theme="bubblegum"] {
+  --ejd-marigold: #ffd42e;
+  --ejd-vermilion: #ff4f9a;
+  --ejd-blush: #ffd1e8;
+  --ejd-ice: #a8e0ff;
+  --ejd-sage: #92d6a8;
+  --ejd-red: #ff3d6e;
+  --ejd-burnt: #d94f7a;
+  --ejd-deep: #6b1f45;
+  --ejd-ink: #2b1030;
+  --ejd-violet: #9d6bff;
+  --mv-paper: #fff0f7;
+}
 :root[data-theme="seaglass"] {
   --ejd-blush: #cfeee6;
   --ejd-vermilion: #0f7d78;
@@ -524,20 +543,6 @@ html {
   --ejd-deep: #1f4218;
   --ejd-violet: #6a5bbd;
 }
-/* Peony: Neither green nor pink as the ground: a warm oat field lets the pink and yellow be the only saturated things on the page, with green kept for the ink. */
-:root[data-theme="peony"] {
-  --ejd-blush: #f6ecd8;
-  --ejd-vermilion: #d81e6a;
-  --ejd-marigold: #ffcf2e;
-  --ejd-ink: #23301a;
-  --mv-paper: #fdf8ec;
-  --ejd-ice: #b9e2d8;
-  --ejd-sage: #7aa77c;
-  --ejd-red: #cf3b3b;
-  --ejd-burnt: #b0692b;
-  --ejd-deep: #5c1436;
-  --ejd-violet: #6a5bbd;
-}
 /* Rhubarb: Closest to Bubblegum. Same pink field, but the display pink is deepened to berry and the ink turns olive, which is most of what makes Bubblegum read young. */
 :root[data-theme="rhubarb"] {
   --ejd-blush: #ffd9dc;
@@ -614,4 +619,37 @@ html {
 }
 :root[data-cursor="teal-blush"], :root[data-cursor="teal-blush"] * {
   cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20stroke%3D%22%231a1210%22%20stroke-width%3D%222%22%3E%3Ccircle%20cx%3D%2216.00%22%20cy%3D%228.00%22%20r%3D%225.4%22%20fill%3D%22%230f7d78%22%2F%3E%3Ccircle%20cx%3D%2222.93%22%20cy%3D%2212.00%22%20r%3D%225.4%22%20fill%3D%22%230f7d78%22%2F%3E%3Ccircle%20cx%3D%2222.93%22%20cy%3D%2220.00%22%20r%3D%225.4%22%20fill%3D%22%230f7d78%22%2F%3E%3Ccircle%20cx%3D%2216.00%22%20cy%3D%2224.00%22%20r%3D%225.4%22%20fill%3D%22%230f7d78%22%2F%3E%3Ccircle%20cx%3D%229.07%22%20cy%3D%2220.00%22%20r%3D%225.4%22%20fill%3D%22%230f7d78%22%2F%3E%3Ccircle%20cx%3D%229.07%22%20cy%3D%2212.00%22%20r%3D%225.4%22%20fill%3D%22%230f7d78%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%224.8%22%20fill%3D%22%23f2b7b3%22%20stroke%3D%22%231a1210%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E") 16 16, auto;
+}
+
+/* Her own motifs as cursors, at her request (2026-09-07). Exported to 48px:
+   browsers refuse a cursor image over 128px and silently fall back to the
+   default arrow, and below ~40 her line work stops reading. Each hotspot is
+   the centre of MASS of the artwork, not the middle of the canvas, so a
+   daisy with a stem still points from its head. */
+:root[data-cursor="art-sun"], :root[data-cursor="art-sun"] * {
+  cursor: url("/cursors/sun.png") 24 23, auto;
+}
+:root[data-cursor="art-daisy-face"], :root[data-cursor="art-daisy-face"] * {
+  cursor: url("/cursors/daisy-face.png") 23 23, auto;
+}
+:root[data-cursor="art-daisy-blue"], :root[data-cursor="art-daisy-blue"] * {
+  cursor: url("/cursors/daisy-blue.png") 23 21, auto;
+}
+:root[data-cursor="art-daisy-stem"], :root[data-cursor="art-daisy-stem"] * {
+  cursor: url("/cursors/daisy-stem.png") 23 20, auto;
+}
+:root[data-cursor="art-flower"], :root[data-cursor="art-flower"] * {
+  cursor: url("/cursors/flower.png") 24 23, auto;
+}
+:root[data-cursor="art-star-soft"], :root[data-cursor="art-star-soft"] * {
+  cursor: url("/cursors/star-soft.png") 22 23, auto;
+}
+:root[data-cursor="art-star-lime"], :root[data-cursor="art-star-lime"] * {
+  cursor: url("/cursors/star-lime.png") 26 23, auto;
+}
+:root[data-cursor="art-daisy"], :root[data-cursor="art-daisy"] * {
+  cursor: url("/cursors/daisy.png") 23 23, auto;
+}
+:root[data-cursor="art-ohs"], :root[data-cursor="art-ohs"] * {
+  cursor: url("/cursors/ohs.png") 27 25, auto;
 }

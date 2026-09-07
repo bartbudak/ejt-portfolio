@@ -71,6 +71,12 @@ export const awards: Award[] = [
   {
     name: "NEXTY Awards",
     detail: "Finalist, Natural Products Expo West 2025",
+    // The finalist badge itself rather than a product shot: this is the one
+    // award whose "work" is the recognition (Ellie supplied it, 2026-09-07).
+    preview: {
+      src: "/awards/nexty-finalist.webp",
+      alt: "NEXTY Awards Finalist 2025 badge, Newtopia Now",
+    },
     href: "https://www.newhope.com/nexty-awards/presenting-the-2025-natural-products-expo-west-nexty-awards-finalists",
     linkLabel: "See the finalists",
   },
