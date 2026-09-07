@@ -146,7 +146,7 @@
 
 /* ── Deck palette (Ellie's Canva deck) ───────────────────────────────────── */
 :root {
-  --ejd-marigold: #ffe066; /* 15% of the deck — the dominant ground */
+  --ejd-marigold: #ffd42e; /* 15% of the deck — the dominant ground */
   --ejd-vermilion: #ff4f9a; /* 13% — display type + the loud ground */
   --ejd-blush: #ffd1e8; /* the hero field */
   --ejd-ice: #a8e0ff;

@@ -24,7 +24,7 @@ export function Contact() {
       // finished leaving, so the two were always on screen together. She grows
       // with the section — her height is the section's — so the extra room is
       // hers.
-      className="relative isolate min-h-[100svh] w-full"
+      className="relative isolate flex min-h-[100svh] w-full flex-col"
       style={{ backgroundColor: "var(--ejd-vermilion)" }}
     >
       {/* The closing band, pinned under the header for as long as this section
@@ -36,7 +36,12 @@ export function Contact() {
       {/* No bottom padding while she is in flow beneath the card — that
           padding was the 79px gap holding her off it. It comes back at `lg`,
           where she is absolutely positioned and the copy needs the room. */}
-      <div className="px-3 pt-20 pb-0 sm:px-10 sm:pt-28 lg:pb-28">
+      {/* From `lg` this block takes the height the marquee leaves and centres
+          the heading and card inside it as one group, so the pair sits against
+          the middle of her rather than riding the top edge with a screen of
+          empty vermilion underneath. Below `lg` she is in flow beneath the copy
+          and there is no leftover height to centre in, so it stays a stack. */}
+      <div className="px-3 pt-20 pb-0 sm:px-10 sm:pt-28 lg:flex lg:flex-1 lg:flex-col lg:justify-center lg:py-16">
       <div // Centred in the space beside her, not in the whole section — `mx-auto` alone
       // kept the column over her feet.
       className="relative mx-auto flex w-full max-w-4xl flex-col items-center gap-8 text-center lg:ml-0 lg:mr-auto lg:max-w-[60%]">

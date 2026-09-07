@@ -42,7 +42,7 @@ export function Results() {
       // back on the same vermilion-on-blush pairing as the title card.
       style={{ backgroundColor: "var(--ejd-blush)" }}
     >
-      <div className="relative px-5 pb-10 pt-20 sm:px-10 sm:pb-14 sm:pt-28">
+      <div className="relative px-5 pb-4 pt-20 sm:px-10 sm:pb-6 sm:pt-28">
       <div className="relative mx-auto flex w-full max-w-5xl flex-col items-center gap-8 text-center">
         {/* The bursts hang off the HEADING, not the section. Pinned to the
             section's corners they drifted a long way from the words as the

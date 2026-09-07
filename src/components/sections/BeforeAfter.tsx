@@ -130,7 +130,7 @@ export function BeforeAfter() {
   return (
     <section
       id="before-after"
-      className="w-full px-3 py-14 sm:px-6 sm:py-20"
+      className="w-full px-3 pb-14 pt-8 sm:px-6 sm:pb-20 sm:pt-10"
       // Blush, matching the hero and the results band above. Maeve's own paper
       // (#fff3e5) is the pale peach Bart read as skin; the frame furniture below
       // still follows the theme, but the ground it sits on is Ellie's.
