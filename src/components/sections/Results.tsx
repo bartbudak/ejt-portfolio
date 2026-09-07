@@ -39,17 +39,24 @@ export function Results() {
       style={{ backgroundColor: "var(--ejd-blush)" }}
     >
       <div className="relative px-5 pb-10 pt-20 sm:px-10 sm:pb-14 sm:pt-28">
-      <Burst className="pointer-events-none absolute -left-8 top-6 h-24 w-24 sm:-left-4 sm:h-40 sm:w-40" />
-      <Burst className="pointer-events-none absolute -right-6 bottom-4 h-16 w-16 sm:h-28 sm:w-28" />
-
       <div className="relative mx-auto flex w-full max-w-5xl flex-col items-center gap-8 text-center">
-        <h2
-          className="font-display font-black uppercase leading-[0.84] tracking-[-0.03em]"
-          style={{ ...WONK, color: "var(--ejd-vermilion)", fontSize: "clamp(3.5rem,12.5vw,7.5rem)" }}
-        >
-          <span className="block">The</span>
-          <span className="block">Results</span>
-        </h2>
+        {/* The bursts hang off the HEADING, not the section. Pinned to the
+            section's corners they drifted a long way from the words as the
+            section grew; the deck sits them tight against the type — a cluster
+            of two off its top-left and one large star off its bottom-right. */}
+        <div className="relative">
+          <Burst className="pointer-events-none absolute -left-[18%] -top-[14%] h-16 w-16 sm:-left-[22%] sm:h-28 sm:w-28" />
+          <Burst className="pointer-events-none absolute -left-[2%] -top-[26%] h-8 w-8 sm:h-12 sm:w-12" />
+          <Burst className="pointer-events-none absolute -right-[18%] -bottom-[10%] h-14 w-14 sm:-right-[22%] sm:h-24 sm:w-24" />
+
+          <h2
+            className="relative font-display font-black uppercase leading-[0.84] tracking-[-0.03em]"
+            style={{ ...WONK, color: "var(--ejd-vermilion)", fontSize: "clamp(3.5rem,12.5vw,7.5rem)" }}
+          >
+            <span className="block">The</span>
+            <span className="block">Results</span>
+          </h2>
+        </div>
 
         <p
           className="max-w-[48ch] text-base leading-relaxed sm:text-lg"
