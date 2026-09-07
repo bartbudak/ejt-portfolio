@@ -77,46 +77,60 @@ export interface LocalPost {
 // Captions are her list of what the local campaign consisted of, not invented
 // post copy.
 export const localPosts: LocalPost[] = [
+  // ⚠️ Every caption below is Ellie's, verbatim from her 2026-09-07 feedback.
+  // First person, no em dashes. Do not tighten or re-order them; ask her first.
   {
     slug: "storefront",
     label: "Flagship store",
-    caption: "The flagship store and factory tour, reimagined — concept, script, run of show and the physical build-out.",
+    caption:
+      "We Maeve-ified their flagship store, factory tour and airport kiosk. I lead the concepting, script-writing, planogram, run of show and recommendations for physical build-outs.",
     image: "/local/storefront.webp",
     alt: "The Maeve flagship store, its product wall stacked behind",
   },
   {
     slug: "billboard",
     label: "Billboard",
-    caption: "Seattle Chocolate is now Maeve — announced on a city billboard, with Gretchen the Blackberry Bear fronting it.",
+    caption:
+      "We purchased two slots on a billboard in downtown Seattle, next to a ton of stadium foot traffic. I worked with the branding agency to create a billboard design that quickly and easily communicated the rebrand.",
+    // TODO (Ellie, 2026-09-07): she likes this shot but the billboard itself is
+    // illegible at this distance, and wants the digital artwork composited over
+    // it. That is an image edit, not a code change; waiting on direction.
     image: "/local/billboard.webp",
     alt: "A Maeve bar held up in front of the pink city billboard announcing the rebrand",
   },
   {
     slug: "tradeshow",
-    label: "Tradeshow",
-    caption: "Booths and activations built with the sales team — the brand out in front of buyers, not just shoppers.",
+    label: "Trade Shows",
+    // NOTE: "for Maeve'." is hers as written. Flagged to her as a likely stray
+    // apostrophe rather than silently corrected.
+    caption:
+      "I worked with an agency to create a one-of-a-kind booth for Maeve'. I attended Natural Products Expo West, PAX West, the Northwest Chocolate Festival and more with this booth. It truly stopped people in their tracks!",
     image: "/local/tradeshow.webp",
-    alt: "Ellie at a Maeve tradeshow booth, product wall behind her",
+    alt: "The Maeve trade show booth, built as a walk-in world",
   },
   {
     slug: "wheatpaste",
     label: "Wheatpasting",
-    caption: "Guerrilla posters across the city, announcing the change before most people knew one was coming.",
+    caption:
+      "Guerrilla posters across the city, announcing the change before most people knew one was coming.",
     image: "/local/wheatpaste.webp",
     alt: "A wall of wheatpasted Maeve posters",
   },
   {
     slug: "press",
     label: "Local news",
-    caption: "The rebrand in print, with Ellie as the face of it — one of the interviews, podcasts and TV segments she fronted.",
+    caption:
+      "I acted as the face of the brand and was interviewed by MSNBC, King 5 News, Evening Magazine, Fox 13, Bizwomen, Candy & Snack TODAY, The National Confectioners Association, Alaska Airlines in-flight media in addition to podcasts and panels.",
     image: "/local/press.webp",
     alt: "A newspaper spread about Maeve Chocolate",
   },
   {
-    slug: "merch",
-    label: "Merch",
-    caption: "Wearable world-building — the brand off the shelf and out on the street.",
-    image: "/local/merch.webp",
-    alt: "A Maeve embroidered jacket photographed from behind",
+    // Replaced Merch at her request.
+    slug: "collaborations",
+    label: "Collaborations",
+    caption:
+      "We collaborated with some local friends to help get the word out, including MiiR, Schilling Cider, comedy duo My Straight Friends, and author Matt Dinniman.",
+    image: "/local/collaborations.webp",
+    alt: "Maeve chocolate with the comedy duo My Straight Friends",
   },
 ];

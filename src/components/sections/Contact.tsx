@@ -85,7 +85,7 @@ export function Contact() {
           className="max-w-[46ch] text-base leading-relaxed sm:text-xl"
           style={{ color: "var(--ejd-ink)" }}
         >
-          {`I'm based in ${site.location} and looking for my next brand home — in-house building something from the ground up, or agency-side helping other brands find their story. If any of this resonates, I'd love to hear from you.`}
+          {`I'm based in ${site.location} and looking for my next brand home. In-house building something from the ground up, or agency-side helping other brands find their story. If any of this resonates, I'd love to hear from you.`}
         </p>
 
         <ul className="flex flex-wrap items-center justify-center gap-3">

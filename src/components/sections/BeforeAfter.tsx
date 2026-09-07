@@ -86,9 +86,11 @@ const FRAME: React.CSSProperties = {
 
 export function BeforeAfter() {
   const [active, setActive] = useState(0);
-  // Opens at 10%: the old pack shows as a sliver rather than half the panel, so
-  // the first read is the new brand, and the reveal is something you go and get.
-  const [pos, setPos] = useState(10);
+  // Opens at 90%, so the OLD pack is what you see first. It used to open at
+  // 10% and lead with the new brand, but "before and after" sets an order and
+  // the panel was playing it backwards (Ellie, 2026-09-07). The reveal is now
+  // the thing you drag toward, which is also the direction the words promise.
+  const [pos, setPos] = useState(90);
   const panel = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
 
@@ -180,7 +182,7 @@ export function BeforeAfter() {
               <div className="absolute inset-x-0 bottom-8 top-14">
                 <Image
                   src={`/work/before-after/${pair.slug}-before.png`}
-                  alt={`${pair.before} — the packaging before the rebrand`}
+                  alt={`${pair.before}, the packaging before the rebrand`}
                   fill
                   sizes="(max-width: 768px) 100vw, 620px"
                   className="pointer-events-none object-contain"
@@ -188,7 +190,7 @@ export function BeforeAfter() {
                 />
                 <Image
                   src={`/work/before-after/${pair.slug}-after.png`}
-                  alt={`${pair.after} — the packaging after the rebrand`}
+                  alt={`${pair.after}, the packaging after the rebrand`}
                   fill
                   sizes="(max-width: 768px) 100vw, 620px"
                   className="pointer-events-none object-contain"
@@ -202,17 +204,29 @@ export function BeforeAfter() {
                 className="pointer-events-none absolute inset-y-0 w-1 -translate-x-1/2"
                 style={{ left: `${pos}%`, backgroundColor: "var(--mv-soft-black)" }}
               />
+              {/* The handle. It was a text arrow on paper, which read as a
+                  full stop rather than a control; now it is a drawn glyph with
+                  real stroke weight on her vermilion, so it announces itself as
+                  the thing to grab (Ellie, 2026-09-07). */}
               <span
                 aria-hidden
-                className="pointer-events-none absolute top-1/2 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full text-base font-bold"
+                className="pointer-events-none absolute top-1/2 grid h-12 w-12 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full"
                 style={{
                   left: `${pos}%`,
-                  backgroundColor: "var(--mv-paper)",
-                  border: "var(--mv-stroke) solid var(--mv-soft-black)",
-                  color: "var(--mv-soft-black)",
+                  backgroundColor: "var(--ejd-vermilion)",
+                  border: "3px solid var(--mv-soft-black)",
+                  color: "var(--mv-paper)",
                 }}
               >
-                ↔
+                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" aria-hidden>
+                  <path
+                    d="M9 6 3.5 12 9 18M15 6l5.5 6-5.5 6M3.5 12h17"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </span>
 
               <span
@@ -252,10 +266,10 @@ export function BeforeAfter() {
                   <li key={p.slug} className="min-w-0">
                     <button
                       type="button"
-                      onClick={() => { setActive(i); setPos(10); }}
+                      onClick={() => { setActive(i); setPos(90); }}
                       aria-pressed={on}
                       aria-label={`${p.after}, was ${p.before}`}
-                      title={`${p.after} — was ${p.before}`}
+                      title={`${p.after}, was ${p.before}`}
                       className="grid h-full w-full place-items-center p-3 transition-colors"
                       style={{ backgroundColor: on ? p.bg : "var(--mv-paper)" }}
                     >

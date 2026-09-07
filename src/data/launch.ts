@@ -22,12 +22,14 @@ export interface LaunchPost {
   handle?: string;
 }
 
-// Not rendered — the section is the heading and the posts alone. Kept because
-// it is her deck's own framing of the campaign.
+// Rendered under the heading, at her request (2026-09-07). Her words, verbatim.
 export const launchIntro =
-  "We had a two-pronged approach to Maeve's launch; one campaign focused on converting local Seattle Chocolate fans into Maevens, and one aimed at capturing new members of our target audience across the country.";
+  "We had to be scrappy with our national strategy since we invested so much into the brand itself. It cost too much to work with some of our dream influencers, but I knew that if I could find the stores the influencers shop in, they could be influenced naturally. We partnered with stores in key locations around the country and created opportunities for our audience to discover Maeve in their own environment. We targeted stores that were not typically associated with chocolate brands, like bookstores, breweries, record stores, vintage stores, and museums. We held events and/or created LTO dual-branded products with them.";
 
 export const launchPosts: LaunchPost[] = [
+  // Partners and captions are Ellie's, from her 2026-09-07 feedback. Two of the
+  // four were swapped out wholesale (Valheria Rocha for Su'Juk, Soundbooth for
+  // Talea), so the old entries are gone rather than reordered.
   {
     partner: "Butterfield Market",
     what: "Frozen yogurt s'mores using Maeve's chocolate",
@@ -38,29 +40,29 @@ export const launchPosts: LaunchPost[] = [
     partner: "Books Are Magic",
     what: "Chocolate and book pairings in all their stores",
     handle: "@booksaremagicbk",
-    post: "https://www.instagram.com/p/DcCPZcUGruv/?img_index=1",
+    post: "https://www.instagram.com/p/DOg4VVbEaLd/?img_index=1",
   },
   {
-    partner: "Valheria Rocha",
-    what: "Artist collaboration — Maeve, Certified Magic",
-    handle: "@maevechocolate",
-    post: "https://www.instagram.com/p/DcJ2qYnSO68/",
+    partner: "Su'Juk",
+    what: "Multiple ship and shop experiences",
+    handle: "@sujukbrooklyn",
+    post: "https://www.instagram.com/p/DUvxx9aEYum/",
   },
   {
-    partner: "Soundbooth Theater",
-    what: "Mama's Night Off — the Dungeon Crawler Carl webgame",
-    handle: "@maevechocolate",
-    post: "https://www.instagram.com/p/Da0cujESC6-/",
+    partner: "Talea Beer Co.",
+    what: "Romance trivia night with a LTO Pineapple Cacao Sour cobranded beverage",
+    handle: "@taleabeer",
+    post: "https://www.instagram.com/p/DUletwej_--/",
   },
 ];
 
 /** The rest of the national list, from her deck — no post links attached yet. */
 export const launchAlsoRan = [
-  "Talea Brewery — Valentine's party in their Williamsburg taproom, with an LTO chocolate stout",
-  "Su'Juk — multiple snack + thrift events",
-  "Greenwich Letterpress — chocolate next to their sticker wall",
-  "Dungeon Crawler Carl × Maeve bar",
-  "My Straight Friends — comedy duo sponsorship",
+  "Talea Brewery, a Valentine's party in their Williamsburg taproom with an LTO chocolate stout",
+  "Su'Juk, multiple snack and thrift events",
+  "Greenwich Letterpress, chocolate next to their sticker wall",
+  "Dungeon Crawler Carl x Maeve bar",
+  "My Straight Friends, comedy duo sponsorship",
 ];
 
 /** Pulls the shortcode out of a post URL, or passes a bare shortcode through. */

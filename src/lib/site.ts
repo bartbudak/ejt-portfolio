@@ -20,29 +20,42 @@ export const site = {
   location: "New York",
   availability: "Open to Brand & Marketing roles in NYC",
   intro:
-    "Seven years growing consumer food brands from the inside out. Most notably, I led the from-scratch reinvention of a 25-year-old chocolate company into Maeve — a brand now winning national design awards and selling out in record time. I'm a psychology grad with a serious design habit, and right now I'm looking for my next brand home in NYC.",
+    "Seven years growing consumer food brands from the inside out. Most notably, I led the from-scratch reinvention of a 30-year-old chocolate company into Maeve, a brand now winning national design awards and selling out in record time. I'm a psychology grad with a serious design habit, and right now I'm looking for my next brand home in NYC.",
   description:
-    "I'm Ellie Thompson — the brand and marketing leader behind Maeve, the reinvention of Seattle Chocolate Company.",
+    "I'm Ellie Thompson, the brand and marketing leader behind Maeve, the reinvention of Seattle Chocolate Company.",
   // While the full site is in progress, render the coming-soon holding page.
   // Flip to false to launch the full multi-section site.
   comingSoon: true,
   // Hero scoreboard. Four, not six — her deck lists 110% / +12% / 4 awards /
   // 36 hrs / 5.5x / 81% IG; the two weakest (+12% B2B, 81% IG) dilute the rest.
   // Swap them back in here if she'd rather lead with breadth than punch.
+  // Seven, not four. She asked for overall growth, Instagram and email
+  // subscribers to be added; her Instagram and email numbers supersede the
+  // older "5.5x / 10K to 55K" line, which disagreed with them.
   stats: [
     { value: "110%", label: "YoY ecommerce growth post-rebrand" },
+    { value: "18%", label: "Overall growth" },
     { value: "36 hrs", label: "Fastest sellout in company history" },
     { value: "4", label: "National design awards" },
-    { value: "5.5x", label: "Email list growth, 10K to 55K" },
+    { value: "82%", label: "Increase in followers on Instagram. 22k to 40k." },
+    { value: "37%", label: "Increase in email subscribers. 40k to 55k" },
   ],
   // The scrolling band under the hero (components/shared/Marquee.tsx). The
   // first two were the title card's corner tags in her deck. Keep this list
   // short — the component repeats it to fill the loop, so length here is about
   // what the band says, not whether it scrolls cleanly.
+  // One item per phrase. They used to be three phrases plus a fourth that
+  // packed three MORE phrases behind interpuncts of its own, which is why the
+  // separators looked mismatched: the band's own dots sat between items, and
+  // those inner ones were plain text at a different size. Splitting them out
+  // means every gap in the band is the same dot (Ellie, 2026-09-07). The full
+  // role names are hers too.
   marquee: [
     "Open to Work",
     "Moving to NYC",
-    "Brand · Marketing · Creative Strategy",
+    "Brand Management",
+    "Marketing Directing",
+    "Creative Strategy",
   ],
   // "HI THERE!" — her deck's own introduction, verbatim. Deliberately hers and
   // not the longer About in assets/maeve/docs/ellie-thompson-portfolio-copy.md;

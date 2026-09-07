@@ -115,7 +115,7 @@ export function Header() {
       >
         <Link
           href="/preview"
-          aria-label={`${site.name} — home`}
+          aria-label={`${site.name}, home`}
           className="inline-flex shrink-0 items-center justify-self-start"
         >
           {site.signature ? (

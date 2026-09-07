@@ -1,5 +1,5 @@
 import { Marquee } from "@/components/shared/Marquee";
-import { brief, briefIntro, briefLead, briefScript } from "@/data/brief";
+import { brief, briefIntro, briefLead, briefScript, briefTurn } from "@/data/brief";
 
 // "THE BRIEF" — the deck page between "why did I pitch the rebrand?" and the
 // numbers. It answers the obvious question the results raise: what was the plan
@@ -28,7 +28,7 @@ export function Brief() {
           on screen, then handed off to the next one. Both brand names ride in
           the band because this is the page where one became the other. */}
       <Marquee
-        items={["The Brief", "Maeve", "Seattle Chocolate"]}
+        items={["The story of the Seattle Chocolate rebrand"]}
         background="var(--ejd-vermilion)"
         ring="var(--ejd-marigold)"
         className="sticky top-[var(--ejt-header)] z-30"
@@ -64,7 +64,15 @@ export function Brief() {
           ))}
         </div>
 
-        <ol className="mt-12 grid grid-cols-1 gap-5 sm:mt-14 sm:grid-cols-2">
+        {/* Her own turn from the setup into the work, asked for by name. */}
+        <h3
+          className="mt-14 text-center font-display font-black uppercase leading-[0.9] tracking-[-0.02em]"
+          style={{ ...WONK, color: "var(--ejd-vermilion)", fontSize: "clamp(1.75rem,5vw,3rem)" }}
+        >
+          {briefTurn}
+        </h3>
+
+        <ol className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
           {brief.map((line, i) => (
             <li
               key={line.heading}

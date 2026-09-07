@@ -94,7 +94,7 @@ export function Results() {
           And within the first year, post-launch, the business saw:
         </p>
 
-        <dl className="grid w-full max-w-3xl grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-4">
+        <dl className="grid w-full max-w-4xl grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-3">
           {site.stats.map((s) => (
             <div key={s.value} className="flex flex-col items-center gap-1">
               <dt

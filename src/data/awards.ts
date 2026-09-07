@@ -31,7 +31,7 @@ export interface Award {
 export const awards: Award[] = [
   {
     name: "Webby Awards",
-    detail: "People's Voice Winner — Food & Drink, for the Maeve website",
+    detail: "People's Voice Winner, Food & Drink, for the Maeve website",
     credit: "Built with View Source",
     href: "https://winners.webbyawards.com/2026/websites-and-mobile-sites/general-desktop-mobile-sites/food-drink/364780/maeve-chocolate",
     linkLabel: "See the win",
@@ -39,7 +39,7 @@ export const awards: Award[] = [
     // maevechocolate.com is the work itself, and the work is hers.
     preview: {
       src: "/awards/maeve-site.webp",
-      alt: "The Maeve website — the Princess Donut lounge scene behind the Maeve wordmark",
+      alt: "The Maeve website, the Princess Donut lounge scene behind the Maeve wordmark",
     },
     extra: {
       href: "https://view-source.com/work/maeve",
@@ -49,7 +49,7 @@ export const awards: Award[] = [
   {
     name: "Dieline Awards",
     detail:
-      "Three awards — 2nd place for the everyday bar line, plus two for seasonal collections. All three conceived and led personally.",
+      "Three awards: 2nd place for the everyday bar line, plus two for seasonal collections. All three conceived and led personally.",
     href: "https://thedieline.com/occasion-driven-chocolate-packaging-for-everyday-gifting-with-maeve/",
     linkLabel: "Read the feature",
     preview: {
@@ -70,7 +70,7 @@ export const awards: Award[] = [
   },
   {
     name: "NEXTY Awards",
-    detail: "Finalist — Natural Products Expo West 2025",
+    detail: "Finalist, Natural Products Expo West 2025",
     href: "https://www.newhope.com/nexty-awards/presenting-the-2025-natural-products-expo-west-nexty-awards-finalists",
     linkLabel: "See the finalists",
   },

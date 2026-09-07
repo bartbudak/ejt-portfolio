@@ -12,27 +12,6 @@ import { site } from "@/lib/site";
 
 const WONK = { fontVariationSettings: '"SOFT" 0, "WONK" 1' } as const;
 
-// The deck's hand-drawn marigold star — eight strokes radiating from a centre,
-// deliberately uneven so it reads as drawn rather than generated.
-function Star({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 100 100" aria-hidden className={className}>
-      <g
-        stroke="var(--ejd-marigold)"
-        strokeWidth="7"
-        strokeLinecap="round"
-        fill="none"
-      >
-        <path d="M50 6v88M6 50h88M19 19l62 62M81 19L19 81" />
-      </g>
-      <path
-        d="M50 24c4 14 12 22 26 26-14 4-22 12-26 26-4-14-12-22-26-26 14-4 22-12 26-26Z"
-        fill="var(--ejd-marigold)"
-      />
-    </svg>
-  );
-}
-
 // Her deck marks two words inside the body copy: her own name in italic, and
 // "Maeve" in marigold with a rule under it. Keeping the source strings plain in
 // site.ts and doing the emphasis here means the copy stays editable as prose.
@@ -43,13 +22,19 @@ function withEmphasis(text: string) {
     part === "Ellie" ? (
       <em key={i}>{part}</em>
     ) : part === "Maeve" ? (
-      <strong
+      // Ellie asked for Maeve to lead out to the brand she built. Same marked
+      // treatment the deck gives the word, now doing something.
+      <a
         key={i}
-        className="font-semibold underline underline-offset-4"
+        href="https://maevechocolate.com"
+        target="_blank"
+        rel="noreferrer"
+        className="font-semibold underline underline-offset-4 transition-opacity hover:opacity-80"
         style={{ color: "var(--ejd-marigold)" }}
       >
         {part}
-      </strong>
+        <span className="sr-only"> (opens maevechocolate.com in a new tab)</span>
+      </a>
     ) : (
       part
     ),
@@ -108,7 +93,6 @@ export function About() {
             well on a phone: full-width copy, then her bleeding off both edges
             of her own block. */}
         <div className="relative min-h-[26rem] overflow-hidden lg:min-h-0 lg:static">
-          <Star className="pointer-events-none absolute left-1 top-8 z-10 h-16 w-16 sm:h-24 sm:w-24 lg:left-auto lg:right-[42%]" />
           {/* Height-driven, not width-driven: `inset-y-0` pins her to the top
               and bottom of the panel and `w-auto` lets her own ratio set the
               width, so her top, right and bottom edges all sit on the viewport

@@ -196,7 +196,7 @@ export const seasons: Collection[] = [
       },
       {
         label: "Launch Campaign",
-        body: "We brought Gretchen the Bear — from our Hungry Blackberry world — in as the season's main character. The story: a delicious smell wakes her from hibernation, she wanders out of her cave, and stumbles straight into a glamorous garden party. We shot the whole thing Alice in Wonderland–style: girls in ball gowns paired with rubber boots and garden tools, tipped just far enough into absurd and whimsical to feel like Maeve's world rather than a stock garden shoot. On Instagram, Gretchen followed it up with her own guide to recycling and composting, which we then built into the influencer PR box — cards, product, and a mini compost bin for the bonbon wrappers.",
+        body: "We brought Gretchen the Bear, from our Hungry Blackberry world, in as the season's main character. The story: a delicious smell wakes her from hibernation, she wanders out of her cave, and stumbles straight into a glamorous garden party. We shot the whole thing Alice in Wonderland–style: girls in ball gowns paired with rubber boots and garden tools, tipped just far enough into absurd and whimsical to feel like Maeve's world rather than a stock garden shoot. On Instagram, Gretchen followed it up with her own guide to recycling and composting, which we then built into the influencer PR box: cards, product, and a mini compost bin for the bonbon wrappers.",
       },
     ],
   },
@@ -262,13 +262,13 @@ export const seasons: Collection[] = [
       {
         label: "Flavor Strategy",
         drafted: true,
-        body: "the flavors you only bother with when there's a crowd to feed — orchard fruit, warm spice, and a splash of something off the top shelf.",
+        body: "the flavors you only bother with when there's a crowd to feed: orchard fruit, warm spice, and a splash of something off the top shelf.",
       },
       { label: "Audience", body: AUDIENCE },
       {
         label: "Campaign",
         drafted: true,
-        body: "The Friendsy: an invitation rather than an ad. We shot the whole season as one long weekend away — arrivals, the field, the table, the walk back in the dark — and released it in that order so the feed played like somebody's camera roll. The PR send went out as a packing list: product, a card with the invitation, and the sense that the party had already started without you.",
+        body: "The Friendsy: an invitation rather than an ad. We shot the whole season as one long weekend away, arrivals, the field, the table, the walk back in the dark, and released it in that order so the feed played like somebody's camera roll. The PR send went out as a packing list: product, a card with the invitation, and the sense that the party had already started without you.",
       },
     ],
   },
@@ -315,7 +315,7 @@ export const seasons: Collection[] = [
       {
         label: "Flavor Strategy",
         drafted: true,
-        body: "the dessert course, borrowed from the traditions people already keep — the thing that only comes out of the oven once a year, made small enough to give away.",
+        body: "the dessert course, borrowed from the traditions people already keep. The thing that only comes out of the oven once a year, made small enough to give away.",
       },
       {
         label: "Flavor names",
@@ -333,7 +333,7 @@ export const seasons: Collection[] = [
 // all marked drafted.
 
 export const collabsIntro =
-  "The other half of the calendar. Partnerships I conceived, pitched and licensed myself — bringing worlds our audience was already obsessed with into ours, and finding out that a fanbase notices everything.";
+  "The other half of the calendar. Partnerships I conceived, pitched and licensed myself, bringing worlds our audience was already obsessed with into ours, and finding out that a fanbase notices everything.";
 
 export const collabs: Collection[] = [
   {

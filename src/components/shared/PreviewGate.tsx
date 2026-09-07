@@ -153,7 +153,7 @@ export function PreviewGate({ children }: { children: React.ReactNode }) {
             className="min-h-6 font-mono text-xs uppercase tracking-[0.14em]"
             style={{ color: "var(--ejd-deep)" }}
           >
-            {wrong ? "That is not it — try again" : ""}
+            {wrong ? "That is not it, try again" : ""}
           </p>
         </form>
       </div>

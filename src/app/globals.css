@@ -171,6 +171,13 @@
      subtracts it so the title card still fits one screen, and scroll-padding
      keeps the nav from parking on top of whichever section it just jumped to. */
   --ejt-header: 4rem;
+  /* The band's own occupied height, mirrored here so the first screen can
+     subtract it and hero + band still land on exactly one viewport now that
+     the band is a sibling of the hero rather than a child of it.
+     = line-height 1.1 x its clamped font size
+     + py-1 (8px) + two hairlines (2 x --mv-stroke) + frame margins (2 x 7px).
+     Keep in step with .ejt-marquee below and with Marquee.tsx. */
+  --ejt-marquee-h: calc(1.1 * clamp(1rem, 1.75vw, 2rem) + 26px);
 }
 
 html {
@@ -293,6 +300,7 @@ html {
   transform: translateY(-50%);
 }
 @media (max-width: 767px) {
+  :root { --ejt-marquee-h: calc(1.1 * clamp(1rem, 1.75vw, 2rem) + 22px); }
   .ejt-marquee { --ejt-marquee-frame: 5px; }
   .ejt-marquee__item { --ejt-dot: 8px; --ejt-gap: 24px; }
 }

@@ -4,13 +4,14 @@ import { ThemeSwitcher } from "@/components/shared/PalettePicker";
 import { Hero } from "@/components/sections/Hero";
 import { Marquee } from "@/components/shared/Marquee";
 import { About } from "@/components/sections/About";
+import { CrownJewel } from "@/components/sections/CrownJewel";
 import { Brief } from "@/components/sections/Brief";
 import { Results } from "@/components/sections/Results";
 import { BeforeAfter } from "@/components/sections/BeforeAfter";
-import { WhatIDid } from "@/components/sections/WhatIDid";
 import { LocalLaunch } from "@/components/sections/LocalLaunch";
 import { Launch } from "@/components/sections/Launch";
 import { Awards } from "@/components/sections/Awards";
+import { Testimonial } from "@/components/sections/Testimonial";
 import { Contact } from "@/components/sections/Contact";
 
 // Local-only preview of the home while the live site stays on the coming-soon
@@ -29,11 +30,19 @@ export default function PreviewPage() {
       <ThemeSwitcher />
       {/* One screen: the header sits above it, the hero takes what is left, and
           the marquee closes the fold rather than hanging below it. */}
-      <div className="flex h-[calc(100svh-var(--ejt-header))] w-full flex-col">
-        <Hero />
-        <Marquee />
+      {/* Marquee 1 used to scroll away with the hero. Ellie asked for it to
+          behave like the section bands, which pin under the header and act as
+          a summary of the slide they belong to. Sticky resolves against this
+          wrapper, so it now closes the fold, rises with the scroll, then holds
+          under the header for the whole of "Hi There!" and leaves with it. */}
+      <div className="relative">
+        <div className="flex h-[calc(100svh-var(--ejt-header)-var(--ejt-marquee-h))] w-full flex-col">
+          <Hero />
+        </div>
+        <Marquee className="sticky top-[var(--ejt-header)] z-30" />
+        <About />
       </div>
-      <About />
+      <CrownJewel />
       <Brief />
       {/* One band across both: the numbers and the before/after are a single
           argument — here is what changed, and here is what it looked like — so
@@ -50,10 +59,10 @@ export default function PreviewPage() {
         <Results />
         <BeforeAfter />
       </div>
-      <WhatIDid />
       <LocalLaunch />
       <Launch />
       <Awards />
+      <Testimonial />
       <Contact />
     </>
   );

@@ -1,6 +1,5 @@
-import { Marquee } from "@/components/shared/Marquee";
 import { PostCard } from "@/components/shared/PostCard";
-import { embedUrl, launchPosts } from "@/data/launch";
+import { embedUrl, launchIntro, launchPosts } from "@/data/launch";
 
 // "NATIONAL LAUNCH" — the partner campaign, shown through the posts it produced.
 //
@@ -32,16 +31,6 @@ export function Launch() {
       className="relative w-full"
       style={{ backgroundColor: "var(--ejd-marigold)" }}
     >
-      {/* The section's own name, pinned under the header for as long as the
-          section is on screen. Sticky resolves against this section, so when it
-          scrolls away the band goes with it and the next section's band takes
-          the slot. */}
-      <Marquee
-        items={["National Launch", "Maeve"]}
-        background="var(--ejd-vermilion)"
-        ring="var(--ejd-marigold)"
-        className="sticky top-[var(--ejt-header)] z-30"
-      />
 
       <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-10 sm:py-24">
         <h2
@@ -50,6 +39,15 @@ export function Launch() {
         >
           National Launch
         </h2>
+
+        {/* Her framing of the national strategy, which she asked to sit between
+            the heading and the posts. */}
+        <p
+          className="mx-auto mt-8 max-w-[62ch] text-base leading-relaxed sm:text-xl"
+          style={{ color: "var(--ejd-ink)" }}
+        >
+          {launchIntro}
+        </p>
 
         <ul className="mt-14 grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-4">
           {launchPosts.map((p) => {

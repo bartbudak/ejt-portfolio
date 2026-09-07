@@ -25,7 +25,7 @@ export function LocalLaunch() {
           scrolls away the band goes with it and the next section's band takes
           the slot. */}
       <Marquee
-        items={["Local Launch", "Maeve"]}
+        items={["Some receipts for you"]}
         background="var(--ejd-marigold)"
         ring="var(--ejd-vermilion)"
         className="sticky top-[var(--ejt-header)] z-30"
