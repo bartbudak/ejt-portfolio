@@ -2,7 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import { site } from "@/lib/site";
-import { useMarqueeSettings } from "@/components/shared/MarqueeSettings";
+import {
+  BAND_FRAME,
+  BAND_STROKE,
+  bandEdge,
+  bandHeight,
+  useMarqueeSettings,
+} from "@/components/shared/MarqueeSettings";
 
 // The scrolling band, now riding a wave.
 //
@@ -129,13 +135,13 @@ export function Marquee({
     };
   }, []);
 
-  const STROKE = 2;
+  const STROKE = BAND_STROKE;
+  const FRAME = BAND_FRAME;
   // Matches --ejt-header in globals.css (4rem).
   const HEADER_PX = 64;
-  const FRAME = 7;
   // The band's own depth, plus the room the wave needs to swing in.
-  const bandH = fontSize * 1.1 + padding * 2;
-  const edgeRoom = amplitude + FRAME / 2 + STROKE;
+  const bandH = bandHeight(settings);
+  const edgeRoom = bandEdge(settings);
   const height = bandH + edgeRoom * 2;
   const midY = height / 2;
   const topY = midY - bandH / 2;
@@ -176,7 +182,11 @@ export function Marquee({
     <div
       ref={hostRef}
       className={`relative z-10 w-full flex-none ${className}`}
-      style={{ height }}
+      // The edge room is given back with negative margins, so the band consumes
+      // only its opaque body in flow and its transparent slivers sit OVER the
+      // sections either side. Without this the page background showed through
+      // above and below every band as a pale seam (Ellie, 2026-09-07).
+      style={{ height, marginTop: -edgeRoom, marginBottom: -edgeRoom }}
     >
       <svg
         width={width}

@@ -51,7 +51,12 @@ export function Hero() {
       // Fills the first-screen block rather than measuring itself: the marquee
       // is inside that block now, so the two share one viewport height and the
       // hero takes whatever is left after the band.
-      className="relative isolate flex min-h-0 w-full flex-1 flex-col overflow-hidden"
+      // `overflow-x: clip` with `overflow-y: visible` rather than
+      // `overflow: hidden`: she has to bleed past the bottom edge to tuck
+      // behind the band, but must still be trimmed at the sides. `hidden`
+      // cannot do one axis without making the other a scroll container; `clip`
+      // can.
+      className="relative isolate flex min-h-0 w-full flex-1 flex-col [overflow-x:clip] [overflow-y:visible]"
       style={{ backgroundColor: "var(--ejd-blush)" }}
     >
       <div className="relative z-20 mx-auto w-full max-w-[1600px] px-4 pt-12 sm:pt-16">
@@ -149,7 +154,12 @@ export function Hero() {
           //
           // The centring translate carries her head offset too — 50% to centre
           // plus the 12% her head sits right of the cut-out's middle.
-          className="absolute bottom-0 left-1/2 h-[105%] w-auto max-w-none -translate-x-1/2 object-contain object-bottom sm:-translate-x-[62%]"
+          // Dropped by half the band so her bottom edge lands mid-marquee and
+          // the hard photographic crop is covered by the band's opaque body
+          // rather than ending in mid-air above it (Ellie, 2026-09-07). She
+          // stays BEHIND the band: in front, that straight cut would read as a
+          // mistake drawn across the ribbon.
+          className="absolute bottom-[calc(var(--ejt-marquee-h)*-0.5)] left-1/2 h-[105%] w-auto max-w-none -translate-x-1/2 object-contain object-bottom sm:-translate-x-[62%]"
         />
       </div>
     </section>
