@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
-import { ThemeSwitcher } from "@/components/shared/ThemeSwitcher";
+import { ThemeSwitcher } from "@/components/shared/PalettePicker";
 import { Hero } from "@/components/sections/Hero";
 import { Marquee } from "@/components/shared/Marquee";
 import { About } from "@/components/sections/About";
+import { Brief } from "@/components/sections/Brief";
 import { Results } from "@/components/sections/Results";
 import { BeforeAfter } from "@/components/sections/BeforeAfter";
 import { WhatIDid } from "@/components/sections/WhatIDid";
@@ -33,6 +34,7 @@ export default function PreviewPage() {
         <Marquee />
       </div>
       <About />
+      <Brief />
       {/* One band across both: the numbers and the before/after are a single
           argument — here is what changed, and here is what it looked like — so
           the label stays pinned for the whole of it rather than dropping out

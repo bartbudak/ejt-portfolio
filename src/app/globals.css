@@ -478,3 +478,9 @@ html {
   --ejd-deep: #173547;
   --ejd-violet: #5d5f9e;
 }
+
+/* The before/after comparer's "old" ground. One neutral grey for every
+   Seattle Chocolate pack — they were a pale sage/cream family, and a light
+   cool grey sits them back without tinting them. The "new" grounds are NOT
+   here: each Maeve pack gets its own, set on the pair in BeforeAfter.tsx. */
+:root { --cmp-old: #c8c7cc; }

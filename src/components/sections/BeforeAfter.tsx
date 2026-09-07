@@ -20,61 +20,59 @@ type Pair = {
   slug: string;
   before: string;
   after: string;
-  /** Ground behind the old pack — a Maeve theme colour chosen to contrast it. */
-  beforeBg: string;
-  /** Ground behind the new pack. Also contrasts `beforeBg` so the split reads. */
-  afterBg: string;
+  /**
+   * The ground behind the NEW pack. One per product, so sliding through the
+   * picker walks a colour story rather than repeating a single pink — which is
+   * the point Maeve's own range makes. Each is chosen AGAINST that pack's own
+   * art (sampled from the PNGs): never the pack's dominant hue, and never so
+   * pale that a mostly-white wrapper sinks into it. The old side's ground is
+   * shared and neutral (`--cmp-old`), so the swipe always reads grey → colour.
+   */
+  bg: string;
 };
 
 const PAIRS: Pair[] = [
   {
     slug: "pike-place",
+    bg: "#9d6bff", // violet — her own palette's violet; cobalt read as a hole in the page
     before: "Pike Place Espresso",
     after: "Pike Place Espresso",
-    beforeBg: "#426130", // --cr-olive
-    afterBg: "#fb66e5", // --cr-pink
   },
   {
     slug: "san-juan",
+    bg: "#ffc72c", // marigold — complement to the pack's teal and sea green
     before: "San Juan Sea Salt",
     after: "San Juan Salted Toffee",
-    beforeBg: "#5d58f2", // --cr-blue
-    afterBg: "#ffc72c", // --cr-yellow
   },
   {
     slug: "peanut-butter",
+    bg: "#ff13b4", // magenta — cuts against the pack's rust, gold and violet
     before: "Crunchy Peanut Butter",
     after: "Peanut Butter-Fly",
-    beforeBg: "#a6c3e6", // --cr-blue-lighter
-    afterBg: "#426130", // --cr-olive
   },
   {
     slug: "coconut",
+    bg: "#ff5800", // tangerine — complement to the pack's blues and olive
     before: "Coconut Sea Salt",
     after: "Coconut Island",
-    beforeBg: "#009e50", // --cr-green
-    afterBg: "#ff13b4", // --cr-magenta
   },
   {
     slug: "birthday",
+    bg: "#ff4f9a", // her pink — the house colour, held for the loudest pack
     before: "Happy Birthday Cake Batter",
     after: "Have a Nice Day",
-    beforeBg: "#feb002", // --cr-gold
-    afterBg: "#6595f9", // --cr-blue-light
   },
   {
     slug: "assorted-box",
+    bg: "#0f7d78", // deep teal — the box itself is pink, so pink would swallow it
     before: "Seattle Chocolate assorted box",
     after: "Maeve assorted box",
-    beforeBg: "#a9ee65", // --cr-green-light
-    afterBg: "#5d58f2", // --cr-blue
   },
   {
     slug: "truffles",
+    bg: "#9fc400", // chartreuse — sets off a pale blue box that fights both pink and blue
     before: "Seattle Chocolate truffles",
     after: "Dark & Salty Toffee bonbons",
-    beforeBg: "#ad917f", // --cr-beige
-    afterBg: "#ff5800", // --cr-orange
   },
 ];
 
@@ -166,7 +164,7 @@ export function BeforeAfter() {
               onPointerCancel={() => { dragging.current = false; }}
               className="relative min-h-[30rem] cursor-ew-resize touch-pan-y select-none overflow-hidden focus-visible:outline-2 focus-visible:-outline-offset-4 sm:min-h-[34rem] md:min-h-[38rem]"
               style={{
-                backgroundColor: pair.beforeBg,
+                backgroundColor: "var(--cmp-old)",
                 outlineColor: "var(--mv-soft-black)",
               }}
             >
@@ -174,7 +172,7 @@ export function BeforeAfter() {
               <div
                 aria-hidden
                 className="absolute inset-0"
-                style={{ backgroundColor: pair.afterBg, clipPath: clipAfter }}
+                style={{ backgroundColor: pair.bg, clipPath: clipAfter }}
               />
 
               {/* Image stage — full panel width, so one clip percentage maps
@@ -259,7 +257,7 @@ export function BeforeAfter() {
                       aria-label={`${p.after}, was ${p.before}`}
                       title={`${p.after} — was ${p.before}`}
                       className="grid h-full w-full place-items-center p-3 transition-colors"
-                      style={{ backgroundColor: on ? p.afterBg : "var(--mv-paper)" }}
+                      style={{ backgroundColor: on ? p.bg : "var(--mv-paper)" }}
                     >
                       <Image
                         src={`/work/before-after/${p.slug}-thumb.png`}

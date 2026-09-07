@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
-import { ThemeSwitcher } from "@/components/shared/ThemeSwitcher";
+import { ThemeSwitcher } from "@/components/shared/PalettePicker";
 import { Collections, DARK_TONE } from "@/components/sections/Collections";
 import { Contact } from "@/components/sections/Contact";
 import { collabs, collabsIntro } from "@/data/campaigns";

@@ -56,18 +56,34 @@ export function Results() {
               The offsets pull in on small screens: at deck proportions a phone
               would throw them past the viewport edge, and this section can no
               longer clip — `overflow: hidden` here would break the sticky band.
-              At the deck's own offsets a 375px screen overflowed by 3px, which
-              is a horizontal scrollbar on a phone for the sake of a decoration. */}
-          <Burst className="pointer-events-none absolute -left-[18%] -top-[30%] aspect-square w-[20%] sm:-left-[40%] sm:-top-[34%] sm:w-[30%]" />
-          <Burst className="pointer-events-none absolute -left-[8%] -top-[42%] aspect-square w-[11%] sm:-left-[14%] sm:-top-[48%] sm:w-[14%]" />
-          <Burst className="pointer-events-none absolute -right-[16%] -bottom-[24%] aspect-square w-[18%] sm:-right-[46%] sm:-bottom-[30%] sm:w-[28%]" />
+              At the deck's own offsets a 375px screen overflowed, which is a
+              horizontal scrollbar on a phone for the sake of a decoration — and
+              the pull-in had to go further once the display line became
+              "MAEVE WAS (RE)BORN", because a wider heading box makes every one
+              of these percentage offsets reach further out. Both left values
+              move together, so the cluster keeps its shape. */}
+          <Burst className="pointer-events-none absolute -left-[6%] -top-[30%] aspect-square w-[20%] sm:-left-[40%] sm:-top-[34%] sm:w-[30%]" />
+          <Burst className="pointer-events-none absolute left-[4%] -top-[42%] aspect-square w-[11%] sm:-left-[14%] sm:-top-[48%] sm:w-[14%]" />
+          <Burst className="pointer-events-none absolute -right-[6%] -bottom-[24%] aspect-square w-[18%] sm:-right-[46%] sm:-bottom-[30%] sm:w-[28%]" />
 
-          <h2
-            className="relative font-display font-black uppercase leading-[0.84] tracking-[-0.03em]"
-            style={{ ...WONK, color: "var(--ejd-vermilion)", fontSize: "clamp(3.5rem,12.5vw,7.5rem)" }}
-          >
-            <span className="block">The</span>
-            <span className="block">Results</span>
+          {/* Her deck's own hierarchy: "MAEVE WAS (RE)BORN" is the display
+              line and "THE RESULTS" is the small label above it. Both live in
+              one <h2> so the heading still reads as a single heading to a
+              screen reader, and the label is not announced as its own level. */}
+          <h2 className="relative">
+            <span
+              className="block font-display font-black uppercase tracking-[0.08em]"
+              style={{ ...WONK, color: "var(--ejd-vermilion)", fontSize: "1.25rem" }}
+            >
+              The Results
+            </span>
+            <span
+              className="mt-3 block font-display font-black uppercase leading-[0.84] tracking-[-0.03em]"
+              style={{ ...WONK, color: "var(--ejd-vermilion)", fontSize: "clamp(3.25rem,11vw,6.5rem)" }}
+            >
+              <span className="block">Maeve was</span>
+              <span className="block">(Re)born</span>
+            </span>
           </h2>
         </div>
 
@@ -75,9 +91,7 @@ export function Results() {
           className="max-w-[48ch] text-base leading-relaxed sm:text-lg"
           style={{ color: "var(--ejd-ink)" }}
         >
-          I pitched the reinvention of a 25-year-old chocolate company and saw it
-          through — 75+ products redrawn, a new name, a new world. In the first year
-          after launch:
+          And within the first year, post-launch, the business saw:
         </p>
 
         <dl className="grid w-full max-w-3xl grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-4">
