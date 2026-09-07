@@ -41,13 +41,6 @@ type Tone = {
   body: string;
   /** Face of an unselected card. */
   card: string;
-  /**
-   * Ring around an UNSELECTED card. It has to differ from `card`, or the
-   * frame device (hairline · ring · hairline) collapses into a plain slab —
-   * which is exactly why the yellow tabs read as flat. Derived from `card`
-   * rather than fixed, so it follows whatever the theme makes of it.
-   */
-  rest: string;
   /** Rule and card border. */
   line: string;
 };
@@ -57,7 +50,6 @@ export const LIGHT_TONE: Tone = {
   display: "var(--ejd-vermilion)",
   body: "var(--ejd-ink)",
   card: "var(--ejd-marigold)",
-  rest: "color-mix(in oklab, var(--ejd-marigold) 78%, var(--ejd-ink))",
   line: "var(--ejd-ink)",
 };
 
@@ -74,7 +66,6 @@ export const DARK_TONE: Tone = {
   display: "var(--ejd-marigold)",
   body: "var(--mv-paper)",
   card: "var(--ejd-deep)",
-  rest: "color-mix(in oklab, var(--ejd-deep) 78%, var(--mv-paper))",
   line: "var(--mv-paper)",
 };
 
@@ -223,9 +214,7 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
                 aria-controls="collection-panel"
                 tabIndex={active ? 0 : -1}
                 onClick={() => setOpen(c.slug)}
-                className={`group flex min-h-[5rem] flex-col items-center justify-center gap-2 p-4 transition-transform focus-visible:outline-2 focus-visible:outline-offset-2 ${
-                  active ? "-translate-y-1" : "hover:-translate-y-0.5"
-                }`}
+                className="group flex min-h-[5rem] flex-col items-center justify-center gap-2 p-4 transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2"
                 style={{
                   // The selected card wears its own collection's colours, so
                   // the row previews the palette the view box is about to open in.
@@ -233,36 +222,12 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
                   color: active ? c.body : tone.body,
                   // The same framed treatment as the view box, at card scale:
                   // hairline, ring, hairline. The selected card rings itself in
-                  // its collection's display colour; an unselected one rings
-                  // itself in a shaded version of its own face, so the frame
-                  // still reads as a frame instead of vanishing into the fill.
+                  // its collection's display colour.
                   border: `var(--mv-stroke) solid ${tone.line}`,
-                  boxShadow: [
-                    `0 0 0 5px ${active ? c.display : tone.rest}`,
-                    `0 0 0 7px ${tone.line}`,
-                    // Selected sits proud and casts; unselected is pressed into
-                    // the page. That is the depth cue doing the work of saying
-                    // "on" and "off", so neither state has to go flat or grey.
-                    active
-                      ? `0 6px 0 -1px ${tone.line}`
-                      : `inset 0 -4px 0 0 color-mix(in oklab, ${tone.line} 14%, transparent)`,
-                  ].join(", "),
+                  boxShadow: `0 0 0 5px ${active ? c.display : tone.card}, 0 0 0 7px ${tone.line}`,
                   borderRadius: 14,
                 }}
               >
-                {/* Every card carries its collection's colour as a swatch, so
-                    an unselected one still has an identity rather than being an
-                    anonymous yellow box. On selection the swatch flips to the
-                    display colour — the ground it was showing has become the
-                    whole card, so the chip shows the other half of the pair. */}
-                <span
-                  aria-hidden
-                  className="block h-2 w-8 rounded-full"
-                  style={{
-                    backgroundColor: active ? c.display : c.ground,
-                    border: `1.5px solid ${tone.line}`,
-                  }}
-                />
                 <span
                   className="text-center font-display text-base font-black uppercase leading-[0.95] tracking-[-0.01em] sm:text-lg"
                   style={WONK}

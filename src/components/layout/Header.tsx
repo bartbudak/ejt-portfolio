@@ -45,6 +45,37 @@ const TONES: Record<string, { bg: string; ink: string }> = {
 };
 const DEFAULT_TONE = TONES["/preview"];
 
+// The active tab's rule. Two waves rather than a straight border, drawn as a
+// tiled <pattern> rather than one stretched path — with a stretched path the
+// wavelength would scale with the label, so "About" and "Campaigns" would get
+// different-looking squiggles. userSpaceOnUse tiling keeps every tab on the
+// same 12px period.
+//
+// It sits absolutely under the label, so it costs no layout and the baseline
+// does not move between the active tab and the others.
+function Squiggle() {
+  return (
+    <svg
+      aria-hidden
+      className="pointer-events-none absolute inset-x-0 -bottom-2 h-2 w-full"
+      preserveAspectRatio="none"
+    >
+      <defs>
+        <pattern id="ejt-nav-squiggle" width="12" height="8" patternUnits="userSpaceOnUse">
+          <path
+            d="M0 2.5Q3 0.5 6 2.5T12 2.5M0 6Q3 4 6 6T12 6"
+            fill="none"
+            stroke="var(--ejd-vermilion)"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#ejt-nav-squiggle)" />
+    </svg>
+  );
+}
+
 export function Header() {
   const pathname = usePathname();
   const tone =
@@ -156,15 +187,16 @@ export function Header() {
                     href={item.href}
                     aria-current={active ? "page" : undefined}
                     // The active tab carries weight and a rule under it, not
-                    // colour alone.
+                    // colour alone. The rule is absolutely placed, so both
+                    // states keep the same box and nothing shifts on navigation.
                     className={
                       active
-                        ? "border-b-2 pb-0.5 font-bold"
-                        : "border-b-2 border-transparent pb-0.5 opacity-70 transition-opacity hover:opacity-100"
+                        ? "relative inline-block pb-1 font-bold"
+                        : "relative inline-block pb-1 opacity-70 transition-opacity hover:opacity-100"
                     }
-                    style={active ? { borderColor: "var(--ejd-vermilion)" } : undefined}
                   >
                     {item.label}
+                    {active && <Squiggle />}
                   </Link>
                 )}
               </li>
