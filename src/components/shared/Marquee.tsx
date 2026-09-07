@@ -8,6 +8,7 @@ import {
   bandEdge,
   bandFlow,
   bandHeight,
+  bandPinOffset,
   useMarqueeSettings,
 } from "@/components/shared/MarqueeSettings";
 
@@ -93,6 +94,10 @@ export function Marquee({
   const { settings } = useMarqueeSettings();
   const { amplitude, wavelength, fontSize, speed, padding } = settings;
 
+  // Declared up here because the pinned-state effect below reads it. Same
+  // number that positions the band, so the two cannot drift apart.
+  const pinOffset = bandPinOffset(settings);
+
   const hostRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(1280);
   const [reduced, setReduced] = useState(false);
@@ -126,7 +131,7 @@ export function Marquee({
     // above the wave never painted. That gap is what showed as white space
     // between the header and the marquee (Ellie, 2026-09-07).
     const check = () =>
-      setStuck(el.getBoundingClientRect().top <= HEADER_PX + amplitude * 2 + 1);
+      setStuck(el.getBoundingClientRect().top <= HEADER_PX + pinOffset + 1);
     check();
     window.addEventListener("scroll", check, { passive: true });
     window.addEventListener("resize", check);
@@ -141,7 +146,7 @@ export function Marquee({
       window.removeEventListener("resize", check);
       mq.removeEventListener("change", onChange);
     };
-  }, [amplitude]);
+  }, [pinOffset]);
 
   const STROKE = BAND_STROKE;
   const FRAME = BAND_FRAME;
@@ -192,7 +197,12 @@ export function Marquee({
   return (
     <div
       ref={hostRef}
-      className={`z-10 w-full flex-none ${className}`}
+      // `overflow-x: clip` and not `hidden`: the drawing has to bleed
+      // vertically past this box, and `hidden` on one axis forces the other to
+      // become a scroll container. Without it, a width measurement that has not
+      // caught up with a resize leaves an oversized SVG pushing the whole page
+      // sideways.
+      className={`z-10 w-full flex-none [overflow-x:clip] [overflow-y:visible] ${className}`}
       // The band occupies only its opaque body in flow; the wave's swing room
       // hangs outside that box so the sections either side meet underneath it
       // rather than being parted by it.

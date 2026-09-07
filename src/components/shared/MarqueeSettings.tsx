@@ -73,6 +73,22 @@ export const bandFlow = (s: MarqueeSettings) =>
 export const bandEdge = (s: MarqueeSettings) =>
   s.amplitude + (BAND_FRAME + BAND_STROKE * 2) / 2 + 2;
 
+/**
+ * How far below the header a pinned band parks.
+ *
+ * ONE definition, used both to set --ejt-band-top and to decide whether a band
+ * is currently pinned. They were computed separately and drifted apart twice:
+ * each time the offset changed, the test kept comparing against the old number,
+ * never read as pinned, and the header-coloured fill above the wave stopped
+ * painting. Keep them together.
+ *
+ * The figure clears the outermost ink, not the path: the edge is stroked twice,
+ * so its ink reaches (frame + 2 x stroke) / 2 past the centreline, and the
+ * centreline is already an amplitude above the body.
+ */
+export const bandPinOffset = (s: MarqueeSettings) =>
+  s.amplitude * 2 + (BAND_FRAME + BAND_STROKE * 2) / 2 + 1;
+
 export function MarqueeSettingsProvider({ children }: { children: React.ReactNode }) {
   const [settings, setSettings] = useState<MarqueeSettings>(MARQUEE_DEFAULTS);
 
@@ -93,7 +109,7 @@ export function MarqueeSettingsProvider({ children }: { children: React.ReactNod
     // still read as one piece rather than as a gap.
     root.setProperty(
       "--ejt-band-top",
-      `calc(var(--ejt-header) + ${settings.amplitude * 2}px)`,
+      `calc(var(--ejt-header) + ${bandPinOffset(settings)}px)`,
     );
   }, [settings]);
   const set = (patch: Partial<MarqueeSettings>) =>

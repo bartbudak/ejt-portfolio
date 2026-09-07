@@ -45,10 +45,12 @@ export function Contact() {
       <div // Centred in the space beside her, not in the whole section — `mx-auto` alone
       // kept the column over her feet.
       className="relative mx-auto flex w-full max-w-4xl flex-col items-center gap-8 text-center lg:ml-0 lg:mr-auto lg:max-w-[60%]">
-        {/* `w-fit` makes this column hug its widest child — the heading — so
-            the card below can take `w-full` and come out exactly as wide as
-            "Let's talk" rather than as wide as the section. */}
-        <div className="mx-auto flex w-full max-w-full flex-col items-center gap-6 sm:w-fit">
+        {/* `w-fit` makes this column hug its widest child, which was the
+            heading, so the card came out exactly as wide as "Let's talk". That
+            left the paragraph too narrow and stranded "you." alone on a line,
+            so the column now carries a floor of its own and the heading only
+            widens it further (Ellie, 2026-09-07). */}
+        <div className="mx-auto flex w-full max-w-full flex-col items-center gap-6 sm:w-fit sm:min-w-[36rem]">
         <h2
           className="font-display font-black uppercase leading-[0.86] tracking-[-0.03em]"
           style={{ ...WONK, color: "var(--ejd-marigold)", fontSize: "clamp(3.25rem,11.25vw,6.5rem)" }}
@@ -82,8 +84,11 @@ export function Contact() {
         >
 
         <p
-          className="max-w-[46ch] text-base leading-relaxed sm:text-xl"
-          style={{ color: "var(--ejd-ink)" }}
+          className="max-w-[52ch] text-base leading-relaxed sm:text-xl"
+          // `pretty` asks the browser to avoid leaving a single word on the
+          // last line. Belt and braces alongside the wider box: the copy will
+          // change again, and the orphan should not come back with it.
+          style={{ color: "var(--ejd-ink)", textWrap: "pretty" }}
         >
           {`I'm based in ${site.location} and looking for my next brand home. In-house building something from the ground up, or agency-side helping other brands find their story. If any of this resonates, I'd love to hear from you.`}
         </p>
