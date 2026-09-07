@@ -71,7 +71,10 @@ export function PostCard({
             href={href}
             target="_blank"
             rel="noreferrer"
-            className="mt-2 inline-block font-mono text-[0.6rem] uppercase tracking-[0.14em] opacity-60 hover:opacity-100"
+            // Was 0.6rem at 60% opacity — 4.1:1 and a 14px tap target, the
+            // smallest on the page. Full ink, bolder, and padded out to a
+            // reachable height.
+            className="-mx-1 mt-1 inline-block px-1 py-1.5 font-mono text-[0.72rem] font-bold uppercase tracking-[0.12em] underline underline-offset-4 opacity-80 hover:opacity-100"
           >
             {linkLabel} ↗
           </a>

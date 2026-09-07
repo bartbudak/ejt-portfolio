@@ -86,8 +86,12 @@ export function Awards() {
                     href={a.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="font-mono text-[0.62rem] uppercase tracking-[0.14em] underline-offset-4 hover:underline"
-                    style={{ color: "var(--ejd-vermilion)" }}
+                    // Ink, not the display colour: at this size the display
+                    // token measured 2.27:1 on the card, where 4.5 is the bar.
+                    // Ink is the one token guaranteed readable on the ground in
+                    // every theme, so this holds whichever palette is on.
+                    className="-mx-1 inline-block px-1 py-1.5 font-mono text-[0.72rem] font-bold uppercase tracking-[0.12em] underline underline-offset-4"
+                    style={{ color: "var(--ejd-ink)" }}
                   >
                     {a.linkLabel ?? "Read more"} ↗
                   </a>
@@ -97,7 +101,7 @@ export function Awards() {
                     href={a.extra.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="font-mono text-[0.62rem] uppercase tracking-[0.14em] underline-offset-4 opacity-70 hover:underline hover:opacity-100"
+                    className="-mx-1 inline-block px-1 py-1.5 font-mono text-[0.72rem] font-bold uppercase tracking-[0.12em] underline underline-offset-4 opacity-80 hover:opacity-100"
                     style={{ color: "var(--ejd-ink)" }}
                   >
                     {a.extra.label} ↗
