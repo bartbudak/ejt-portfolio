@@ -49,9 +49,18 @@ export function Results() {
             section grew; the deck sits them tight against the type — a cluster
             of two off its top-left and one large star off its bottom-right. */}
         <div className="relative">
-          <Burst className="pointer-events-none absolute -left-[18%] -top-[14%] h-16 w-16 sm:-left-[22%] sm:h-28 sm:w-28" />
-          <Burst className="pointer-events-none absolute -left-[2%] -top-[26%] h-8 w-8 sm:h-12 sm:w-12" />
-          <Burst className="pointer-events-none absolute -right-[18%] -bottom-[10%] h-14 w-14 sm:-right-[22%] sm:h-24 sm:w-24" />
+          {/* Sized as a share of the heading, to her deck's proportions: her
+              left cluster is 42% of the heading's width and the right star 28%,
+              measured off the band. Fixed pixel sizes had them at 22% and 19% —
+              about half the weight they carry in the deck.
+              The offsets pull in on small screens: at deck proportions a phone
+              would throw them past the viewport edge, and this section can no
+              longer clip — `overflow: hidden` here would break the sticky band.
+              At the deck's own offsets a 375px screen overflowed by 3px, which
+              is a horizontal scrollbar on a phone for the sake of a decoration. */}
+          <Burst className="pointer-events-none absolute -left-[18%] -top-[30%] aspect-square w-[20%] sm:-left-[40%] sm:-top-[34%] sm:w-[30%]" />
+          <Burst className="pointer-events-none absolute -left-[8%] -top-[42%] aspect-square w-[11%] sm:-left-[14%] sm:-top-[48%] sm:w-[14%]" />
+          <Burst className="pointer-events-none absolute -right-[16%] -bottom-[24%] aspect-square w-[18%] sm:-right-[46%] sm:-bottom-[30%] sm:w-[28%]" />
 
           <h2
             className="relative font-display font-black uppercase leading-[0.84] tracking-[-0.03em]"
