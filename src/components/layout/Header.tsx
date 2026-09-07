@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { site } from "@/lib/site";
+import { ExternalIcon } from "@/components/shared/ExternalLink";
 
 // Sticky top navigation: Ellie's hand-drawn "ejt" monogram on the left, the
 // section tabs on the right.
@@ -179,7 +180,7 @@ export function Header() {
                     className="inline-flex items-baseline gap-1 underline-offset-4 hover:underline"
                   >
                     {item.label}
-                    <span aria-hidden>↗</span>
+                    <ExternalIcon />
                     <span className="sr-only">(opens in a new tab)</span>
                   </a>
                 ) : (

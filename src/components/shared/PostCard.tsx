@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { ExternalIcon } from "@/components/shared/ExternalLink";
 
 // The post card both launch sections use: our own chrome — avatar, handle, then
 // a caption where Instagram puts one — wrapped in the Maeve frame. National
@@ -76,7 +77,9 @@ export function PostCard({
             // reachable height.
             className="-mx-1 mt-1 inline-block px-1 py-2 font-mono text-xs font-bold uppercase tracking-[0.12em] underline underline-offset-4 opacity-80 hover:opacity-100"
           >
-            {linkLabel} ↗
+            {linkLabel}
+            <ExternalIcon className="ml-[0.3em]" />
+            <span className="sr-only"> (opens in a new tab)</span>
           </a>
         )}
       </div>

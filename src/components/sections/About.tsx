@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ExternalIcon } from "@/components/shared/ExternalLink";
 import { site } from "@/lib/site";
 
 // "HI THERE!" — the panel that sits directly under the title card in Ellie's
@@ -29,10 +30,11 @@ function withEmphasis(text: string) {
         href="https://maevechocolate.com"
         target="_blank"
         rel="noreferrer"
-        className="font-semibold underline underline-offset-4 transition-opacity hover:opacity-80"
+        className="whitespace-nowrap font-semibold underline underline-offset-4 transition-opacity hover:opacity-80"
         style={{ color: "var(--ejd-marigold)" }}
       >
         {part}
+        <ExternalIcon className="ml-[0.15em]" />
         <span className="sr-only"> (opens maevechocolate.com in a new tab)</span>
       </a>
     ) : (

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ExternalIcon } from "@/components/shared/ExternalLink";
 import { awards } from "@/data/awards";
 
 // "AWARDS" — her deck sets this on marigold, but National Launch immediately
@@ -82,7 +83,9 @@ export function Awards() {
                     className="-mx-1 inline-block px-1 py-2 font-mono text-xs font-bold uppercase tracking-[0.12em] underline underline-offset-4"
                     style={{ color: "var(--ejd-ink)" }}
                   >
-                    {a.linkLabel ?? "Read more"} ↗
+                    {a.linkLabel ?? "Read more"}
+                    <ExternalIcon className="ml-[0.3em]" />
+                    <span className="sr-only"> (opens in a new tab)</span>
                   </a>
                 )}
                 {a.extra && (
@@ -93,7 +96,9 @@ export function Awards() {
                     className="-mx-1 inline-block px-1 py-2 font-mono text-xs font-bold uppercase tracking-[0.12em] underline underline-offset-4 opacity-80 hover:opacity-100"
                     style={{ color: "var(--ejd-ink)" }}
                   >
-                    {a.extra.label} ↗
+                    {a.extra.label}
+                    <ExternalIcon className="ml-[0.3em]" />
+                    <span className="sr-only"> (opens in a new tab)</span>
                   </a>
                 )}
                 </div>

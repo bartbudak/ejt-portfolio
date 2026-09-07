@@ -18,7 +18,11 @@ export const briefTurn = "So what exactly did I do?";
 export interface BriefLine {
   heading: string;
   body: string;
-  /** The long ones span the grid rather than squeezing into a column. */
+  /**
+   * Exactly ONE card spans, and it is the middle one. That gives the two-two
+   * rhythm around a full-width band that Ellie liked; when three of the five
+   * spanned, the grid stopped being a grid and became a stack (2026-09-07).
+   */
   wide?: boolean;
 }
 
@@ -40,20 +44,18 @@ export const brief: BriefLine[] = [
   {
     heading: "Design Strategy",
     body: "I wanted something that would pop on the shelf - something bold, readable, that wouldn't get stale in a few years. This was our chance to break the “fun OR healthful” rule of the category. We leaned into colorful, maximalist, fantastical designs with a subtle nod to American traditional tattoo style. I acted as the liaison between the design agencies and the business, leading all calls and briefings.",
-    wide: true,
   },
   {
     heading: "Name Strategy",
+    wide: true,
     body: "It is a woman-owned business so I felt it was important that the name sounded feminine. It needed to be an open-vessel name that could be filled with meaning over time without limiting our expansion. Lastly, I kept the old name on the packaging, bar caddies, shipping boxes and displays to ease the transition.",
   },
   {
     heading: "Launch Campaign",
     body: "Chocolate is an emotional food that acts as a small escape from the monotonies of the day. We leaned into this feeling of escapism and created a fantasy world, bringing the characters on the packaging to life with world maps, narrative lore, unique merchandise, unexpected collaborations, and more. I created the marketing plan and launch plans by channel, including the e-commerce website, email, socials, ads, PR, influencers, collaborations and refreshing brick & mortar stores.",
-    wide: true,
   },
   {
     heading: "Seasonal Strategy",
     body: "In addition to the 50+ everyday products, we created 5 seasonal collections - Valentine's Day, Spring, Summer, Fall and Holiday, with over 50 more products (see Campaigns tab for a deeper dive.) These lines allowed us to expand on the everyday launch campaign and world building, while introducing exciting, new limited-edition products on a regular basis.",
-    wide: true,
   },
 ];
