@@ -588,13 +588,17 @@ html {
    sun's line work uses. Built by compositing her PNG rather than redrawing it,
    so it is her artwork and not an imitation of it. 64px: browsers refuse a
    cursor over 128 and fall back to the plain arrow, and the sun needs its 48
-   to stay legible next to the wedge.
+   to stay legible next to the wedge. The wedge is rendered at 8x and averaged
+   down, so its diagonals and its stroke carry partial coverage instead of
+   staircasing, and its corners are rounded 1px so the three points read as
+   drawn rather than cut. ?v= because hosting serves PNGs immutable for a year:
+   without it nobody who has already loaded the cursor would see a new one.
 
    Text fields keep the I-beam. Losing it makes a password or search box feel
    broken, and there is no version of "delightful" that survives that. */
 :root,
 :root * {
-  cursor: url("/cursors/sun-pointer.png") 3 3, auto;
+  cursor: url("/cursors/sun-pointer.png?v=2") 3 3, auto;
 }
 :root input,
 :root textarea,
