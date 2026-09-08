@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
-import { CursorPicker, ThemeSwitcher } from "@/components/shared/PalettePicker";
-import { MarqueeTuner } from "@/components/shared/MarqueeTuner";
+import { ThemeSwitcher } from "@/components/shared/PalettePicker";
 import { Collections, DARK_TONE } from "@/components/sections/Collections";
 import { Contact } from "@/components/sections/Contact";
 import { collabs, collabsIntro } from "@/data/campaigns";
@@ -19,8 +18,6 @@ export default function CollabsPage() {
       <Header />
       {/* Preview-only palette picker; delete to remove. */}
       <ThemeSwitcher />
-      <MarqueeTuner />
-      <CursorPicker />
       <Collections
         title="Collaborations"
         intro={collabsIntro}

@@ -146,13 +146,15 @@
 
 /* ── Deck palette (Ellie's Canva deck) ───────────────────────────────────── */
 :root {
-  /* PEONY is the default palette (Ellie, 2026-09-07): neither green nor pink
-     as the ground, so a warm oat field lets the pink and yellow be the only
-     saturated things on the page, with the green kept for the ink. It is one
-     of the five drawn between Meadow and Bubblegum. */
+  /* ROSEWATER is the default (Ellie, 2026-09-08): Peony's berry display,
+     her yellow and the deep-leaf ink, but on a soft pink field instead of
+     a beige one. She did not want to lead with beige, and this is the
+     nearest ground to "the pink and yellow is more me" that does not bring
+     Bubblegum's sweetness back with it. The other non-beige grounds are
+     themes below; Peony itself is kept as one, so nothing is lost. */
   --ejd-marigold: #ffcf2e; /* 15% of the deck — the dominant ground */
   --ejd-vermilion: #d81e6a; /* 13% — display type + the loud ground */
-  --ejd-blush: #f6ecd8; /* the hero field */
+  --ejd-blush: #ffdfe8; /* the hero field */
   --ejd-ice: #b9e2d8;
   --ejd-sage: #7aa77c;
   --ejd-red: #cf3b3b;
@@ -163,7 +165,7 @@
 
   /* Lifted from the live Maeve theme (github: maeve/styles/__base.scss) so the
      case-study furniture matches the site she actually shipped. */
-  --mv-paper: #fdf8ec; /* Bubblegum's paper; the deck's #fff3e5 lives in the deck theme */
+  --mv-paper: #fff5f7; /* Bubblegum's paper; the deck's #fff3e5 lives in the deck theme */
   --mv-red: #ff4001; /* --cr-red — the frame colour */
   --mv-pink: #fb66e5; /* --cr-pink — the showcase panel */
   --mv-yellow: #ffc72c; /* --cr-yellow */
@@ -580,76 +582,58 @@ html {
   to   { transform: translateX(var(--ejt-travel, -100%)); }
 }
 
-/* ── Cursors ───────────────────────────────────────────────────────────────
-   PREVIEW TOOL. Ellie asked for a cursor built from her flower motif, in
-   ten colourways off Maeve's palette. Drawn as SVG rather than traced from
-   her PNGs: at 32px the artwork's fine outlines turn to mush, while a
-   simplified flower keeps her house style (flat fill, heavy ink outline).
-   The hotspot is the flower's centre, 16 16, so the click point is the dot.
-   Applied to everything including buttons, which does cost the pointer
-   affordance on hover; the links here carry their own underlines and pill
-   shapes, so the cue is not lost. Remove the [data-cursor] attribute to
-   turn it off. */
-:root[data-cursor="marigold-green"], :root[data-cursor="marigold-green"] * {
-  cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20stroke%3D%22%231a1210%22%20stroke-width%3D%222%22%3E%3Ccircle%20cx%3D%2216.00%22%20cy%3D%228.00%22%20r%3D%225.4%22%20fill%3D%22%23ffc72c%22%2F%3E%3Ccircle%20cx%3D%2222.93%22%20cy%3D%2212.00%22%20r%3D%225.4%22%20fill%3D%22%23ffc72c%22%2F%3E%3Ccircle%20cx%3D%2222.93%22%20cy%3D%2220.00%22%20r%3D%225.4%22%20fill%3D%22%23ffc72c%22%2F%3E%3Ccircle%20cx%3D%2216.00%22%20cy%3D%2224.00%22%20r%3D%225.4%22%20fill%3D%22%23ffc72c%22%2F%3E%3Ccircle%20cx%3D%229.07%22%20cy%3D%2220.00%22%20r%3D%225.4%22%20fill%3D%22%23ffc72c%22%2F%3E%3Ccircle%20cx%3D%229.07%22%20cy%3D%2212.00%22%20r%3D%225.4%22%20fill%3D%22%23ffc72c%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%224.8%22%20fill%3D%22%2316a34a%22%20stroke%3D%22%231a1210%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E") 16 16, auto;
+/* ── Cursor ────────────────────────────────────────────────────────────────
+   Her smiley sun, with a pointer wedge at the hotspot so it still behaves like
+   a cursor: white, outlined in the motif's own near-black at the same 2px the
+   sun's line work uses. Built by compositing her PNG rather than redrawing it,
+   so it is her artwork and not an imitation of it. 64px: browsers refuse a
+   cursor over 128 and fall back to the plain arrow, and the sun needs its 48
+   to stay legible next to the wedge.
+
+   Text fields keep the I-beam. Losing it makes a password or search box feel
+   broken, and there is no version of "delightful" that survives that. */
+:root,
+:root * {
+  cursor: url("/cursors/sun-pointer.png") 3 3, auto;
 }
-:root[data-cursor="vermilion-gold"], :root[data-cursor="vermilion-gold"] * {
-  cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20stroke%3D%22%231a1210%22%20stroke-width%3D%222%22%3E%3Ccircle%20cx%3D%2216.00%22%20cy%3D%228.00%22%20r%3D%225.4%22%20fill%3D%22%23f83e02%22%2F%3E%3Ccircle%20cx%3D%2222.93%22%20cy%3D%2212.00%22%20r%3D%225.4%22%20fill%3D%22%23f83e02%22%2F%3E%3Ccircle%20cx%3D%2222.93%22%20cy%3D%2220.00%22%20r%3D%225.4%22%20fill%3D%22%23f83e02%22%2F%3E%3Ccircle%20cx%3D%2216.00%22%20cy%3D%2224.00%22%20r%3D%225.4%22%20fill%3D%22%23f83e02%22%2F%3E%3Ccircle%20cx%3D%229.07%22%20cy%3D%2220.00%22%20r%3D%225.4%22%20fill%3D%22%23f83e02%22%2F%3E%3Ccircle%20cx%3D%229.07%22%20cy%3D%2212.00%22%20r%3D%225.4%22%20fill%3D%22%23f83e02%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%224.8%22%20fill%3D%22%23ffc72c%22%20stroke%3D%22%231a1210%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E") 16 16, auto;
-}
-:root[data-cursor="blush-vermilion"], :root[data-cursor="blush-vermilion"] * {
-  cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20stroke%3D%22%231a1210%22%20stroke-width%3D%222%22%3E%3Ccircle%20cx%3D%2216.00%22%20cy%3D%228.00%22%20r%3D%225.4%22%20fill%3D%22%23f2b7b3%22%2F%3E%3Ccircle%20cx%3D%2222.93%22%20cy%3D%2212.00%22%20r%3D%225.4%22%20fill%3D%22%23f2b7b3%22%2F%3E%3Ccircle%20cx%3D%2222.93%22%20cy%3D%2220.00%22%20r%3D%225.4%22%20fill%3D%22%23f2b7b3%22%2F%3E%3Ccircle%20cx%3D%2216.00%22%20cy%3D%2224.00%22%20r%3D%225.4%22%20fill%3D%22%23f2b7b3%22%2F%3E%3Ccircle%20cx%3D%229.07%22%20cy%3D%2220.00%22%20r%3D%225.4%22%20fill%3D%22%23f2b7b3%22%2F%3E%3Ccircle%20cx%3D%229.07%22%20cy%3D%2212.00%22%20r%3D%225.4%22%20fill%3D%22%23f2b7b3%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%224.8%22%20fill%3D%22%23f83e02%22%20stroke%3D%22%231a1210%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E") 16 16, auto;
-}
-:root[data-cursor="ice-violet"], :root[data-cursor="ice-violet"] * {
-  cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20stroke%3D%22%231a1210%22%20stroke-width%3D%222%22%3E%3Ccircle%20cx%3D%2216.00%22%20cy%3D%228.00%22%20r%3D%225.4%22%20fill%3D%22%2399f0ff%22%2F%3E%3Ccircle%20cx%3D%2222.93%22%20cy%3D%2212.00%22%20r%3D%225.4%22%20fill%3D%22%2399f0ff%22%2F%3E%3Ccircle%20cx%3D%2222.93%22%20cy%3D%2220.00%22%20r%3D%225.4%22%20fill%3D%22%2399f0ff%22%2F%3E%3Ccircle%20cx%3D%2216.00%22%20cy%3D%2224.00%22%20r%3D%225.4%22%20fill%3D%22%2399f0ff%22%2F%3E%3Ccircle%20cx%3D%229.07%22%20cy%3D%2220.00%22%20r%3D%225.4%22%20fill%3D%22%2399f0ff%22%2F%3E%3Ccircle%20cx%3D%229.07%22%20cy%3D%2212.00%22%20r%3D%225.4%22%20fill%3D%22%2399f0ff%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%224.8%22%20fill%3D%22%23825dc6%22%20stroke%3D%22%231a1210%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E") 16 16, auto;
-}
-:root[data-cursor="sage-gold"], :root[data-cursor="sage-gold"] * {
-  cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20stroke%3D%22%231a1210%22%20stroke-width%3D%222%22%3E%3Ccircle%20cx%3D%2216.00%22%20cy%3D%228.00%22%20r%3D%225.4%22%20fill%3D%22%238c9f5d%22%2F%3E%3Ccircle%20cx%3D%2222.93%22%20cy%3D%2212.00%22%20r%3D%225.4%22%20fill%3D%22%238c9f5d%22%2F%3E%3Ccircle%20cx%3D%2222.93%22%20cy%3D%2220.00%22%20r%3D%225.4%22%20fill%3D%22%238c9f5d%22%2F%3E%3Ccircle%20cx%3D%2216.00%22%20cy%3D%2224.00%22%20r%3D%225.4%22%20fill%3D%22%238c9f5d%22%2F%3E%3Ccircle%20cx%3D%229.07%22%20cy%3D%2220.00%22%20r%3D%225.4%22%20fill%3D%22%238c9f5d%22%2F%3E%3Ccircle%20cx%3D%229.07%22%20cy%3D%2212.00%22%20r%3D%225.4%22%20fill%3D%22%238c9f5d%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%224.8%22%20fill%3D%22%23ffc72c%22%20stroke%3D%22%231a1210%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E") 16 16, auto;
-}
-:root[data-cursor="red-ice"], :root[data-cursor="red-ice"] * {
-  cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20stroke%3D%22%231a1210%22%20stroke-width%3D%222%22%3E%3Ccircle%20cx%3D%2216.00%22%20cy%3D%228.00%22%20r%3D%225.4%22%20fill%3D%22%23cc0000%22%2F%3E%3Ccircle%20cx%3D%2222.93%22%20cy%3D%2212.00%22%20r%3D%225.4%22%20fill%3D%22%23cc0000%22%2F%3E%3Ccircle%20cx%3D%2222.93%22%20cy%3D%2220.00%22%20r%3D%225.4%22%20fill%3D%22%23cc0000%22%2F%3E%3Ccircle%20cx%3D%2216.00%22%20cy%3D%2224.00%22%20r%3D%225.4%22%20fill%3D%22%23cc0000%22%2F%3E%3Ccircle%20cx%3D%229.07%22%20cy%3D%2220.00%22%20r%3D%225.4%22%20fill%3D%22%23cc0000%22%2F%3E%3Ccircle%20cx%3D%229.07%22%20cy%3D%2212.00%22%20r%3D%225.4%22%20fill%3D%22%23cc0000%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%224.8%22%20fill%3D%22%2399f0ff%22%20stroke%3D%22%231a1210%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E") 16 16, auto;
-}
-:root[data-cursor="violet-gold"], :root[data-cursor="violet-gold"] * {
-  cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20stroke%3D%22%231a1210%22%20stroke-width%3D%222%22%3E%3Ccircle%20cx%3D%2216.00%22%20cy%3D%228.00%22%20r%3D%225.4%22%20fill%3D%22%23825dc6%22%2F%3E%3Ccircle%20cx%3D%2222.93%22%20cy%3D%2212.00%22%20r%3D%225.4%22%20fill%3D%22%23825dc6%22%2F%3E%3Ccircle%20cx%3D%2222.93%22%20cy%3D%2220.00%22%20r%3D%225.4%22%20fill%3D%22%23825dc6%22%2F%3E%3Ccircle%20cx%3D%2216.00%22%20cy%3D%2224.00%22%20r%3D%225.4%22%20fill%3D%22%23825dc6%22%2F%3E%3Ccircle%20cx%3D%229.07%22%20cy%3D%2220.00%22%20r%3D%225.4%22%20fill%3D%22%23825dc6%22%2F%3E%3Ccircle%20cx%3D%229.07%22%20cy%3D%2212.00%22%20r%3D%225.4%22%20fill%3D%22%23825dc6%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%224.8%22%20fill%3D%22%23ffc72c%22%20stroke%3D%22%231a1210%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E") 16 16, auto;
-}
-:root[data-cursor="paper-burnt"], :root[data-cursor="paper-burnt"] * {
-  cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20stroke%3D%22%231a1210%22%20stroke-width%3D%222%22%3E%3Ccircle%20cx%3D%2216.00%22%20cy%3D%228.00%22%20r%3D%225.4%22%20fill%3D%22%23fff3e5%22%2F%3E%3Ccircle%20cx%3D%2222.93%22%20cy%3D%2212.00%22%20r%3D%225.4%22%20fill%3D%22%23fff3e5%22%2F%3E%3Ccircle%20cx%3D%2222.93%22%20cy%3D%2220.00%22%20r%3D%225.4%22%20fill%3D%22%23fff3e5%22%2F%3E%3Ccircle%20cx%3D%2216.00%22%20cy%3D%2224.00%22%20r%3D%225.4%22%20fill%3D%22%23fff3e5%22%2F%3E%3Ccircle%20cx%3D%229.07%22%20cy%3D%2220.00%22%20r%3D%225.4%22%20fill%3D%22%23fff3e5%22%2F%3E%3Ccircle%20cx%3D%229.07%22%20cy%3D%2212.00%22%20r%3D%225.4%22%20fill%3D%22%23fff3e5%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%224.8%22%20fill%3D%22%23cc4e00%22%20stroke%3D%22%231a1210%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E") 16 16, auto;
-}
-:root[data-cursor="gold-vermilion"], :root[data-cursor="gold-vermilion"] * {
-  cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20stroke%3D%22%231a1210%22%20stroke-width%3D%222%22%3E%3Ccircle%20cx%3D%2216.00%22%20cy%3D%228.00%22%20r%3D%225.4%22%20fill%3D%22%23ffc72c%22%2F%3E%3Ccircle%20cx%3D%2222.93%22%20cy%3D%2212.00%22%20r%3D%225.4%22%20fill%3D%22%23ffc72c%22%2F%3E%3Ccircle%20cx%3D%2222.93%22%20cy%3D%2220.00%22%20r%3D%225.4%22%20fill%3D%22%23ffc72c%22%2F%3E%3Ccircle%20cx%3D%2216.00%22%20cy%3D%2224.00%22%20r%3D%225.4%22%20fill%3D%22%23ffc72c%22%2F%3E%3Ccircle%20cx%3D%229.07%22%20cy%3D%2220.00%22%20r%3D%225.4%22%20fill%3D%22%23ffc72c%22%2F%3E%3Ccircle%20cx%3D%229.07%22%20cy%3D%2212.00%22%20r%3D%225.4%22%20fill%3D%22%23ffc72c%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%224.8%22%20fill%3D%22%23f83e02%22%20stroke%3D%22%231a1210%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E") 16 16, auto;
-}
-:root[data-cursor="teal-blush"], :root[data-cursor="teal-blush"] * {
-  cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20stroke%3D%22%231a1210%22%20stroke-width%3D%222%22%3E%3Ccircle%20cx%3D%2216.00%22%20cy%3D%228.00%22%20r%3D%225.4%22%20fill%3D%22%230f7d78%22%2F%3E%3Ccircle%20cx%3D%2222.93%22%20cy%3D%2212.00%22%20r%3D%225.4%22%20fill%3D%22%230f7d78%22%2F%3E%3Ccircle%20cx%3D%2222.93%22%20cy%3D%2220.00%22%20r%3D%225.4%22%20fill%3D%22%230f7d78%22%2F%3E%3Ccircle%20cx%3D%2216.00%22%20cy%3D%2224.00%22%20r%3D%225.4%22%20fill%3D%22%230f7d78%22%2F%3E%3Ccircle%20cx%3D%229.07%22%20cy%3D%2220.00%22%20r%3D%225.4%22%20fill%3D%22%230f7d78%22%2F%3E%3Ccircle%20cx%3D%229.07%22%20cy%3D%2212.00%22%20r%3D%225.4%22%20fill%3D%22%230f7d78%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%224.8%22%20fill%3D%22%23f2b7b3%22%20stroke%3D%22%231a1210%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E") 16 16, auto;
+:root input,
+:root textarea,
+:root select,
+:root [contenteditable="true"] {
+  cursor: text;
 }
 
-/* Her own motifs as cursors, at her request (2026-09-07). Exported to 48px:
-   browsers refuse a cursor image over 128px and silently fall back to the
-   default arrow, and below ~40 her line work stops reading. Each hotspot is
-   the centre of MASS of the artwork, not the middle of the canvas, so a
-   daisy with a stem still points from its head. */
-:root[data-cursor="art-sun"], :root[data-cursor="art-sun"] * {
-  cursor: url("/cursors/sun.png") 24 23, auto;
+/* ── Grounds for the default palette ──────────────────────────────────────
+   Same berry display, yellow and deep-leaf ink throughout; only the two
+   grounds change. Every one clears the pairings the site renders: display
+   on the hero ground at 3:1+, ink on it and paper on vermilion at 4.5:1+. */
+/* Peony: the original beige field, kept so it is still reachable. */
+:root[data-theme="peony"] {
+  --ejd-blush: #f6ecd8;
+  --mv-paper: #fdf8ec;
 }
-:root[data-cursor="art-daisy-face"], :root[data-cursor="art-daisy-face"] * {
-  cursor: url("/cursors/daisy-face.png") 23 23, auto;
+/* Sprout: pale garden green. */
+:root[data-theme="sprout"] {
+  --ejd-blush: #e2efcd;
+  --mv-paper: #f6fbec;
 }
-:root[data-cursor="art-daisy-blue"], :root[data-cursor="art-daisy-blue"] * {
-  cursor: url("/cursors/daisy-blue.png") 23 21, auto;
+/* Porcelain: cool pale blue. */
+:root[data-theme="porcelain"] {
+  --ejd-blush: #dbeaf4;
+  --mv-paper: #f3f9fd;
 }
-:root[data-cursor="art-daisy-stem"], :root[data-cursor="art-daisy-stem"] * {
-  cursor: url("/cursors/daisy-stem.png") 23 20, auto;
+/* Wisteria: pale lilac. */
+:root[data-theme="wisteria"] {
+  --ejd-blush: #e7ddf6;
+  --mv-paper: #faf7ff;
 }
-:root[data-cursor="art-flower"], :root[data-cursor="art-flower"] * {
-  cursor: url("/cursors/flower.png") 24 23, auto;
+/* Mint: pale mint. */
+:root[data-theme="mint"] {
+  --ejd-blush: #d6ecdf;
+  --mv-paper: #f2fbf6;
 }
-:root[data-cursor="art-star-soft"], :root[data-cursor="art-star-soft"] * {
-  cursor: url("/cursors/star-soft.png") 22 23, auto;
-}
-:root[data-cursor="art-star-lime"], :root[data-cursor="art-star-lime"] * {
-  cursor: url("/cursors/star-lime.png") 26 23, auto;
-}
-:root[data-cursor="art-daisy"], :root[data-cursor="art-daisy"] * {
-  cursor: url("/cursors/daisy.png") 23 23, auto;
-}
-:root[data-cursor="art-ohs"], :root[data-cursor="art-ohs"] * {
-  cursor: url("/cursors/ohs.png") 27 25, auto;
+/* Chalk: neutral near-white, no warmth at all. */
+:root[data-theme="chalk"] {
+  --ejd-blush: #f2f2ee;
+  --mv-paper: #fdfdfb;
 }

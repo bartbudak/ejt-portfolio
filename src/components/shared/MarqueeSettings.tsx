@@ -24,11 +24,13 @@ export type MarqueeSettings = {
 };
 
 export const MARQUEE_DEFAULTS: MarqueeSettings = {
+  // Ellie's settings, dialled in on the tuner and frozen here (2026-09-08).
+  // The tuner itself is gone; change these numbers to change the band.
   amplitude: 7,
-  wavelength: 190,
-  fontSize: 26,
-  speed: 75,
-  padding: 6,
+  wavelength: 140,
+  fontSize: 15,
+  padding: 11,
+  speed: 115,
 };
 
 type Ctx = {

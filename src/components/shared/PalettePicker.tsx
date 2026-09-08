@@ -70,7 +70,6 @@ function Picker({
                 type="button"
                 onClick={() => pick(o.id)}
                 aria-pressed={on}
-                {...(swatches.length === 0 ? { [attr]: o.id || undefined } : {})}
                 className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-left transition-colors hover:bg-black/5"
               >
                 {/* The chips carry the option's own attribute, so each row
@@ -126,7 +125,14 @@ function Picker({
 }
 
 const THEMES: readonly Option[] = [
-  { id: "", name: "Peony", note: "The default" },
+  { id: "", name: "Rosewater", note: "The default" },
+  // Same palette, different ground. Ellie did not want to lead with beige.
+  { id: "sprout", name: "Sprout", note: "Pale garden green field" },
+  { id: "porcelain", name: "Porcelain", note: "Cool pale blue field" },
+  { id: "wisteria", name: "Wisteria", note: "Pale lilac field" },
+  { id: "mint", name: "Mint", note: "Pale mint field" },
+  { id: "chalk", name: "Chalk", note: "Neutral near-white" },
+  { id: "peony", name: "Peony", note: "The beige field, as it was" },
   { id: "bubblegum", name: "Bubblegum", note: "The previous default" },
   // Between Meadow and Bubblegum, Meadow-most first.
   { id: "orchard", name: "Orchard", note: "Meadow's ground, Bubblegum's pink" },
@@ -147,45 +153,6 @@ const THEMES: readonly Option[] = [
   { id: "maeve-live", name: "Maeve Live", note: "What the shipped site runs on" },
 ];
 
-
-const CURSORS: readonly Option[] = [
-  { id: "", name: "Off", note: "The system arrow" },
-  // Her own motif PNGs first, then the drawn colourways.
-  { id: "art-sun", name: "Smiley sun", note: "Her artwork" },
-  { id: "art-daisy-face", name: "Flower face", note: "Her artwork" },
-  { id: "art-daisy-blue", name: "Blue-eye daisy", note: "Her artwork" },
-  { id: "art-daisy-stem", name: "Daisy on a stem", note: "Her artwork" },
-  { id: "art-flower", name: "Yellow flower", note: "Her artwork" },
-  { id: "art-star-soft", name: "Soft star", note: "Her artwork" },
-  { id: "art-star-lime", name: "Lime star", note: "Her artwork" },
-  { id: "art-daisy", name: "White daisy", note: "Her artwork" },
-  { id: "art-ohs", name: "Honey nutty Ohs", note: "Her artwork" },
-  { id: "marigold-green", name: "Marigold & green", note: "Her original flower" },
-  { id: "vermilion-gold", name: "Vermilion & gold", note: "" },
-  { id: "blush-vermilion", name: "Blush & vermilion", note: "" },
-  { id: "ice-violet", name: "Ice & violet", note: "" },
-  { id: "sage-gold", name: "Sage & gold", note: "" },
-  { id: "red-ice", name: "Red & ice", note: "" },
-  { id: "violet-gold", name: "Violet & gold", note: "" },
-  { id: "paper-burnt", name: "Daisy", note: "White petals, burnt centre" },
-  { id: "gold-vermilion", name: "Gold & vermilion", note: "" },
-  { id: "teal-blush", name: "Teal & blush", note: "" },
-];
-
-export function CursorPicker() {
-  return (
-    <Picker
-      options={CURSORS}
-      attr="data-cursor"
-      storageKey="ejt-cursor-preview"
-      label="Cursor"
-      // The row's own attribute makes each chip show that colourway's cursor on
-      // hover, so the list previews itself.
-      swatches={[]}
-      offsetClass="bottom-28 left-4"
-    />
-  );
-}
 
 export function ThemeSwitcher() {
   return (

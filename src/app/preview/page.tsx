@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
-import { CursorPicker, ThemeSwitcher } from "@/components/shared/PalettePicker";
-import { MarqueeTuner } from "@/components/shared/MarqueeTuner";
+import { ThemeSwitcher } from "@/components/shared/PalettePicker";
 import { Hero } from "@/components/sections/Hero";
 import { Marquee } from "@/components/shared/Marquee";
 import { About } from "@/components/sections/About";
@@ -29,8 +28,6 @@ export default function PreviewPage() {
       <Header />
       {/* Preview-only palette picker; delete to remove. */}
       <ThemeSwitcher />
-      <MarqueeTuner />
-      <CursorPicker />
       {/* One screen: the header sits above it, the hero takes what is left, and
           the marquee closes the fold rather than hanging below it. */}
       {/* Marquee 1 used to scroll away with the hero. Ellie asked for it to
