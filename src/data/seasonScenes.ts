@@ -49,6 +49,11 @@ export interface ArtLayer {
   clip?: [number, number, number, number];
   /** Wrap it in the post card's frame — a photograph standing in a card's place. */
   frame?: boolean;
+  /** `src` is a video, not a picture: plays muted on a loop, in the frame. */
+  video?: boolean;
+  /** A framed group: these layers render inside this box, cropped to it,
+   *  at their own deck positions. The box is the frame. */
+  children?: ArtLayer[];
 }
 
 /** A logotype she set as text rather than placed as art. */
@@ -210,12 +215,43 @@ export const SEASON_ART: Record<keyof typeof DECK, BandArt> = {
     edges: pick(springArt, "flower"),
     stage: {
       origin: 410,
-      height: 1318,
-      layers: rest(springArt, "flower"),
+      // Room under the photographs for the frame's ring.
+      height: 1330,
+      // The three garden photographs sit in one wide frame, each at its own
+      // deck position inside it, with the "A Nice Day to Melt Away" badge
+      // where she put it, now inside the frame (Bart, 2026-09-13). The frame
+      // stops short of the band's edge so its ring shows all round.
+      layers: [
+        ...rest(
+          springArt,
+          "flower",
+          "photo-garden-trio",
+          "photo-garden-basket",
+          "photo-garden-cake",
+          "nice-day",
+        ),
+        {
+          name: "garden-frame",
+          src: "",
+          px: [0, 0],
+          x: 276,
+          y: 1196,
+          w: 728,
+          h: 512,
+          frame: true,
+          children: pick(
+            springArt,
+            "photo-garden-trio",
+            "photo-garden-basket",
+            "photo-garden-cake",
+          ),
+        },
+        ...pick(springArt, "nice-day"),
+      ],
       // Her one post sits in the column beside the garden photographs. Its box
       // touches the band's left edge in the deck; here it comes in far enough
-      // to show its ring.
-      posts: [{ x: 12, y: 1290, w: 250 }],
+      // to show its ring, and stops short of the photographs' frame.
+      posts: [{ x: 12, y: 1290, w: 246 }],
     },
   },
   summer: {
@@ -235,14 +271,32 @@ export const SEASON_ART: Record<keyof typeof DECK, BandArt> = {
       // frame, narrowed and centred on the booth so its ring clears the cards'
       // rings either side, and drawn LAST so the frame sits over the awning
       // rather than under it (Bart, 2026-09-13).
+      // The flag-and-arch stands ("the little factories") come up 65 and lose
+      // her crop, so the arch and its first row of lights show above the
+      // cards and the rest runs on behind them (Bart, 2026-09-13).
       layers: [
-        ...rest(summerArt, "photo-market"),
+        // Bart's summer clip, in the card frame, where her sky photograph sat
+        // to the left of the three bars (2026-09-13).
+        ...tweak(
+          tweak(rest(summerArt, "photo-market", "photo-sky"), "flags-left", {
+            y: 1150,
+            clip: undefined,
+          }),
+          "flags-right",
+          { y: 1150, clip: undefined },
+        ),
         ...tweak(pick(summerArt, "photo-market"), "photo-market", {
           frame: true,
           x: 342,
           y: 1322,
           w: 340,
           h: 236,
+        }),
+        ...tweak(pick(summerArt, "photo-sky"), "photo-sky", {
+          name: "video-fair",
+          src: "/motifs/summer-fair.mp4",
+          frame: true,
+          video: true,
         }),
       ],
       // Her two posts flank the chocolate booth, touching it either side.

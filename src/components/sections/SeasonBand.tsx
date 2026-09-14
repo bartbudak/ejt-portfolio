@@ -40,23 +40,42 @@ function Art({ layer, origin = 0 }: { layer: ArtLayer; origin?: number }) {
   };
 
   if (layer.frame) {
-    // A photograph in a card's place: the post card's frame around it, the
-    // picture filling the frame. The ring is drawn outside the box, so the
-    // box stays where she put the picture.
+    // Something in a card's place — a photograph, a clip, or a group of
+    // pictures — with the post card's frame around it. The ring is drawn
+    // outside the box, so the box stays where she put the picture.
     return (
       <div
         aria-hidden
         className="pointer-events-none absolute overflow-hidden"
         style={{ ...CARD_FRAME, ...box, margin: 0, fontSize: DECK_EM }}
       >
-        <Image
-          src={layer.src}
-          alt=""
-          width={layer.px[0]}
-          height={layer.px[1]}
-          draggable={false}
-          className="h-full w-full select-none object-cover"
-        />
+        {layer.children ? (
+          layer.children.map((child, i) => (
+            <Art
+              key={child.name + i}
+              layer={{ ...child, x: child.x - layer.x, y: child.y - layer.y }}
+            />
+          ))
+        ) : layer.video ? (
+          <video
+            src={layer.src}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <Image
+            src={layer.src}
+            alt=""
+            width={layer.px[0]}
+            height={layer.px[1]}
+            draggable={false}
+            className="h-full w-full select-none object-cover"
+          />
+        )}
       </div>
     );
   }

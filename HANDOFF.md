@@ -151,6 +151,13 @@
 >   drawn frogs perched on Holiday's post frames (`perches`, files in
 >   `public/motifs/holiday-frog-*.webp` — NOT in `seasons/`, which the
 >   pipeline wipes).
+> - **Summer's clip and Spring's wide frame (Bart, later 2026-09-13):** the
+>   iCloud `MAEVE/Summer .mp4.mp4` (99MB, 1080x1350) is transcoded to
+>   `public/motifs/summer-fair.mp4` (720x900, muted, 3.7MB) and plays on a
+>   loop in the card frame where her sky photograph sat, left of the three
+>   bars (`video: true` on a framed layer). Spring's three garden photographs
+>   sit inside one framed group (`children`), badge inside it. Summer's flag
+>   stands come up 65 and lose her crop so the arches show above the cards.
 > - **Page bands and themes:** Campaigns and Collaborations each get a marquee
 >   pinned under the header naming the page. Each page names its theme through
 >   `<ThemeSwitcher theme>`: Campaigns on Pistachio, the home and Collaborations
