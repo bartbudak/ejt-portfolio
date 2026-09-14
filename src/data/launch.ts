@@ -20,6 +20,20 @@ export interface LaunchPost {
   post: string;
   /** Handle, shown while a post link is still missing. */
   handle?: string;
+  /**
+   * The shape of the post's OWN media, as a CSS aspect ratio.
+   *
+   * The embed renders its media at the iframe's full width, so the media's
+   * height is set by this and nothing else. Every card frames a 4:5 window, so
+   * a post that is not 4:5 has to be told its real shape or the leftover height
+   * fills with Instagram's white chrome, which is what Ellie saw on the Su'Juk
+   * card (2026-09-11): given its true ratio, the media is centred in the window
+   * and the remainder is black instead.
+   *
+   * MEASURED, not guessed: each was read off its own embed at 839px wide.
+   * Re-measure if a link changes; the value is a property of that post.
+   */
+  aspect?: string;
 }
 
 // Rendered under the heading, at her request (2026-09-07). Her words, verbatim.
@@ -35,24 +49,32 @@ export const launchPosts: LaunchPost[] = [
     what: "Frozen yogurt s'mores using Maeve's chocolate",
     handle: "@butterfieldnyc",
     post: "https://www.instagram.com/p/Db3cky_R3vJ/",
+    // A reel: Instagram letterboxes it into 4:5 itself.
+    aspect: "839 / 1049",
   },
   {
     partner: "Books Are Magic",
     what: "Chocolate and book pairings in all their stores",
     handle: "@booksaremagicbk",
     post: "https://www.instagram.com/p/DOg4VVbEaLd/?img_index=1",
+    // A carousel, a hair taller than 4:5.
+    aspect: "838 / 1024",
   },
   {
     partner: "Su'Juk",
     what: "Multiple ship and shop experiences",
     handle: "@sujukbrooklyn",
     post: "https://www.instagram.com/p/DUvxx9aEYum/",
+    // Square. This is the one whose leftover height was showing white.
+    aspect: "1 / 1",
   },
   {
     partner: "Talea Beer Co.",
     what: "Romance trivia night with a LTO Pineapple Cacao Sour cobranded beverage",
     handle: "@taleabeer",
     post: "https://www.instagram.com/p/DUletwej_--/",
+    // A vertical video, letterboxed to 4:5 on Instagram's own black.
+    aspect: "839 / 1049",
   },
 ];
 

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { site } from "@/lib/site";
 import { ExternalIcon } from "@/components/shared/ExternalLink";
 
@@ -42,7 +42,10 @@ const samePath = (a: string, b: string) =>
 const TONES: Record<string, { bg: string; ink: string }> = {
   "/preview": { bg: "var(--ejd-blush)", ink: "var(--ejd-ink)" },
   "/preview/campaigns": { bg: "var(--mv-paper)", ink: "var(--ejd-ink)" },
-  "/preview/collabs": { bg: "var(--ejd-burnt)", ink: "var(--mv-paper)" },
+  // Collabs used to run on burnt orange as the inverse of Campaigns. Ellie
+  // asked for the two to share a look now that Collaborations is its own tab
+  // (2026-09-11), so the band takes the same paper ground.
+  "/preview/collabs": { bg: "var(--mv-paper)", ink: "var(--ejd-ink)" },
 };
 const DEFAULT_TONE = TONES["/preview"];
 
@@ -151,7 +154,7 @@ export function Header() {
         </Link>
 
         <ul
-          className="flex items-center justify-center gap-5 font-display uppercase tracking-[0.08em] sm:gap-9"
+          className="flex items-center justify-center gap-3 font-display uppercase tracking-[0.06em] sm:gap-7 sm:tracking-[0.08em]"
           style={{ color: tone.ink, fontSize: "clamp(0.75rem,1.15vw,1rem)" }}
         >
           {(site.nav as readonly NavItem[]).map((item) => {

@@ -17,8 +17,12 @@
 export interface Award {
   name: string;
   detail: string;
-  /** Preview shown in the card. */
-  preview?: { src: string; alt: string };
+  /**
+   * Preview shown in the card. Every card's preview box is the same 4:3 well
+   * (see Awards.tsx), so a source that is not 4:3 has to say how it should sit
+   * in it: `contain` letterboxes it against `bg` instead of cropping.
+   */
+  preview?: { src: string; alt: string; contain?: boolean; bg?: string };
   /** A second link, where the project has one. */
   extra?: { href: string; label: string };
   /** Who else is on the credit, where it is not hers alone. */
@@ -76,6 +80,14 @@ export const awards: Award[] = [
     preview: {
       src: "/awards/nexty-finalist.webp",
       alt: "NEXTY Awards Finalist 2025 badge, Newtopia Now",
+      // The one preview that is not a photograph. It is 958x630 on a white
+      // ground, so cropping it to the shared 4:3 well would cut the wordmark;
+      // instead it sits inside the well with white around it, which is what
+      // Ellie asked for when she said its box should match the others
+      // (2026-09-11). White, not blush, because the badge's own ground is white
+      // and a blush surround would read as a border round the artwork.
+      contain: true,
+      bg: "#ffffff",
     },
     href: "https://www.newhope.com/nexty-awards/presenting-the-2025-natural-products-expo-west-nexty-awards-finalists",
     linkLabel: "See the finalists",

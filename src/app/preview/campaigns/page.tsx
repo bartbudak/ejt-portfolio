@@ -26,7 +26,6 @@ export default function CampaignsPage() {
         intro={seasonsIntro}
         items={seasons}
         tone={LIGHT_TONE}
-        crossLink={{ href: "/preview/collabs", label: "click here for collaborations" }}
       />
       <Contact />
     </>

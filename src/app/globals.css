@@ -75,7 +75,13 @@
    colorful case-study imagery pop. Body text clears WCAG AA in both themes;
    the rose accent is text-safe (5.2:1 light / 8.1:1 dark). */
 :root {
-  --background: #f2ead9;
+  /* The page ground, which is what shows in overscroll and anywhere a section
+     does not paint over it. It used to be Atelier Paper's cream (#f2ead9), a
+     palette this site retired in September 2026 — so a beige that appears
+     nowhere else in the design was the colour behind everything (Bart,
+     2026-09-11, seeing it on a tall window). It now tracks the live palette,
+     so it is blush whichever theme is on. */
+  --background: var(--ejd-blush);
   --foreground: #2a2521;
   --card: #fcf8f0;
   --card-foreground: #2a2521;

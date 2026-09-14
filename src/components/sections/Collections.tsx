@@ -1,36 +1,26 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 import type { Collection } from "@/data/campaigns";
+import { PostCard } from "@/components/shared/PostCard";
+import { InstagramEmbed } from "@/components/shared/InstagramEmbed";
+import { Nutshell, WONK, outlined, withLinks } from "./CollectionCopy";
+import { SeasonBand } from "./SeasonBand";
 
-// The Campaigns page, and its inverse for collaborations — same machinery, two
-// palettes.
+// The Campaigns page and the Collaborations page: one component, two tabs. They
+// used to be a light page and a dark one; since 2026-09-11 they share a look, so
+// what tells them apart is the work in them.
 //
-// Cards select; the view box below recreates the band that collection gets in
-// Ellie's deck: her ground colour, "<NAME> BRIEF" in display caps, "In a
-// nutshell" in script beside it, then the labelled rows she actually wrote. The
-// motif is her own illustration, floated large and low-contrast behind the
-// copy the way the deck scatters roses, apples and string lights through each
-// band.
+// Cards select; the view box below is the band that collection gets in Ellie's
+// deck. The five seasons are rebuilt 1:1 from measurements (SeasonBand). The
+// collaboration bands still compose themselves the older way: her ground
+// colour, "<NAME> BRIEF" in display caps, "In a nutshell" in script beside it,
+// then the labelled rows she actually wrote, with her own illustration floated
+// large and low-contrast behind the copy.
 //
 // One selection at a time, arrow-key navigable — it behaves like a tablist, so
 // it is built as one.
-
-const WONK = { fontVariationSettings: '"SOFT" 0, "WONK" 1' } as const;
-
-// `paint-order: stroke fill` puts the stroke UNDER the fill, so the letterform
-// keeps its full weight and only gains an edge — a plain text-stroke is drawn
-// centred and eats into thin strokes like the script face's.
-const outlined = (on?: boolean) =>
-  on
-    ? ({
-        WebkitTextStrokeWidth: "clamp(1.5px, 0.035em, 4px)",
-        WebkitTextStrokeColor: "var(--ejd-ink)",
-        paintOrder: "stroke fill",
-      } as const)
-    : null;
 
 type Tone = {
   /** Page ground. */
@@ -53,41 +43,18 @@ export const LIGHT_TONE: Tone = {
   line: "var(--ejd-ink)",
 };
 
-// The inverse, warm rather than dark. Flipping paper to near-black was a value
-// inversion — technically the opposite, but it dropped a hole in the middle of a
-// palette that has no black in it. Burnt orange is one of her own deck grounds
-// (it carries the Fall band), so the page still reads as the negative of the
-// seasonal one — dark ground, light type — without leaving her colour world.
-// Alternatives if this is still too much: `--ejd-deep` (#7a1a00, a cocoa that
-// sits closer to brown) or `--ejd-vermilion` (louder, but it then collides with
-// the Contact band below).
-export const DARK_TONE: Tone = {
-  ground: "var(--ejd-burnt)",
-  display: "var(--ejd-marigold)",
-  body: "var(--mv-paper)",
-  card: "var(--ejd-deep)",
-  line: "var(--mv-paper)",
-};
+// Collaborations used to run on its own dark tone, as the inverse of the
+// seasonal page. Ellie asked for the two to share a look once Collaborations
+// became a tab of its own (2026-09-11), so both pages now take LIGHT_TONE and
+// the inverse is gone. The burnt-orange version is in git history if the pages
+// ever need telling apart again.
 
 type Props = {
   title: string;
   intro: string;
   items: Collection[];
   tone: Tone;
-  /** The small italic link under the title, pointing at the other page. */
-  crossLink: { href: string; label: string };
 };
-
-function Nutshell({ collection, className = "" }: { collection: Collection; className?: string }) {
-  return (
-    <span
-      className={`block pb-1 font-script text-base normal-case tracking-normal sm:pb-2 sm:text-2xl ${className}`}
-      style={{ color: collection.display, ...outlined(collection.outlineDisplay) }}
-    >
-      In a nutshell
-    </span>
-  );
-}
 
 // Her own band artwork, placed where she places it: the rose spray down
 // Valentine's right edge, the flower border along Spring's bottom, apples across
@@ -151,7 +118,7 @@ const PANEL_BOTTOM: Record<string, string> = {
   none: "pb-12 sm:pb-16",
 };
 
-export function Collections({ title, intro, items, tone, crossLink }: Props) {
+export function Collections({ title, intro, items, tone }: Props) {
   const [open, setOpen] = useState(items[0].slug);
   const current = items.find((c) => c.slug === open) ?? items[0];
 
@@ -172,25 +139,19 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
       style={{ backgroundColor: tone.ground }}
     >
       <div className="mx-auto w-full max-w-6xl">
+        {/* Centred, as Ellie asked (2026-09-11), so the page opens the way
+            every heading on About does rather than ranged left on its own. The
+            intro follows it into the centre column; ranged-left copy under a
+            centred title reads as two different pages stacked. */}
         <h1
-          className="font-display font-black uppercase leading-[0.84] tracking-[-0.03em]"
+          className="text-center font-display font-black uppercase leading-[0.84] tracking-[-0.03em]"
           style={{ ...WONK, color: tone.display, fontSize: "clamp(2.5rem,8vw,6rem)" }}
         >
           {title}
         </h1>
 
-        {/* Sits directly under the title, deliberately quiet — it is a way
-            across to the other half of the work, not a second heading. */}
-        <Link
-          href={crossLink.href}
-          className="mt-3 inline-block text-base italic underline underline-offset-4 opacity-80 transition-opacity hover:opacity-100 sm:text-base"
-          style={{ color: tone.body }}
-        >
-          {crossLink.label}
-        </Link>
-
         <p
-          className="mt-6 max-w-[62ch] text-base leading-relaxed sm:text-xl"
+          className="mx-auto mt-6 max-w-[62ch] text-center text-base leading-relaxed sm:text-xl"
           style={{ color: tone.body }}
         >
           {intro}
@@ -265,6 +226,11 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
             marginTop: "calc(var(--mv-frame) + var(--mv-stroke) + 1.25rem)",
           }}
         >
+          {current.art ? (
+            // The five seasons: her band, measured and rebuilt. See SeasonBand.
+            <SeasonBand collection={current} art={current.art} />
+          ) : (
+          <>
           {/* The brief section. It is the artwork's positioning context, not
               the panel — with a product lineup below, "centred in the panel"
               and "centred in the brief" are very different places, and the deck
@@ -370,7 +336,7 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
                   {row.label}:{" "}
                 </dt>
                 <dd className="inline" style={{ color: current.body }}>
-                  {row.body}
+                  {withLinks(row.body, row.links)}
                 </dd>
               </div>
             ))}
@@ -404,11 +370,56 @@ export function Collections({ title, intro, items, tone, crossLink }: Props) {
               src={current.showcase.src}
               alt={current.showcase.alt}
               width={1700}
-              height={865}
+              // The crop's real height, so `h-auto` lands on its true shape.
+              height={current.showcase.height ?? 865}
               loading="eager"
               className="relative -mb-px block h-auto w-full"
             />
           )}
+          </>
+          )}
+
+          {/* Her third slide: the posts the launch produced, in the same card
+              chrome the National Launch wall uses (Ellie, 2026-09-11). It sits
+              inside the panel, on the collection's own ground, so it reads as
+              the last part of that band rather than a separate section.
+
+              Nothing renders until a collection actually has posts — an empty
+              row of frames would read as broken, and right now every season is
+              waiting on links or stills from Ellie. */}
+          {current.posts?.length ? (
+            <ul
+              className="grid grid-cols-1 gap-6 px-6 pb-12 pt-12 sm:grid-cols-3 sm:px-14 sm:pb-16"
+              style={{ backgroundColor: current.ground }}
+            >
+              {current.posts.map((post) => (
+                <li key={post.caption}>
+                  <PostCard
+                    handle={post.handle}
+                    caption={post.caption}
+                    href={post.post || undefined}
+                    media={
+                      post.post ? (
+                        <InstagramEmbed
+                          post={post.post}
+                          title={`${post.handle} on Instagram`}
+                          aspect={post.aspect}
+                        />
+                      ) : post.image ? (
+                        <Image
+                          src={post.image.src}
+                          alt={post.image.alt}
+                          width={900}
+                          height={1125}
+                          className="block h-auto w-full"
+                        />
+                      ) : null
+                    }
+                  />
+                </li>
+              ))}
+            </ul>
+          ) : null}
         </div>
       </div>
     </section>

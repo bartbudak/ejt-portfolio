@@ -177,7 +177,7 @@ export function BeforeAfter() {
               onPointerMove={(e) => { if (dragging.current) fromEvent(e.clientX); }}
               onPointerUp={() => { dragging.current = false; }}
               onPointerCancel={() => { dragging.current = false; }}
-              className="relative min-h-[30rem] cursor-ew-resize touch-pan-y select-none overflow-hidden focus-visible:outline-2 focus-visible:-outline-offset-4 sm:min-h-[34rem] md:min-h-[38rem]"
+              className="relative flex min-h-[30rem] cursor-ew-resize touch-pan-y select-none flex-col overflow-hidden focus-visible:outline-2 focus-visible:-outline-offset-4 sm:min-h-[34rem] md:min-h-[38rem]"
               style={{
                 backgroundColor: "var(--cmp-old)",
                 outlineColor: "var(--mv-soft-black)",
@@ -190,9 +190,41 @@ export function BeforeAfter() {
                 style={{ backgroundColor: pair.bg, clipPath: clipAfter }}
               />
 
+              {/* The pill, in the flow rather than floated over the stage.
+                  Ellie asked for the pack to sit centred between the bottom of
+                  the box and this bubble (2026-09-11); measuring that gap in
+                  fixed pixels would drift, because the pill is two lines of type
+                  and changes height at the `sm` breakpoint. As a flow sibling it
+                  measures itself, and whatever it leaves is the stage. It keeps
+                  `pointer-events-none` so dragging still starts on the panel. */}
+              <span
+                aria-hidden
+                className="pointer-events-none relative z-10 flex shrink-0 justify-center px-4 pt-5"
+              >
+                <span
+                  className="flex flex-col items-center gap-0 rounded-full px-4 py-1 text-xs font-bold uppercase leading-tight tracking-[0.08em] sm:text-base"
+                  style={{
+                    backgroundColor: "#fff",
+                    border: "var(--mv-stroke) solid var(--mv-soft-black)",
+                    color: "var(--mv-soft-black)",
+                  }}
+                >
+                  <span className="flex items-center gap-2">
+                    <Dot /> Before &amp; after <Dot />
+                  </span>
+                  <span className="text-xs font-semibold normal-case tracking-[0.06em] opacity-70">
+                    slide to see the magic
+                  </span>
+                </span>
+              </span>
+
               {/* Image stage — full panel width, so one clip percentage maps
-                  onto the ground, the pack and the seam alike. */}
-              <div className="absolute inset-x-0 bottom-8 top-14">
+                  onto the ground, the pack and the seam alike. It takes every
+                  pixel under the pill, and its own padding is equal top and
+                  bottom, so `object-contain` centres the pack in that gap. The
+                  images are absolutely positioned inside it, which resolves
+                  against this box's PADDING edge, so the padding insets them. */}
+              <div className="relative min-h-0 flex-1 py-6">
                 <Image
                   src={`/work/before-after/${pair.slug}-before.png`}
                   alt={`${pair.before}, the packaging before the rebrand`}
@@ -240,27 +272,6 @@ export function BeforeAfter() {
                     strokeLinejoin="round"
                   />
                 </svg>
-              </span>
-
-              <span
-                aria-hidden
-                className="pointer-events-none absolute inset-x-0 top-5 flex justify-center"
-              >
-                <span
-                  className="flex flex-col items-center gap-0 rounded-full px-4 py-1 text-xs font-bold uppercase leading-tight tracking-[0.08em] sm:text-base"
-                  style={{
-                    backgroundColor: "#fff",
-                    border: "var(--mv-stroke) solid var(--mv-soft-black)",
-                    color: "var(--mv-soft-black)",
-                  }}
-                >
-                  <span className="flex items-center gap-2">
-                    <Dot /> Before &amp; after <Dot />
-                  </span>
-                  <span className="text-xs font-semibold normal-case tracking-[0.06em] opacity-70">
-                    slide to see the magic
-                  </span>
-                </span>
               </span>
 
             </div>

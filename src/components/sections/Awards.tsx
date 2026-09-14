@@ -42,14 +42,34 @@ export function Awards() {
                   // Webby, her on the Dieline stage, the game's own character
                   // for the IGN piece. Screenshots of other people's pages would
                   // put their layouts on her portfolio to no purpose.
-                  <Image
-                    src={a.preview.src}
-                    alt={a.preview.alt}
-                    width={720}
-                    height={540}
-                    className="block h-auto w-full"
-                    style={{ borderBottom: "var(--mv-stroke) solid var(--ejd-ink)" }}
-                  />
+                  //
+                  // One fixed 4:3 well for all four, rather than each image
+                  // setting its own height off its intrinsic ratio. Three of the
+                  // sources are 720x540 and fill it exactly; the NEXTY badge is
+                  // 958x630, and used to make its card's picture visibly
+                  // shallower than the rest of the row (Ellie, 2026-09-11). It
+                  // now sits `contain` inside the same well, padded, on its own
+                  // white ground.
+                  <div
+                    className="relative w-full"
+                    style={{
+                      aspectRatio: "4 / 3",
+                      backgroundColor: a.preview.bg ?? "var(--ejd-blush)",
+                      borderBottom: "var(--mv-stroke) solid var(--ejd-ink)",
+                    }}
+                  >
+                    <Image
+                      src={a.preview.src}
+                      alt={a.preview.alt}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px"
+                      className={
+                        a.preview.contain
+                          ? "object-contain p-5"
+                          : "object-cover"
+                      }
+                    />
+                  </div>
                 )}
                 <div className="flex flex-1 flex-col gap-3 p-5">
                 <h3

@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { ThemeSwitcher } from "@/components/shared/PalettePicker";
-import { Collections, DARK_TONE } from "@/components/sections/Collections";
+import { Collections, LIGHT_TONE } from "@/components/sections/Collections";
 import { Contact } from "@/components/sections/Contact";
 import { collabs, collabsIntro } from "@/data/campaigns";
 
-// Collaborations — the inverse of the seasonal page. Same layout and the same
-// card/view-box machinery, run on an ink ground instead of paper.
+// Collaborations — its own tab since 2026-09-11, sitting between Campaigns and
+// Resume. It used to be the visual inverse of the seasonal page, on a burnt
+// ground; Ellie asked for "the same visual look and feel as the Campaigns tab",
+// so it now runs the same layout on the same paper.
 export const metadata: Metadata = {
   title: "Collaborations",
   robots: { index: false, follow: false },
@@ -22,8 +24,7 @@ export default function CollabsPage() {
         title="Collaborations"
         intro={collabsIntro}
         items={collabs}
-        tone={DARK_TONE}
-        crossLink={{ href: "/preview/campaigns", label: "click here for seasonal collections" }}
+        tone={LIGHT_TONE}
       />
       <Contact />
     </>

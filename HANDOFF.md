@@ -56,6 +56,82 @@
 >   actually holds eight. That doc is stale on this point.
 
 
+> ### Update 2026-09-11 — Ellie's second round, and her second Canva export
+>
+> Her round-two feedback is applied except where it needs assets. Copy changes
+> are all in the data files with her wording verbatim.
+>
+> - **Collaborations is now a top-level tab**, between Campaigns and Resume, and
+>   shares the Campaigns look (`LIGHT_TONE`). The dark `DARK_TONE` inverse and
+>   the cross-links under each title are gone — the tab does that job now.
+> - **Second Canva export** (`~/Downloads/v.pdf`, 3 tall pages) replaces every
+>   seasonal brief with two rows, Theme and Launch Campaign, and fills in the
+>   blanks — so **no `drafted: true` rows remain in `seasons`**. Dungeon Crawler
+>   Carl is now her own long-form What / Why / My Role / The Results.
+> - **⚠️ The Instagram posts are NOT in that PDF.** Canva cannot rasterise a
+>   live embed: all 15 seasonal cards and all 5 DCC cards export as blank "View
+>   this post on Instagram" placeholders (verified at 150dpi). Her third slide
+>   is built and wired — `CollectionPost` in `data/campaigns.ts`, rendered in
+>   `Collections.tsx` in the same `PostCard` chrome as National Launch — but it
+>   renders nothing until post URLs or stills arrive. **Uploaded photos DO
+>   extract** (the DCC hero is `public/motifs/dcc-lineup.webp`, cropped at
+>   260dpi; the Spring garden-party strip is still in the PDF unused).
+> - **`InstagramEmbed`** (`components/shared/`) now owns the embed crop for both
+>   pages. It takes each post's real media aspect, so a square post letterboxes
+>   on black instead of showing Instagram's white chrome.
+> - **Showcase lineups carry their own height.** They were hard-coded 1700x865,
+>   which squashed Summer's 1700x1205 crop by a quarter.
+> - **`--background` was still Atelier Paper's cream** (`#f2ead9`) — a retired
+>   palette — so every unpainted pixel read beige. It now tracks `--ejd-blush`.
+>   Bart's "sections get cut off on tall viewports" is the desktop browser pane
+>   failing to paint below ~900px, not the site: a `position:fixed; inset:0`
+>   probe is clipped the same way, and the DOM measures correctly at 1200x1900.
+>
+> **Still needed from Ellie:** Instagram post URLs (or stills) for each season's
+> third slide and the five DCC posts; the billboard shot with the artwork
+> composited in. Her own typos are preserved deliberately — "activites",
+> "pacakging", "peak into", "turn it's remnants", "concieved", "hundred of
+> thousands" — flag them to her rather than fixing them in the repo.
+
+
+> ### Update 2026-09-13 — the five seasonal bands, rebuilt 1:1 from her deck
+>
+> Bart dropped the Canva element exports for the seasonal slides and asked for
+> the bands to match her deck as closely as possible, cut-offs included. They
+> now do, and not by eye: **every element's position, size, rotation, flip and
+> crop is measured out of the PDF** (`Downloads/v.pdf`, page 2).
+>
+> - **`scripts/season-art.py`** is the pipeline. It runs `pdfimages` for every
+>   embedded image with its alpha mask, `pdftocairo -svg` for the transform each
+>   one is drawn with (walking cairo's surface groups, which is where Canva's
+>   flipped elements — the spring border, the right-hand flags, the reindeer —
+>   hide), then trims, names and writes 67 WebPs to `public/motifs/seasons/`
+>   and emits **`src/data/seasonArt.ts`** (generated, do not hand-edit).
+>   Re-run: `python3 scripts/season-art.py ~/Downloads/v.pdf`. Needs poppler.
+> - **`src/data/seasonScenes.ts`** is the hand-written composition: per band,
+>   the brief's geometry (her margins and gaps, in deck units), the `edges` art
+>   pinned around the brief, an optional tiled `strip` (the Valentine's ribbon),
+>   and a fixed-proportion `stage` of layers plus her text logotypes.
+> - **`SeasonBand.tsx`** renders it. The band is a CSS container and every deck
+>   unit becomes `cqw`, so the composition keeps its shape at any width — what
+>   she ran off the edge stays run off the edge. Only the copy reflows.
+> - **Colours are now the deck's own**, in `DECK`: pink `#ff9fca`, sage
+>   `#8c9f5d`, ice `#99f0ff`, burnt `#cc4e00`, red `#cc0000`; violet display on
+>   pink, white elsewhere, black body. The earlier "deepened for contrast"
+>   grounds are gone. White on ice fails badly, so Summer keeps its ink outline
+>   (`outlineDisplay`) — the one knowing departure from the deck.
+> - Headings are the season alone ("SPRING"), no "Brief" — that is how she sets
+>   them. `wordmark`, `showcase`, `frame` and `floatArt` are gone from the
+>   seasons (and their old files from `public/motifs/`); the collaboration bands
+>   still use them through the legacy path in `Collections.tsx`, and the shared
+>   copy helpers moved to `CollectionCopy.tsx`.
+> - **Not done:** the DCC band. Its Canva exports are in `~/Downloads` too
+>   (`Ellie Thompson Portfolio.png` and `(1)`–`(7)`: the stone frame, Donut, the
+>   skull, the eye, both photographs) and the pipeline already measures page 2's
+>   DCC placements — it is a NAMES entry and a scene away.
+> - The Instagram rows are still waiting on links from Ellie; each band ends
+>   where her products end and the post grid appends below when they arrive.
+
 Portfolio for **Ellie J. Thompson** (creative director) → **elliejthompson.com**.
 Built by Bart (her husband). This doc captures the direction, research, and
 decisions so a fresh session can continue without re-deriving anything.

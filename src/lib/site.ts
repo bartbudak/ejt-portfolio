@@ -79,14 +79,12 @@ export const site = {
   // become "/" and "/campaigns".
   nav: [
     { label: "About", href: "/preview", external: false },
-    // Collabs is reached from the Campaigns page and is the other half of the
-    // same body of work, so the tab stays lit while the reader is over there.
-    {
-      label: "Campaigns",
-      href: "/preview/campaigns",
-      external: false,
-      alsoActiveOn: ["/preview/collabs"],
-    },
+    { label: "Campaigns", href: "/preview/campaigns", external: false },
+    // Its own tab since 2026-09-11, at Ellie's request: it used to be reached
+    // only by a cross-link under the Campaigns title, which made half the body
+    // of work invisible to anyone who did not scroll to find it. It sits
+    // between Campaigns and Resume because that is where she put it.
+    { label: "Collaborations", href: "/preview/collabs", external: false },
     // Self-hosted rather than a Drive link: no sign-in wall, no sharing
     // settings to get wrong, and it ships with the site. `external: true` still
     // opens it in a new tab so the portfolio stays put behind it.

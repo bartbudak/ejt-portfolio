@@ -1,0 +1,193 @@
+"use client";
+
+import Image from "next/image";
+import type { CSSProperties } from "react";
+import type { Collection } from "@/data/campaigns";
+import type { ArtLayer, BandArt, TextLayer } from "@/data/seasonScenes";
+import { Nutshell, WONK, outlined, withLinks } from "./CollectionCopy";
+
+// One seasonal band, rebuilt 1:1 from her deck (see seasonScenes.ts for the
+// model and seasonArt.ts for the measurements).
+//
+// The whole band is a container, and every measurement is a deck unit turned
+// into `cqw` — a hundredth of the band's width. So the composition is the same
+// shape at 1100px as at 375px: the friends lean in from Fall's edges by the
+// same fraction, the cranberry strings hang the same way, and the products sit
+// exactly where she put them. The only thing that reflows is the copy.
+
+/** Deck unit → container width unit. The deck canvas is 1024 wide. */
+const u = (v: number) => `${((v / 1024) * 100).toFixed(3)}cqw`;
+const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(2)}%`;
+
+// A placed piece of artwork. Decorative throughout: the products are named in
+// the copy and the alt text of the tab, so none of this needs to be read out.
+function Art({ layer, origin = 0 }: { layer: ArtLayer; origin?: number }) {
+  const style: CSSProperties = {
+    left: u(layer.x),
+    top: u(layer.y - origin),
+    width: u(layer.w),
+    height: u(layer.h),
+    transform: layer.rot ? `rotate(${layer.rot}deg)` : undefined,
+    // Her crop, as an inset on the box. The box itself is not clipped, so a
+    // rotated element keeps its corners.
+    clipPath: layer.clip
+      ? `inset(${pct(layer.clip[1], layer.h)} ${pct(layer.clip[2], layer.w)} ${pct(layer.clip[3], layer.h)} ${pct(layer.clip[0], layer.w)})`
+      : undefined,
+  };
+  return (
+    <Image
+      src={layer.src}
+      alt=""
+      width={layer.px[0]}
+      height={layer.px[1]}
+      aria-hidden
+      draggable={false}
+      className="pointer-events-none absolute max-w-none select-none"
+      style={style}
+    />
+  );
+}
+
+// A logotype she set as text. Fraunces stands in for her Benguiat, so it is
+// wider than her box; the left edge (or centre) is what is held.
+function Logotype({ layer, origin }: { layer: TextLayer; origin: number }) {
+  return (
+    <p
+      className="absolute m-0 whitespace-nowrap font-display font-black uppercase leading-none tracking-[-0.02em]"
+      style={{
+        ...WONK,
+        left: u(layer.x),
+        top: u(layer.y - origin),
+        fontSize: u(layer.size),
+        color: layer.color,
+        transform: layer.align === "center" ? "translateX(-50%)" : undefined,
+      }}
+    >
+      {layer.text}
+    </p>
+  );
+}
+
+function Brief({ collection, art }: { collection: Collection; art: BandArt }) {
+  const g = art.brief;
+  const centered = g.headingX === undefined;
+
+  const heading = (
+    <h2
+      className={`m-0 whitespace-nowrap font-display font-black uppercase leading-[0.86] tracking-[-0.02em] ${
+        centered ? "text-center" : ""
+      }`}
+      style={{
+        ...WONK,
+        ...outlined(collection.outlineDisplay),
+        color: collection.display,
+        fontSize: u(g.headingSize),
+        marginLeft: centered ? undefined : u(g.headingX!),
+        marginTop: g.nutshell.at === "above" ? u(g.nutshell.gap) : undefined,
+      }}
+    >
+      {collection.briefTitle}
+    </h2>
+  );
+
+  // Her script on the canvas sits in a 44pt box; Beth Ellen runs wide, so it
+  // comes down a step to hold her line length and clear the corner flowers.
+  const script = (extra: CSSProperties = {}) => (
+    <Nutshell
+      collection={collection}
+      className="whitespace-nowrap pb-0 sm:pb-0"
+      style={{ fontSize: u(40), lineHeight: 1, ...extra }}
+    />
+  );
+
+  return (
+    <div className="relative" style={{ paddingTop: u(g.top), paddingBottom: u(g.stageGap) }}>
+      {art.edges?.map((layer, i) => (
+        <Art key={layer.name + i} layer={layer} />
+      ))}
+
+      <div className="relative">
+        {g.nutshell.at === "above" && script({ textAlign: "center" })}
+
+        {g.nutshell.at === "inline" ? (
+          // Beside the heading, at her x, centred on the heading's height.
+          <div className="relative">
+            {heading}
+            <div
+              className="absolute top-1/2 -translate-y-1/2"
+              style={{ left: u(g.nutshell.x!) }}
+            >
+              {script()}
+            </div>
+          </div>
+        ) : (
+          heading
+        )}
+
+        {g.nutshell.at === "below" &&
+          script({
+            marginTop: u(g.nutshell.gap),
+            marginLeft: g.nutshell.x !== undefined ? u(g.nutshell.x) : undefined,
+            textAlign: g.nutshell.x === undefined ? "center" : undefined,
+          })}
+      </div>
+
+      <dl
+        className="relative m-0"
+        style={{
+          paddingLeft: u(g.copy.left),
+          paddingRight: u(g.copy.right),
+          marginTop: u(g.copy.gap),
+          // Her 16pt Futura on the 1024 canvas, held between readable bounds so
+          // a phone does not get 6px copy and a wide panel does not get 20px.
+          fontSize: `clamp(0.9375rem, ${u(16)}, 1.125rem)`,
+          lineHeight: 1.36,
+          color: collection.body,
+        }}
+      >
+        {collection.rows.map((row, i) => (
+          <div
+            key={row.label}
+            style={{ marginTop: i > 0 && g.copy.paragraphGap ? "1.36em" : undefined }}
+          >
+            <dt className="inline font-semibold">{row.label}:{" "}</dt>
+            <dd className="m-0 inline">{withLinks(row.body, row.links)}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  );
+}
+
+export function SeasonBand({ collection, art }: { collection: Collection; art: BandArt }) {
+  const { stage, strip } = art;
+  return (
+    <div className="@container relative">
+      {strip && (
+        // Tiled down the whole band, so it runs behind the posts too if there
+        // are any, the way her bookmark ribbon runs the full page.
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 left-0"
+          style={{
+            width: u(strip.w),
+            backgroundImage: `url(${strip.src})`,
+            backgroundSize: "100% auto",
+            backgroundRepeat: "repeat-y",
+          }}
+        />
+      )}
+
+      <Brief collection={collection} art={art} />
+
+      <div className="relative overflow-hidden" style={{ height: u(stage.height) }}>
+        {stage.layers.map((layer, i) => (
+          <Art key={layer.name + i} layer={layer} origin={stage.origin} />
+        ))}
+        {stage.text?.map((layer) => (
+          <Logotype key={layer.text} layer={layer} origin={stage.origin} />
+        ))}
+      </div>
+    </div>
+  );
+}

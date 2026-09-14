@@ -31,9 +31,9 @@ export interface BriefLine {
 // (she quoted its ending back when asking for the sub-heading), with its em
 // dash turned into a colon.
 export const briefLead = [
-  "Seattle Chocolate had a fantastic product with a built-in giveback to cocoa farmers around the world. In order to have a bigger impact on the farmers lives, they needed to appeal to consumers in markets outside of Seattle.",
+  "Seattle Chocolate had a fantastic product with a built-in giveback to cocoa farmers around the world. In order to have a bigger impact on the farmers lives, they needed to appeal to younger consumers in markets outside of Seattle.",
   "I saw many chocolate brands on shelf that were either very serious with health-forward messaging or colorful, clownish, sugary candy brands. I wondered why a chocolate brand couldn't be somewhere in the middle; fun while still having depth.",
-  "So I pitched the reinvention of a 30-year-old chocolate company, and then led it: 100+ products in three years, a new name, and a whole world to put them in.",
+  "So I pitched the reinvention of a 30-year-old chocolate brand, and then led it: 100+ products in three years, a new name, and a whole world to put them in.",
 ];
 
 export const brief: BriefLine[] = [
@@ -48,7 +48,7 @@ export const brief: BriefLine[] = [
   {
     heading: "Name Strategy",
     wide: true,
-    body: "It is a woman-owned business so I felt it was important that the name sounded feminine. It needed to be an open-vessel name that could be filled with meaning over time without limiting our expansion. Lastly, I kept the old name on the packaging, bar caddies, shipping boxes and displays to ease the transition.",
+    body: "It is a woman-owned business so I felt it was important that the name sounded feminine. It needed to be an open-vessel name that could be filled with meaning over time without limiting their expansion. Lastly, I kept the old name on the packaging, bar caddies, shipping boxes and displays to ease the transition.",
   },
   {
     heading: "Launch Campaign",
