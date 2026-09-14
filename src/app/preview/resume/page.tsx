@@ -36,22 +36,25 @@ export default function ResumePage() {
         style={{ backgroundColor: "var(--mv-paper)" }}
       >
         <div className="@container mx-auto w-full max-w-5xl">
-          <h1
-            className="text-center font-display font-black uppercase leading-[0.84] tracking-[-0.03em]"
-            style={{
-              ...WONK,
-              color: "var(--ejd-vermilion)",
-              fontSize: "clamp(2.5rem,8vw,6rem)",
-            }}
-          >
-            Resume
-          </h1>
+          {/* Title and download: one row on a phone, where the two would
+              otherwise cost a screen between them; stacked and centred from
+              the small breakpoint up. */}
+          <div className="flex items-center justify-between gap-3 sm:flex-col sm:justify-center sm:gap-8">
+            <h1
+              className="font-display font-black uppercase leading-[0.84] tracking-[-0.03em] sm:text-center"
+              style={{
+                ...WONK,
+                color: "var(--ejd-vermilion)",
+                fontSize: "clamp(2.25rem,8vw,6rem)",
+              }}
+            >
+              Resume
+            </h1>
 
-          <p className="mt-8 text-center">
             <a
               href="/ellie-thompson-resume.pdf"
               download="Ellie-Thompson-Resume.pdf"
-              className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-base font-semibold tracking-[0.02em] transition-transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2"
+              className="inline-flex flex-none items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold tracking-[0.02em] transition-transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 sm:px-6 sm:py-3 sm:text-base"
               style={{
                 backgroundColor: "var(--ejd-marigold)",
                 color: "var(--ejd-ink)",
@@ -65,15 +68,18 @@ export default function ResumePage() {
               <span aria-hidden>↓</span>
               <span className="sr-only"> (PDF, two pages)</span>
             </a>
-          </p>
+          </div>
 
           {/* The résumé, in the Maeve frame. The document sizes itself from
               this container's width, so it is the same two pages at every
               width, just smaller. */}
           <div
-            className="mt-12 overflow-hidden"
+            className="overflow-hidden"
             style={{
               ...CARD_FRAME,
+              // CARD_FRAME's margin is its ring; the top needs the section's
+              // own rhythm on top of that, or the button's ring sits on it.
+              marginTop: "calc(var(--mv-frame) + var(--mv-stroke) + 2.5rem)",
               backgroundColor: "var(--ejd-blush)",
               padding: "clamp(0.75rem, 3cqw, 2rem)",
             }}
