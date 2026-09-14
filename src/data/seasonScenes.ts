@@ -415,13 +415,20 @@ export const DCC_ART: BandArt = {
     stageGap: 0,
   },
   // The stone frame, started over (Bart, 2026-09-13): the first strip stands
-  // at the top-left corner, centred on the left edge — half in, half out.
+  // at the top-left corner, its top square block centred ON the corner —
+  // half in, half out both ways.
   // Further pieces to follow his instruction.
   stones: {
     src: dccStoneStrip.src,
     px: dccStoneStrip.px,
     pieces: [
-      { x: -dccStoneStrip.w / 2, y: 0, w: dccStoneStrip.w, h: dccStoneStrip.h },
+      {
+        x: -dccStoneStrip.w / 2,
+        // The top square block is 43 tall, so its centre sits on the corner.
+        y: -22,
+        w: dccStoneStrip.w,
+        h: dccStoneStrip.h,
+      },
     ],
   },
   stage: {
