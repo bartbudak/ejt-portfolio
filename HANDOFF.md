@@ -190,6 +190,18 @@
 >   `/preview/campaigns/` and `/preview/collabs/`, behind the password gate;
 >   the root is still the coming-soon page. Redeploy with
 >   `pnpm build && firebase hosting:channel:deploy <name> --expires 7d`.
+> - **Resume is its own tab (Bart, 2026-09-13):** `/preview/resume` — band,
+>   title, a "Download now" button, then the résumé in the Maeve frame.
+>   `src/data/resume.ts` is the content (updated from the August résumé with
+>   the site's newer numbers: `site.stats`, 30-year-old brand, 50+ seasonal
+>   products, the Webby's People's Voice level, the DCC results and IGN game,
+>   the national partner list); `ResumeDoc.tsx` renders it as two Letter pages
+>   in em units, scaled to its container on the page and pinned to 16px on
+>   `/resume-print/` (outside the gate, noindex), which
+>   `scripts/print-resume.sh` prints with headless Chrome to
+>   `public/ellie-thompson-resume.pdf`. Re-run the script after any change to
+>   the data or the document and commit the PDF with it. The page break is by
+>   hand (`SPLIT`); the print route reports 38px to spare on each page.
 > - **Page bands and themes:** Campaigns and Collaborations each get a marquee
 >   pinned under the header naming the page. Each page names its theme through
 >   `<ThemeSwitcher theme>`: Campaigns on Pistachio, the home and Collaborations

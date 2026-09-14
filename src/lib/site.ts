@@ -85,10 +85,10 @@ export const site = {
     // of work invisible to anyone who did not scroll to find it. It sits
     // between Campaigns and Resume because that is where she put it.
     { label: "Collaborations", href: "/preview/collabs", external: false },
-    // Self-hosted rather than a Drive link: no sign-in wall, no sharing
-    // settings to get wrong, and it ships with the site. `external: true` still
-    // opens it in a new tab so the portfolio stays put behind it.
-    { label: "Resume", href: "/ellie-thompson-resume.pdf", external: true },
+    // Its own page since 2026-09-13 (Bart): the résumé rendered in the site's
+    // own type inside the frame, with the PDF — printed from that same
+    // rendition — offered for download at the top.
+    { label: "Resume", href: "/preview/resume", external: false },
   ],
   // Her hand-drawn "ejt" monogram, used as the logo in the header. Extracted
   // from the Procreate PDF she supplied: a 2388x1668 JPEG of black ink on
