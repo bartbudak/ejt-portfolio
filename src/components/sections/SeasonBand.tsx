@@ -250,7 +250,7 @@ export function SeasonBand({
   return (
     <div
       className="@container relative"
-      style={stones ? { paddingBottom: u(stones.w / 2 + 8) } : undefined}
+      style={stones ? { paddingBottom: u(stones.w + 8) } : undefined}
     >
       {strip && (
         // Her bookmark ribbon at the top, then the book's binding tiled the
@@ -345,14 +345,13 @@ function StageBox({ stage }: { stage: Stage }) {
   );
 }
 
-// The stone frame, floating on the band's edge: whole blocks down both sides
-// and, turned, along the top and bottom, a square block at each corner, and a
-// gap between every two. Each side is a wrapping flex line with more blocks
+// The stone frame, inside the band's edge: whole blocks down both sides and,
+// turned, along the top and bottom, a square block at each corner, and a gap
+// between every two — every gap showing the band's own ground. Each side is a wrapping flex line with more blocks
 // than fit, so the visible line holds only whole blocks, spread evenly; the
 // rest wrap out of the clipped box. Nothing is cut and nothing touches.
 function StoneFrame({ stones }: { stones: NonNullable<BandArt["stones"]> }) {
   const { w, blocks, corner } = stones;
-  const half = w / 2;
   const gap = 4;
   const many = (n: number) =>
     Array.from({ length: n }, (_, i) => blocks[i % blocks.length]);
@@ -364,9 +363,9 @@ function StoneFrame({ stones }: { stones: NonNullable<BandArt["stones"]> }) {
           key={side}
           className="absolute flex flex-col flex-wrap content-start justify-between overflow-hidden"
           style={{
-            [side]: u(-half),
-            top: u(half + gap),
-            bottom: u(half + gap),
+            [side]: 0,
+            top: u(w + gap),
+            bottom: u(w + gap),
             width: u(w),
             paddingTop: u(gap),
             paddingBottom: u(gap),
@@ -392,9 +391,9 @@ function StoneFrame({ stones }: { stones: NonNullable<BandArt["stones"]> }) {
           key={edge}
           className="absolute flex flex-row flex-wrap content-start justify-between overflow-hidden"
           style={{
-            [edge]: u(-half),
-            left: u(half + gap),
-            right: u(half + gap),
+            [edge]: 0,
+            left: u(w + gap),
+            right: u(w + gap),
             height: u(w),
             paddingLeft: u(gap),
             paddingRight: u(gap),
@@ -425,7 +424,7 @@ function StoneFrame({ stones }: { stones: NonNullable<BandArt["stones"]> }) {
             height={corner.px[1]}
             draggable={false}
             className="absolute max-w-none select-none"
-            style={{ [v]: u(-half), [h]: u(-half), width: u(w), height: u(w) }}
+            style={{ [v]: 0, [h]: 0, width: u(w), height: u(w) }}
           />
         )),
       )}

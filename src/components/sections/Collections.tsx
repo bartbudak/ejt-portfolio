@@ -261,10 +261,8 @@ export function Collections({ title, intro, items, tone }: Props) {
           aria-labelledby={`collection-tab-${current.slug}`}
           // The panel is a bare frame; the brief section inside it carries the
           // padding and the product lineup runs full-bleed beneath it.
-          className={`relative isolate ${
-            current.art?.stones
-              ? "overflow-visible"
-              : "overflow-hidden rounded-lg"
+          className={`relative isolate overflow-hidden ${
+            current.art?.stones ? "" : "rounded-lg"
           }`}
           style={
             current.art?.stones
@@ -274,8 +272,9 @@ export function Collections({ title, intro, items, tone }: Props) {
                   // to the edge (Bart, 2026-09-13).
                   backgroundColor: current.ground,
                   borderRadius: 0,
-                  marginTop:
-                    "calc(var(--mv-frame) + var(--mv-stroke) + 1.25rem)",
+                  // No ring to hold off the tabs, so the same visual gap as
+                  // a ringed panel's ring edge: the 1.25rem alone.
+                  marginTop: "1.25rem",
                 }
               : {
                   backgroundColor: current.ground,

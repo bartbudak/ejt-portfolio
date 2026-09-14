@@ -151,10 +151,10 @@ export interface BandArt {
   /** A second stage under the post grid — DCC's website shot with its skull
    *  and eye. */
   footer?: Stage;
-  /** A stone border AS the band's frame, replacing the panel's ring and
-   *  straddling its edge: whole blocks laid down both sides and along the top
-   *  and bottom with a gap between every two, and a square block at each
-   *  corner. `w` is the border's thickness. */
+  /** A stone border AS the band's frame, replacing the panel's ring: whole
+   *  blocks laid inside both sides and along the top and bottom with a gap
+   *  between every two, and a square block at each corner. `w` is the
+   *  border's thickness. */
   stones?: {
     w: number;
     blocks: { src: string; run: string; px: [number, number] }[];
@@ -405,18 +405,18 @@ export const SEASON_ART: Record<keyof typeof DECK, BandArt> = {
 // then Matt Dinniman's site announcement flanked by the skull and the eye.
 export const DCC_ART: BandArt = {
   brief: {
-    // Her title's top sits at 86.6; the top run of stones, centred on the
-    // band's edge, reaches 25.5 in.
-    top: 61,
+    // Her title's top sits at 86.6; the run of stones along the top takes the
+    // first stone's width.
+    top: 52,
     headingSize: 62,
     nutshell: { at: "none", gap: 0 },
     // Full width, inside the stones, as she runs it.
     copy: { left: 70, right: 70, gap: 7, paragraphGap: false },
     stageGap: 0,
   },
-  // The stones are the frame itself (Bart, 2026-09-13), floating on the
-  // band's edge: the strip's blocks down both sides and, turned, along the
-  // top and bottom, square blocks at the corners, a gap between every two.
+  // The stones are the frame itself (Bart, 2026-09-13), inside the band's
+  // edge so every gap shows orange: the strip's blocks down both sides and,
+  // turned, along the top and bottom, square blocks at the corners.
   stones: dccStones,
   stage: {
     origin: 525,
