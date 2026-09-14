@@ -169,13 +169,17 @@
 >   every band were taken off again at Bart's ask, and the DCC title is back
 >   to vermilion. The Holiday frogs: santa on the first card, mirrored to face
 >   in; snow cloud on the last, settled into the rim.
-> - **The DCC stone frame is being rebuilt piece by piece with Bart** (from
->   2026-09-13, late): two tiled versions were rejected, so it starts over as
->   hand-placed copies of her narrow strip with its square end blocks
->   (`dccStoneStrip`, `stones.pieces` in deck units from the panel's top-left,
->   negatives outside the edge). Piece one: top-left corner, centred on the
->   left edge, half in and half out. The panel is bare, square and unclipped
->   for a stoned band. Next pieces on his instruction.
+> - **The DCC stone frame, rebuilt with Bart piece by piece (2026-09-13,
+>   late):** two tiled versions were rejected. It is now `StoneFrame`, laid out
+>   LIVE from the band's measured height: down each side, copies of her narrow
+>   strip (`dccStoneStrip`, square bricks at both ends, with its brick-gap map
+>   from the pipeline) chained with their top brick clipped so brick meets
+>   brick; the top square brick centred on the top corner (half out — the
+>   panel holds off the tabs by that `overhang`), the bottom square brick
+>   centred on the bottom corner, and the chain cut where a gap falls nearest
+>   it, the column stretched by the small remainder (a few percent at most).
+>   The panel is bare, square and unclipped for a stoned band. No top or
+>   bottom runs yet — Bart is directing the frame one step at a time.
 > - **Page bands and themes:** Campaigns and Collaborations each get a marquee
 >   pinned under the header naming the page. Each page names its theme through
 >   `<ThemeSwitcher theme>`: Campaigns on Pistachio, the home and Collaborations

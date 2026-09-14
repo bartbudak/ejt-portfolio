@@ -279,14 +279,7 @@ export function Collections({ title, intro, items, tone }: Props) {
                   // No ring to hold off the tabs: the 1.25rem a ringed panel
                   // keeps, plus however far the stone frame reaches above the
                   // panel's edge, so the two never overlap (Bart, 2026-09-13).
-                  marginTop: `calc(1.25rem + ${(
-                    (Math.max(
-                      0,
-                      ...current.art.stones.pieces.map((p) => -p.y),
-                    ) /
-                      1024) *
-                    100
-                  ).toFixed(3)}cqw)`,
+                  marginTop: `calc(1.25rem + ${((current.art.stones.overhang / 1024) * 100).toFixed(3)}cqw)`,
                 }
               : {
                   backgroundColor: current.ground,

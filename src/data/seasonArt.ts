@@ -109,6 +109,14 @@ export const dccArt: ArtLayer[] = [
 /** The bookmark ribbon down the Valentine's band's left edge, drawn once at
  *  the top, 77.2 deck units wide; `tile` is its binding, repeated below it. */
 export const valentinesRibbon = { src: "/motifs/seasons/valentines/ribbon.webp", tile: "/motifs/seasons/valentines/ribbon-tile.webp", px: [193, 2886] as [number, number], w: 77.2, h: 1162.7 };
-/** Her narrow stone strip, square blocks at both ends; `w` is its width on
- *  the canvas, and `h` the height that width gives it. */
-export const dccStoneStrip = { src: "/motifs/seasons/dcc/stone-strip.webp", px: [155, 1760] as [number, number], w: 51, h: 579.1 };
+/** Her narrow stone strip, square bricks at both ends: its width on the
+ *  canvas, the height that gives it, and the gaps between its bricks from
+ *  the top, in the same units. The first gap follows the top square brick
+ *  and the last precedes the bottom one. */
+export const dccStoneStrip = {
+  src: "/motifs/seasons/dcc/stone-strip.webp",
+  px: [155, 1760] as [number, number],
+  w: 51,
+  h: 579.1,
+  gaps: [[40.8, 43.4], [112.5, 115.5], [182.9, 186.2], [253.7, 256.3], [324.1, 328.0], [395.5, 398.5], [465.9, 468.9], [533.4, 535.3]] as [number, number][],
+};

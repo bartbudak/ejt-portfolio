@@ -377,9 +377,40 @@ lines.append(f'export const valentinesRibbon = {{ src: "{ribbon["src"]}", tile: 
 strip = alpha_image(200)
 strip = strip.crop(strip.getbbox())
 strip.save(os.path.join(out_dir, "dcc", "stone-strip.webp"), "WEBP", lossless=True, quality=100, method=6)
-lines.append("/** Her narrow stone strip, square blocks at both ends; `w` is its width on")
-lines.append(" *  the canvas, and `h` the height that width gives it. */")
-lines.append(f'export const dccStoneStrip = {{ src: "/motifs/seasons/dcc/stone-strip.webp", px: [{strip.width}, {strip.height}] as [number, number], w: 51, h: {round(51 * strip.height / strip.width, 1)} }};')
+# the gaps between its bricks, top to bottom, as [start, end] in deck units at
+# width 51 — the band chains copies of the strip and only ever cuts on a gap
+sw, sh = strip.size
+unit = 51 / sw
+# a boundary is where the light fill stops: a transparent gap or two outlines
+# meeting (the bottom two bricks touch, so alpha alone misses that seam)
+px = strip.load()
+def fill_frac(y):
+    n = 0
+    for x in range(sw):
+        r, g, b, a = px[x, y]
+        if a > 128 and b > 150 and b > r + 20:
+            n += 1
+    return n / sw
+fills = [fill_frac(y) for y in range(sh)]
+gaps, run = [], None
+for y, f in enumerate(fills + [1.0]):
+    if f < 0.3 and run is None:
+        run = y
+    elif f >= 0.3 and run is not None:
+        if run > 0 and y < sh:  # not the strip's own edges
+            gaps.append((round(run * unit, 1), round(y * unit, 1)))
+        run = None
+lines.append("/** Her narrow stone strip, square bricks at both ends: its width on the")
+lines.append(" *  canvas, the height that gives it, and the gaps between its bricks from")
+lines.append(" *  the top, in the same units. The first gap follows the top square brick")
+lines.append(" *  and the last precedes the bottom one. */")
+lines.append("export const dccStoneStrip = {")
+lines.append('  src: "/motifs/seasons/dcc/stone-strip.webp",')
+lines.append(f"  px: [{sw}, {sh}] as [number, number],")
+lines.append("  w: 51,")
+lines.append(f"  h: {round(sh * unit, 1)},")
+lines.append("  gaps: [" + ", ".join(f"[{a}, {b}]" for a, b in gaps) + "] as [number, number][],")
+lines.append("};")
 
 with open(os.path.join(REPO, "src", "data", "seasonArt.ts"), "w") as f:
     f.write("\n".join(lines) + "\n")

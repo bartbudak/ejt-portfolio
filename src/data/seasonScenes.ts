@@ -151,24 +151,12 @@ export interface BandArt {
   /** A second stage under the post grid — DCC's website shot with its skull
    *  and eye. */
   footer?: Stage;
-  /** A stone border AS the band's frame, replacing the panel's ring: copies
-   *  of her strip, each placed by hand in deck units from the panel's
-   *  top-left corner (so a negative x sits outside the edge). Being built up
-   *  piece by piece with Bart (2026-09-13). */
-  stones?: {
-    src: string;
-    px: [number, number];
-    pieces: {
-      x: number;
-      y: number;
-      w: number;
-      h: number;
-      rot?: number;
-      /** [left, top, right, bottom] cut off the strip, deck units — to drop
-       *  an end brick where two copies meet. */
-      clip?: [number, number, number, number];
-    }[];
-  };
+  /** A stone border AS the band's frame, replacing the panel's ring, built
+   *  live from her strip: down each side, copies chained with their top
+   *  brick cut off so brick meets brick, the top square brick centred on the
+   *  top corner and the bottom one on the bottom corner (Bart, 2026-09-13).
+   *  `overhang` is how far the top brick reaches above the panel's edge. */
+  stones?: { strip: typeof dccStoneStrip; overhang: number };
 }
 
 const pick = (layers: ArtLayer[], ...names: string[]) =>
@@ -423,32 +411,15 @@ export const DCC_ART: BandArt = {
     copy: { left: 70, right: 70, gap: 7, paragraphGap: false },
     stageGap: 0,
   },
-  // The stone frame, started over (Bart, 2026-09-13): the first strip stands
-  // at the top-left corner, its top square block centred ON the corner —
-  // half in, half out both ways.
-  // Further pieces to follow his instruction.
+  // The stone frame, built piece by piece with Bart (2026-09-13): the strip
+  // stands at the top-left with its top square brick centred on the corner,
+  // copies chain below it with their top brick cut so brick meets brick,
+  // the column ends with a square brick on the bottom corner, and the right
+  // side matches. Laid out live from the band's height — see StoneFrame.
   stones: {
-    src: dccStoneStrip.src,
-    px: dccStoneStrip.px,
-    pieces: [
-      {
-        x: -dccStoneStrip.w / 2,
-        // The top square block is 43 tall, so its centre sits on the corner.
-        y: -22,
-        w: dccStoneStrip.w,
-        h: dccStoneStrip.h,
-      },
-      // The next copy straight below, its top square brick cut off (the brick
-      // and the hairline gap after it, 43.8), so its first long brick meets
-      // the square brick above it.
-      {
-        x: -dccStoneStrip.w / 2,
-        y: -22 + dccStoneStrip.h - 43.8,
-        w: dccStoneStrip.w,
-        h: dccStoneStrip.h,
-        clip: [0, 43.8, 0, 0],
-      },
-    ],
+    strip: dccStoneStrip,
+    // Half the top square brick: the brick's centre sits on the corner.
+    overhang: dccStoneStrip.gaps[0][0] / 2,
   },
   stage: {
     origin: 525,

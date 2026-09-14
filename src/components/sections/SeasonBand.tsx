@@ -1,7 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import type { CSSProperties, ReactNode } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
 import type { Collection } from "@/data/campaigns";
 import type { ArtLayer, BandArt, Stage, TextLayer } from "@/data/seasonScenes";
 import { CARD_FRAME } from "@/components/shared/PostCard";
@@ -250,7 +256,7 @@ export function SeasonBand({
   return (
     <div
       className="@container relative"
-      style={stones ? { paddingBottom: u(60) } : undefined}
+      style={stones ? { paddingBottom: u(stones.strip.w) } : undefined}
     >
       {strip && (
         // Her bookmark ribbon at the top, then the book's binding tiled the
@@ -345,32 +351,99 @@ function StageBox({ stage }: { stage: Stage }) {
   );
 }
 
-// The stone frame: copies of her strip, each where the data puts it, from the
-// panel's top-left corner. Above everything and free to sit outside the edge.
+// A column of her strip: copies chained top to bottom, their top brick cut
+// off so brick meets brick; the top square brick centred on the top corner and
+// the bottom square brick centred on the bottom corner. The band's height is
+// whatever the copy and the posts make it, so the chain is cut where a brick
+// gap falls nearest the bottom brick and the whole column stretched by the
+// small remainder (a few percent at most) so the seam lands exactly. Units are
+// deck units; y = 0 is the top corner.
+type StripPiece = { y: number; h: number; clipTop: number; clipBottom: number };
+
+type StoneStrip = NonNullable<BandArt["stones"]>["strip"];
+
+function stoneColumn(strip: StoneStrip, H: number): StripPiece[] {
+  const gaps = strip.gaps;
+  const topCentre = gaps[0][0] / 2;
+  const topClip = gaps[0][1];
+  const [b0, b1] = gaps[gaps.length - 1];
+  const bottomCentre = (b1 + strip.h) / 2;
+  const yBottom = H - bottomCentre;
+  const T = yBottom + b0;
+
+  // the chain, unscaled, with every brick boundary it offers
+  const chain: { y: number; clipTop: number }[] = [];
+  const bounds: { at: number; k: number }[] = [];
+  let y = -topCentre;
+  for (let k = 0; k < 60; k++) {
+    const clipTop = k === 0 ? 0 : topClip;
+    chain.push({ y, clipTop });
+    for (const [g0] of gaps) if (g0 > clipTop) bounds.push({ at: y + g0, k });
+    if (y + strip.h > T + strip.h) break;
+    y += strip.h - topClip;
+  }
+  let best = bounds[0];
+  for (const b of bounds)
+    if (Math.abs(b.at - T) < Math.abs(best.at - T)) best = b;
+  const f = best.at > 0 ? T / best.at : 1;
+
+  const pieces: StripPiece[] = chain.slice(0, best.k + 1).map((c, i) => ({
+    y: c.y * f,
+    h: strip.h * f,
+    clipTop: c.clipTop,
+    clipBottom: i === best.k ? strip.h - (best.at - c.y) : 0,
+  }));
+  pieces.push({ y: yBottom, h: strip.h, clipTop: b0, clipBottom: 0 });
+  return pieces;
+}
+
+// The stone frame, laid out live: it measures the band and stands a column of
+// the strip down each side. Above everything and free to sit outside the edge.
 function StoneFrame({ stones }: { stones: NonNullable<BandArt["stones"]> }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [H, setH] = useState<number | null>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const measure = () => setH((el.clientHeight / el.clientWidth) * 1024);
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const { strip } = stones;
+  const pieces = H ? stoneColumn(strip, H) : [];
+
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 z-20">
-      {stones.pieces.map((piece, i) => (
-        <Image
-          key={i}
-          src={stones.src}
-          alt=""
-          width={stones.px[0]}
-          height={stones.px[1]}
-          draggable={false}
-          className="absolute max-w-none select-none"
-          style={{
-            left: u(piece.x),
-            top: u(piece.y),
-            width: u(piece.w),
-            height: u(piece.h),
-            transform: piece.rot ? `rotate(${piece.rot}deg)` : undefined,
-            clipPath: piece.clip
-              ? `inset(${pct(piece.clip[1], piece.h)} ${pct(piece.clip[2], piece.w)} ${pct(piece.clip[3], piece.h)} ${pct(piece.clip[0], piece.w)})`
-              : undefined,
-          }}
-        />
-      ))}
+    <div
+      ref={ref}
+      aria-hidden
+      className="pointer-events-none absolute inset-0 z-20"
+    >
+      {[-strip.w / 2, 1024 - strip.w / 2].map((x, side) =>
+        pieces.map((piece, i) => (
+          <Image
+            key={`${side}-${i}`}
+            src={strip.src}
+            alt=""
+            width={strip.px[0]}
+            height={strip.px[1]}
+            draggable={false}
+            className="absolute max-w-none select-none"
+            style={{
+              left: u(x),
+              top: u(piece.y),
+              width: u(strip.w),
+              height: u(piece.h),
+              clipPath:
+                piece.clipTop || piece.clipBottom
+                  ? `inset(${pct(piece.clipTop, strip.h)} 0 ${pct(piece.clipBottom, strip.h)} 0)`
+                  : undefined,
+            }}
+          />
+        )),
+      )}
     </div>
   );
 }
