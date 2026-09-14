@@ -184,9 +184,15 @@
 >   bricks the same way (`stoneRun`). The footer row — eye, site shot, skull —
 >   is spaced evenly between the columns, and the site shot links out to
 >   mattdinniman.com (`href`/`alt` on a framed layer make it a real link).
-> - **Preview channel for Ellie (2026-09-13, second cut, with the Resume
->   page):** https://ejt-folio--ellie-review-20260913-1926-9haue7wi.web.app —
->   expires 2026-09-20. (The earlier channel from the same day is superseded.) The work-in-progress pages are `/preview/`,
+> - **Deploys (2026-09-14):** the live channel (elliejthompson.com) now
+>   carries the current build — Bart reviews at
+>   https://elliejthompson.com/preview/ and expects releases there. That is
+>   safe because everything under /preview is behind the password gate and
+>   the root is still the coming-soon page; the older "never deploy the main
+>   channel" caution predates the gate. `pnpm deploy` builds and releases.
+>   Firebase preview channels (`firebase hosting:channel:deploy <name>
+>   --expires 7d`) still work for throwaway links, but they are separate
+>   URLs, not the domain. The work-in-progress pages are `/preview/`,
 >   `/preview/campaigns/` and `/preview/collabs/`, behind the password gate;
 >   the root is still the coming-soon page. Redeploy with
 >   `pnpm build && firebase hosting:channel:deploy <name> --expires 7d`.
