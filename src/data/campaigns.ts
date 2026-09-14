@@ -23,7 +23,7 @@
 // corrected, per the standing copy rule: "activites" (Fall), "pacakging" and
 // "peak into" (Holiday). Flag them to her; do not fix them here.
 
-import { DECK, SEASON_ART, type BandArt } from "./seasonScenes";
+import { DCC_ART, DECK, SEASON_ART, type BandArt } from "./seasonScenes";
 
 /** A name inside `body` that should be a link. Matched as plain text, so the
  *  `text` has to appear in `body` exactly once. */
@@ -381,7 +381,6 @@ export const collabs: Collection[] = [
     // Her deck sets the full series name across the top of the band, centred,
     // rather than the "DCC × Maeve" shorthand.
     briefTitle: "Dungeon Crawler Carl",
-    wordmark: "Virgin Dirty Shirley",
     // The deck's own orange, sampled off the band (#ffa51f), not the theme's
     // marigold: the hero crop below carries this exact colour baked in, so a
     // token that shifts with the palette would leave a seam around it. Same
@@ -399,20 +398,12 @@ export const collabs: Collection[] = [
       nutshell: "none",
       motifs: "right",
       reserve: "none",
-      headingLines: ["Dungeon Crawler", "Carl"],
     },
-    // The band's hero, cropped out of the second Canva export at 260dpi: the
-    // Virgin Dirty Shirley bar photographed in the dungeon, the bar beside
-    // Dinniman's paperback, and Princess Donut breaking over the top of both.
-    showcase: {
-      src: "/motifs/dcc-lineup.webp",
-      height: 1123,
-      alt: "The Virgin Dirty Shirley bar standing in a dungeon of red rubble, the same bar beside the Dungeon Crawler Carl paperback, and Princess Donut in her crown and sunglasses above them",
-    },
-    // No corner motif. The fallback drops Princess Donut into the top-right,
-    // where she lands on top of a centred heading; and her deck does not put
-    // her there anyway — she is in the band's hero photograph.
-    frame: [],
+    // The band itself — stone border, cream title with its vermilion shadow,
+    // full-width copy, Donut over the two photographs in one frame, the posts,
+    // then the website shot with the skull and the eye — is measured from her
+    // deck and composed in seasonScenes.ts (Bart, 2026-09-13).
+    art: DCC_ART,
     posts: [
       ig("DXhouP9Eyjk"),
       ig("DWmFBHYlEOh", "@maevechocolate & @mattdinniman"),

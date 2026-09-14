@@ -158,6 +158,17 @@
 >   bars (`video: true` on a framed layer). Spring's three garden photographs
 >   sit inside one framed group (`children`), badge inside it. Summer's flag
 >   stands come up 65 and lose her crop so the arches show above the cards.
+> - **DCC is on the measured system too (Bart, 2026-09-13):** `DCC_ART` in
+>   seasonScenes.ts. Its stone border is one tall strip (`stones`: tiled up
+>   both sides, turned for the top and bottom runs), the title is cream text
+>   with a hard vermilion shadow (`brief.heading`), the copy runs full width
+>   inside the stones, Donut breaks over the two photographs held in one card
+>   frame, and a `footer` stage under the posts carries the website shot
+>   (framed) with the skull and the eye. The old `dcc-lineup.webp` crop and
+>   the "Virgin Dirty Shirley" wordmark are gone. **Every season's heading now
+>   carries the same hard drop shadow** in a deep tone of its ground
+>   (`SHADOW`). The Holiday frogs: santa on the first card, mirrored to face
+>   in; snow cloud on the last, settled into the rim.
 > - **Page bands and themes:** Campaigns and Collaborations each get a marquee
 >   pinned under the header naming the page. Each page names its theme through
 >   `<ThemeSwitcher theme>`: Campaigns on Pistachio, the home and Collaborations

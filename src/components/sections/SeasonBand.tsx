@@ -3,7 +3,7 @@
 import Image from "next/image";
 import type { CSSProperties, ReactNode } from "react";
 import type { Collection } from "@/data/campaigns";
-import type { ArtLayer, BandArt, TextLayer } from "@/data/seasonScenes";
+import type { ArtLayer, BandArt, Stage, TextLayer } from "@/data/seasonScenes";
 import { CARD_FRAME } from "@/components/shared/PostCard";
 import {
   Nutshell,
@@ -135,7 +135,11 @@ function Brief({ collection, art }: { collection: Collection; art: BandArt }) {
       style={{
         ...WONK,
         ...outlined(collection.outlineDisplay),
-        color: collection.display,
+        color: g.heading?.color ?? collection.display,
+        // A hard, unblurred drop shadow — her title card's, not a soft glow.
+        textShadow: g.heading?.shadow
+          ? `0.05em 0.05em 0 ${g.heading.shadow}`
+          : undefined,
         fontSize: u(g.headingSize),
         marginLeft: centered ? undefined : u(g.headingX!),
         marginTop: g.nutshell.at === "above" ? u(g.nutshell.gap) : undefined,
@@ -231,7 +235,7 @@ export function SeasonBand({
    *  puts them, otherwise gridded beneath it with the frogs on their rims. */
   cards: ReactNode[];
 }) {
-  const { stage, strip } = art;
+  const { stage, strip, stones, footer } = art;
 
   // Art that reaches above the stage's origin — the tips of Fall's leaves, the
   // reindeer's antlers — must not be cut, so the stage box starts as high as
@@ -268,6 +272,28 @@ export function SeasonBand({
             style={{ top: u(-9), width: u(strip.w), height: u(strip.h) }}
           />
         </div>
+      )}
+
+      {stones && (
+        // The stone border: the strip tiled up both sides, under the top and
+        // bottom runs, which are the same strip turned on its side.
+        <>
+          {(["left", "right"] as const).map((side) => (
+            <div
+              key={side}
+              aria-hidden
+              className="pointer-events-none absolute inset-y-0"
+              style={{
+                [side]: 0,
+                width: u(stones.side.w),
+                backgroundImage: `url(${stones.side.src})`,
+                backgroundSize: "100% auto",
+                backgroundRepeat: "repeat-y",
+              }}
+            />
+          ))}
+          <StoneRun stones={stones} edge="top" />
+        </>
       )}
 
       <Brief collection={collection} art={art} />
@@ -312,6 +338,59 @@ export function SeasonBand({
           />
         </div>
       )}
+
+      {footer && <StageBox stage={footer} />}
+
+      {stones && <StoneRun stones={stones} edge="bottom" />}
+    </div>
+  );
+}
+
+// A stage on its own: the box, its layers and logotypes. The main stage also
+// seats cards, so it stays inline above; this one is for a band's footer.
+function StageBox({ stage }: { stage: Stage }) {
+  return (
+    <div
+      className="relative overflow-hidden"
+      style={{ height: u(stage.height) }}
+    >
+      {stage.layers.map((layer, i) => (
+        <Art key={layer.name + i} layer={layer} origin={stage.origin} />
+      ))}
+      {stage.text?.map((layer) => (
+        <Logotype key={layer.text} layer={layer} origin={stage.origin} />
+      ))}
+    </div>
+  );
+}
+
+// One horizontal run of the stone border. In flow and raised, so it paints
+// over the side strips at the corners. The top run starts above the band's
+// edge the way her deck cuts it; the bottom sits flush.
+function StoneRun({
+  stones,
+  edge,
+}: {
+  stones: NonNullable<BandArt["stones"]>;
+  edge: "top" | "bottom";
+}) {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none relative z-10"
+      style={{
+        height: u(stones.band.h),
+        marginTop: edge === "top" ? u(stones.band.y) : undefined,
+      }}
+    >
+      <Image
+        src={stones.band.src}
+        alt=""
+        width={stones.band.px[0]}
+        height={stones.band.px[1]}
+        draggable={false}
+        className="absolute left-0 top-0 h-full w-full max-w-none select-none"
+      />
     </div>
   );
 }

@@ -134,7 +134,7 @@ export function PostGrid({
                   left: `${perch.x}%`,
                   bottom: "100%",
                   width: `${perch.w}%`,
-                  transform: `translateY(${perch.hang * 100}%)`,
+                  transform: `translateY(${perch.hang * 100}%)${perch.flip ? " scaleX(-1)" : ""}`,
                 }}
               />
             ))}
