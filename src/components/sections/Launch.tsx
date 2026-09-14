@@ -1,5 +1,5 @@
-import { PostCard } from "@/components/shared/PostCard";
-import { FRAME_ASPECT, InstagramEmbed } from "@/components/shared/InstagramEmbed";
+import { PostCard, PostPlaceholder } from "@/components/shared/PostCard";
+import { InstagramEmbed } from "@/components/shared/InstagramEmbed";
 import { launchIntro, launchPosts } from "@/data/launch";
 
 // "NATIONAL LAUNCH" — the partner campaign, shown through the posts it produced.
@@ -57,20 +57,7 @@ export function Launch() {
                   ) : (
                     // No link yet: a labelled placeholder holds the shape
                     // rather than an empty frame that reads as broken.
-                    <div
-                      className="flex flex-col justify-between gap-6 p-5"
-                      style={{ aspectRatio: FRAME_ASPECT, color: "var(--ejd-ink)" }}
-                    >
-                      <span
-                        className="font-display text-xl font-black uppercase leading-[0.95]"
-                        style={WONK}
-                      >
-                        {p.partner}
-                      </span>
-                      <span className="font-mono text-xs uppercase tracking-[0.14em] opacity-50">
-                        Awaiting post link
-                      </span>
-                    </div>
+                    <PostPlaceholder label={p.partner} />
                   )
                 }
               />

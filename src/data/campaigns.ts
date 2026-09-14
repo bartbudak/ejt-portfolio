@@ -111,7 +111,28 @@ export interface CollectionPost {
   aspect?: string;
   /** A still, for a post that cannot be embedded or is not linked yet. */
   image?: { src: string; alt: string };
+  /**
+   * No link or still yet: render the labelled placeholder the launch wall
+   * uses, with this label in the frame. Set on the stand-in entries below.
+   */
+  placeholder?: string;
 }
+
+// Her deck shows each band ending in a row of Instagram posts — three under
+// Valentine's, Fall and Holiday, one beside Spring's photographs, two flanking
+// Summer's booth, five under Dungeon Crawler Carl — all exported blank, since
+// Canva cannot rasterise an embed. These hold those slots in the launch wall's
+// placeholder chrome until she sends the links (Bart, 2026-09-13). Replace an
+// entry's `placeholder` with `post` (and a measured `aspect`) as each arrives.
+//
+// ⚠️ "@maevechocolate" is assumed — the brand's handle is not recorded anywhere
+// in the repo or her deck. Confirm it with Ellie before launch.
+const awaiting = (label: string, count: number): CollectionPost[] =>
+  Array.from({ length: count }, (_, i) => ({
+    handle: "@maevechocolate",
+    caption: `Launch post ${i + 1} of ${count}.`,
+    placeholder: label,
+  }));
 
 export interface Collection {
   slug: string;
@@ -171,8 +192,15 @@ export const seasons: Collection[] = [
     ...DECK.valentines,
     motif: "/motifs/valentines-heart.png",
     motifAlt: "A purple candy heart reading “M'Lady (Tips Fedora)”",
-    layout: { align: "left", nutshell: "inline", motifs: "right", reserve: "right", headingLines: ["Valentine's Day", "Brief"] },
+    layout: {
+      align: "left",
+      nutshell: "inline",
+      motifs: "right",
+      reserve: "right",
+      headingLines: ["Valentine's Day", "Brief"],
+    },
     art: SEASON_ART.valentines,
+    posts: awaiting("Valentine's Day", 3),
     rows: [
       {
         label: "Theme",
@@ -184,7 +212,12 @@ export const seasons: Collection[] = [
         // The one name she hyperlinks in this band. Her deck points it at the
         // artist's Instagram, so the site does too rather than leaving it as
         // flat text (Ellie, "please ensure all links are properly linked out").
-        links: [{ text: "Valheria Rocha", href: "https://www.instagram.com/valheria123/" }],
+        links: [
+          {
+            text: "Valheria Rocha",
+            href: "https://www.instagram.com/valheria123/",
+          },
+        ],
       },
     ],
   },
@@ -196,8 +229,14 @@ export const seasons: Collection[] = [
     ...DECK.spring,
     motif: "/motifs/spring-daffodil.png",
     motifAlt: "An illustrated yellow daffodil",
-    layout: { align: "left", nutshell: "inline", motifs: "bottom-row", reserve: "none" },
+    layout: {
+      align: "left",
+      nutshell: "inline",
+      motifs: "bottom-row",
+      reserve: "none",
+    },
     art: SEASON_ART.spring,
+    posts: awaiting("Spring", 1),
     rows: [
       {
         label: "Theme",
@@ -223,6 +262,7 @@ export const seasons: Collection[] = [
     motifAlt: "An illustrated yellow star",
     layout: { align: "left", nutshell: "inline", motifs: "scatter" },
     art: SEASON_ART.summer,
+    posts: awaiting("Summer", 2),
     rows: [
       {
         label: "Theme",
@@ -242,8 +282,14 @@ export const seasons: Collection[] = [
     ...DECK.fall,
     motif: "/motifs/fall-leaf.png",
     motifAlt: "An illustrated orange maple leaf",
-    layout: { align: "center", nutshell: "below", motifs: "top-row", reserve: "none" },
+    layout: {
+      align: "center",
+      nutshell: "below",
+      motifs: "top-row",
+      reserve: "none",
+    },
     art: SEASON_ART.fall,
+    posts: awaiting("Fall", 3),
     rows: [
       {
         label: "Theme",
@@ -263,8 +309,14 @@ export const seasons: Collection[] = [
     ...DECK.holiday,
     motif: "/motifs/holiday-bird.png",
     motifAlt: "An illustrated bird wearing a santa hat",
-    layout: { align: "center", nutshell: "above", motifs: "corners", reserve: "none" },
+    layout: {
+      align: "center",
+      nutshell: "above",
+      motifs: "corners",
+      reserve: "none",
+    },
     art: SEASON_ART.holiday,
+    posts: awaiting("Holiday", 3),
     rows: [
       {
         label: "Theme",
@@ -335,6 +387,7 @@ export const collabs: Collection[] = [
     // where she lands on top of a centred heading; and her deck does not put
     // her there anyway — she is in the band's hero photograph.
     frame: [],
+    posts: awaiting("Dungeon Crawler Carl", 5),
     rows: [
       {
         label: "What",
@@ -378,7 +431,11 @@ export const collabs: Collection[] = [
         drafted: true,
         body: "A Galentine's rom-com trivia night with a co-brewed Pineapple Coco Cacao sour, craft stations, and the collection as the prize table.",
       },
-      { label: "Result", drafted: true, body: "119 attendees, and a chocolate brand in a room full of people who came for beer." },
+      {
+        label: "Result",
+        drafted: true,
+        body: "119 attendees, and a chocolate brand in a room full of people who came for beer.",
+      },
     ],
   },
   {

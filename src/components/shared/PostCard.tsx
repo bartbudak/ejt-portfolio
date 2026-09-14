@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { ExternalIcon } from "@/components/shared/ExternalLink";
+import { FRAME_ASPECT } from "@/components/shared/InstagramEmbed";
 
 // The post card both launch sections use: our own chrome — avatar, handle, then
 // a caption where Instagram puts one — wrapped in the Maeve frame. National
@@ -83,6 +84,29 @@ export function PostCard({
           </a>
         )}
       </div>
+    </div>
+  );
+}
+
+// The media slot while a post has no link yet: a labelled frame that holds the
+// card's shape, rather than an empty one that reads as broken. National Launch
+// has used it since the partner list arrived ahead of the links; the seasonal
+// bands use it for every post until Ellie's links land (2026-09-13).
+export function PostPlaceholder({ label }: { label: string }) {
+  return (
+    <div
+      className="flex flex-col justify-between gap-6 p-5"
+      style={{ aspectRatio: FRAME_ASPECT, color: "var(--ejd-ink)" }}
+    >
+      <span
+        className="font-display text-xl font-black uppercase leading-[0.95]"
+        style={WONK}
+      >
+        {label}
+      </span>
+      <span className="font-mono text-xs uppercase tracking-[0.14em] opacity-50">
+        Awaiting post link
+      </span>
     </div>
   );
 }

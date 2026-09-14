@@ -129,8 +129,14 @@
 >   (`Ellie Thompson Portfolio.png` and `(1)`–`(7)`: the stone frame, Donut, the
 >   skull, the eye, both photographs) and the pipeline already measures page 2's
 >   DCC placements — it is a NAMES entry and a scene away.
-> - The Instagram rows are still waiting on links from Ellie; each band ends
->   where her products end and the post grid appends below when they arrive.
+> - **Instagram rows now hold their slots** with the launch wall's labelled
+>   placeholder (`PostPlaceholder`, shared from `PostCard.tsx`), at the deck's
+>   counts: three under Valentine's, Fall and Holiday, one for Spring, two for
+>   Summer, five under DCC (`awaiting()` in `campaigns.ts`). The grid renders
+>   inside `SeasonBand` so the Valentine's ribbon runs behind it. Swap each
+>   entry's `placeholder` for a `post` + measured `aspect` as links arrive.
+>   **"@maevechocolate" is assumed** — the brand handle is recorded nowhere;
+>   confirm with Ellie.
 
 Portfolio for **Ellie J. Thompson** (creative director) → **elliejthompson.com**.
 Built by Bart (her husband). This doc captures the direction, research, and

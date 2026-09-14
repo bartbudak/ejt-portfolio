@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import type { Collection } from "@/data/campaigns";
 import type { ArtLayer, BandArt, TextLayer } from "@/data/seasonScenes";
 import { Nutshell, WONK, outlined, withLinks } from "./CollectionCopy";
@@ -101,7 +101,10 @@ function Brief({ collection, art }: { collection: Collection; art: BandArt }) {
   );
 
   return (
-    <div className="relative" style={{ paddingTop: u(g.top), paddingBottom: u(g.stageGap) }}>
+    <div
+      className="relative"
+      style={{ paddingTop: u(g.top), paddingBottom: u(g.stageGap) }}
+    >
       {art.edges?.map((layer, i) => (
         <Art key={layer.name + i} layer={layer} />
       ))}
@@ -127,7 +130,8 @@ function Brief({ collection, art }: { collection: Collection; art: BandArt }) {
         {g.nutshell.at === "below" &&
           script({
             marginTop: u(g.nutshell.gap),
-            marginLeft: g.nutshell.x !== undefined ? u(g.nutshell.x) : undefined,
+            marginLeft:
+              g.nutshell.x !== undefined ? u(g.nutshell.x) : undefined,
             textAlign: g.nutshell.x === undefined ? "center" : undefined,
           })}
       </div>
@@ -148,9 +152,11 @@ function Brief({ collection, art }: { collection: Collection; art: BandArt }) {
         {collection.rows.map((row, i) => (
           <div
             key={row.label}
-            style={{ marginTop: i > 0 && g.copy.paragraphGap ? "1.36em" : undefined }}
+            style={{
+              marginTop: i > 0 && g.copy.paragraphGap ? "1.36em" : undefined,
+            }}
           >
-            <dt className="inline font-semibold">{row.label}:{" "}</dt>
+            <dt className="inline font-semibold">{row.label}: </dt>
             <dd className="m-0 inline">{withLinks(row.body, row.links)}</dd>
           </div>
         ))}
@@ -159,7 +165,17 @@ function Brief({ collection, art }: { collection: Collection; art: BandArt }) {
   );
 }
 
-export function SeasonBand({ collection, art }: { collection: Collection; art: BandArt }) {
+export function SeasonBand({
+  collection,
+  art,
+  children,
+}: {
+  collection: Collection;
+  art: BandArt;
+  /** The band's post grid — her third slide — rendered inside the band so a
+   *  strip down the edge runs behind it the way it runs the whole deck page. */
+  children?: ReactNode;
+}) {
   const { stage, strip } = art;
   return (
     <div className="@container relative">
@@ -180,7 +196,10 @@ export function SeasonBand({ collection, art }: { collection: Collection; art: B
 
       <Brief collection={collection} art={art} />
 
-      <div className="relative overflow-hidden" style={{ height: u(stage.height) }}>
+      <div
+        className="relative overflow-hidden"
+        style={{ height: u(stage.height) }}
+      >
         {stage.layers.map((layer, i) => (
           <Art key={layer.name + i} layer={layer} origin={stage.origin} />
         ))}
@@ -188,6 +207,17 @@ export function SeasonBand({ collection, art }: { collection: Collection; art: B
           <Logotype key={layer.text} layer={layer} origin={stage.origin} />
         ))}
       </div>
+
+      {children && (
+        // The grid clears the strip; in her deck the first card starts just
+        // past the ribbon's edge.
+        <div
+          className="relative"
+          style={strip ? { paddingLeft: u(strip.w) } : undefined}
+        >
+          {children}
+        </div>
+      )}
     </div>
   );
 }
