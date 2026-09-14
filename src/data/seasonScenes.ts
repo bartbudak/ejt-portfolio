@@ -158,7 +158,16 @@ export interface BandArt {
   stones?: {
     src: string;
     px: [number, number];
-    pieces: { x: number; y: number; w: number; h: number; rot?: number }[];
+    pieces: {
+      x: number;
+      y: number;
+      w: number;
+      h: number;
+      rot?: number;
+      /** [left, top, right, bottom] cut off the strip, deck units — to drop
+       *  an end brick where two copies meet. */
+      clip?: [number, number, number, number];
+    }[];
   };
 }
 
@@ -428,6 +437,16 @@ export const DCC_ART: BandArt = {
         y: -22,
         w: dccStoneStrip.w,
         h: dccStoneStrip.h,
+      },
+      // The next copy straight below, its top square brick cut off (the brick
+      // and the hairline gap after it, 43.8), so its first long brick meets
+      // the square brick above it.
+      {
+        x: -dccStoneStrip.w / 2,
+        y: -22 + dccStoneStrip.h - 43.8,
+        w: dccStoneStrip.w,
+        h: dccStoneStrip.h,
+        clip: [0, 43.8, 0, 0],
       },
     ],
   },

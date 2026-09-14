@@ -365,6 +365,9 @@ function StoneFrame({ stones }: { stones: NonNullable<BandArt["stones"]> }) {
             width: u(piece.w),
             height: u(piece.h),
             transform: piece.rot ? `rotate(${piece.rot}deg)` : undefined,
+            clipPath: piece.clip
+              ? `inset(${pct(piece.clip[1], piece.h)} ${pct(piece.clip[2], piece.w)} ${pct(piece.clip[3], piece.h)} ${pct(piece.clip[0], piece.w)})`
+              : undefined,
           }}
         />
       ))}
