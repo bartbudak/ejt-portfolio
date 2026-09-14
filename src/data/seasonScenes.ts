@@ -454,7 +454,8 @@ export const DCC_ART: BandArt = {
   },
   footer: {
     origin: 1440,
-    height: 200,
+    // Deep enough for the site shot's frame and its ring below it.
+    height: 220,
     // The eye, the site shot and the skull, spaced evenly across the band
     // between the stone columns (Bart, 2026-09-13); the site shot links out
     // to Matt Dinniman's site, which it is a picture of.

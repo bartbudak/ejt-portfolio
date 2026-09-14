@@ -346,10 +346,7 @@ export function SeasonBand({
 // seats cards, so it stays inline above; this one is for a band's footer.
 function StageBox({ stage }: { stage: Stage }) {
   return (
-    <div
-      className="relative overflow-hidden"
-      style={{ height: u(stage.height) }}
-    >
+    <div className="relative" style={{ height: u(stage.height) }}>
       {stage.layers.map((layer, i) => (
         <Art key={layer.name + i} layer={layer} origin={stage.origin} />
       ))}
@@ -455,8 +452,8 @@ function StoneFrame({ stones }: { stones: NonNullable<BandArt["stones"]> }) {
 
   const { strip, run } = stones;
   const pieces = H ? stoneColumn(strip, H) : [];
-  // between the corner bricks, a join's gap off each
-  const runStart = strip.w / 2 + 3;
+  // from corner brick to corner brick, the end bricks touching the squares
+  const runStart = strip.w / 2;
   const runPieces = H ? stoneRun(run, 1024 - 2 * runStart) : [];
 
   return (
