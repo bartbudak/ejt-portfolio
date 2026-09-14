@@ -25,6 +25,7 @@
 
 import {
   dccArt,
+  dccStoneRun,
   dccStoneStrip,
   fallArt,
   holidayArt,
@@ -51,6 +52,9 @@ export interface ArtLayer {
   clip?: [number, number, number, number];
   /** Wrap it in the post card's frame — a photograph standing in a card's place. */
   frame?: boolean;
+  /** Make it a link out, with `alt` as its accessible name. */
+  href?: string;
+  alt?: string;
   /** `src` is a video, not a picture: plays muted on a loop, in the frame. */
   video?: boolean;
   /** A framed group: these layers render inside this box, cropped to it,
@@ -156,7 +160,13 @@ export interface BandArt {
    *  brick cut off so brick meets brick, the top square brick centred on the
    *  top corner and the bottom one on the bottom corner (Bart, 2026-09-13).
    *  `overhang` is how far the top brick reaches above the panel's edge. */
-  stones?: { strip: typeof dccStoneStrip; overhang: number };
+  stones?: {
+    strip: typeof dccStoneStrip;
+    /** The strip with its square bricks cut off, on its side, for the runs
+     *  along the top and bottom between the corner bricks. */
+    run: typeof dccStoneRun;
+    overhang: number;
+  };
 }
 
 const pick = (layers: ArtLayer[], ...names: string[]) =>
@@ -418,6 +428,7 @@ export const DCC_ART: BandArt = {
   // side matches. Laid out live from the band's height — see StoneFrame.
   stones: {
     strip: dccStoneStrip,
+    run: dccStoneRun,
     // Half the top square brick: the brick's centre sits on the corner.
     overhang: dccStoneStrip.gaps[0][0] / 2,
   },
@@ -444,9 +455,18 @@ export const DCC_ART: BandArt = {
   footer: {
     origin: 1440,
     height: 200,
+    // The eye, the site shot and the skull, spaced evenly across the band
+    // between the stone columns (Bart, 2026-09-13); the site shot links out
+    // to Matt Dinniman's site, which it is a picture of.
     layers: [
-      ...tweak(pick(dccArt, "website"), "website", { frame: true }),
-      ...pick(dccArt, "skull", "eye"),
+      ...tweak(pick(dccArt, "eye"), "eye", { x: 128 }),
+      ...tweak(pick(dccArt, "website"), "website", {
+        frame: true,
+        x: 335,
+        href: "https://mattdinniman.com/",
+        alt: "Matt Dinniman's website, announcing the Mama's Night Off game by Maeve Chocolate",
+      }),
+      ...tweak(pick(dccArt, "skull"), "skull", { x: 777 }),
     ],
   },
 };

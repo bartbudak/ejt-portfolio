@@ -48,11 +48,20 @@ function Art({ layer, origin = 0 }: { layer: ArtLayer; origin?: number }) {
   if (layer.frame) {
     // Something in a card's place — a photograph, a clip, or a group of
     // pictures — with the post card's frame around it. The ring is drawn
-    // outside the box, so the box stays where she put the picture.
+    // outside the box, so the box stays where she put the picture. With an
+    // `href` it is a link, and the one piece of art that is not decorative.
+    const Frame = layer.href ? "a" : "div";
     return (
-      <div
-        aria-hidden
-        className="pointer-events-none absolute overflow-hidden"
+      <Frame
+        {...(layer.href
+          ? {
+              href: layer.href,
+              target: "_blank",
+              rel: "noreferrer",
+              "aria-label": layer.alt,
+            }
+          : { "aria-hidden": true })}
+        className={`absolute overflow-hidden ${layer.href ? "" : "pointer-events-none"}`}
         style={{ ...CARD_FRAME, ...box, margin: 0, fontSize: DECK_EM }}
       >
         {layer.children ? (
@@ -82,7 +91,7 @@ function Art({ layer, origin = 0 }: { layer: ArtLayer; origin?: number }) {
             className="h-full w-full select-none object-cover"
           />
         )}
-      </div>
+      </Frame>
     );
   }
 
@@ -397,8 +406,40 @@ function stoneColumn(strip: StoneStrip, H: number): StripPiece[] {
   return pieces;
 }
 
+// A run of the strip-without-its-square-bricks along an edge, between the two
+// corner bricks: copies chained left to right with a brick's gap at each join,
+// cut where a gap falls nearest the far corner brick and stretched by the
+// remainder, exactly as the columns are. Positions from the run's start.
+function stoneRun(
+  run: NonNullable<BandArt["stones"]>["run"],
+  L: number,
+): StripPiece[] {
+  const join = 3;
+  const chain: number[] = [];
+  const bounds: { at: number; k: number }[] = [];
+  let x = 0;
+  for (let k = 0; k < 60; k++) {
+    chain.push(x);
+    for (const [g0] of run.gaps) bounds.push({ at: x + g0, k });
+    bounds.push({ at: x + run.len, k });
+    if (x + run.len > L + run.len) break;
+    x += run.len + join;
+  }
+  let best = bounds[0];
+  for (const b of bounds)
+    if (Math.abs(b.at - L) < Math.abs(best.at - L)) best = b;
+  const f = best.at > 0 ? L / best.at : 1;
+  return chain.slice(0, best.k + 1).map((x0, i) => ({
+    y: x0 * f,
+    h: run.len * f,
+    clipTop: 0,
+    clipBottom: i === best.k ? run.len - (best.at - x0) : 0,
+  }));
+}
+
 // The stone frame, laid out live: it measures the band and stands a column of
-// the strip down each side. Above everything and free to sit outside the edge.
+// the strip down each side and a run along the top and bottom between the
+// corner bricks. Above everything and free to sit outside the edge.
 function StoneFrame({ stones }: { stones: NonNullable<BandArt["stones"]> }) {
   const ref = useRef<HTMLDivElement>(null);
   const [H, setH] = useState<number | null>(null);
@@ -412,8 +453,11 @@ function StoneFrame({ stones }: { stones: NonNullable<BandArt["stones"]> }) {
     return () => ro.disconnect();
   }, []);
 
-  const { strip } = stones;
+  const { strip, run } = stones;
   const pieces = H ? stoneColumn(strip, H) : [];
+  // between the corner bricks, a join's gap off each
+  const runStart = strip.w / 2 + 3;
+  const runPieces = H ? stoneRun(run, 1024 - 2 * runStart) : [];
 
   return (
     <div
@@ -444,6 +488,29 @@ function StoneFrame({ stones }: { stones: NonNullable<BandArt["stones"]> }) {
           />
         )),
       )}
+      {H !== null &&
+        [-strip.w / 2, H - strip.w / 2].map((y, edge) =>
+          runPieces.map((piece, i) => (
+            <Image
+              key={`run-${edge}-${i}`}
+              src={run.src}
+              alt=""
+              width={run.px[0]}
+              height={run.px[1]}
+              draggable={false}
+              className="absolute max-w-none select-none"
+              style={{
+                left: u(runStart + piece.y),
+                top: u(y),
+                width: u(piece.h),
+                height: u(strip.w),
+                clipPath: piece.clipBottom
+                  ? `inset(0 ${pct(piece.clipBottom, run.len)} 0 0)`
+                  : undefined,
+              }}
+            />
+          )),
+        )}
     </div>
   );
 }

@@ -178,8 +178,12 @@
 >   panel holds off the tabs by that `overhang`), the bottom square brick
 >   centred on the bottom corner, and the chain cut where a gap falls nearest
 >   it, the column stretched by the small remainder (a few percent at most).
->   The panel is bare, square and unclipped for a stoned band. No top or
->   bottom runs yet — Bart is directing the frame one step at a time.
+>   The panel is bare, square and unclipped for a stoned band. The top and
+>   bottom runs are the same strip with both square bricks cut off and turned
+>   on its side (`dccStoneRun`, its own gap map), chained between the corner
+>   bricks the same way (`stoneRun`). The footer row — eye, site shot, skull —
+>   is spaced evenly between the columns, and the site shot links out to
+>   mattdinniman.com (`href`/`alt` on a framed layer make it a real link).
 > - **Page bands and themes:** Campaigns and Collaborations each get a marquee
 >   pinned under the header naming the page. Each page names its theme through
 >   `<ThemeSwitcher theme>`: Campaigns on Pistachio, the home and Collaborations

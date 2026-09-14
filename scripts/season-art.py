@@ -411,6 +411,22 @@ lines.append("  w: 51,")
 lines.append(f"  h: {round(sh * unit, 1)},")
 lines.append("  gaps: [" + ", ".join(f"[{a}, {b}]" for a, b in gaps) + "] as [number, number][],")
 lines.append("};")
+# the same strip with both square bricks cut off and turned on its side, for
+# the runs along the top and bottom; its gaps run left to right
+cut0, cut1 = round(gaps[0][1] / unit), round(gaps[-1][0] / unit)
+run = strip.crop((0, cut0, sw, cut1)).rotate(90, expand=True)
+run.save(os.path.join(out_dir, "dcc", "stone-run.webp"), "WEBP", lossless=True, quality=100, method=6)
+run_gaps = [(round(a - gaps[0][1], 1), round(b - gaps[0][1], 1)) for a, b in gaps[1:-1]]
+lines.append("/** The same strip with both square bricks cut off and turned on its side,")
+lines.append(" *  for the runs along the top and bottom: its length on the canvas at the")
+lines.append(" *  strip's width, and the gaps between its bricks from the left. */")
+lines.append("export const dccStoneRun = {")
+lines.append('  src: "/motifs/seasons/dcc/stone-run.webp",')
+lines.append(f"  px: [{run.width}, {run.height}] as [number, number],")
+lines.append("  w: 51,")
+lines.append(f"  len: {round((cut1 - cut0) * unit, 1)},")
+lines.append("  gaps: [" + ", ".join(f"[{a}, {b}]" for a, b in run_gaps) + "] as [number, number][],")
+lines.append("};")
 
 with open(os.path.join(REPO, "src", "data", "seasonArt.ts"), "w") as f:
     f.write("\n".join(lines) + "\n")

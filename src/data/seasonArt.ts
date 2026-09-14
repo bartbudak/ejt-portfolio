@@ -120,3 +120,13 @@ export const dccStoneStrip = {
   h: 579.1,
   gaps: [[40.8, 43.4], [112.5, 115.5], [182.9, 186.2], [253.7, 256.3], [324.1, 328.0], [395.5, 398.5], [465.9, 468.9], [533.4, 535.3]] as [number, number][],
 };
+/** The same strip with both square bricks cut off and turned on its side,
+ *  for the runs along the top and bottom: its length on the canvas at the
+ *  strip's width, and the gaps between its bricks from the left. */
+export const dccStoneRun = {
+  src: "/motifs/seasons/dcc/stone-run.webp",
+  px: [1489, 155] as [number, number],
+  w: 51,
+  len: 489.9,
+  gaps: [[69.1, 72.1], [139.5, 142.8], [210.3, 212.9], [280.7, 284.6], [352.1, 355.1], [422.5, 425.5]] as [number, number][],
+};
