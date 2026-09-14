@@ -106,7 +106,13 @@ export interface BriefGeometry {
   headingSize: number;
   /** "In a nutshell": where, and the gap (or overlap, negative) to the heading.
    *  `x` is its left edge for the ranged-left placements. */
-  nutshell: { at: "below" | "inline" | "above"; x?: number; gap: number };
+  nutshell: {
+    at: "below" | "inline" | "above";
+    x?: number;
+    gap: number;
+    /** Point size on the 1024 canvas; 40 unless a band needs it smaller. */
+    size?: number;
+  };
   /** The copy column: its left and right insets, the gap above it, and whether
    *  she left a blank line between Theme and Launch Campaign. */
   copy: { left: number; right: number; gap: number; paragraphGap: boolean };
@@ -250,7 +256,9 @@ export const SEASON_ART: Record<keyof typeof DECK, BandArt> = {
     brief: {
       top: 28,
       headingSize: 98,
-      nutshell: { at: "below", gap: -12 },
+      // Smaller and sitting clear under the heading rather than tucked into
+      // it, so the script no longer runs over FALL's feet (Bart, 2026-09-13).
+      nutshell: { at: "below", gap: 0, size: 30 },
       copy: { left: 169, right: 174, gap: 122, paragraphGap: true },
       stageGap: 4,
     },

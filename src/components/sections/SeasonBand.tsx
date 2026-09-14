@@ -132,7 +132,7 @@ function Brief({ collection, art }: { collection: Collection; art: BandArt }) {
     <Nutshell
       collection={collection}
       className="whitespace-nowrap pb-0 sm:pb-0"
-      style={{ fontSize: u(40), lineHeight: 1, ...extra }}
+      style={{ fontSize: u(g.nutshell.size ?? 40), lineHeight: 1, ...extra }}
     />
   );
 
