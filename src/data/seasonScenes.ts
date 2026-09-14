@@ -226,8 +226,19 @@ export const SEASON_ART: Record<keyof typeof DECK, BandArt> = {
       // Deep enough for the two cards, which run below her band's foot.
       height: 1440,
       // The market photograph stands in a card's place, so it gets the card's
-      // frame (Bart, 2026-09-13).
-      layers: tweak(summerArt, "photo-market", { frame: true }),
+      // frame, narrowed and centred on the booth so its ring clears the cards'
+      // rings either side, and drawn LAST so the frame sits over the awning
+      // rather than under it (Bart, 2026-09-13).
+      layers: [
+        ...rest(summerArt, "photo-market"),
+        ...tweak(pick(summerArt, "photo-market"), "photo-market", {
+          frame: true,
+          x: 342,
+          y: 1322,
+          w: 340,
+          h: 236,
+        }),
+      ],
       // Her two posts flank the chocolate booth, touching it either side.
       posts: [
         { x: 20, y: 1319, w: 281 },
@@ -269,7 +280,10 @@ export const SEASON_ART: Record<keyof typeof DECK, BandArt> = {
     edges: pick(holidayArt, "skewers-left", "skewers-right"),
     stage: {
       origin: 505,
-      height: 855,
+      // Ends just under the products, so the cards come up to meet them
+      // (Bart, 2026-09-13); the lights-hanger's legs are cut here, as her
+      // deck's first card cuts them.
+      height: 735,
       // The pixel frog is retired in favour of the two drawn ones perched on
       // the post frames below (Bart, 2026-09-13).
       layers: rest(holidayArt, "skewers-left", "skewers-right", "frog"),
@@ -277,23 +291,24 @@ export const SEASON_ART: Record<keyof typeof DECK, BandArt> = {
     // The two frogs Bart drew in (2026-09-13) live in public/motifs/, not the
     // generated seasons/ folder, which the pipeline wipes on every run.
     perches: [
-      // Santa-hat frog sitting on the first card's rim, toes just over it.
+      // Frog on a snow cloud on the first card, the cloud settled into the rim
+      // so it reads as snow on the frame, icicles dripping over the header.
       {
         post: 0,
+        src: "/motifs/holiday-frog-snow.webp",
+        px: [395, 420],
+        w: 38,
+        x: 4,
+        hang: 0.56,
+      },
+      // Santa-hat frog sitting on the last card's rim, toes just over it.
+      {
+        post: 2,
         src: "/motifs/holiday-frog-santa.webp",
         px: [306, 420],
         w: 24,
-        x: 7,
+        x: 68,
         hang: 0.04,
-      },
-      // Frog on a snow cloud on the last card, icicles dripping over the rim.
-      {
-        post: 2,
-        src: "/motifs/holiday-frog-snow.webp",
-        px: [395, 420],
-        w: 36,
-        x: 56,
-        hang: 0.42,
       },
     ],
   },
