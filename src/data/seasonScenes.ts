@@ -25,6 +25,7 @@
 
 import {
   dccArt,
+  dccStones,
   fallArt,
   holidayArt,
   springArt,
@@ -150,11 +151,13 @@ export interface BandArt {
   /** A second stage under the post grid — DCC's website shot with its skull
    *  and eye. */
   footer?: Stage;
-  /** A stone border round the band: one tall strip tiled up both sides, and
-   *  the same strip turned to run along the top and bottom. */
+  /** A stone border AS the band's frame, replacing the panel's ring: `side`
+   *  tiled down both edges the whole way, `run` tiled between them along the
+   *  top and bottom, every tile ending in a gap so blocks never touch. */
   stones?: {
-    side: { src: string; px: [number, number]; w: number; h: number };
-    band: { src: string; px: [number, number]; h: number; y: number };
+    side: { src: string; px: [number, number] };
+    run: { src: string; px: [number, number] };
+    w: number;
   };
 }
 
@@ -177,20 +180,9 @@ export const DECK = {
   holiday: { ground: "#cc0000", display: "#ffffff", body: "#000000" },
 } as const;
 
-// The hard shadow under each season's heading: a deep tone of its own ground,
-// so the letters lift off the band the way her DCC title does off its orange.
-const SHADOW = {
-  valentines: "#5d1f9e",
-  spring: "#4b6a1f",
-  summer: "#1c6f9e",
-  fall: "#7a2e00",
-  holiday: "#7a0000",
-} as const;
-
 export const SEASON_ART: Record<keyof typeof DECK, BandArt> = {
   valentines: {
     brief: {
-      heading: { shadow: SHADOW.valentines },
       top: 40,
       headingX: 94,
       headingSize: 78,
@@ -232,7 +224,6 @@ export const SEASON_ART: Record<keyof typeof DECK, BandArt> = {
   },
   spring: {
     brief: {
-      heading: { shadow: SHADOW.spring },
       top: 55,
       headingX: 93,
       headingSize: 98,
@@ -285,7 +276,6 @@ export const SEASON_ART: Record<keyof typeof DECK, BandArt> = {
   },
   summer: {
     brief: {
-      heading: { shadow: SHADOW.summer },
       top: 63,
       headingX: 75,
       headingSize: 98,
@@ -338,7 +328,6 @@ export const SEASON_ART: Record<keyof typeof DECK, BandArt> = {
   },
   fall: {
     brief: {
-      heading: { shadow: SHADOW.fall },
       top: 28,
       headingSize: 98,
       // Smaller and sitting clear under the heading rather than tucked into
@@ -361,7 +350,6 @@ export const SEASON_ART: Record<keyof typeof DECK, BandArt> = {
   },
   holiday: {
     brief: {
-      heading: { shadow: SHADOW.holiday },
       top: 142,
       headingSize: 98,
       // Tighter under the script and more air over the copy than her deck
@@ -414,25 +402,20 @@ export const SEASON_ART: Record<keyof typeof DECK, BandArt> = {
 // Her band, measured the same way: a stone border all round, the title over
 // full-width copy, Princess Donut breaking over the two photographs, the posts,
 // then Matt Dinniman's site announcement flanked by the skull and the eye.
-const stoneV = pick(dccArt, "stone-v")[0];
-const stoneH = pick(dccArt, "stone-h")[0];
-
 export const DCC_ART: BandArt = {
   brief: {
-    // Her title's top sits at 86.6; the top stones take the first 72.
-    top: 14,
+    // Her title's top sits at 86.6; the top run of stones takes the first 51.
+    top: 36,
     headingSize: 62,
-    // Cream letters with a vermilion shadow, as her title card has them.
-    heading: { color: "var(--mv-paper)", shadow: "var(--ejd-vermilion)" },
     nutshell: { at: "none", gap: 0 },
     // Full width, inside the stones, as she runs it.
     copy: { left: 70, right: 70, gap: 7, paragraphGap: false },
     stageGap: 0,
   },
-  stones: {
-    side: { src: stoneV.src, px: stoneV.px, w: stoneV.w, h: stoneV.h },
-    band: { src: stoneH.src, px: stoneH.px, h: stoneH.h, y: stoneH.y },
-  },
+  // The stones are the frame itself (Bart, 2026-09-13): built from the tall
+  // strip alone, down both sides the whole way and across the top and bottom
+  // between them, with no two blocks touching.
+  stones: dccStones,
   stage: {
     origin: 525,
     height: 585,

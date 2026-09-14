@@ -109,3 +109,7 @@ export const dccArt: ArtLayer[] = [
 /** The bookmark ribbon down the Valentine's band's left edge, drawn once at
  *  the top, 77.2 deck units wide; `tile` is its binding, repeated below it. */
 export const valentinesRibbon = { src: "/motifs/seasons/valentines/ribbon.webp", tile: "/motifs/seasons/valentines/ribbon-tile.webp", px: [193, 2886] as [number, number], w: 77.2, h: 1162.7 };
+/** The DCC stone border: a five-block tile for the side columns and a
+ *  one-block tile for the runs, both ending in a gap so blocks never touch;
+ *  `w` is the border's thickness, her side strip's 51. */
+export const dccStones = { side: { src: "/motifs/seasons/dcc/stone-side.webp", px: [128, 887] as [number, number] }, run: { src: "/motifs/seasons/dcc/stone-run.webp", px: [176, 128] as [number, number] }, w: 51 };

@@ -275,24 +275,24 @@ export function SeasonBand({
       )}
 
       {stones && (
-        // The stone border: the strip tiled up both sides, under the top and
-        // bottom runs, which are the same strip turned on its side.
+        // The stone frame: the side tile down both edges for the band's whole
+        // height, and the run tile across the top between them.
         <>
           {(["left", "right"] as const).map((side) => (
             <div
               key={side}
               aria-hidden
-              className="pointer-events-none absolute inset-y-0"
+              className="pointer-events-none absolute inset-y-0 z-10"
               style={{
                 [side]: 0,
-                width: u(stones.side.w),
+                width: u(stones.w),
                 backgroundImage: `url(${stones.side.src})`,
                 backgroundSize: "100% auto",
                 backgroundRepeat: "repeat-y",
               }}
             />
           ))}
-          <StoneRun stones={stones} edge="top" />
+          <StoneRun stones={stones} />
         </>
       )}
 
@@ -341,7 +341,7 @@ export function SeasonBand({
 
       {footer && <StageBox stage={footer} />}
 
-      {stones && <StoneRun stones={stones} edge="bottom" />}
+      {stones && <StoneRun stones={stones} />}
     </div>
   );
 }
@@ -364,33 +364,22 @@ function StageBox({ stage }: { stage: Stage }) {
   );
 }
 
-// One horizontal run of the stone border. In flow and raised, so it paints
-// over the side strips at the corners. The top run starts above the band's
-// edge the way her deck cuts it; the bottom sits flush.
-function StoneRun({
-  stones,
-  edge,
-}: {
-  stones: NonNullable<BandArt["stones"]>;
-  edge: "top" | "bottom";
-}) {
+// One run of the stone border across the band, between the two side columns
+// and a gap off each. `round` fits a whole number of blocks to the width,
+// scaling them a hair rather than cutting one or letting two meet.
+function StoneRun({ stones }: { stones: NonNullable<BandArt["stones"]> }) {
   return (
     <div
       aria-hidden
-      className="pointer-events-none relative z-10"
+      className="pointer-events-none relative"
       style={{
-        height: u(stones.band.h),
-        marginTop: edge === "top" ? u(stones.band.y) : undefined,
+        height: u(stones.w),
+        marginLeft: u(stones.w + 4),
+        marginRight: u(stones.w + 4),
+        backgroundImage: `url(${stones.run.src})`,
+        backgroundSize: "auto 100%",
+        backgroundRepeat: "round no-repeat",
       }}
-    >
-      <Image
-        src={stones.band.src}
-        alt=""
-        width={stones.band.px[0]}
-        height={stones.band.px[1]}
-        draggable={false}
-        className="absolute left-0 top-0 h-full w-full max-w-none select-none"
-      />
-    </div>
+    />
   );
 }

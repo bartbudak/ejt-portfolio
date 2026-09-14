@@ -372,6 +372,28 @@ tile.save(os.path.join(out_dir, "valentines", "ribbon-tile.webp"), "WEBP", lossl
 lines.append("/** The bookmark ribbon down the Valentine's band's left edge, drawn once at")
 lines.append(f" *  the top, {ribbon['w']} deck units wide; `tile` is its binding, repeated below it. */")
 lines.append(f'export const valentinesRibbon = {{ src: "{ribbon["src"]}", tile: "/motifs/seasons/valentines/ribbon-tile.webp", px: [{ribbon["px"][0]}, {ribbon["px"][1]}] as [number, number], w: {ribbon["w"]}, h: {ribbon["h"]} }};')
+# The DCC stone border, as tiles. The strip's blocks sit 6-18px apart, but its
+# ends are blocks, so tiled as-is two blocks meet at every seam. These tiles end
+# in a gap instead: five varied blocks for the tall side columns, one block for
+# the runs across the top and bottom (turned on its side, and repeated with
+# `round` so no block is ever cut or touching).
+stone = alpha_image(198)
+GAP = 12
+def with_gap(img):
+    out = Image.new("RGBA", (img.width, img.height + GAP), (0, 0, 0, 0))
+    out.paste(img, (0, 0))
+    return out
+side = with_gap(stone.crop((0, 180, stone.width, 1602)))
+side = side.resize((128, round(side.height * 128 / side.width)), Image.LANCZOS)
+side.save(os.path.join(out_dir, "dcc", "stone-side.webp"), "WEBP", lossless=True, quality=100, method=6)
+run = with_gap(stone.crop((0, 180, stone.width, 453))).rotate(90, expand=True)
+run = run.resize((round(run.width * 128 / run.height), 128), Image.LANCZOS)
+run.save(os.path.join(out_dir, "dcc", "stone-run.webp"), "WEBP", lossless=True, quality=100, method=6)
+lines.append("/** The DCC stone border: a five-block tile for the side columns and a")
+lines.append(" *  one-block tile for the runs, both ending in a gap so blocks never touch;")
+lines.append(" *  `w` is the border's thickness, her side strip's 51. */")
+lines.append(f'export const dccStones = {{ side: {{ src: "/motifs/seasons/dcc/stone-side.webp", px: [{side.width}, {side.height}] as [number, number] }}, run: {{ src: "/motifs/seasons/dcc/stone-run.webp", px: [{run.width}, {run.height}] as [number, number] }}, w: 51 }};')
+
 with open(os.path.join(REPO, "src", "data", "seasonArt.ts"), "w") as f:
     f.write("\n".join(lines) + "\n")
 

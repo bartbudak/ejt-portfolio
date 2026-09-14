@@ -262,20 +262,33 @@ export function Collections({ title, intro, items, tone }: Props) {
           // The panel is a bare frame; the brief section inside it carries the
           // padding and the product lineup runs full-bleed beneath it.
           className="relative isolate overflow-hidden rounded-lg"
-          style={{
-            backgroundColor: current.ground,
-            // The Maeve frame from the compare section — soft-black hairline, a
-            // 7px ring, then a second hairline outside it — but ringed in the
-            // collection's own display colour rather than Maeve's red, so each
-            // band is framed in its own palette.
-            border: "var(--mv-stroke) solid var(--ejd-ink)",
-            boxShadow: `0 0 0 var(--mv-frame) ${current.display}, 0 0 0 calc(var(--mv-frame) + var(--mv-stroke)) var(--ejd-ink)`,
-            borderRadius: 28,
-            // The ring is drawn outside the border box, so the panel has to hold
-            // it off its neighbours itself.
-            margin: "calc(var(--mv-frame) + var(--mv-stroke))",
-            marginTop: "calc(var(--mv-frame) + var(--mv-stroke) + 1.25rem)",
-          }}
+          style={
+            current.art?.stones
+              ? {
+                  // A band that brings its own frame — DCC's stones — takes
+                  // the panel bare: no ring, square corners, the stones flush
+                  // to the edge (Bart, 2026-09-13).
+                  backgroundColor: current.ground,
+                  borderRadius: 0,
+                  marginTop:
+                    "calc(var(--mv-frame) + var(--mv-stroke) + 1.25rem)",
+                }
+              : {
+                  backgroundColor: current.ground,
+                  // The Maeve frame from the compare section — soft-black hairline, a
+                  // 7px ring, then a second hairline outside it — but ringed in the
+                  // collection's own display colour rather than Maeve's red, so each
+                  // band is framed in its own palette.
+                  border: "var(--mv-stroke) solid var(--ejd-ink)",
+                  boxShadow: `0 0 0 var(--mv-frame) ${current.display}, 0 0 0 calc(var(--mv-frame) + var(--mv-stroke)) var(--ejd-ink)`,
+                  borderRadius: 28,
+                  // The ring is drawn outside the border box, so the panel has to hold
+                  // it off its neighbours itself.
+                  margin: "calc(var(--mv-frame) + var(--mv-stroke))",
+                  marginTop:
+                    "calc(var(--mv-frame) + var(--mv-stroke) + 1.25rem)",
+                }
+          }
         >
           {current.art ? (
             // The five seasons: her band, measured and rebuilt. See SeasonBand.

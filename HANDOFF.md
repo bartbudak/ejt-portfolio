@@ -165,10 +165,15 @@
 >   inside the stones, Donut breaks over the two photographs held in one card
 >   frame, and a `footer` stage under the posts carries the website shot
 >   (framed) with the skull and the eye. The old `dcc-lineup.webp` crop and
->   the "Virgin Dirty Shirley" wordmark are gone. **Every season's heading now
->   carries the same hard drop shadow** in a deep tone of its ground
->   (`SHADOW`). The Holiday frogs: santa on the first card, mirrored to face
+>   the "Virgin Dirty Shirley" wordmark are gone. The title shadows tried on
+>   every band were taken off again at Bart's ask, and the DCC title is back
+>   to vermilion. The Holiday frogs: santa on the first card, mirrored to face
 >   in; snow cloud on the last, settled into the rim.
+> - **The stones ARE the DCC frame** (Bart, later): the panel drops its ring
+>   and radius for a stoned band, and `dccStones` (cut by the pipeline from
+>   the tall strip alone) tiles the sides the whole way down and the runs
+>   across the top and bottom between them, every tile ending in a gap so no
+>   two blocks touch; the runs repeat with `round` so none is cut.
 > - **Page bands and themes:** Campaigns and Collaborations each get a marquee
 >   pinned under the header naming the page. Each page names its theme through
 >   `<ThemeSwitcher theme>`: Campaigns on Pistachio, the home and Collaborations
