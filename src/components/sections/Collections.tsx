@@ -185,7 +185,9 @@ export function Collections({ title, intro, items, tone }: Props) {
       className="w-full px-5 py-16 sm:px-10 sm:py-24"
       style={{ backgroundColor: tone.ground }}
     >
-      <div className="mx-auto w-full max-w-6xl">
+      {/* A container, so the panel can hold itself off the tabs by however far
+          its frame reaches above its own edge, in the frame's own units. */}
+      <div className="@container mx-auto w-full max-w-6xl">
         {/* Centred, as Ellie asked (2026-09-11), so the page opens the way
             every heading on About does rather than ranged left on its own. The
             intro follows it into the centre column; ranged-left copy under a
@@ -274,9 +276,17 @@ export function Collections({ title, intro, items, tone }: Props) {
                   // to the edge (Bart, 2026-09-13).
                   backgroundColor: current.ground,
                   borderRadius: 0,
-                  // No ring to hold off the tabs, so the same visual gap as
-                  // a ringed panel's ring edge: the 1.25rem alone.
-                  marginTop: "1.25rem",
+                  // No ring to hold off the tabs: the 1.25rem a ringed panel
+                  // keeps, plus however far the stone frame reaches above the
+                  // panel's edge, so the two never overlap (Bart, 2026-09-13).
+                  marginTop: `calc(1.25rem + ${(
+                    (Math.max(
+                      0,
+                      ...current.art.stones.pieces.map((p) => -p.y),
+                    ) /
+                      1024) *
+                    100
+                  ).toFixed(3)}cqw)`,
                 }
               : {
                   backgroundColor: current.ground,
