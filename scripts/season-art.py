@@ -244,6 +244,8 @@ for d in placed:
         continue
     elements.append(dict(d, name=name, kind=kind))
 
+# Wholly generated: anything hand-added here is lost on the next run. Hand-drawn
+# extras (the Holiday frogs) live one level up in public/motifs/.
 out_dir = os.path.join(REPO, "public", "motifs", "seasons")
 shutil.rmtree(out_dir, ignore_errors=True)
 written = {}
@@ -349,9 +351,15 @@ for band in BANDS[:5]:
         lines.append("  { " + ", ".join(parts) + " },")
     lines.append("];\n")
 ribbon = next(l for l in layers["valentines"] if l["name"] == "ribbon")
-lines.append("/** The bookmark ribbon down the Valentine's band's left edge — tiled down the")
-lines.append(f" *  whole band, {ribbon['w']} deck units wide. */")
-lines.append(f'export const valentinesRibbon = {{ src: "{ribbon["src"]}", px: [{ribbon["px"][0]}, {ribbon["px"][1]}] as [number, number], w: {ribbon["w"]} }};')
+# The book's binding, as a tile: a slice of the ribbon file from below the
+# purple bookmark, where it is only vertical lines, so it repeats without a seam
+# and the bookmark is drawn once at the top rather than at every repeat.
+rib = Image.open(os.path.join(out_dir, "valentines", "ribbon.webp"))
+tile = rib.crop((0, int(rib.height * 0.52), rib.width, int(rib.height * 0.66)))
+tile.save(os.path.join(out_dir, "valentines", "ribbon-tile.webp"), "WEBP", lossless=True, quality=100, method=6)
+lines.append("/** The bookmark ribbon down the Valentine's band's left edge, drawn once at")
+lines.append(f" *  the top, {ribbon['w']} deck units wide; `tile` is its binding, repeated below it. */")
+lines.append(f'export const valentinesRibbon = {{ src: "{ribbon["src"]}", tile: "/motifs/seasons/valentines/ribbon-tile.webp", px: [{ribbon["px"][0]}, {ribbon["px"][1]}] as [number, number], w: {ribbon["w"]}, h: {ribbon["h"]} }};')
 with open(os.path.join(REPO, "src", "data", "seasonArt.ts"), "w") as f:
     f.write("\n".join(lines) + "\n")
 

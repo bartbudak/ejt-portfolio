@@ -5,7 +5,14 @@ import { useState } from "react";
 import type { Collection } from "@/data/campaigns";
 import { PostCard, PostPlaceholder } from "@/components/shared/PostCard";
 import { InstagramEmbed } from "@/components/shared/InstagramEmbed";
-import { Nutshell, WONK, outlined, withLinks } from "./CollectionCopy";
+import {
+  Nutshell,
+  PostGrid,
+  WONK,
+  outlined,
+  withLinks,
+} from "./CollectionCopy";
+import { RedditEmbed } from "@/components/shared/RedditEmbed";
 import { SeasonBand } from "./SeasonBand";
 
 // The Campaigns page and the Collaborations page: one component, two tabs. They
@@ -135,47 +142,42 @@ export function Collections({ title, intro, items, tone }: Props) {
     document.getElementById(`collection-tab-${next.slug}`)?.focus();
   };
 
-  // Her third slide: the posts the launch produced, in the same card chrome the
-  // National Launch wall uses (Ellie, 2026-09-11). It sits inside the panel, on
-  // the collection's own ground, so it reads as the last part of that band
-  // rather than a separate section. A post with no link yet gets the same
-  // labelled placeholder the launch wall uses, so the row holds its shape
-  // until Ellie's links land (Bart, 2026-09-13).
-  const posts = current.posts?.length ? (
-    <ul
-      className="grid grid-cols-1 gap-6 px-6 pb-12 pt-12 sm:grid-cols-3 sm:px-14 sm:pb-16"
-      style={{ backgroundColor: current.ground }}
-    >
-      {current.posts.map((post, i) => (
-        <li key={i}>
-          <PostCard
-            handle={post.handle}
-            caption={post.caption}
-            href={post.post || undefined}
-            media={
-              post.post ? (
-                <InstagramEmbed
-                  post={post.post}
-                  title={`${post.handle} on Instagram`}
-                  aspect={post.aspect}
-                />
-              ) : post.image ? (
-                <Image
-                  src={post.image.src}
-                  alt={post.image.alt}
-                  width={900}
-                  height={1125}
-                  className="block h-auto w-full"
-                />
-              ) : (
-                <PostPlaceholder label={post.placeholder ?? current.label} />
-              )
-            }
+  // Her third slide: the posts the launch produced, one card each in the
+  // chrome the National Launch wall uses (Ellie, 2026-09-11). Where a card
+  // goes is the band's call: a season slots them into its composition or grids
+  // them under it (SeasonBand); a collaboration grids them. A post with no
+  // link yet gets the launch wall's labelled placeholder, so the row holds its
+  // shape until the link lands.
+  const cards = (current.posts ?? []).map((post) => (
+    <PostCard
+      key={post.post ?? post.reddit ?? post.placeholder}
+      handle={post.handle}
+      caption={post.caption}
+      href={post.post || post.reddit || undefined}
+      linkLabel={post.reddit ? "View on Reddit" : undefined}
+      media={
+        post.post ? (
+          <InstagramEmbed
+            post={post.post}
+            title={`${post.handle} on Instagram`}
+            aspect={post.aspect}
           />
-        </li>
-      ))}
-    </ul>
-  ) : null;
+        ) : post.reddit ? (
+          <RedditEmbed url={post.reddit} title={`${post.handle} on Reddit`} />
+        ) : post.image ? (
+          <Image
+            src={post.image.src}
+            alt={post.image.alt}
+            width={900}
+            height={1125}
+            className="block h-auto w-full"
+          />
+        ) : (
+          <PostPlaceholder label={post.placeholder ?? current.label} />
+        )
+      }
+    />
+  ));
 
   return (
     <section
@@ -277,9 +279,7 @@ export function Collections({ title, intro, items, tone }: Props) {
         >
           {current.art ? (
             // The five seasons: her band, measured and rebuilt. See SeasonBand.
-            <SeasonBand collection={current} art={current.art}>
-              {posts}
-            </SeasonBand>
+            <SeasonBand collection={current} art={current.art} cards={cards} />
           ) : (
             <>
               {/* The brief section. It is the artwork's positioning context, not
@@ -452,7 +452,9 @@ export function Collections({ title, intro, items, tone }: Props) {
             </>
           )}
 
-          {current.art ? null : posts}
+          {!current.art && cards.length > 0 && (
+            <PostGrid cards={cards} ground={current.ground} />
+          )}
         </div>
       </div>
     </section>

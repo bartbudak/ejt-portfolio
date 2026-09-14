@@ -4,7 +4,14 @@ import Image from "next/image";
 import type { CSSProperties, ReactNode } from "react";
 import type { Collection } from "@/data/campaigns";
 import type { ArtLayer, BandArt, TextLayer } from "@/data/seasonScenes";
-import { Nutshell, WONK, outlined, withLinks } from "./CollectionCopy";
+import { CARD_FRAME } from "@/components/shared/PostCard";
+import {
+  Nutshell,
+  PostGrid,
+  WONK,
+  outlined,
+  withLinks,
+} from "./CollectionCopy";
 
 // One seasonal band, rebuilt 1:1 from her deck (see seasonScenes.ts for the
 // model and seasonArt.ts for the measurements).
@@ -19,14 +26,43 @@ import { Nutshell, WONK, outlined, withLinks } from "./CollectionCopy";
 const u = (v: number) => `${((v / 1024) * 100).toFixed(3)}cqw`;
 const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(2)}%`;
 
+/** A deck unit as the card's em, so a card in the stage keeps her proportions. */
+const DECK_EM = u(16);
+
 // A placed piece of artwork. Decorative throughout: the products are named in
 // the copy and the alt text of the tab, so none of this needs to be read out.
 function Art({ layer, origin = 0 }: { layer: ArtLayer; origin?: number }) {
-  const style: CSSProperties = {
+  const box: CSSProperties = {
     left: u(layer.x),
     top: u(layer.y - origin),
     width: u(layer.w),
     height: u(layer.h),
+  };
+
+  if (layer.frame) {
+    // A photograph in a card's place: the post card's frame around it, the
+    // picture filling the frame. The ring is drawn outside the box, so the
+    // box stays where she put the picture.
+    return (
+      <div
+        aria-hidden
+        className="pointer-events-none absolute overflow-hidden"
+        style={{ ...CARD_FRAME, ...box, margin: 0, fontSize: DECK_EM }}
+      >
+        <Image
+          src={layer.src}
+          alt=""
+          width={layer.px[0]}
+          height={layer.px[1]}
+          draggable={false}
+          className="h-full w-full select-none object-cover"
+        />
+      </div>
+    );
+  }
+
+  const style: CSSProperties = {
+    ...box,
     transform: layer.rot ? `rotate(${layer.rot}deg)` : undefined,
     // Her crop, as an inset on the box. The box itself is not clipped, so a
     // rotated element keeps its corners.
@@ -168,54 +204,93 @@ function Brief({ collection, art }: { collection: Collection; art: BandArt }) {
 export function SeasonBand({
   collection,
   art,
-  children,
+  cards,
 }: {
   collection: Collection;
   art: BandArt;
-  /** The band's post grid — her third slide — rendered inside the band so a
-   *  strip down the edge runs behind it the way it runs the whole deck page. */
-  children?: ReactNode;
+  /** The band's post cards, in order. Slotted into the stage where her deck
+   *  puts them, otherwise gridded beneath it with the frogs on their rims. */
+  cards: ReactNode[];
 }) {
   const { stage, strip } = art;
+
+  // Art that reaches above the stage's origin — the tips of Fall's leaves, the
+  // reindeer's antlers — must not be cut, so the stage box starts as high as
+  // its highest layer and holds its layers where they were.
+  const reach = Math.max(0, ...stage.layers.map((l) => stage.origin - l.y));
+  const origin = stage.origin - reach;
+
+  const slots = stage.posts ?? [];
+  const slotted = cards.slice(0, slots.length);
+  const gridded = cards.slice(slots.length);
+
   return (
     <div className="@container relative">
       {strip && (
-        // Tiled down the whole band, so it runs behind the posts too if there
-        // are any, the way her bookmark ribbon runs the full page.
+        // Her bookmark ribbon at the top, then the book's binding tiled the
+        // rest of the way down — the deck runs the binding the full page.
         <div
           aria-hidden
           className="pointer-events-none absolute inset-y-0 left-0"
           style={{
             width: u(strip.w),
-            backgroundImage: `url(${strip.src})`,
+            backgroundImage: `url(${strip.tile})`,
             backgroundSize: "100% auto",
             backgroundRepeat: "repeat-y",
           }}
-        />
+        >
+          <Image
+            src={strip.src}
+            alt=""
+            width={strip.px[0]}
+            height={strip.px[1]}
+            draggable={false}
+            className="absolute left-0 max-w-none select-none"
+            style={{ top: u(-9), width: u(strip.w), height: u(strip.h) }}
+          />
+        </div>
       )}
 
       <Brief collection={collection} art={art} />
 
       <div
         className="relative overflow-hidden"
-        style={{ height: u(stage.height) }}
+        style={{ height: u(stage.height + reach), marginTop: u(-reach) }}
       >
         {stage.layers.map((layer, i) => (
-          <Art key={layer.name + i} layer={layer} origin={stage.origin} />
+          <Art key={layer.name + i} layer={layer} origin={origin} />
         ))}
         {stage.text?.map((layer) => (
-          <Logotype key={layer.text} layer={layer} origin={stage.origin} />
+          <Logotype key={layer.text} layer={layer} origin={origin} />
+        ))}
+        {slotted.map((card, i) => (
+          <div
+            key={i}
+            className="absolute"
+            style={{
+              left: u(slots[i].x),
+              top: u(slots[i].y - origin),
+              width: u(slots[i].w),
+              fontSize: DECK_EM,
+            }}
+          >
+            {card}
+          </div>
         ))}
       </div>
 
-      {children && (
+      {gridded.length > 0 && (
         // The grid clears the strip; in her deck the first card starts just
         // past the ribbon's edge.
         <div
           className="relative"
           style={strip ? { paddingLeft: u(strip.w) } : undefined}
         >
-          {children}
+          <PostGrid
+            cards={gridded}
+            ground={collection.ground}
+            perches={art.perches}
+          />
         </div>
       )}
     </div>

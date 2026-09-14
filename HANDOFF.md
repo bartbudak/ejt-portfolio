@@ -129,14 +129,34 @@
 >   (`Ellie Thompson Portfolio.png` and `(1)`–`(7)`: the stone frame, Donut, the
 >   skull, the eye, both photographs) and the pipeline already measures page 2's
 >   DCC placements — it is a NAMES entry and a scene away.
-> - **Instagram rows now hold their slots** with the launch wall's labelled
->   placeholder (`PostPlaceholder`, shared from `PostCard.tsx`), at the deck's
->   counts: three under Valentine's, Fall and Holiday, one for Spring, two for
->   Summer, five under DCC (`awaiting()` in `campaigns.ts`). The grid renders
->   inside `SeasonBand` so the Valentine's ribbon runs behind it. Swap each
->   entry's `placeholder` for a `post` + measured `aspect` as links arrive.
->   **"@maevechocolate" is assumed** — the brand handle is recorded nowhere;
->   confirm with Ellie.
+> - **The Instagram posts are live.** Bart supplied the 17 links (2026-09-13),
+>   in deck order; `ig()` in `campaigns.ts` holds them with the shape each
+>   embed renders at (read off every post's own /embed/: all 4:5 except one
+>   square and one 1024/1264) and the handles the embeds credit. DCC also gets
+>   the Reddit thread through `RedditEmbed` (embed.reddit.com allows framing).
+>   No captions are written for them. `PostPlaceholder` (shared from
+>   `PostCard.tsx`) still covers any post without a link.
+> - **Cards sit where her deck puts them.** `PostCard` is sized in em, so a
+>   wrapper's font-size scales the whole card; `SeasonBand` slots Spring's card
+>   beside the garden photographs and Summer's two against the booth
+>   (`stage.posts`), with Summer's market photograph in the card frame
+>   (`frame: true`). The other bands grid their cards under the stage
+>   (`PostGrid`, with the Valentine's ribbon running behind).
+> - **Bart's round of notes, applied:** the Maeve Books mark bigger and off the
+>   corner; the bookmark ribbon drawn once with the binding tiled beneath
+>   (`ribbon-tile.webp`, no repeat seam); nothing cut at a stage's top — the
+>   stage now starts as high as its highest layer (`reach` in SeasonBand), so
+>   Fall's leaf tips and the reindeer's antlers show; Holiday's script tighter
+>   to its heading and the copy further from it; the pixel frog retired for two
+>   drawn frogs perched on Holiday's post frames (`perches`, files in
+>   `public/motifs/holiday-frog-*.webp` — NOT in `seasons/`, which the
+>   pipeline wipes).
+> - **Page bands and themes:** Campaigns and Collaborations each get a marquee
+>   pinned under the header naming the page. Each page names its theme through
+>   `<ThemeSwitcher theme>`: Campaigns on Pistachio, the home and Collaborations
+>   on Rosewater (the default). The picker's memory is now per page.
+> - Pre-existing lint errors (Marquee.tsx:134, the setState-in-effect pattern
+>   in PalettePicker and PreviewGate) are untouched and predate this work.
 
 Portfolio for **Ellie J. Thompson** (creative director) → **elliejthompson.com**.
 Built by Bart (her husband). This doc captures the direction, research, and

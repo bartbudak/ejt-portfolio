@@ -1,5 +1,7 @@
-import type { CSSProperties } from "react";
+import Image from "next/image";
+import type { CSSProperties, ReactNode } from "react";
 import type { BriefLink, Collection } from "@/data/campaigns";
+import type { Perch } from "@/data/seasonScenes";
 import { ExternalIcon } from "@/components/shared/ExternalLink";
 
 // The pieces of a brief that every band shares, whichever way the band around
@@ -81,9 +83,63 @@ export function Nutshell({
   return (
     <span
       className={`block pb-1 font-script text-base normal-case tracking-normal sm:pb-2 sm:text-2xl ${className}`}
-      style={{ color: collection.display, ...outlined(collection.outlineDisplay), ...style }}
+      style={{
+        color: collection.display,
+        ...outlined(collection.outlineDisplay),
+        ...style,
+      }}
     >
       In a nutshell
     </span>
+  );
+}
+
+// Her third slide: the posts the launch produced, in the same card chrome the
+// National Launch wall uses (Ellie, 2026-09-11). It sits inside the panel, on
+// the collection's own ground, so it reads as the last part of that band
+// rather than a separate section. A `perch` is something drawn to sit on a
+// card's rim — the two frogs on Holiday's frames (Bart, 2026-09-13).
+export function PostGrid({
+  cards,
+  ground,
+  perches,
+}: {
+  cards: ReactNode[];
+  ground: string;
+  perches?: Perch[];
+}) {
+  return (
+    <ul
+      className="grid grid-cols-1 gap-6 px-6 pb-12 pt-12 sm:grid-cols-3 sm:px-14 sm:pb-16"
+      style={{ backgroundColor: ground }}
+    >
+      {cards.map((card, i) => (
+        <li key={i} className="relative">
+          {card}
+          {perches
+            ?.filter((perch) => perch.post === i)
+            .map((perch) => (
+              // Feet on the frame's outer edge, which is the li's own top —
+              // the card's margin is exactly its ring. `hang` drops it in.
+              <Image
+                key={perch.src}
+                src={perch.src}
+                alt=""
+                width={perch.px[0]}
+                height={perch.px[1]}
+                aria-hidden
+                draggable={false}
+                className="pointer-events-none absolute z-10 h-auto max-w-none select-none"
+                style={{
+                  left: `${perch.x}%`,
+                  bottom: "100%",
+                  width: `${perch.w}%`,
+                  transform: `translateY(${perch.hang * 100}%)`,
+                }}
+              />
+            ))}
+        </li>
+      ))}
+    </ul>
   );
 }

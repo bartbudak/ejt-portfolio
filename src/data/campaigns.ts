@@ -103,10 +103,13 @@ export interface FloatArt {
 export interface CollectionPost {
   /** Account the post belongs to, e.g. "@maevechocolate". */
   handle: string;
-  /** What the post is, in her words. */
-  caption: string;
+  /** What the post is, in her words. Left off for the seasonal posts: the
+   *  card is the handle, the post and the link, and no copy is invented. */
+  caption?: string;
   /** Instagram post URL or bare shortcode. */
   post?: string;
+  /** A Reddit post URL instead — framed through Reddit's own embed. */
+  reddit?: string;
   /** Media aspect, MEASURED off the post's own /embed/ — see InstagramEmbed. */
   aspect?: string;
   /** A still, for a post that cannot be embedded or is not linked yet. */
@@ -120,19 +123,28 @@ export interface CollectionPost {
 
 // Her deck shows each band ending in a row of Instagram posts — three under
 // Valentine's, Fall and Holiday, one beside Spring's photographs, two flanking
-// Summer's booth, five under Dungeon Crawler Carl — all exported blank, since
-// Canva cannot rasterise an embed. These hold those slots in the launch wall's
-// placeholder chrome until she sends the links (Bart, 2026-09-13). Replace an
-// entry's `placeholder` with `post` (and a measured `aspect`) as each arrives.
+// Summer's booth, five (and a Reddit thread) under Dungeon Crawler Carl. The
+// links are Bart's, in that order (2026-09-13). No captions: the card is the
+// handle, the post and the link, and nothing is written for her.
 //
-// ⚠️ "@maevechocolate" is assumed — the brand's handle is not recorded anywhere
-// in the repo or her deck. Confirm it with Ellie before launch.
-const awaiting = (label: string, count: number): CollectionPost[] =>
-  Array.from({ length: count }, (_, i) => ({
-    handle: "@maevechocolate",
-    caption: `Launch post ${i + 1} of ${count}.`,
-    placeholder: label,
-  }));
+// `aspect` is the shape of the post's media as Instagram's embed renders it,
+// read off each post's own /embed/ page. Reels and tall photos are letterboxed
+// to 4:5 by Instagram itself; the one square post and the one slightly short
+// carousel keep their own ratio so the crop lands on the media's edge.
+//
+// Handles are the accounts the embed credits — "a and b" on a collaboration
+// post is the two authors.
+const MAEVE = "@maevechocolate";
+const FOUR_FIVE = "4 / 5";
+const ig = (
+  code: string,
+  handle = MAEVE,
+  aspect = FOUR_FIVE,
+): CollectionPost => ({
+  handle,
+  post: `https://www.instagram.com/p/${code}/`,
+  aspect,
+});
 
 export interface Collection {
   slug: string;
@@ -200,7 +212,12 @@ export const seasons: Collection[] = [
       headingLines: ["Valentine's Day", "Brief"],
     },
     art: SEASON_ART.valentines,
-    posts: awaiting("Valentine's Day", 3),
+    posts: [
+      ig("DUTvMyUEZ-p", "@forktofuel & @maevechocolate"),
+      ig("DUV_eIXEptd", "@maevechocolate & @meetcutebookshop"),
+      // Square.
+      ig("DTLS7VHEjPr", MAEVE, "1 / 1"),
+    ],
     rows: [
       {
         label: "Theme",
@@ -236,7 +253,7 @@ export const seasons: Collection[] = [
       reserve: "none",
     },
     art: SEASON_ART.spring,
-    posts: awaiting("Spring", 1),
+    posts: [ig("DWMhVoOCdK0")],
     rows: [
       {
         label: "Theme",
@@ -262,7 +279,7 @@ export const seasons: Collection[] = [
     motifAlt: "An illustrated yellow star",
     layout: { align: "left", nutshell: "inline", motifs: "scatter" },
     art: SEASON_ART.summer,
-    posts: awaiting("Summer", 2),
+    posts: [ig("DZXphshOAQW"), ig("DbWBc9DPQve")],
     rows: [
       {
         label: "Theme",
@@ -289,7 +306,12 @@ export const seasons: Collection[] = [
       reserve: "none",
     },
     art: SEASON_ART.fall,
-    posts: awaiting("Fall", 3),
+    posts: [
+      ig("DPb2aw4DiLQ", "@maevechocolate & @schillingciderhouse"),
+      ig("DOJU_sSjrto"),
+      // A hair short of 4:5.
+      ig("DPR2oZogNHj", MAEVE, "1024 / 1264"),
+    ],
     rows: [
       {
         label: "Theme",
@@ -316,7 +338,11 @@ export const seasons: Collection[] = [
       reserve: "none",
     },
     art: SEASON_ART.holiday,
-    posts: awaiting("Holiday", 3),
+    posts: [
+      ig("DRP_w66EuXD", "@maevechocolate & @mikesshaveice"),
+      ig("DQrrA3zEYsc"),
+      ig("DP1fZiUEfig"),
+    ],
     rows: [
       {
         label: "Theme",
@@ -387,7 +413,18 @@ export const collabs: Collection[] = [
     // where she lands on top of a centred heading; and her deck does not put
     // her there anyway — she is in the band's hero photograph.
     frame: [],
-    posts: awaiting("Dungeon Crawler Carl", 5),
+    posts: [
+      ig("DXhouP9Eyjk"),
+      ig("DWmFBHYlEOh", "@maevechocolate & @mattdinniman"),
+      ig("DclvbsajJRL", "@maevechocolate & @mattdinniman"),
+      ig("Da0cujESC6-", "@maevechocolate & @soundbooththeater"),
+      ig("DWxR3kODR06"),
+      {
+        handle: "r/DungeonCrawlerCarl",
+        reddit:
+          "https://www.reddit.com/r/DungeonCrawlerCarl/comments/1up4dl4/virgin_dirty_shirley_is_in_barnes_and_noble/",
+      },
+    ],
     rows: [
       {
         label: "What",

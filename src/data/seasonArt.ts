@@ -94,6 +94,6 @@ export const holidayArt: ArtLayer[] = [
   { name: "frog", src: "/motifs/seasons/holiday/frog.webp", px: [342, 469], x: 110.4, y: 1159.3, w: 137.2, h: 187.4 },
 ];
 
-/** The bookmark ribbon down the Valentine's band's left edge — tiled down the
- *  whole band, 77.2 deck units wide. */
-export const valentinesRibbon = { src: "/motifs/seasons/valentines/ribbon.webp", px: [193, 2886] as [number, number], w: 77.2 };
+/** The bookmark ribbon down the Valentine's band's left edge, drawn once at
+ *  the top, 77.2 deck units wide; `tile` is its binding, repeated below it. */
+export const valentinesRibbon = { src: "/motifs/seasons/valentines/ribbon.webp", tile: "/motifs/seasons/valentines/ribbon-tile.webp", px: [193, 2886] as [number, number], w: 77.2, h: 1162.7 };

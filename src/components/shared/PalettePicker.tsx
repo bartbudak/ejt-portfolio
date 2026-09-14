@@ -17,11 +17,16 @@ function Picker({
   label,
   swatches,
   offsetClass,
+  defaultTheme = "",
 }: {
   options: readonly Option[];
   /** The data attribute this picker owns on <html>. */
   attr: string;
   storageKey: string;
+  /** The page's own choice, applied unless a pick has been saved for this
+   *  page. Memory is per page (the key carries the pathname), so trying a
+   *  palette on one page does not repaint the others (Bart, 2026-09-13). */
+  defaultTheme?: string;
   label: string;
   /** Tokens shown as chips for each option. */
   swatches: readonly string[];
@@ -35,10 +40,18 @@ function Picker({
     else document.documentElement.removeAttribute(attr);
   };
 
+  const key = () => `${storageKey}:${window.location.pathname}`;
+
   useEffect(() => {
-    const saved = localStorage.getItem(storageKey) ?? "";
-    setActive(saved);
-    apply(saved);
+    let saved: string | null = null;
+    try {
+      saved = localStorage.getItem(key());
+    } catch {
+      // Private windows refuse storage; the page's own theme applies.
+    }
+    const id = saved ?? defaultTheme;
+    setActive(id);
+    apply(id);
     // `attr` and `storageKey` are fixed per mount.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -47,7 +60,7 @@ function Picker({
     setActive(id);
     apply(id);
     try {
-      localStorage.setItem(storageKey, id);
+      localStorage.setItem(key(), id);
     } catch {
       // Private windows refuse storage; the choice still applies for the session.
     }
@@ -82,7 +95,11 @@ function Picker({
                     style={{ border: "1.5px solid #1a1210" }}
                   >
                     {swatches.map((v) => (
-                      <i key={v} className="h-4 w-3 rounded-[2px]" style={{ background: `var(${v})` }} />
+                      <i
+                        key={v}
+                        className="h-4 w-3 rounded-[2px]"
+                        style={{ background: `var(${v})` }}
+                      />
                     ))}
                   </span>
                 )}
@@ -94,7 +111,10 @@ function Picker({
                     {o.name}
                     {on && " ✓"}
                   </span>
-                  <span className="block text-xs leading-tight opacity-60" style={{ color: "#1a1210" }}>
+                  <span
+                    className="block text-xs leading-tight opacity-60"
+                    style={{ color: "#1a1210" }}
+                  >
                     {o.note}
                   </span>
                 </span>
@@ -109,12 +129,20 @@ function Picker({
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         className="flex items-center gap-2 rounded-full px-3 py-2 text-xs font-bold shadow-lg"
-        style={{ backgroundColor: "#fffdf8", color: "#1a1210", border: "2px solid #1a1210" }}
+        style={{
+          backgroundColor: "#fffdf8",
+          color: "#1a1210",
+          border: "2px solid #1a1210",
+        }}
       >
         {swatches.length > 0 && (
           <span aria-hidden className="flex gap-1">
             {swatches.map((v) => (
-              <i key={v} className="h-3 w-3 rounded-full" style={{ background: `var(${v})` }} />
+              <i
+                key={v}
+                className="h-3 w-3 rounded-full"
+                style={{ background: `var(${v})` }}
+              />
             ))}
           </span>
         )}
@@ -141,7 +169,11 @@ const THEMES: readonly Option[] = [
   { id: "clover", name: "Clover", note: "Green ground, berry pink" },
   { id: "seaglass", name: "Seaglass", note: "Pale aqua, deep teal, citrus" },
   { id: "meadow", name: "Meadow", note: "Pale green, forest, butter" },
-  { id: "cornflower", name: "Cornflower", note: "Periwinkle, indigo, marigold" },
+  {
+    id: "cornflower",
+    name: "Cornflower",
+    note: "Periwinkle, indigo, marigold",
+  },
   { id: "citron", name: "Citron", note: "Lemon, olive, orange" },
   { id: "lagoon", name: "Lagoon", note: "Turquoise, cobalt, coral" },
   { id: "moss", name: "Moss", note: "Oat green, deep moss, gold" },
@@ -150,20 +182,25 @@ const THEMES: readonly Option[] = [
   { id: "butter", name: "Butter", note: "Butter, teal, tomato" },
   { id: "glacier", name: "Glacier", note: "Ice blue, slate, chartreuse" },
   { id: "deck", name: "Deck", note: "Her Canva palette, kept whole" },
-  { id: "maeve-live", name: "Maeve Live", note: "What the shipped site runs on" },
+  {
+    id: "maeve-live",
+    name: "Maeve Live",
+    note: "What the shipped site runs on",
+  },
 ];
 
-
-export function ThemeSwitcher() {
+// Each page names its theme (Bart, 2026-09-13): the home and Collaborations
+// sit on Rosewater, the default; Campaigns on Pistachio.
+export function ThemeSwitcher({ theme = "" }: { theme?: string }) {
   return (
     <Picker
       options={THEMES}
       attr="data-theme"
       storageKey="ejt-theme-preview"
+      defaultTheme={theme}
       label="Theme"
       swatches={["--ejd-blush", "--ejd-vermilion", "--ejd-marigold"]}
       offsetClass="bottom-4 left-4"
     />
   );
 }
-
