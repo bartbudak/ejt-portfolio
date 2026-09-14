@@ -109,7 +109,17 @@ export const dccArt: ArtLayer[] = [
 /** The bookmark ribbon down the Valentine's band's left edge, drawn once at
  *  the top, 77.2 deck units wide; `tile` is its binding, repeated below it. */
 export const valentinesRibbon = { src: "/motifs/seasons/valentines/ribbon.webp", tile: "/motifs/seasons/valentines/ribbon-tile.webp", px: [193, 2886] as [number, number], w: 77.2, h: 1162.7 };
-/** The DCC stone border: a five-block tile for the side columns and a
- *  one-block tile for the runs, both ending in a gap so blocks never touch;
- *  `w` is the border's thickness, her side strip's 51. */
-export const dccStones = { side: { src: "/motifs/seasons/dcc/stone-side.webp", px: [128, 887] as [number, number] }, run: { src: "/motifs/seasons/dcc/stone-run.webp", px: [176, 128] as [number, number] }, w: 51 };
+/** The DCC stone border: five blocks for the sides (each also turned, for
+ *  the runs), the square corner block, and `w`, the border's thickness —
+ *  her side strip's 51. */
+export const dccStones = {
+  w: 51,
+  blocks: [
+    { src: "/motifs/seasons/dcc/stone-1.webp", run: "/motifs/seasons/dcc/stone-r1.webp", px: [128, 169] as [number, number] },
+    { src: "/motifs/seasons/dcc/stone-2.webp", run: "/motifs/seasons/dcc/stone-r2.webp", px: [128, 169] as [number, number] },
+    { src: "/motifs/seasons/dcc/stone-3.webp", run: "/motifs/seasons/dcc/stone-r3.webp", px: [128, 169] as [number, number] },
+    { src: "/motifs/seasons/dcc/stone-4.webp", run: "/motifs/seasons/dcc/stone-r4.webp", px: [128, 164] as [number, number] },
+    { src: "/motifs/seasons/dcc/stone-5.webp", run: "/motifs/seasons/dcc/stone-r5.webp", px: [128, 174] as [number, number] },
+  ],
+  corner: { src: "/motifs/dcc-stone-corner.webp", px: [104, 121] as [number, number] },
+};

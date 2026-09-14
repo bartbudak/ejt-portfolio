@@ -248,7 +248,10 @@ export function SeasonBand({
   const gridded = cards.slice(slots.length);
 
   return (
-    <div className="@container relative">
+    <div
+      className="@container relative"
+      style={stones ? { paddingBottom: u(stones.w / 2 + 8) } : undefined}
+    >
       {strip && (
         // Her bookmark ribbon at the top, then the book's binding tiled the
         // rest of the way down — the deck runs the binding the full page.
@@ -274,27 +277,7 @@ export function SeasonBand({
         </div>
       )}
 
-      {stones && (
-        // The stone frame: the side tile down both edges for the band's whole
-        // height, and the run tile across the top between them.
-        <>
-          {(["left", "right"] as const).map((side) => (
-            <div
-              key={side}
-              aria-hidden
-              className="pointer-events-none absolute inset-y-0 z-10"
-              style={{
-                [side]: 0,
-                width: u(stones.w),
-                backgroundImage: `url(${stones.side.src})`,
-                backgroundSize: "100% auto",
-                backgroundRepeat: "repeat-y",
-              }}
-            />
-          ))}
-          <StoneRun stones={stones} />
-        </>
-      )}
+      {stones && <StoneFrame stones={stones} />}
 
       <Brief collection={collection} art={art} />
 
@@ -340,8 +323,6 @@ export function SeasonBand({
       )}
 
       {footer && <StageBox stage={footer} />}
-
-      {stones && <StoneRun stones={stones} />}
     </div>
   );
 }
@@ -364,22 +345,90 @@ function StageBox({ stage }: { stage: Stage }) {
   );
 }
 
-// One run of the stone border across the band, between the two side columns
-// and a gap off each. `round` fits a whole number of blocks to the width,
-// scaling them a hair rather than cutting one or letting two meet.
-function StoneRun({ stones }: { stones: NonNullable<BandArt["stones"]> }) {
+// The stone frame, floating on the band's edge: whole blocks down both sides
+// and, turned, along the top and bottom, a square block at each corner, and a
+// gap between every two. Each side is a wrapping flex line with more blocks
+// than fit, so the visible line holds only whole blocks, spread evenly; the
+// rest wrap out of the clipped box. Nothing is cut and nothing touches.
+function StoneFrame({ stones }: { stones: NonNullable<BandArt["stones"]> }) {
+  const { w, blocks, corner } = stones;
+  const half = w / 2;
+  const gap = 4;
+  const many = (n: number) =>
+    Array.from({ length: n }, (_, i) => blocks[i % blocks.length]);
+
   return (
-    <div
-      aria-hidden
-      className="pointer-events-none relative"
-      style={{
-        height: u(stones.w),
-        marginLeft: u(stones.w + 4),
-        marginRight: u(stones.w + 4),
-        backgroundImage: `url(${stones.run.src})`,
-        backgroundSize: "auto 100%",
-        backgroundRepeat: "round no-repeat",
-      }}
-    />
+    <div aria-hidden className="pointer-events-none absolute inset-0 z-20">
+      {(["left", "right"] as const).map((side) => (
+        <div
+          key={side}
+          className="absolute flex flex-col flex-wrap content-start justify-between overflow-hidden"
+          style={{
+            [side]: u(-half),
+            top: u(half + gap),
+            bottom: u(half + gap),
+            width: u(w),
+            paddingTop: u(gap),
+            paddingBottom: u(gap),
+          }}
+        >
+          {many(80).map((b, i) => (
+            <Image
+              key={i}
+              src={b.src}
+              alt=""
+              width={b.px[0]}
+              height={b.px[1]}
+              draggable={false}
+              className="max-w-none flex-none select-none"
+              style={{ width: u(w), height: u((w * b.px[1]) / b.px[0]) }}
+            />
+          ))}
+        </div>
+      ))}
+
+      {(["top", "bottom"] as const).map((edge) => (
+        <div
+          key={edge}
+          className="absolute flex flex-row flex-wrap content-start justify-between overflow-hidden"
+          style={{
+            [edge]: u(-half),
+            left: u(half + gap),
+            right: u(half + gap),
+            height: u(w),
+            paddingLeft: u(gap),
+            paddingRight: u(gap),
+          }}
+        >
+          {many(40).map((b, i) => (
+            <Image
+              key={i}
+              src={b.run}
+              alt=""
+              width={b.px[1]}
+              height={b.px[0]}
+              draggable={false}
+              className="max-w-none flex-none select-none"
+              style={{ height: u(w), width: u((w * b.px[1]) / b.px[0]) }}
+            />
+          ))}
+        </div>
+      ))}
+
+      {(["top", "bottom"] as const).map((v) =>
+        (["left", "right"] as const).map((h) => (
+          <Image
+            key={v + h}
+            src={corner.src}
+            alt=""
+            width={corner.px[0]}
+            height={corner.px[1]}
+            draggable={false}
+            className="absolute max-w-none select-none"
+            style={{ [v]: u(-half), [h]: u(-half), width: u(w), height: u(w) }}
+          />
+        )),
+      )}
+    </div>
   );
 }
