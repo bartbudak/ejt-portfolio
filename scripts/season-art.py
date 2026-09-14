@@ -372,39 +372,14 @@ tile.save(os.path.join(out_dir, "valentines", "ribbon-tile.webp"), "WEBP", lossl
 lines.append("/** The bookmark ribbon down the Valentine's band's left edge, drawn once at")
 lines.append(f" *  the top, {ribbon['w']} deck units wide; `tile` is its binding, repeated below it. */")
 lines.append(f'export const valentinesRibbon = {{ src: "{ribbon["src"]}", tile: "/motifs/seasons/valentines/ribbon-tile.webp", px: [{ribbon["px"][0]}, {ribbon["px"][1]}] as [number, number], w: {ribbon["w"]}, h: {ribbon["h"]} }};')
-# The DCC stone border, as blocks. Five varied blocks cut from the tall strip
-# (and each turned for the top and bottom runs); the band lays them out itself
-# with a gap between every two, and a square block from the older Canva asset
-# (public/motifs/dcc-stone-corner.webp, cut by hand) at the corners.
-stone = alpha_image(198)
-BLOCKS = [(180, 453), (471, 744), (751, 1025), (1041, 1307), (1320, 1602)]
-block_lines = []
-widths = []
-for i, (y0, y1) in enumerate(BLOCKS, 1):
-    blk = stone.crop((0, y0, stone.width, y1))
-    # to what is drawn: the strip has clear margins either side of its blocks,
-    # and a box that keeps them makes a stone look thinner than its box
-    bb = blk.getbbox()
-    blk = blk.crop(bb)
-    widths.append(bb[2] - bb[0])
-    blk = blk.resize((128, round(blk.height * 128 / blk.width)), Image.LANCZOS)
-    blk.save(os.path.join(out_dir, "dcc", f"stone-{i}.webp"), "WEBP", lossless=True, quality=100, method=6)
-    blk.rotate(90, expand=True).save(os.path.join(out_dir, "dcc", f"stone-r{i}.webp"), "WEBP", lossless=True, quality=100, method=6)
-    block_lines.append(f'    {{ src: "/motifs/seasons/dcc/stone-{i}.webp", run: "/motifs/seasons/dcc/stone-r{i}.webp", px: [{blk.width}, {blk.height}] as [number, number] }},')
-corner_path = os.path.join(REPO, "public", "motifs", "dcc-stone-corner.webp")
-cw, ch = Image.open(corner_path).size if os.path.exists(corner_path) else (99, 109)
-lines.append("/** The DCC stone border: five blocks for the sides (each also turned, for")
-lines.append(" *  the runs), the square corner block, and `w`, the border's thickness —")
-lines.append(" *  the width of a stone as drawn in her side strip. */")
-# Her side strip is 51 wide with its margins; the stones themselves are this wide.
-stone_w = round(51 * (sum(widths) / len(widths)) / stone.width, 1)
-lines.append("export const dccStones = {")
-lines.append(f"  w: {stone_w},")
-lines.append("  blocks: [")
-lines += block_lines
-lines.append("  ],")
-lines.append(f'  corner: {{ src: "/motifs/dcc-stone-corner.webp", px: [{cw}, {ch}] as [number, number] }},')
-lines.append("};")
+# The DCC stone border: her narrow side strip, square blocks at both ends, as
+# one asset. Where each copy goes is composed by hand in seasonScenes.ts.
+strip = alpha_image(200)
+strip = strip.crop(strip.getbbox())
+strip.save(os.path.join(out_dir, "dcc", "stone-strip.webp"), "WEBP", lossless=True, quality=100, method=6)
+lines.append("/** Her narrow stone strip, square blocks at both ends; `w` is its width on")
+lines.append(" *  the canvas, and `h` the height that width gives it. */")
+lines.append(f'export const dccStoneStrip = {{ src: "/motifs/seasons/dcc/stone-strip.webp", px: [{strip.width}, {strip.height}] as [number, number], w: 51, h: {round(51 * strip.height / strip.width, 1)} }};')
 
 with open(os.path.join(REPO, "src", "data", "seasonArt.ts"), "w") as f:
     f.write("\n".join(lines) + "\n")

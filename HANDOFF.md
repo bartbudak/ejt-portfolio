@@ -169,18 +169,13 @@
 >   every band were taken off again at Bart's ask, and the DCC title is back
 >   to vermilion. The Holiday frogs: santa on the first card, mirrored to face
 >   in; snow cloud on the last, settled into the rim.
-> - **The stones ARE the DCC frame** (Bart, later): the panel drops its ring
->   and radius for a stoned band and sits 1.25rem under the tabs, and
->   `StoneFrame` lays the border INSIDE the panel's edge so every gap shows
->   orange (a floating, half-out version was tried and rejected: white gaps).
->   It is whole blocks, not a tile: `dccStones` carries five blocks cut by
->   the pipeline from the tall strip and cropped to what is drawn (the strip
->   has clear margins; `w` = 34.4 is the stone's real width), each also
->   turned for the runs, plus the square corner block cut by hand from the
->   older Canva strip (`public/motifs/dcc-stone-corner.webp`, outside the
->   wiped folder). Each side is a wrapping flex line with more blocks than
->   fit and `space-between`, so only whole blocks show, evenly spread, none
->   cut and none touching.
+> - **The DCC stone frame is being rebuilt piece by piece with Bart** (from
+>   2026-09-13, late): two tiled versions were rejected, so it starts over as
+>   hand-placed copies of her narrow strip with its square end blocks
+>   (`dccStoneStrip`, `stones.pieces` in deck units from the panel's top-left,
+>   negatives outside the edge). Piece one: top-left corner, centred on the
+>   left edge, half in and half out. The panel is bare, square and unclipped
+>   for a stoned band. Next pieces on his instruction.
 > - **Page bands and themes:** Campaigns and Collaborations each get a marquee
 >   pinned under the header naming the page. Each page names its theme through
 >   `<ThemeSwitcher theme>`: Campaigns on Pistachio, the home and Collaborations

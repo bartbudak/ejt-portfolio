@@ -261,8 +261,10 @@ export function Collections({ title, intro, items, tone }: Props) {
           aria-labelledby={`collection-tab-${current.slug}`}
           // The panel is a bare frame; the brief section inside it carries the
           // padding and the product lineup runs full-bleed beneath it.
-          className={`relative isolate overflow-hidden ${
-            current.art?.stones ? "" : "rounded-lg"
+          className={`relative isolate ${
+            current.art?.stones
+              ? "overflow-visible"
+              : "overflow-hidden rounded-lg"
           }`}
           style={
             current.art?.stones

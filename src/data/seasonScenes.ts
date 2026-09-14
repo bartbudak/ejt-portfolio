@@ -25,7 +25,7 @@
 
 import {
   dccArt,
-  dccStones,
+  dccStoneStrip,
   fallArt,
   holidayArt,
   springArt,
@@ -151,14 +151,14 @@ export interface BandArt {
   /** A second stage under the post grid — DCC's website shot with its skull
    *  and eye. */
   footer?: Stage;
-  /** A stone border AS the band's frame, replacing the panel's ring: whole
-   *  blocks laid inside both sides and along the top and bottom with a gap
-   *  between every two, and a square block at each corner. `w` is the
-   *  border's thickness. */
+  /** A stone border AS the band's frame, replacing the panel's ring: copies
+   *  of her strip, each placed by hand in deck units from the panel's
+   *  top-left corner (so a negative x sits outside the edge). Being built up
+   *  piece by piece with Bart (2026-09-13). */
   stones?: {
-    w: number;
-    blocks: { src: string; run: string; px: [number, number] }[];
-    corner: { src: string; px: [number, number] };
+    src: string;
+    px: [number, number];
+    pieces: { x: number; y: number; w: number; h: number; rot?: number }[];
   };
 }
 
@@ -414,10 +414,16 @@ export const DCC_ART: BandArt = {
     copy: { left: 70, right: 70, gap: 7, paragraphGap: false },
     stageGap: 0,
   },
-  // The stones are the frame itself (Bart, 2026-09-13), inside the band's
-  // edge so every gap shows orange: the strip's blocks down both sides and,
-  // turned, along the top and bottom, square blocks at the corners.
-  stones: dccStones,
+  // The stone frame, started over (Bart, 2026-09-13): the first strip stands
+  // at the top-left corner, centred on the left edge — half in, half out.
+  // Further pieces to follow his instruction.
+  stones: {
+    src: dccStoneStrip.src,
+    px: dccStoneStrip.px,
+    pieces: [
+      { x: -dccStoneStrip.w / 2, y: 0, w: dccStoneStrip.w, h: dccStoneStrip.h },
+    ],
+  },
   stage: {
     origin: 525,
     height: 585,

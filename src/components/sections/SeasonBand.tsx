@@ -250,7 +250,7 @@ export function SeasonBand({
   return (
     <div
       className="@container relative"
-      style={stones ? { paddingBottom: u(stones.w + 8) } : undefined}
+      style={stones ? { paddingBottom: u(60) } : undefined}
     >
       {strip && (
         // Her bookmark ribbon at the top, then the book's binding tiled the
@@ -345,89 +345,29 @@ function StageBox({ stage }: { stage: Stage }) {
   );
 }
 
-// The stone frame, inside the band's edge: whole blocks down both sides and,
-// turned, along the top and bottom, a square block at each corner, and a gap
-// between every two — every gap showing the band's own ground. Each side is a wrapping flex line with more blocks
-// than fit, so the visible line holds only whole blocks, spread evenly; the
-// rest wrap out of the clipped box. Nothing is cut and nothing touches.
+// The stone frame: copies of her strip, each where the data puts it, from the
+// panel's top-left corner. Above everything and free to sit outside the edge.
 function StoneFrame({ stones }: { stones: NonNullable<BandArt["stones"]> }) {
-  const { w, blocks, corner } = stones;
-  const gap = 4;
-  const many = (n: number) =>
-    Array.from({ length: n }, (_, i) => blocks[i % blocks.length]);
-
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 z-20">
-      {(["left", "right"] as const).map((side) => (
-        <div
-          key={side}
-          className="absolute flex flex-col flex-wrap content-start justify-between overflow-hidden"
+      {stones.pieces.map((piece, i) => (
+        <Image
+          key={i}
+          src={stones.src}
+          alt=""
+          width={stones.px[0]}
+          height={stones.px[1]}
+          draggable={false}
+          className="absolute max-w-none select-none"
           style={{
-            [side]: 0,
-            top: u(w + gap),
-            bottom: u(w + gap),
-            width: u(w),
-            paddingTop: u(gap),
-            paddingBottom: u(gap),
+            left: u(piece.x),
+            top: u(piece.y),
+            width: u(piece.w),
+            height: u(piece.h),
+            transform: piece.rot ? `rotate(${piece.rot}deg)` : undefined,
           }}
-        >
-          {many(80).map((b, i) => (
-            <Image
-              key={i}
-              src={b.src}
-              alt=""
-              width={b.px[0]}
-              height={b.px[1]}
-              draggable={false}
-              className="max-w-none flex-none select-none"
-              style={{ width: u(w), height: u((w * b.px[1]) / b.px[0]) }}
-            />
-          ))}
-        </div>
+        />
       ))}
-
-      {(["top", "bottom"] as const).map((edge) => (
-        <div
-          key={edge}
-          className="absolute flex flex-row flex-wrap content-start justify-between overflow-hidden"
-          style={{
-            [edge]: 0,
-            left: u(w + gap),
-            right: u(w + gap),
-            height: u(w),
-            paddingLeft: u(gap),
-            paddingRight: u(gap),
-          }}
-        >
-          {many(40).map((b, i) => (
-            <Image
-              key={i}
-              src={b.run}
-              alt=""
-              width={b.px[1]}
-              height={b.px[0]}
-              draggable={false}
-              className="max-w-none flex-none select-none"
-              style={{ height: u(w), width: u((w * b.px[1]) / b.px[0]) }}
-            />
-          ))}
-        </div>
-      ))}
-
-      {(["top", "bottom"] as const).map((v) =>
-        (["left", "right"] as const).map((h) => (
-          <Image
-            key={v + h}
-            src={corner.src}
-            alt=""
-            width={corner.px[0]}
-            height={corner.px[1]}
-            draggable={false}
-            className="absolute max-w-none select-none"
-            style={{ [v]: 0, [h]: 0, width: u(w), height: u(w) }}
-          />
-        )),
-      )}
     </div>
   );
 }
