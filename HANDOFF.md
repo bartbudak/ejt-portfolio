@@ -184,9 +184,9 @@
 >   bricks the same way (`stoneRun`). The footer row — eye, site shot, skull —
 >   is spaced evenly between the columns, and the site shot links out to
 >   mattdinniman.com (`href`/`alt` on a framed layer make it a real link).
-> - **Preview channel for Ellie (2026-09-13):**
->   https://ejt-folio--ellie-review-20260913-cgp3lx2i.web.app — expires
->   2026-09-20. The work-in-progress pages are `/preview/`,
+> - **Preview channel for Ellie (2026-09-13, second cut, with the Resume
+>   page):** https://ejt-folio--ellie-review-20260913-1926-9haue7wi.web.app —
+>   expires 2026-09-20. (The earlier channel from the same day is superseded.) The work-in-progress pages are `/preview/`,
 >   `/preview/campaigns/` and `/preview/collabs/`, behind the password gate;
 >   the root is still the coming-soon page. Redeploy with
 >   `pnpm build && firebase hosting:channel:deploy <name> --expires 7d`.
