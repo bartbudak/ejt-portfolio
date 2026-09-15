@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 
 // On a phone, a card folds down to one row — a tiny preview, its title and a
 // line of its copy — and opens on a tap (Bart, 2026-09-15). From the small
@@ -30,13 +30,26 @@ export function MobileCollapse({
   children: ReactNode;
 }) {
   const [open, setOpen] = useState(false);
+  const rowRef = useRef<HTMLButtonElement>(null);
+
+  // An opened card is taller than the screen, so by the time someone has
+  // read it the row that opened it is off the top. A close control sits under
+  // the card too, and closing brings the row back into view so the page does
+  // not appear to jump to nowhere (Bart, 2026-09-15).
+  const close = () => {
+    setOpen(false);
+    requestAnimationFrame(() =>
+      rowRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" }),
+    );
+  };
 
   return (
     <div>
       <button
+        ref={rowRef}
         type="button"
         aria-expanded={open}
-        onClick={() => setOpen((o) => !o)}
+        onClick={() => (open ? close() : setOpen(true))}
         className={`flex w-full items-center gap-3 text-left sm:hidden ${
           framed ? "rounded-[14px] p-2.5" : ""
         }`}
@@ -101,6 +114,33 @@ export function MobileCollapse({
       </button>
 
       <div className={open ? "mt-3" : "max-sm:hidden"}>{children}</div>
+
+      {open && (
+        <button
+          type="button"
+          onClick={close}
+          className="mt-2 flex w-full items-center justify-center gap-2 rounded-[14px] py-2.5 font-mono text-xs font-bold uppercase tracking-[0.14em] sm:hidden"
+          style={{
+            backgroundColor: "var(--mv-paper)",
+            border: "var(--mv-stroke) solid var(--ejd-ink)",
+            color: "var(--ejd-ink)",
+          }}
+        >
+          Close
+          <svg
+            aria-hidden
+            viewBox="0 0 20 20"
+            className="h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M5 12l5-5 5 5" />
+          </svg>
+        </button>
+      )}
     </div>
   );
 }
