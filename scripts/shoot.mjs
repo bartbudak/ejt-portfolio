@@ -16,7 +16,7 @@ const engine = engineName === "chromium" ? chromium : webkit;
 // DEVICE=desktop for a 1280-wide window instead of a phone profile.
 const device =
   process.env.DEVICE === "desktop"
-    ? { viewport: { width: 1280, height: 900 } }
+    ? { viewport: { width: Number(process.env.WIDTH ?? 1280), height: 900 } }
     : devices[process.env.DEVICE ?? "iPhone 16 Pro"];
 mkdirSync(outDir, { recursive: true });
 

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { PostCard, PostPlaceholder } from "@/components/shared/PostCard";
 import { InstagramEmbed } from "@/components/shared/InstagramEmbed";
 import { MobileCollapse } from "@/components/shared/MobileCollapse";
@@ -47,15 +48,25 @@ export function Launch() {
                 title={p.partner}
                 blurb={p.what}
                 thumb={
-                  <span
-                    className="font-display text-xl font-black"
-                    style={{ ...WONK, color: "var(--ejd-vermilion)" }}
-                  >
-                    {(p.handle ?? p.partner)
-                      .replace(/^@/, "")
-                      .charAt(0)
-                      .toUpperCase()}
-                  </span>
+                  p.still ? (
+                    <Image
+                      src={p.still}
+                      alt=""
+                      fill
+                      sizes="56px"
+                      className="object-cover"
+                    />
+                  ) : (
+                    <span
+                      className="font-display text-xl font-black"
+                      style={{ ...WONK, color: "var(--ejd-vermilion)" }}
+                    >
+                      {(p.handle ?? p.partner)
+                        .replace(/^@/, "")
+                        .charAt(0)
+                        .toUpperCase()}
+                    </span>
+                  )
                 }
               >
                 <PostCard

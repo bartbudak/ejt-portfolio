@@ -110,7 +110,7 @@ export function Brief() {
                   </span>
                 }
               >
-                <div className="flex items-baseline gap-3">
+                <div className="hidden items-baseline gap-3 sm:flex">
                   <span
                     aria-hidden
                     className="font-display text-2xl font-black leading-none tabular-nums sm:text-[2rem]"
@@ -130,7 +130,7 @@ export function Brief() {
                   </h3>
                 </div>
                 <p
-                  className="mt-3 text-base leading-relaxed"
+                  className="mt-1 text-base leading-relaxed sm:mt-3"
                   style={{ color: "var(--ejd-ink)" }}
                 >
                   {line.body}

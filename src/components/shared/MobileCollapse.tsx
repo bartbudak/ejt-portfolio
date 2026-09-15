@@ -67,7 +67,13 @@ export function MobileCollapse({
             {title}
           </span>
           {blurb && (
-            <span className="mt-1 line-clamp-2 block text-sm leading-snug opacity-80">
+            // On a bare card the row is the head and the body follows it,
+            // so the teaser goes once the body is showing.
+            <span
+              className={`mt-1 line-clamp-2 block text-sm leading-snug opacity-80 ${
+                !framed && open ? "hidden" : ""
+              }`}
+            >
               {blurb}
             </span>
           )}

@@ -21,6 +21,12 @@ export interface LaunchPost {
   /** Handle, shown while a post link is still missing. */
   handle?: string;
   /**
+   * A still of the post's media, for the folded card on a phone (Bart,
+   * 2026-09-15). Captured off the post's own embed page by Playwright and
+   * cropped square; not live, and does not need to be.
+   */
+  still?: string;
+  /**
    * The shape of the post's OWN media, as a CSS aspect ratio.
    *
    * The embed renders its media at the iframe's full width, so the media's
@@ -46,6 +52,7 @@ export const launchPosts: LaunchPost[] = [
   // Talea), so the old entries are gone rather than reordered.
   {
     partner: "Butterfield Market",
+    still: "/launch/stills/butterfield.webp",
     what: "Frozen yogurt s'mores using Maeve's chocolate",
     handle: "@butterfieldnyc",
     post: "https://www.instagram.com/p/Db3cky_R3vJ/",
@@ -54,6 +61,7 @@ export const launchPosts: LaunchPost[] = [
   },
   {
     partner: "Books Are Magic",
+    still: "/launch/stills/books-are-magic.webp",
     what: "Chocolate and book pairings in all their stores",
     handle: "@booksaremagicbk",
     post: "https://www.instagram.com/p/DOg4VVbEaLd/?img_index=1",
@@ -62,6 +70,7 @@ export const launchPosts: LaunchPost[] = [
   },
   {
     partner: "Su'Juk",
+    still: "/launch/stills/sujuk.webp",
     what: "Multiple ship and shop experiences",
     handle: "@sujukbrooklyn",
     post: "https://www.instagram.com/p/DUvxx9aEYum/",
@@ -70,6 +79,7 @@ export const launchPosts: LaunchPost[] = [
   },
   {
     partner: "Talea Beer Co.",
+    still: "/launch/stills/talea.webp",
     what: "Romance trivia night with a LTO Pineapple Cacao Sour cobranded beverage",
     handle: "@taleabeer",
     post: "https://www.instagram.com/p/DUletwej_--/",
@@ -90,7 +100,9 @@ export const launchAlsoRan = [
 /** Pulls the shortcode out of a post URL, or passes a bare shortcode through. */
 export function embedUrl(post: string): string | null {
   if (!post) return null;
-  const match = post.match(/instagram\.com\/(?:p|reel|reels|tv)\/([A-Za-z0-9_-]+)/);
+  const match = post.match(
+    /instagram\.com\/(?:p|reel|reels|tv)\/([A-Za-z0-9_-]+)/,
+  );
   const code = match ? match[1] : /^[A-Za-z0-9_-]+$/.test(post) ? post : null;
   // Plain `/embed/`, not `/embed/captioned/` — the caption is rebuilt in our
   // own chrome, and the shorter the embed's own furniture the less of it has

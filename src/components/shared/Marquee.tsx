@@ -230,9 +230,9 @@ export function Marquee({
       // No overflow rule of its own. The band used to carry `overflow-x: clip`
       // so an unmeasured, oversized SVG could not push the page sideways, and
       // that one rule is what iPhone Chrome appeared to misread, cutting the
-      // bottom wave flat (Bart, 2026-09-15). Now the drawing is 100% wide and
-      // clips itself sideways, as an outer <svg> and an overflow-hidden div
-      // always do, so nothing here can ever be wider than the page.
+      // bottom wave flat (Bart, 2026-09-15). Now the drawing sits in a box of
+      // the band's own width that clips it, so nothing here can ever be wider
+      // than the page.
       className={`z-10 w-full flex-none overflow-visible ${className}`}
       // The band occupies only its opaque body in flow; the wave's swing room
       // hangs outside that box so the sections either side meet underneath it
@@ -247,53 +247,21 @@ export function Marquee({
       style={{ height: flowH }}
     >
       <div className="relative h-full w-full">
-        {/* The band itself — sky, field, the two stroked edges — drawn once.
-            The edges repeat every wavelength, so they never needed to move;
-            they used to ride along with the type only because everything was
-            one group. `slice` keeps the drawing 1:1 vertically whatever the
-            measured width is doing, cropping the right end if it must. */}
-        <svg
-          width="100%"
-          height={height}
-          viewBox={`0 0 ${width} ${height}`}
-          preserveAspectRatio="xMinYMin slice"
-          style={{ position: "absolute", top: svgTop, left: 0 }}
-          className="block"
+        {/* The whole drawing — sky, field, both stroked edges and the type —
+            travels together, exactly as it did when it was one SVG group: the
+            type has to stay on the field's centreline, and the edges ripple
+            with it, which is the point of the wave. What changed is WHAT
+            carries the animation: an HTML element, which the browser moves on
+            the GPU as one finished picture, rather than the SVG group, which
+            had WebKit re-rasterising text along a curve every frame for every
+            band on the page — where the phone's heat went. The outer box
+            clips it to the band's own width and full swing; nothing here can
+            be wider than the page. Paused whenever the band is off screen. */}
+        <div
+          className="absolute left-0 w-full overflow-hidden"
+          style={{ top: svgTop, height }}
           role="img"
           aria-label={items.join(", ")}
-        >
-          {/* Painted only while pinned: the slot between the header and the
-              wave takes the header's own colour instead of letting the page
-              scroll through it (Ellie, 2026-09-07). */}
-          {stuck && (
-            <path d={skyPath} fill="var(--ejt-header-bg, transparent)" />
-          )}
-          <path d={fieldPath} fill={background} />
-          {[topPath, bottomPath].map((d, i) => (
-            <g key={i} fill="none" strokeLinecap="round">
-              {/* One path stroked twice: the wider ink pass leaves a hairline
-                  either side of the narrower ring pass, which is the
-                  hairline · ring · hairline frame the flat band had. */}
-              <path
-                d={d}
-                stroke="var(--ejd-ink)"
-                strokeWidth={FRAME + STROKE * 2}
-              />
-              <path d={d} stroke={ring} strokeWidth={FRAME} />
-            </g>
-          ))}
-        </svg>
-
-        {/* The type, on a layer of its own. The animation is on an HTML
-            element, which the browser can move on the GPU as a finished
-            picture; animating the SVG group itself had WebKit re-rasterising
-            the text along its curve every frame, for every band on the page,
-            which is where the phone's heat went. Clipped to the same box as
-            the band, and paused whenever the band is off screen. */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute left-0 w-full overflow-hidden"
-          style={{ top: svgTop, height }}
         >
           <div
             style={{
@@ -321,10 +289,31 @@ export function Marquee({
               height={height}
               viewBox={`0 0 ${pathWidth} ${height}`}
               className="block"
+              aria-hidden
             >
               <defs>
                 <path id={`${id}-text`} d={textPath} />
               </defs>
+              {/* Painted only while pinned: the slot between the header and
+                  the wave takes the header's own colour instead of letting
+                  the page scroll through it (Ellie, 2026-09-07). */}
+              {stuck && (
+                <path d={skyPath} fill="var(--ejt-header-bg, transparent)" />
+              )}
+              <path d={fieldPath} fill={background} />
+              {[topPath, bottomPath].map((d, i) => (
+                <g key={i} fill="none" strokeLinecap="round">
+                  {/* One path stroked twice: the wider ink pass leaves a
+                      hairline either side of the narrower ring pass, which is
+                      the hairline · ring · hairline frame the flat band had. */}
+                  <path
+                    d={d}
+                    stroke="var(--ejd-ink)"
+                    strokeWidth={FRAME + STROKE * 2}
+                  />
+                  <path d={d} stroke={ring} strokeWidth={FRAME} />
+                </g>
+              ))}
               <text
                 fontSize={fontSize}
                 fontWeight={400}

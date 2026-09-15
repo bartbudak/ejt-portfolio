@@ -228,7 +228,12 @@
 >   - **Cards fold on phones:** `MobileCollapse` wraps the award, idea, local
 >     launch and national launch cards — a row with a thumbnail, title and a
 >     line of copy, tap to open. One DOM: the row is `sm:hidden`, the card
->     `max-sm:hidden` until opened, so closed cards fetch no media.
+>     `max-sm:hidden` until opened, so closed cards fetch no media. The
+>     national launch rows use stills of the posts (`public/launch/stills/`,
+>     captured off each post's embed page with Playwright, `still` in
+>     `launch.ts`); an idea card's row IS its head, so it opens into the body.
+>   - The band's whole drawing moves together on the composited layer (a
+>     first cut moved only the type, which drifted off the static wave).
 > - **Page bands and themes:** Campaigns and Collaborations each get a marquee
 >   pinned under the header naming the page. Each page names its theme through
 >   `<ThemeSwitcher theme>`: Campaigns on Pistachio, the home and Collaborations
