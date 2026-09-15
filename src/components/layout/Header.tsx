@@ -65,7 +65,12 @@ function Squiggle() {
       preserveAspectRatio="none"
     >
       <defs>
-        <pattern id="ejt-nav-squiggle" width="12" height="8" patternUnits="userSpaceOnUse">
+        <pattern
+          id="ejt-nav-squiggle"
+          width="12"
+          height="8"
+          patternUnits="userSpaceOnUse"
+        >
           <path
             d="M0 2.5Q3 0.5 6 2.5T12 2.5M0 6Q3 4 6 6T12 6"
             fill="none"
@@ -83,7 +88,8 @@ function Squiggle() {
 export function Header() {
   const pathname = usePathname();
   const tone =
-    Object.entries(TONES).find(([p]) => samePath(pathname, p))?.[1] ?? DEFAULT_TONE;
+    Object.entries(TONES).find(([p]) => samePath(pathname, p))?.[1] ??
+    DEFAULT_TONE;
 
   // Published on <html> so a pinned band can paint the slot between itself and
   // the header in the header's own colour (Ellie, 2026-09-07). It has to go on
@@ -112,7 +118,7 @@ export function Header() {
         // so the tabs in the middle sit on the page's true centre line no
         // matter how wide the monogram is. With space-between they would only
         // look centred by coincidence.
-        className="mx-auto grid h-full w-full max-w-[1600px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 sm:px-8"
+        className="mx-auto grid h-full w-full max-w-[1600px] grid-cols-[1fr_auto_1fr] items-center gap-2 px-3 sm:gap-4 sm:px-8"
       >
         <Link
           href="/preview"
@@ -127,7 +133,7 @@ export function Header() {
             <span
               role="img"
               aria-label={`${site.name} monogram`}
-              className="block h-9 w-auto sm:h-10"
+              className="block h-7 w-auto sm:h-10"
               style={{
                 aspectRatio: "900 / 801",
                 backgroundColor: tone.ink,
@@ -154,8 +160,11 @@ export function Header() {
         </Link>
 
         <ul
-          className="flex items-center justify-center gap-3 font-display uppercase tracking-[0.06em] sm:gap-7 sm:tracking-[0.08em]"
-          style={{ color: tone.ink, fontSize: "clamp(0.75rem,1.15vw,1rem)" }}
+          // Four tabs have to fit beside the monogram on a 375px phone, where
+          // "Resume" used to run off the edge (Bart, 2026-09-15): tighter
+          // gaps and tracking and a hard 0.66rem under the small breakpoint.
+          className="flex items-center justify-center gap-2 font-display uppercase tracking-[0.03em] sm:gap-7 sm:tracking-[0.08em]"
+          style={{ color: tone.ink, fontSize: "clamp(0.66rem,2.4vw,1rem)" }}
         >
           {(site.nav as readonly NavItem[]).map((item) => {
             const active =

@@ -1,5 +1,12 @@
 import { Marquee } from "@/components/shared/Marquee";
-import { brief, briefIntro, briefLead, briefScript, briefTurn } from "@/data/brief";
+import { MobileCollapse } from "@/components/shared/MobileCollapse";
+import {
+  brief,
+  briefIntro,
+  briefLead,
+  briefScript,
+  briefTurn,
+} from "@/data/brief";
 
 // "THE BRIEF" — the deck page between "why did I pitch the rebrand?" and the
 // numbers. It answers the obvious question the results raise: what was the plan
@@ -37,7 +44,11 @@ export function Brief() {
       <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-10 sm:py-24">
         <h2
           className="text-center font-display font-black uppercase leading-[0.84] tracking-[-0.03em]"
-          style={{ ...WONK, color: "var(--ejd-vermilion)", fontSize: "clamp(3.75rem,12.5vw,7.5rem)" }}
+          style={{
+            ...WONK,
+            color: "var(--ejd-vermilion)",
+            fontSize: "clamp(3.75rem,12.5vw,7.5rem)",
+          }}
         >
           {briefIntro}
         </h2>
@@ -67,7 +78,11 @@ export function Brief() {
         {/* Her own turn from the setup into the work, asked for by name. */}
         <h3
           className="mt-14 text-center font-display font-black uppercase leading-[0.9] tracking-[-0.02em]"
-          style={{ ...WONK, color: "var(--ejd-vermilion)", fontSize: "clamp(1.75rem,5vw,3rem)" }}
+          style={{
+            ...WONK,
+            color: "var(--ejd-vermilion)",
+            fontSize: "clamp(1.75rem,5vw,3rem)",
+          }}
         >
           {briefTurn}
         </h3>
@@ -76,33 +91,51 @@ export function Brief() {
           {brief.map((line, i) => (
             <li
               key={line.heading}
-              className={`rounded-[24px] p-6 sm:p-7 ${line.wide ? "sm:col-span-2" : ""}`}
+              className={`rounded-[24px] p-4 sm:p-7 ${line.wide ? "sm:col-span-2" : ""}`}
               style={{
                 backgroundColor: "var(--mv-paper)",
                 border: "var(--mv-stroke) solid var(--mv-soft-black)",
               }}
             >
-              <div className="flex items-baseline gap-3">
-                <span
-                  aria-hidden
-                  className="font-display text-2xl font-black leading-none tabular-nums sm:text-[2rem]"
-                  style={{ ...WONK, color: "var(--ejd-vermilion)", opacity: 0.45 }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3
-                  className="font-display text-xl font-black uppercase leading-[0.95] tracking-[-0.01em] sm:text-2xl"
-                  style={{ ...WONK, color: "var(--ejd-vermilion)" }}
-                >
-                  {line.heading}
-                </h3>
-              </div>
-              <p
-                className="mt-3 text-base leading-relaxed"
-                style={{ color: "var(--ejd-ink)" }}
+              <MobileCollapse
+                framed={false}
+                title={line.heading}
+                blurb={line.body}
+                thumb={
+                  <span
+                    className="font-display text-lg font-black tabular-nums"
+                    style={{ ...WONK, color: "var(--ejd-vermilion)" }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                }
               >
-                {line.body}
-              </p>
+                <div className="flex items-baseline gap-3">
+                  <span
+                    aria-hidden
+                    className="font-display text-2xl font-black leading-none tabular-nums sm:text-[2rem]"
+                    style={{
+                      ...WONK,
+                      color: "var(--ejd-vermilion)",
+                      opacity: 0.45,
+                    }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3
+                    className="font-display text-xl font-black uppercase leading-[0.95] tracking-[-0.01em] sm:text-2xl"
+                    style={{ ...WONK, color: "var(--ejd-vermilion)" }}
+                  >
+                    {line.heading}
+                  </h3>
+                </div>
+                <p
+                  className="mt-3 text-base leading-relaxed"
+                  style={{ color: "var(--ejd-ink)" }}
+                >
+                  {line.body}
+                </p>
+              </MobileCollapse>
             </li>
           ))}
         </ol>

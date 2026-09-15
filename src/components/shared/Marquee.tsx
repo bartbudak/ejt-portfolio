@@ -72,7 +72,13 @@ function waveSegs(y: number, width: number, amp: number, len: number): Seg[] {
 }
 
 const fwd = (y: number, segs: Seg[]) =>
-  `M0 ${y}` + segs.map((s) => `C${s.c1[0]} ${s.c1[1]},${s.c2[0]} ${s.c2[1]},${s.to[0]} ${s.to[1]}`).join("");
+  `M0 ${y}` +
+  segs
+    .map(
+      (s) =>
+        `C${s.c1[0]} ${s.c1[1]},${s.c2[0]} ${s.c2[1]},${s.to[0]} ${s.to[1]}`,
+    )
+    .join("");
 
 /** The same curve traced right to left, so it can close a filled shape. */
 function rev(y: number, segs: Seg[]) {
@@ -105,6 +111,9 @@ export function Marquee({
   // slot above its wave need painting; unpinned, that sliver should show the
   // section behind it as before.
   const [stuck, setStuck] = useState(false);
+  // Whether the band is on screen at all. Off screen its type stops moving:
+  // four bands animating at once, seen or not, is what warmed the phone up.
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const el = hostRef.current;
@@ -136,12 +145,21 @@ export function Marquee({
     window.addEventListener("scroll", check, { passive: true });
     window.addEventListener("resize", check);
 
+    const io = new IntersectionObserver(
+      ([entry]) => setVisible(entry.isIntersecting),
+      {
+        rootMargin: "100px 0px",
+      },
+    );
+    io.observe(el);
+
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     setReduced(mq.matches);
     const onChange = () => setReduced(mq.matches);
     mq.addEventListener("change", onChange);
     return () => {
       ro.disconnect();
+      io.disconnect();
       window.removeEventListener("scroll", check);
       window.removeEventListener("resize", check);
       mq.removeEventListener("change", onChange);
@@ -165,7 +183,10 @@ export function Marquee({
 
   // Estimated width of one pass of the list. Measuring would need a layout
   // pass; over-estimating only costs a little unused path.
-  const perPass = items.reduce((w, i) => w + i.length * fontSize * 0.62 + fontSize * 1.6, 0);
+  const perPass = items.reduce(
+    (w, i) => w + i.length * fontSize * 0.62 + fontSize * 1.6,
+    0,
+  );
   // Travel is a whole number of wavelengths, and at least one screen wide.
   const cycles = Math.max(1, Math.ceil(Math.max(width, perPass) / wavelength));
   const travel = cycles * wavelength;
@@ -175,7 +196,12 @@ export function Marquee({
 
   const topSegs = waveSegs(topY, pathWidth, amplitude, wavelength);
   const botSegs = waveSegs(bottomY, pathWidth, amplitude, wavelength);
-  const textSegs = waveSegs(midY + fontSize * 0.34, pathWidth, amplitude, wavelength);
+  const textSegs = waveSegs(
+    midY + fontSize * 0.34,
+    pathWidth,
+    amplitude,
+    wavelength,
+  );
 
   const topPath = fwd(topY, topSegs);
   const bottomPath = fwd(bottomY, botSegs);
@@ -192,17 +218,22 @@ export function Marquee({
     [...items.join("|")].reduce((h, c) => (h * 31 + c.charCodeAt(0)) | 0, 7),
   )}`;
 
-  const line = Array.from({ length: passes }, () => items.join("  •  ")).join("  •  ");
+  const line = Array.from({ length: passes }, () => items.join("  •  ")).join(
+    "  •  ",
+  );
+
+  const svgTop = -(edgeRoom + amplitude);
 
   return (
     <div
       ref={hostRef}
-      // `overflow-x: clip` and not `hidden`: the drawing has to bleed
-      // vertically past this box, and `hidden` on one axis forces the other to
-      // become a scroll container. Without it, a width measurement that has not
-      // caught up with a resize leaves an oversized SVG pushing the whole page
-      // sideways.
-      className={`z-10 w-full flex-none [overflow-x:clip] [overflow-y:visible] ${className}`}
+      // No overflow rule of its own. The band used to carry `overflow-x: clip`
+      // so an unmeasured, oversized SVG could not push the page sideways, and
+      // that one rule is what iPhone Chrome appeared to misread, cutting the
+      // bottom wave flat (Bart, 2026-09-15). Now the drawing is 100% wide and
+      // clips itself sideways, as an outer <svg> and an overflow-hidden div
+      // always do, so nothing here can ever be wider than the page.
+      className={`z-10 w-full flex-none overflow-visible ${className}`}
       // The band occupies only its opaque body in flow; the wave's swing room
       // hangs outside that box so the sections either side meet underneath it
       // rather than being parted by it.
@@ -216,59 +247,98 @@ export function Marquee({
       style={{ height: flowH }}
     >
       <div className="relative h-full w-full">
-      <svg
-        width={width}
-        height={height}
-        style={{ position: "absolute", top: -(edgeRoom + amplitude), left: 0 }}
-        viewBox={`0 0 ${width} ${height}`}
-        // 1:1 with CSS pixels, so nothing is stretched.
-        className="block"
-        role="img"
-        aria-label={items.join(", ")}
-      >
-        <defs>
-          <path id={`${id}-text`} d={textPath} />
-        </defs>
-
-        <g
-          style={
-            reduced
-              ? undefined
-              : {
-                  animation: `ejt-wave-marquee ${speed}s linear infinite`,
-                  // The distance is handed to the keyframes, which live in
-                  // globals.css and cannot know it.
-                  ["--ejt-travel" as string]: `-${travel}px`,
-                }
-          }
+        {/* The band itself — sky, field, the two stroked edges — drawn once.
+            The edges repeat every wavelength, so they never needed to move;
+            they used to ride along with the type only because everything was
+            one group. `slice` keeps the drawing 1:1 vertically whatever the
+            measured width is doing, cropping the right end if it must. */}
+        <svg
+          width="100%"
+          height={height}
+          viewBox={`0 0 ${width} ${height}`}
+          preserveAspectRatio="xMinYMin slice"
+          style={{ position: "absolute", top: svgTop, left: 0 }}
+          className="block"
+          role="img"
+          aria-label={items.join(", ")}
         >
           {/* Painted only while pinned: the slot between the header and the
               wave takes the header's own colour instead of letting the page
               scroll through it (Ellie, 2026-09-07). */}
-          {stuck && <path d={skyPath} fill="var(--ejt-header-bg, transparent)" />}
+          {stuck && (
+            <path d={skyPath} fill="var(--ejt-header-bg, transparent)" />
+          )}
           <path d={fieldPath} fill={background} />
           {[topPath, bottomPath].map((d, i) => (
             <g key={i} fill="none" strokeLinecap="round">
               {/* One path stroked twice: the wider ink pass leaves a hairline
                   either side of the narrower ring pass, which is the
                   hairline · ring · hairline frame the flat band had. */}
-              <path d={d} stroke="var(--ejd-ink)" strokeWidth={FRAME + STROKE * 2} />
+              <path
+                d={d}
+                stroke="var(--ejd-ink)"
+                strokeWidth={FRAME + STROKE * 2}
+              />
               <path d={d} stroke={ring} strokeWidth={FRAME} />
             </g>
           ))}
-          <text
-            fontSize={fontSize}
-            fontWeight={400}
-            className="font-display uppercase"
-            fill="var(--ejd-ink)"
-            style={{ letterSpacing: "0.02em" }}
+        </svg>
+
+        {/* The type, on a layer of its own. The animation is on an HTML
+            element, which the browser can move on the GPU as a finished
+            picture; animating the SVG group itself had WebKit re-rasterising
+            the text along its curve every frame, for every band on the page,
+            which is where the phone's heat went. Clipped to the same box as
+            the band, and paused whenever the band is off screen. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-0 w-full overflow-hidden"
+          style={{ top: svgTop, height }}
+        >
+          <div
+            style={{
+              width: pathWidth,
+              height,
+              ...(reduced
+                ? {}
+                : {
+                    willChange: "transform",
+                    // Longhands, not the shorthand: React refuses to update
+                    // `animation` and `animationPlayState` on one element.
+                    animationName: "ejt-wave-marquee",
+                    animationDuration: `${speed}s`,
+                    animationTimingFunction: "linear",
+                    animationIterationCount: "infinite",
+                    animationPlayState: visible ? "running" : "paused",
+                    // The distance is handed to the keyframes, which live in
+                    // globals.css and cannot know it.
+                    ["--ejt-travel" as string]: `-${travel}px`,
+                  }),
+            }}
           >
-            <textPath href={`#${id}-text`} startOffset="0">
-              {line}
-            </textPath>
-          </text>
-        </g>
-      </svg>
+            <svg
+              width={pathWidth}
+              height={height}
+              viewBox={`0 0 ${pathWidth} ${height}`}
+              className="block"
+            >
+              <defs>
+                <path id={`${id}-text`} d={textPath} />
+              </defs>
+              <text
+                fontSize={fontSize}
+                fontWeight={400}
+                className="font-display uppercase"
+                fill="var(--ejd-ink)"
+                style={{ letterSpacing: "0.02em" }}
+              >
+                <textPath href={`#${id}-text`} startOffset="0">
+                  {line}
+                </textPath>
+              </text>
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
   );

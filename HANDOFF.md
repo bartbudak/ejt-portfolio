@@ -208,6 +208,27 @@
 >   `public/ellie-thompson-resume.pdf`. Re-run the script after any change to
 >   the data or the document and commit the PDF with it. The page break is by
 >   hand (`SPLIT`); the print route reports 38px to spare on each page.
+> - **Mobile pass (Bart, 2026-09-15, from iPhone 16 Pro screenshots):**
+>   - **Test phones with `node scripts/shoot.mjs <url> webkit <dir> [#id ...]`**
+>     — Playwright's WebKit at the iPhone 16 Pro profile, past the gate, with
+>     console errors printed. WebKit is what every iPhone browser runs, Chrome
+>     included; there is no iOS simulator runtime on this Mac. `chromium` and
+>     `DEVICE=desktop` also work. The Browser pane cannot do this.
+>   - **The phone ran hot** because four wave bands animated their SVG text
+>     along a path every frame (WebKit re-rasterises that) and the hero's
+>     particle canvas redrew every frame. Now: the band is drawn once and only
+>     its type moves, on an HTML layer the GPU can composite (`Marquee.tsx`),
+>     bands pause off screen (IntersectionObserver), and phones get plain
+>     type in the hero instead of `ParticleWordmark`.
+>   - The band no longer relies on `overflow-x: clip` on its host — the one
+>     rule iPhone Chrome seemed to misread, cutting the bottom wave flat. The
+>     drawing is 100% wide and clips itself. Phones also get a tighter wave
+>     (`MARQUEE_PHONE`), so the band pins closer under the header.
+>   - The header nav fits a 375px screen (it used to cut "Resume" off).
+>   - **Cards fold on phones:** `MobileCollapse` wraps the award, idea, local
+>     launch and national launch cards — a row with a thumbnail, title and a
+>     line of copy, tap to open. One DOM: the row is `sm:hidden`, the card
+>     `max-sm:hidden` until opened, so closed cards fetch no media.
 > - **Page bands and themes:** Campaigns and Collaborations each get a marquee
 >   pinned under the header naming the page. Each page names its theme through
 >   `<ThemeSwitcher theme>`: Campaigns on Pistachio, the home and Collaborations

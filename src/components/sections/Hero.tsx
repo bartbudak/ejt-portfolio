@@ -71,26 +71,38 @@ export function Hero() {
             Height is derived from the same fitted size the CSS wordmark used,
             so the hero's layout — and the roles crossing her cap below — are
             unchanged. */}
-        <h1
-          className="relative block [--wm-advance:5.6] sm:[--wm-advance:8.58]"
-        >
+        <h1 className="relative block [--wm-advance:5.6] sm:[--wm-advance:8.58]">
           <span className="sr-only">Ellie Thompson</span>
           {/* Two mounts rather than one reflowing mount: the mobile field
               stacks the name over two lines and the desktop one runs it across
               a single line, and each needs its own height. */}
+          {/* Phones get the name as plain type. The particle field is a
+              canvas redrawing every frame for as long as the hero is on
+              screen, which on a phone is heat for no gain at that size
+              (Bart, 2026-09-15). Same fitted size, same two lines. */}
           <span
-            className="block sm:hidden"
-            style={{ height: "calc(min(11.5rem, (100vw - 2rem) / var(--wm-advance)) * 2.1)" }}
+            aria-hidden
+            className="block text-center font-display font-black uppercase leading-[1.02] tracking-[-0.03em] sm:hidden"
+            style={{
+              ...WONK,
+              color: "var(--ejd-vermilion)",
+              // Fraunces sets THOMPSON wider than the particle field's fitted
+              // advance, so the divisor is its own: 6.2em keeps the line
+              // inside a 375px screen with the same side margins.
+              fontSize: "min(11.5rem, (100vw - 2rem) / 6.2)",
+              transform: "scaleX(0.96)",
+            }}
           >
-            <ParticleWordmark
-              lines={["ELLIE", "THOMPSON"]}
-              color="var(--ejd-vermilion)"
-              scaleX={0.96}
-            />
+            Ellie
+            <br />
+            Thompson
           </span>
           <span
             className="hidden sm:block"
-            style={{ height: "calc(min(11.5rem, (100vw - 2rem) / var(--wm-advance)) * 1.05)" }}
+            style={{
+              height:
+                "calc(min(11.5rem, (100vw - 2rem) / var(--wm-advance)) * 1.05)",
+            }}
           >
             <ParticleWordmark
               lines={["ELLIE THOMPSON"]}
@@ -104,7 +116,11 @@ export function Hero() {
             deck stacks them. */}
         <ul
           className="mt-6 flex flex-wrap items-baseline justify-center gap-x-[8vw] gap-y-2 text-center font-display font-semibold uppercase tracking-[0.04em]"
-          style={{ ...WONK, color: "var(--ejd-vermilion)", fontSize: "clamp(0.75rem,1.5vw,1.25rem)" }}
+          style={{
+            ...WONK,
+            color: "var(--ejd-vermilion)",
+            fontSize: "clamp(0.75rem,1.5vw,1.25rem)",
+          }}
         >
           {site.roles.map((r) => (
             <li key={r}>{r}</li>

@@ -33,6 +33,17 @@ export const MARQUEE_DEFAULTS: MarqueeSettings = {
   speed: 115,
 };
 
+/** The same wave, scaled for a phone: a shallower swing and smaller type,
+ *  so the band takes less of a short screen and pins closer under the header
+ *  (Bart, 2026-09-15). */
+export const MARQUEE_PHONE: MarqueeSettings = {
+  amplitude: 5,
+  wavelength: 110,
+  fontSize: 12,
+  padding: 8,
+  speed: 90,
+};
+
 type Ctx = {
   settings: MarqueeSettings;
   set: (patch: Partial<MarqueeSettings>) => void;
@@ -52,7 +63,8 @@ export const BAND_STROKE = 2;
 export const BAND_FRAME = 7;
 
 /** Height of the opaque band itself, ignoring the room the wave swings in. */
-export const bandHeight = (s: MarqueeSettings) => s.fontSize * 1.1 + s.padding * 2;
+export const bandHeight = (s: MarqueeSettings) =>
+  s.fontSize * 1.1 + s.padding * 2;
 /**
  * The strip that is opaque at EVERY x, which is the body minus the wave's
  * swing at both edges. This is what the band occupies in flow, so that two
@@ -91,8 +103,24 @@ export const bandEdge = (s: MarqueeSettings) =>
 export const bandPinOffset = (s: MarqueeSettings) =>
   s.amplitude * 2 + (BAND_FRAME + BAND_STROKE * 2) / 2 + 1;
 
-export function MarqueeSettingsProvider({ children }: { children: React.ReactNode }) {
+export function MarqueeSettingsProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [settings, setSettings] = useState<MarqueeSettings>(MARQUEE_DEFAULTS);
+
+  // Phones get the tighter set. Decided on the client, since the server has
+  // no viewport: the first paint is the desktop band, and a phone re-lays
+  // itself out once, on mount, before anyone has scrolled.
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)");
+    const apply = () =>
+      setSettings(mq.matches ? MARQUEE_PHONE : MARQUEE_DEFAULTS);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
 
   // Published on the root so layout elsewhere can reason about the band without
   // guessing at it. --ejt-marquee-h is the height the band CONSUMES IN FLOW,
@@ -118,6 +146,8 @@ export function MarqueeSettingsProvider({ children }: { children: React.ReactNod
     setSettings((s) => ({ ...s, ...patch }));
   const reset = () => setSettings(MARQUEE_DEFAULTS);
   return (
-    <MarqueeCtx.Provider value={{ settings, set, reset }}>{children}</MarqueeCtx.Provider>
+    <MarqueeCtx.Provider value={{ settings, set, reset }}>
+      {children}
+    </MarqueeCtx.Provider>
   );
 }
