@@ -114,7 +114,9 @@ export function PostGrid({
 }) {
   return (
     <ul
-      className="grid grid-cols-1 gap-6 px-6 pb-12 pt-12 sm:grid-cols-3 sm:px-14 sm:pb-16"
+      // Tight side padding on a phone: inside a band the rows are already
+      // narrow, and a handle in display caps needs every pixel of the column.
+      className="grid grid-cols-1 gap-5 px-3 pb-12 pt-12 sm:grid-cols-3 sm:gap-6 sm:px-14 sm:pb-16"
       style={{ backgroundColor: ground }}
     >
       {cards.map((card, i) => (

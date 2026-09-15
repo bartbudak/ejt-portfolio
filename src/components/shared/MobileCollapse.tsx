@@ -64,7 +64,11 @@ export function MobileCollapse({
             // A long single word — an Instagram handle — drops a size so it
             // fits the column whole instead of breaking mid-word.
             className={`block break-words font-display font-black uppercase leading-[0.95] tracking-[-0.01em] ${
-              title.length > 12 ? "text-sm" : "text-base"
+              title.length > 14
+                ? "text-xs"
+                : title.length > 12
+                  ? "text-sm"
+                  : "text-base"
             }`}
             style={{ ...WONK, color: "var(--ejd-vermilion)" }}
           >
