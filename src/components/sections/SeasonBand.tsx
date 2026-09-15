@@ -258,9 +258,11 @@ export function SeasonBand({
   const reach = Math.max(0, ...stage.layers.map((l) => stage.origin - l.y));
   const origin = stage.origin - reach;
 
+  // Cards seated in the stage are a wide-screen arrangement: at deck scale on
+  // a phone they would be thumbnails. There, every card folds into the grid
+  // below instead, and the seats are hidden.
   const slots = stage.posts ?? [];
   const slotted = cards.slice(0, slots.length);
-  const gridded = cards.slice(slots.length);
 
   return (
     <div
@@ -309,7 +311,7 @@ export function SeasonBand({
         {slotted.map((card, i) => (
           <div
             key={i}
-            className="absolute"
+            className="absolute max-sm:hidden"
             style={{
               left: u(slots[i].x),
               top: u(slots[i].y - origin),
@@ -322,7 +324,7 @@ export function SeasonBand({
         ))}
       </div>
 
-      {gridded.length > 0 && (
+      {cards.length > 0 && (
         // The grid clears the strip; in her deck the first card starts just
         // past the ribbon's edge.
         <div
@@ -330,9 +332,13 @@ export function SeasonBand({
           style={strip ? { paddingLeft: u(strip.w) } : undefined}
         >
           <PostGrid
-            cards={gridded}
+            cards={cards}
             ground={collection.ground}
-            perches={art.perches}
+            perches={art.perches?.map((p) => ({
+              ...p,
+              post: p.post + slots.length,
+            }))}
+            phoneOnlyBefore={slots.length}
           />
         </div>
       )}

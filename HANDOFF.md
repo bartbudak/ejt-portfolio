@@ -234,6 +234,14 @@
 >     `launch.ts`); an idea card's row IS its head, so it opens into the body.
 >   - The band's whole drawing moves together on the composited layer (a
 >     first cut moved only the type, which drifted off the static wave).
+>   - The idea cards do NOT fold: on a phone the number sits in a tile at the
+>     top-left with heading and copy beside it, nothing to tap (Bart).
+>   - **Every Instagram card on Campaigns and Collaborations folds too**, with
+>     a still per post in `public/posts/<shortcode>.webp` (the Reddit thread
+>     by id), captured by `node scripts/post-stills.mjs <codes...>`. Cards a
+>     band seats in its stage (Spring's, Summer's) are hidden on phones and
+>     gridded there instead (`phoneOnlyBefore` on `PostGrid`). Row titles are
+>     the first account; the partner goes in the line below.
 > - **Page bands and themes:** Campaigns and Collaborations each get a marquee
 >   pinned under the header naming the page. Each page names its theme through
 >   `<ThemeSwitcher theme>`: Campaigns on Pistachio, the home and Collaborations

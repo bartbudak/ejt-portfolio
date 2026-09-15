@@ -103,10 +103,14 @@ export function PostGrid({
   cards,
   ground,
   perches,
+  phoneOnlyBefore = 0,
 }: {
   cards: ReactNode[];
   ground: string;
   perches?: Perch[];
+  /** The first N cards show only on a phone — wider, the band seats them in
+   *  its own composition instead. */
+  phoneOnlyBefore?: number;
 }) {
   return (
     <ul
@@ -114,7 +118,10 @@ export function PostGrid({
       style={{ backgroundColor: ground }}
     >
       {cards.map((card, i) => (
-        <li key={i} className="relative">
+        <li
+          key={i}
+          className={`relative ${i < phoneOnlyBefore ? "sm:hidden" : ""}`}
+        >
           {card}
           {perches
             ?.filter((perch) => perch.post === i)

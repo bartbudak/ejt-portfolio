@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import type { Collection } from "@/data/campaigns";
+import type { Collection, CollectionPost } from "@/data/campaigns";
 import { PostCard, PostPlaceholder } from "@/components/shared/PostCard";
 import { InstagramEmbed } from "@/components/shared/InstagramEmbed";
 import {
@@ -13,6 +13,7 @@ import {
   withLinks,
 } from "./CollectionCopy";
 import { RedditEmbed } from "@/components/shared/RedditEmbed";
+import { MobileCollapse } from "@/components/shared/MobileCollapse";
 import { SeasonBand } from "./SeasonBand";
 
 // The Campaigns page and the Collaborations page: one component, two tabs. They
@@ -148,35 +149,81 @@ export function Collections({ title, intro, items, tone }: Props) {
   // them under it (SeasonBand); a collaboration grids them. A post with no
   // link yet gets the launch wall's labelled placeholder, so the row holds its
   // shape until the link lands.
+  // A still of each post for its folded row on a phone, captured off the
+  // post's embed page by scripts/post-stills.mjs and keyed by its shortcode
+  // (a Reddit thread by its id).
+  const stillFor = (post: CollectionPost) => {
+    const code = post.post?.match(
+      /instagram\.com\/(?:p|reel|reels|tv)\/([A-Za-z0-9_-]+)/,
+    )?.[1];
+    if (code) return `/posts/${code}.webp`;
+    const id = post.reddit?.match(/comments\/([a-z0-9]+)/)?.[1];
+    return id ? `/posts/reddit-${id}.webp` : undefined;
+  };
+
   const cards = (current.posts ?? []).map((post) => (
-    <PostCard
+    <MobileCollapse
       key={post.post ?? post.reddit ?? post.placeholder}
-      handle={post.handle}
-      caption={post.caption}
-      href={post.post || post.reddit || undefined}
-      linkLabel={post.reddit ? "View on Reddit" : undefined}
-      media={
-        post.post ? (
-          <InstagramEmbed
-            post={post.post}
-            title={`${post.handle} on Instagram`}
-            aspect={post.aspect}
-          />
-        ) : post.reddit ? (
-          <RedditEmbed url={post.reddit} title={`${post.handle} on Reddit`} />
-        ) : post.image ? (
+      // A collaboration post credits two accounts, which is too long a title
+      // for a phone row in display caps: the first account is the title and
+      // the partner goes in the line below it.
+      title={post.handle.split(" & ")[0]}
+      blurb={
+        post.caption ??
+        (post.handle.includes(" & ")
+          ? `with ${post.handle.split(" & ").slice(1).join(" & ")}`
+          : undefined)
+      }
+      thumb={
+        stillFor(post) ? (
           <Image
-            src={post.image.src}
-            alt={post.image.alt}
-            width={900}
-            height={1125}
-            className="block h-auto w-full"
+            src={stillFor(post)!}
+            alt=""
+            fill
+            sizes="56px"
+            className="object-cover"
           />
         ) : (
-          <PostPlaceholder label={post.placeholder ?? current.label} />
+          <span
+            className="font-display text-xl font-black"
+            style={{ ...WONK, color: "var(--ejd-vermilion)" }}
+          >
+            {post.handle
+              .replace(/^(@|r\/)/, "")
+              .charAt(0)
+              .toUpperCase()}
+          </span>
         )
       }
-    />
+    >
+      <PostCard
+        handle={post.handle}
+        caption={post.caption}
+        href={post.post || post.reddit || undefined}
+        linkLabel={post.reddit ? "View on Reddit" : undefined}
+        media={
+          post.post ? (
+            <InstagramEmbed
+              post={post.post}
+              title={`${post.handle} on Instagram`}
+              aspect={post.aspect}
+            />
+          ) : post.reddit ? (
+            <RedditEmbed url={post.reddit} title={`${post.handle} on Reddit`} />
+          ) : post.image ? (
+            <Image
+              src={post.image.src}
+              alt={post.image.alt}
+              width={900}
+              height={1125}
+              className="block h-auto w-full"
+            />
+          ) : (
+            <PostPlaceholder label={post.placeholder ?? current.label} />
+          )
+        }
+      />
+    </MobileCollapse>
   ));
 
   return (

@@ -1,5 +1,4 @@
 import { Marquee } from "@/components/shared/Marquee";
-import { MobileCollapse } from "@/components/shared/MobileCollapse";
 import {
   brief,
   briefIntro,
@@ -97,45 +96,54 @@ export function Brief() {
                 border: "var(--mv-stroke) solid var(--mv-soft-black)",
               }}
             >
-              <MobileCollapse
-                framed={false}
-                title={line.heading}
-                blurb={line.body}
-                thumb={
+              {/* On a phone the number sits in a tile at the top-left with the
+                  heading and copy beside it, all of it showing — no fold, no
+                  arrow (Bart, 2026-09-15). Wider, the number and heading share
+                  a baseline over the copy, as before. */}
+              <div className="flex items-start gap-3 sm:block">
+                <span
+                  aria-hidden
+                  className="grid h-14 w-14 flex-none place-items-center rounded-[10px] sm:hidden"
+                  style={{
+                    backgroundColor: "var(--ejd-blush)",
+                    border: "var(--mv-stroke) solid var(--ejd-ink)",
+                  }}
+                >
                   <span
                     className="font-display text-lg font-black tabular-nums"
                     style={{ ...WONK, color: "var(--ejd-vermilion)" }}
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                }
-              >
-                <div className="hidden items-baseline gap-3 sm:flex">
-                  <span
-                    aria-hidden
-                    className="font-display text-2xl font-black leading-none tabular-nums sm:text-[2rem]"
-                    style={{
-                      ...WONK,
-                      color: "var(--ejd-vermilion)",
-                      opacity: 0.45,
-                    }}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-baseline gap-3">
+                    <span
+                      aria-hidden
+                      className="hidden font-display text-2xl font-black leading-none tabular-nums sm:inline sm:text-[2rem]"
+                      style={{
+                        ...WONK,
+                        color: "var(--ejd-vermilion)",
+                        opacity: 0.45,
+                      }}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <h3
+                      className="font-display text-xl font-black uppercase leading-[0.95] tracking-[-0.01em] sm:text-2xl"
+                      style={{ ...WONK, color: "var(--ejd-vermilion)" }}
+                    >
+                      {line.heading}
+                    </h3>
+                  </div>
+                  <p
+                    className="mt-1 text-base leading-relaxed sm:mt-3"
+                    style={{ color: "var(--ejd-ink)" }}
                   >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3
-                    className="font-display text-xl font-black uppercase leading-[0.95] tracking-[-0.01em] sm:text-2xl"
-                    style={{ ...WONK, color: "var(--ejd-vermilion)" }}
-                  >
-                    {line.heading}
-                  </h3>
+                    {line.body}
+                  </p>
                 </div>
-                <p
-                  className="mt-1 text-base leading-relaxed sm:mt-3"
-                  style={{ color: "var(--ejd-ink)" }}
-                >
-                  {line.body}
-                </p>
-              </MobileCollapse>
+              </div>
             </li>
           ))}
         </ol>
