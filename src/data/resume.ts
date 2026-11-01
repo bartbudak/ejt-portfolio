@@ -4,7 +4,8 @@
 // Updated 2026-09-13 from the résumé she supplied in August and the site
 // itself, which carries her newer numbers: the scoreboard is `site.stats`
 // (her Instagram and email figures supersede the résumé's "5.5x, 10K to 55K"
-// line), the brand is "30-year-old" as her deck has it, the seasonal count is
+// line), the brand is "35-year-old" per her 2026-11-01 restructure note
+// (standardized site-wide from the deck's "30-year-old"), the seasonal count is
 // the 50+ from her own Campaigns intro, the Webby is the People's Voice
 // Winner, and the Dungeon Crawler Carl line carries what her collaboration
 // copy says: under 36 hours, top three bars by volume in the company's 35-year
@@ -33,7 +34,7 @@ export const resume = {
     },
   ],
   summary:
-    "Brand leader with seven years growing consumer food brands from the inside out, and the person behind the reinvention of a 30-year-old company into Maeve Chocolate: a brand now winning national design awards and selling out in record time. Psychology grad with a serious design habit, who pairs consumer insight with a sharp eye, sells the vision internally, directs world-class creative partners, and turns concepts into award-winning, record-breaking products.",
+    "Brand leader with seven years growing consumer food brands from the inside out, and the person behind the reinvention of a 35-year-old company into Maeve Chocolate: a brand now winning national design awards and selling out in record time. Psychology grad with a serious design habit, who pairs consumer insight with a sharp eye, sells the vision internally, directs world-class creative partners, and turns concepts into award-winning, record-breaking products.",
   stats: [
     { value: "110%", label: "YoY ecommerce growth post-rebrand" },
     { value: "18%", label: "Overall growth" },
@@ -93,7 +94,7 @@ export const resume = {
   signature: {
     label: "Signature project",
     title: "The Maeve Rebrand",
-    body: "Pitched and led the complete reinvention of the company's 30-year-old namesake brand, Seattle Chocolate, into Maeve Chocolate over three years: 100+ products, a new name, and a whole world to put them in, the largest initiative in company history. Owned strategy and final decisions across the reimagined products, packaging, the website, merchandising, trade show booths, sales decks, competitive analysis, launch PR and post-launch campaigns, and served as the rebrand's public face on TV, podcasts and in press interviews. The launch carried the brand into national retail for the first time (including Sprouts, with natural grocery ACV up 3 points) and drove every result in the scoreboard above.",
+    body: "Pitched and led the complete reinvention of the company's 35-year-old namesake brand, Seattle Chocolate, into Maeve Chocolate over three years: 100+ products, a new name, and a whole world to put them in, the largest initiative in company history. Owned strategy and final decisions across the reimagined products, packaging, the website, merchandising, trade show booths, sales decks, competitive analysis, launch PR and post-launch campaigns, and served as the rebrand's public face on TV, podcasts and in press interviews. The launch carried the brand into national retail for the first time (including Sprouts, with natural grocery ACV up 3 points) and drove every result in the scoreboard above.",
     link: {
       label: "See the work → maevechocolate.com",
       href: "https://maevechocolate.com",

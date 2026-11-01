@@ -33,7 +33,7 @@ export interface BriefLine {
 export const briefLead = [
   "Seattle Chocolate had a fantastic product with a built-in giveback to cocoa farmers around the world. In order to have a bigger impact on the farmers lives, they needed to appeal to younger consumers in markets outside of Seattle.",
   "I saw many chocolate brands on shelf that were either very serious with health-forward messaging or colorful, clownish, sugary candy brands. I wondered why a chocolate brand couldn't be somewhere in the middle; fun while still having depth.",
-  "So I pitched the reinvention of a 30-year-old chocolate brand, and then led it: 100+ products in three years, a new name, and a whole world to put them in.",
+  "So I pitched the reinvention of a 35-year-old chocolate brand, and then led it: 100+ products in three years, a new name, and a whole world to put them in.",
 ];
 
 export const brief: BriefLine[] = [

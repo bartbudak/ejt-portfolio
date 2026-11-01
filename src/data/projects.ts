@@ -94,7 +94,7 @@ export const caseStudies: CaseStudy[] = [
     role: "Creative Director — brand vision, art direction, agency direction",
     disciplines: ["Brand strategy", "Identity", "Packaging", "Art direction"],
     summary:
-      "Reinventing a 30-year-old chocolate company as Maeve — a bold, character-driven brand named for an Irish warrior queen.",
+      "Reinventing a 35-year-old chocolate company as Maeve — a bold, character-driven brand named for an Irish warrior queen.",
     featured: true,
     hero: "", // TODO
     challenge:

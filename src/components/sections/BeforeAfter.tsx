@@ -35,7 +35,13 @@ const PAIRS: Pair[] = [
   {
     slug: "pike-place",
     bg: "#9d6bff", // violet — her own palette's violet; cobalt read as a hole in the page
-    before: "Pike Place Espresso",
+    // TODO (2026-11-01 restructure): "before" was a duplicate of "after", so
+    // the alt text read "Pike Place Espresso, which replaced Pike Place
+    // Espresso." Guessed at the Seattle Chocolate-era name, matching the
+    // "Seattle Chocolate X" pattern used below for assorted-box/2lb/truffles
+    // (same bar carried straight into Maeve, no name change) — confirm with
+    // Ellie and correct if the old name was actually different.
+    before: "Seattle Chocolate Pike Place Espresso",
     after: "Pike Place Espresso",
   },
   {

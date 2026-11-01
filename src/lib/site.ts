@@ -52,7 +52,7 @@ export const site = {
   // role names are hers too.
   marquee: [
     "Open to Work",
-    "Moving to NYC",
+    "Based in New York",
     "Brand Management",
     "Marketing Directing",
     "Creative Strategy",

@@ -83,7 +83,7 @@ export const localPosts: LocalPost[] = [
     slug: "storefront",
     label: "Flagship store",
     caption:
-      "We Maeve-ified their flagship store, factory tour and airport kiosk. I lead the concepting, script-writing, planogram, run of show and recommendations for physical build-outs.",
+      "We Maeve-ified their flagship store, factory tour and airport kiosk. I led the concepting, script-writing, planogram, run of show and recommendations for physical build-outs.",
     image: "/local/storefront.webp",
     alt: "The Maeve flagship store, its product wall stacked behind",
   },
@@ -101,10 +101,8 @@ export const localPosts: LocalPost[] = [
   {
     slug: "tradeshow",
     label: "Trade Shows",
-    // NOTE: "for Maeve'." is hers as written. Flagged to her as a likely stray
-    // apostrophe rather than silently corrected.
     caption:
-      "I worked with an agency to create a one-of-a-kind booth for Maeve'. I attended Natural Products Expo West, PAX West, the Northwest Chocolate Festival and more with this booth. It truly stopped people in their tracks!",
+      "I worked with an agency to create a one-of-a-kind booth for Maeve. I attended Natural Products Expo West, PAX West, the Northwest Chocolate Festival and more with this booth. It truly stopped people in their tracks!",
     image: "/local/tradeshow.webp",
     alt: "The Maeve trade show booth, built as a walk-in world",
   },

@@ -367,9 +367,10 @@ export const collabsIntro =
 
 // ⚠️ Dungeon Crawler Carl is now HERS, verbatim, from the second Canva export
 // (Downloads/v.pdf, 2026-09-11) — four long rows where there used to be four
-// short ones I had written. Her typos are kept as typed, per the standing copy
-// rule: "turn it's remnants", "I shoot my shot", "concieved", "hundred of
-// thousands", "35 year history". Flag them to her; do not fix them here.
+// short ones I had written. Four of her own typos here were fixed at her own
+// request (2026-11-01 restructure): "turn it's remnants" → "its", "I shoot my
+// shot" → "shot", "concieved" → "conceived", "hundred of thousands" →
+// "hundreds of thousands". Everything else in these rows is still verbatim.
 //
 // The other three collabs are still written from the asset folders and stay
 // marked `drafted` until she supplies her own.
@@ -419,21 +420,21 @@ export const collabs: Collection[] = [
     rows: [
       {
         label: "What",
-        body: "Dungeon Crawler Carl is an extremely popular LitRPG Fantasy series by author Matt Dinniman. The story begins when an alien corporation destroys all man-made structures on Earth and turn it’s remnants into an 18-level dungeon. We follow two protagonists, Carl, the lovable main character, and Princess Donut, the talking Persian cat. Donut is full of personality and her favorite drink in the dungeon is a “Virgin Dirty Shirley” (AKA a Shirley Temple lol.) We created a Virgin Dirty Shirley bar in her honor and it sold out in under 36 hours.",
+        body: "Dungeon Crawler Carl is an extremely popular LitRPG Fantasy series by author Matt Dinniman. The story begins when an alien corporation destroys all man-made structures on Earth and turn its remnants into an 18-level dungeon. We follow two protagonists, Carl, the lovable main character, and Princess Donut, the talking Persian cat. Donut is full of personality and her favorite drink in the dungeon is a “Virgin Dirty Shirley” (AKA a Shirley Temple lol.) We created a Virgin Dirty Shirley bar in her honor and it sold out in under 36 hours.",
         // The one name her deck hyperlinks on this band.
         links: [{ text: "Matt Dinniman", href: "https://mattdinniman.com/" }],
       },
       {
         label: "Why",
-        body: "My husband and I stumbled across this book series organically and fell head over heels in love with the story. The humor and fantasy elements reminded me so much of Maeve and the world I was trying to build. I did some research and learned that the author was a Seattle local, so I shoot my shot with an Instagram DM asking for a collaboration. The rest is history!",
+        body: "My husband and I stumbled across this book series organically and fell head over heels in love with the story. The humor and fantasy elements reminded me so much of Maeve and the world I was trying to build. I did some research and learned that the author was a Seattle local, so I shot my shot with an Instagram DM asking for a collaboration. The rest is history!",
       },
       {
         label: "My Role",
-        body: "I pitched the idea to the author and to the leadership team. I helped negotiate the licensing agreement, wrote the creative brief, briefed the design agency, concieved a launch plan, spending hours ensuring every detail was lore accurate, which is extremely important to a community like this. I approved content for all digital channels and merchandising in the two storefronts.",
+        body: "I pitched the idea to the author and to the leadership team. I helped negotiate the licensing agreement, wrote the creative brief, briefed the design agency, conceived a launch plan, spending hours ensuring every detail was lore accurate, which is extremely important to a community like this. I approved content for all digital channels and merchandising in the two storefronts.",
       },
       {
         label: "The Results",
-        body: "This opened up Maeve to a new rabid audience. DCC was in the early stages of virality when we got the licensing agreement so the fanbase nearly lost their minds seeing a cool collaboration with their favorite IP for the first time. Our social posts on Instagram and Reddit all went minorly viral, with an average of 1,000+ likes, hundred of thousands of views and extremely high share and comment rates. The product sold out in under 36 hours and the company had to scour the state to find any remaining cherries from the season so they could make more bars. It is now one of the top 3 selling bars by volume in the company’s 35 year history.",
+        body: "This opened up Maeve to a new rabid audience. DCC was in the early stages of virality when we got the licensing agreement so the fanbase nearly lost their minds seeing a cool collaboration with their favorite IP for the first time. Our social posts on Instagram and Reddit all went minorly viral, with an average of 1,000+ likes, hundreds of thousands of views and extremely high share and comment rates. The product sold out in under 36 hours and the company had to scour the state to find any remaining cherries from the season so they could make more bars. It is now one of the top 3 selling bars by volume in the company’s 35 year history.",
       },
     ],
   },
