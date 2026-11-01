@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { CARD_FRAME } from "@/components/shared/PostCard";
 import { Marquee } from "@/components/shared/Marquee";
 import { offTheClockIntro, offTheClockTiles } from "@/data/personal";
@@ -66,7 +67,17 @@ export function OffTheClock() {
           {offTheClockTiles.map((tile) => (
             <li key={tile.slug}>
               <div style={CARD_FRAME} className="overflow-hidden">
-                <PhotoPlaceholder label={tile.label} />
+                {tile.photo ? (
+                  <Image
+                    src={tile.photo.src}
+                    alt={tile.photo.alt}
+                    width={900}
+                    height={1125}
+                    className="aspect-[4/5] h-auto w-full object-cover"
+                  />
+                ) : (
+                  <PhotoPlaceholder label={tile.label} />
+                )}
               </div>
               <h3
                 className="mt-4 font-display text-lg font-black uppercase tracking-[0.01em]"

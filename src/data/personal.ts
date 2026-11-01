@@ -4,9 +4,10 @@
 // Shaped from Ellie's own restructure brief, not invented. Two Off the Clock
 // tiles are `drafted: true`: her brief gave the idea (dopamine dressing /
 // secondhand; sewing and drawing "badly, joyfully") rather than a finished
-// line, so confirm the wording with her before calling this final. Cat names
-// are still TBD from her too — the tile reads "my kitties" until she supplies
-// them. Every tile's photo is a placeholder until she supplies real ones.
+// line, so confirm the wording with her before calling this final. Every
+// tile's photo is a placeholder until she supplies one, except Cat Parent —
+// she sent Syl's photo on 2026-11-01 (public/personal/syl.jpg); Mordecai's
+// is still outstanding.
 
 export interface OffTheClockTile {
   slug: string;
@@ -14,6 +15,8 @@ export interface OffTheClockTile {
   body: string;
   /** Her brief gave the idea, not finished copy — confirm wording with her. */
   drafted?: boolean;
+  /** A real photo, once she's supplied one. Falls back to the placeholder. */
+  photo?: { src: string; alt: string };
 }
 
 export const offTheClockIntro = "The person behind the pitch decks.";
@@ -22,7 +25,13 @@ export const offTheClockTiles: OffTheClockTile[] = [
   {
     slug: "cats",
     label: "Cat Parent",
-    body: "My kitties have strong opinions and zero respect for my calendar.",
+    // Names confirmed by Ellie, 2026-11-01: Sylphrena (after Stormlight
+    // Archive) and Mordecai (after Dungeon Crawler Carl's own cat).
+    body: "Sylphrena and Mordecai — named for Stormlight Archive and Dungeon Crawler Carl — have strong opinions and zero respect for my calendar.",
+    photo: {
+      src: "/personal/syl.jpg",
+      alt: "Sylphrena, a white and grey Ragdoll cat, stretched out on a dining table",
+    },
   },
   {
     slug: "gamer",

@@ -35,13 +35,11 @@ const PAIRS: Pair[] = [
   {
     slug: "pike-place",
     bg: "#9d6bff", // violet — her own palette's violet; cobalt read as a hole in the page
-    // TODO (2026-11-01 restructure): "before" was a duplicate of "after", so
-    // the alt text read "Pike Place Espresso, which replaced Pike Place
-    // Espresso." Guessed at the Seattle Chocolate-era name, matching the
-    // "Seattle Chocolate X" pattern used below for assorted-box/2lb/truffles
-    // (same bar carried straight into Maeve, no name change) — confirm with
-    // Ellie and correct if the old name was actually different.
-    before: "Seattle Chocolate Pike Place Espresso",
+    // Confirmed with Ellie (2026-11-01): this one genuinely kept its name
+    // through the rebrand — only the pack changed. Same string on both sides
+    // is intentional here, not a copy-paste bug; see the sr-only caption
+    // below, which phrases this pair differently for exactly that reason.
+    before: "Pike Place Espresso",
     after: "Pike Place Espresso",
   },
   {
@@ -283,9 +281,14 @@ export function BeforeAfter() {
             </div>
 
             {/* Switching pairs changes the art but nothing textual, so a
-                screen reader hears nothing without this. */}
+                screen reader hears nothing without this. Pike Place kept its
+                name through the rebrand (only the pack changed), so
+                before === after for that one pair — phrased separately here
+                rather than reading as "X, which replaced X". */}
             <p aria-live="polite" className="sr-only">
-              Showing {pair.after}, which replaced {pair.before}.
+              {pair.before === pair.after
+                ? `Showing ${pair.after}'s new packaging, replacing the old.`
+                : `Showing ${pair.after}, which replaced ${pair.before}.`}
             </p>
 
             {/* ── Panel two: the picker — new packaging only, no labels ── */}
