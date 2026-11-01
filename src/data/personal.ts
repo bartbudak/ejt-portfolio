@@ -57,13 +57,13 @@ export const offTheClockTiles: OffTheClockTile[] = [
   },
 ];
 
-// EAA's exact mission wording and whether its official name carries
-// "Foundation" (EAAF) still need Ellie's confirmation.
+// Confirmed with Ellie, 2026-11-01: it's the Foundation (EAAF) board she
+// served on, not the company (EAA) itself.
 export const beyondTheDesk = {
   heading: "I Go To The Source",
   paragraphs: [
     "Maeve's whole reason for being was to do more for cocoa farmers, so I went to meet them. I've traveled to origin in Ghana, Costa Rica, Nicaragua, Ecuador, Peru and Brazil, and trained in bean-to-bar chocolate making so I'd understand the product from the ground up.",
-    "Ghana stayed with me. When I came home, I joined the board of Ethical Apparel Africa, which works to build fair, sustainable garment manufacturing across West Africa. Closer to home, I served on the board of Cancer Pathways and helped plan their annual gala fundraiser.",
+    "Ghana stayed with me. When I came home, I joined the board of the Ethical Apparel Africa Foundation (EAAF), which works to build fair, sustainable garment manufacturing across West Africa. Closer to home, I served on the board of Cancer Pathways and helped plan their annual gala fundraiser.",
     "I'm not a leader who guesses from a distance. I get on the plane.",
   ],
 };

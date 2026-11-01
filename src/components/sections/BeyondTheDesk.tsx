@@ -5,8 +5,7 @@ import { beyondTheDesk } from "@/data/personal";
 // Clock" and "My Crown Jewel". Paper ground, so it sits calmer than the sage
 // of "Off the Clock" above and the blush of "My Crown Jewel" below.
 //
-// EAA's exact mission wording and whether its official name carries
-// "Foundation" (EAAF) still need Ellie's confirmation — see src/data/personal.ts.
+// Copy is hers; see src/data/personal.ts for the board-affiliation note.
 
 const WONK = { fontVariationSettings: '"SOFT" 0, "WONK" 1' } as const;
 
