@@ -6,8 +6,8 @@
 // secondhand; sewing and drawing "badly, joyfully") rather than a finished
 // line, so confirm the wording with her before calling this final. Every
 // tile's photo is a placeholder until she supplies one, except Cat Parent —
-// she sent Syl's photo on 2026-11-01 (public/personal/syl.jpg); Mordecai's
-// is still outstanding.
+// she sent a photo of both cats together on 2026-11-01
+// (public/personal/syl-and-mordecai.jpg).
 
 export interface OffTheClockTile {
   slug: string;
@@ -29,8 +29,8 @@ export const offTheClockTiles: OffTheClockTile[] = [
     // Archive) and Mordecai (after Dungeon Crawler Carl's own cat).
     body: "Sylphrena and Mordecai — named for Stormlight Archive and Dungeon Crawler Carl — have strong opinions and zero respect for my calendar.",
     photo: {
-      src: "/personal/syl.jpg",
-      alt: "Sylphrena, a white and grey Ragdoll cat, stretched out on a dining table",
+      src: "/personal/syl-and-mordecai.jpg",
+      alt: "Mordecai, a long-haired black cat, sitting upright on a kitchen island behind Sylphrena, a white and grey Ragdoll cat, lounging on the dining table",
     },
   },
   {
