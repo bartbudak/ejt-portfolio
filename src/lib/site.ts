@@ -79,12 +79,17 @@ export const site = {
   // become "/" and "/campaigns".
   nav: [
     { label: "About", href: "/preview", external: false },
-    { label: "Campaigns", href: "/preview/campaigns", external: false },
-    // Its own tab since 2026-09-11, at Ellie's request: it used to be reached
-    // only by a cross-link under the Campaigns title, which made half the body
-    // of work invisible to anyone who did not scroll to find it. It sits
-    // between Campaigns and Resume because that is where she put it.
-    { label: "Collaborations", href: "/preview/collabs", external: false },
+    // New tab (2026-11-01 restructure): everything from "The Idea" through
+    // Kirsty's letter, moved off About, which now teases this page instead.
+    { label: "Work", href: "/preview/work", external: false },
+    // Campaigns and Collaborations merged into one tab (2026-11-01
+    // restructure): Seasonal Collections first, then the partnerships, on one
+    // page. The two old routes now redirect here (firebase.json).
+    {
+      label: "Campaigns & Collabs",
+      href: "/preview/campaigns-and-collabs",
+      external: false,
+    },
     // Its own page since 2026-09-13 (Bart): the résumé rendered in the site's
     // own type inside the frame, with the PDF — printed from that same
     // rendition — offered for download at the top.

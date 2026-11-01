@@ -4,19 +4,23 @@ import { ThemeSwitcher } from "@/components/shared/PalettePicker";
 import { Marquee } from "@/components/shared/Marquee";
 import { Collections, LIGHT_TONE } from "@/components/sections/Collections";
 import { Contact } from "@/components/sections/Contact";
-import { seasons, seasonsIntro } from "@/data/campaigns";
+import { seasons, seasonsIntro, collabs, collabsIntro } from "@/data/campaigns";
 
-// Campaigns — the second tab. Starts at the Valentine's Day brief and runs
-// through the seasonal collections (Bart, 2026-09-05).
+// Campaigns & Collabs — merged tab (2026-11-01 restructure). Used to be two
+// separate tabs (/preview/campaigns, /preview/collabs); Ellie asked for one
+// page, Seasonal Collections first and then the partnerships, in the order
+// her deck already has them (DCC, Talea, PAX West, My Straight Friends — see
+// `collabs` in src/data/campaigns.ts). The old routes now redirect here
+// (firebase.json).
 //
-// Local-only, same as /preview: noindex, and do NOT deploy either to the main
-// hosting channel while the live site is still the coming-soon page.
+// Local-only, same as the rest of /preview: noindex, and do NOT deploy to the
+// main hosting channel while the live site is still the coming-soon page.
 export const metadata: Metadata = {
-  title: "Campaigns",
+  title: "Campaigns & Collabs",
   robots: { index: false, follow: false },
 };
 
-export default function CampaignsPage() {
+export default function CampaignsAndCollabsPage() {
   return (
     <>
       <Header />
@@ -25,13 +29,21 @@ export default function CampaignsPage() {
       {/* The page's band, pinned under the header the way the home page's
           first marquee is (Bart, 2026-09-13). */}
       <Marquee
-        items={["Campaigns"]}
+        items={["Campaigns & Collabs"]}
         className="sticky top-[var(--ejt-band-top,var(--ejt-header))] z-30"
       />
       <Collections
+        id="seasonal"
         title="Seasonal Collections"
         intro={seasonsIntro}
         items={seasons}
+        tone={LIGHT_TONE}
+      />
+      <Collections
+        id="collaborations"
+        title="Collaborations"
+        intro={collabsIntro}
+        items={collabs}
         tone={LIGHT_TONE}
       />
       <Contact />

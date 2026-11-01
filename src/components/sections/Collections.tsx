@@ -62,6 +62,13 @@ type Props = {
   intro: string;
   items: Collection[];
   tone: Tone;
+  /**
+   * Prefixes this instance's ids (section, tabs, panel). Defaults to
+   * "campaigns" for the original single-instance pages; the merged
+   * Campaigns & Collabs page (2026-11-01 restructure) renders two instances
+   * on one page, so each needs its own ids or they collide.
+   */
+  id?: string;
 };
 
 // Her own band artwork, placed where she places it: the rose spray down
@@ -129,9 +136,11 @@ const PANEL_BOTTOM: Record<string, string> = {
   none: "pb-12 sm:pb-16",
 };
 
-export function Collections({ title, intro, items, tone }: Props) {
+export function Collections({ title, intro, items, tone, id = "campaigns" }: Props) {
   const [open, setOpen] = useState(items[0].slug);
   const current = items.find((c) => c.slug === open) ?? items[0];
+  const tabId = (slug: string) => `collection-tab-${id}-${slug}`;
+  const panelId = `collection-panel-${id}`;
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     const delta = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
@@ -140,7 +149,7 @@ export function Collections({ title, intro, items, tone }: Props) {
     const i = items.findIndex((c) => c.slug === open);
     const next = items[(i + delta + items.length) % items.length];
     setOpen(next.slug);
-    document.getElementById(`collection-tab-${next.slug}`)?.focus();
+    document.getElementById(tabId(next.slug))?.focus();
   };
 
   // Her third slide: the posts the launch produced, one card each in the
@@ -228,7 +237,7 @@ export function Collections({ title, intro, items, tone }: Props) {
 
   return (
     <section
-      id="campaigns"
+      id={id}
       className="w-full px-5 py-16 sm:px-10 sm:py-24"
       style={{ backgroundColor: tone.ground }}
     >
@@ -268,11 +277,11 @@ export function Collections({ title, intro, items, tone }: Props) {
             return (
               <button
                 key={c.slug}
-                id={`collection-tab-${c.slug}`}
+                id={tabId(c.slug)}
                 role="tab"
                 type="button"
                 aria-selected={active}
-                aria-controls="collection-panel"
+                aria-controls={panelId}
                 tabIndex={active ? 0 : -1}
                 onClick={() => setOpen(c.slug)}
                 className="group flex min-h-[5rem] flex-col items-center justify-center gap-2 p-4 transition-transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2"
@@ -305,9 +314,9 @@ export function Collections({ title, intro, items, tone }: Props) {
             place "In a nutshell" sits, and the motif treatment all come from
             the collection's own `layout` rather than a shared template. */}
         <div
-          id="collection-panel"
+          id={panelId}
           role="tabpanel"
-          aria-labelledby={`collection-tab-${current.slug}`}
+          aria-labelledby={tabId(current.slug)}
           // The panel is a bare frame; the brief section inside it carries the
           // padding and the product lineup runs full-bleed beneath it.
           className={`relative isolate ${

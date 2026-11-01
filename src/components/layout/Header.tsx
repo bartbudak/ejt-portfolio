@@ -41,11 +41,13 @@ const samePath = (a: string, b: string) =>
 // About, where it disappears into the title card.
 const TONES: Record<string, { bg: string; ink: string }> = {
   "/preview": { bg: "var(--ejd-blush)", ink: "var(--ejd-ink)" },
-  "/preview/campaigns": { bg: "var(--mv-paper)", ink: "var(--ejd-ink)" },
+  // Work opens on Brief's own marigold ground (2026-11-01 restructure).
+  "/preview/work": { bg: "var(--ejd-marigold)", ink: "var(--ejd-ink)" },
   // Collabs used to run on burnt orange as the inverse of Campaigns. Ellie
   // asked for the two to share a look now that Collaborations is its own tab
-  // (2026-09-11), so the band takes the same paper ground.
-  "/preview/collabs": { bg: "var(--mv-paper)", ink: "var(--ejd-ink)" },
+  // (2026-09-11), so the band takes the same paper ground. Merged into one
+  // page (2026-11-01 restructure), still paper.
+  "/preview/campaigns-and-collabs": { bg: "var(--mv-paper)", ink: "var(--ejd-ink)" },
 };
 const DEFAULT_TONE = TONES["/preview"];
 

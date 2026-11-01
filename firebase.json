@@ -8,6 +8,18 @@
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "cleanUrls": true,
     "trailingSlash": true,
+    "redirects": [
+      {
+        "source": "/preview/campaigns",
+        "destination": "/preview/campaigns-and-collabs",
+        "type": 301
+      },
+      {
+        "source": "/preview/collabs",
+        "destination": "/preview/campaigns-and-collabs",
+        "type": 301
+      }
+    ],
     "headers": [
       {
         "source": "/sw.js",
