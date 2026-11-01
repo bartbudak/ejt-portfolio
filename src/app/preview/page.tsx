@@ -4,14 +4,9 @@ import { ThemeSwitcher } from "@/components/shared/PalettePicker";
 import { Hero } from "@/components/sections/Hero";
 import { Marquee } from "@/components/shared/Marquee";
 import { About } from "@/components/sections/About";
+import { OffTheClock } from "@/components/sections/OffTheClock";
+import { BeyondTheDesk } from "@/components/sections/BeyondTheDesk";
 import { CrownJewel } from "@/components/sections/CrownJewel";
-import { Brief } from "@/components/sections/Brief";
-import { Results } from "@/components/sections/Results";
-import { BeforeAfter } from "@/components/sections/BeforeAfter";
-import { LocalLaunch } from "@/components/sections/LocalLaunch";
-import { Launch } from "@/components/sections/Launch";
-import { Awards } from "@/components/sections/Awards";
-import { Testimonial } from "@/components/sections/Testimonial";
 import { Contact } from "@/components/sections/Contact";
 
 // Local-only preview of the home while the live site stays on the coming-soon
@@ -42,40 +37,13 @@ export default function PreviewPage() {
         <Marquee className="sticky top-[var(--ejt-band-top,var(--ejt-header))] z-30" />
         <About />
       </div>
+      {/* New in the 2026-11-01 restructure: the person behind the pitch decks,
+          and why she goes to origin. Everything from "The Idea" through
+          Kirsty's letter that used to follow here has moved to /preview/work;
+          Crown Jewel is now the teaser that hands off to it. */}
+      <OffTheClock />
+      <BeyondTheDesk />
       <CrownJewel />
-      <Brief />
-      {/* One band across both: the numbers and the before/after are a single
-          argument — here is what changed, and here is what it looked like — so
-          the label stays pinned for the whole of it rather than dropping out
-          halfway through. Sticky resolves against this wrapper, which is why
-          the band lives here rather than inside either section. */}
-      <div className="relative">
-        <Marquee
-          items={["The Results", "Maeve"]}
-          background="var(--ejd-vermilion)"
-          ring="var(--ejd-marigold)"
-          className="sticky top-[var(--ejt-band-top,var(--ejt-header))] z-30"
-        />
-        <Results />
-        <BeforeAfter />
-      </div>
-      {/* One band across the whole run of proof. Ellie asked for "some receipts
-          for you" to hold until the next marquee takes over, and the next one
-          is Contact's, so it has to span Local Launch, National Launch, Awards
-          and the reference letter. Sticky resolves against this wrapper, which
-          is why the band lives here rather than inside Local Launch. */}
-      <div className="relative">
-        <Marquee
-          items={["Some receipts for you"]}
-          background="var(--ejd-marigold)"
-          ring="var(--ejd-vermilion)"
-          className="sticky top-[var(--ejt-band-top,var(--ejt-header))] z-30"
-        />
-        <LocalLaunch />
-        <Launch />
-        <Awards />
-        <Testimonial />
-      </div>
       <Contact />
     </>
   );

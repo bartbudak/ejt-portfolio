@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Marquee } from "@/components/shared/Marquee";
 
 // "MY CROWN JEWEL" — the slide Ellie asked for between "Hi There!" and "The
@@ -11,6 +12,11 @@ import { Marquee } from "@/components/shared/Marquee";
 //
 // Blush between the vermilion of "Hi There!" and the marigold of "The Idea", so
 // the three panels step rather than collide.
+//
+// 2026-11-01 restructure: this is now the LAST section on About, acting as a
+// teaser into the new /preview/work page (everything from here through
+// Kirsty's letter moved there as-is). The CTA below is new; the copy above it
+// is still hers, untouched.
 
 const WONK = { fontVariationSettings: '"SOFT" 0, "WONK" 1' } as const;
 
@@ -47,9 +53,25 @@ export function CrownJewel() {
           The best way to showcase my skillset is to walk you through the
           thinking behind the biggest project of my career - the Maeve rebrand. I
           pitched the concept and saw through the execution of the rebrand of
-          Seattle Chocolate&rsquo;s 30-year-old namesake brand, creating over 100
+          Seattle Chocolate&rsquo;s 35-year-old namesake brand, creating over 100
           chocolate products in 3 years.
         </p>
+
+        <Link
+          href="/preview/work"
+          className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-base font-semibold tracking-[0.02em] transition-transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 sm:text-lg"
+          style={{
+            backgroundColor: "var(--ejd-marigold)",
+            color: "var(--ejd-ink)",
+            border: "var(--mv-stroke) solid var(--ejd-ink)",
+            boxShadow:
+              "0 0 0 5px var(--ejd-vermilion), 0 0 0 7px var(--ejd-ink)",
+            margin: 7,
+          }}
+        >
+          See the rebrand
+          <span aria-hidden>→</span>
+        </Link>
       </div>
     </section>
   );
