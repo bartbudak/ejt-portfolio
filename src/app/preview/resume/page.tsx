@@ -39,8 +39,9 @@ export default function ResumePage() {
         <div className="@container mx-auto w-full max-w-5xl">
           {/* Title and download: one row on a phone, where the two would
               otherwise cost a screen between them; stacked and centred from
-              the small breakpoint up. */}
-          <div className="flex items-center justify-between gap-3 sm:flex-col sm:justify-center sm:gap-8">
+              the small breakpoint up. It wraps on the very smallest phones (320px),
+              where the title and button together are wider than the screen. */}
+          <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-4 sm:flex-col sm:flex-nowrap sm:justify-center sm:gap-8">
             <h1
               className="font-display font-black uppercase leading-[0.84] tracking-[-0.03em] sm:text-center"
               style={{

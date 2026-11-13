@@ -48,20 +48,10 @@ export function CrownJewel() {
           <span className="block">Jewel</span>
         </h2>
 
-        <p
-          className="max-w-[54ch] text-xl leading-relaxed sm:text-2xl"
-          style={{ color: "var(--ejd-ink)" }}
-        >
-          The best way to showcase my skillset is to walk you through the
-          thinking behind the biggest project of my career: the Maeve rebrand. I
-          pitched the concept and saw through the execution of the rebrand of
-          Seattle Chocolate&rsquo;s 35-year-old namesake brand, creating over 100
-          chocolate products in 3 years.
-        </p>
-
         {/* The Maeve drawing Ellie chose for this slide (2026-11-13), in place of
             the PAX booth photo it had for a day: a woman with starry hair holding
-            Seattle, a ship and palm trees, under the MAEVE logotype. Trimmed from
+            Seattle, a ship and palm trees, under the MAEVE logotype. Sits between the title and the copy, with the
+            button last (Ellie, 2026-11-13). Trimmed from
             Maeve-Ellie_F-20x16.pdf; it is Maeve's artwork, credited in the page's
             fine print. */}
         <div style={CARD_FRAME} className="w-[min(88vw,34rem)] overflow-hidden">
@@ -74,6 +64,18 @@ export function CrownJewel() {
             className="block h-auto w-full"
           />
         </div>
+
+
+        <p
+          className="max-w-[54ch] text-xl leading-relaxed sm:text-2xl"
+          style={{ color: "var(--ejd-ink)" }}
+        >
+          The best way to showcase my skillset is to walk you through the
+          thinking behind the biggest project of my career: the Maeve rebrand. I
+          pitched the concept and saw through the execution of the rebrand of
+          Seattle Chocolate&rsquo;s 35-year-old namesake brand, creating over 100
+          chocolate products in 3 years.
+        </p>
 
         <Link
           href="/preview/work"

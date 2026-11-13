@@ -31,7 +31,9 @@ export function Awards() {
           style={{
             ...WONK,
             color: "var(--ejd-marigold)",
-            fontSize: "clamp(3.75rem,13vw,8rem)",
+            fontSize: "min(8rem, max(min(3.75rem, 16vw), 13vw))",
+            // Same as before at 375px and up; shrinks below that so "NATIONAL"
+            // (318px at 60px type) fits a 280px column on a 320px phone.
           }}
         >
           Awards

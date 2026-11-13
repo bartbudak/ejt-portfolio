@@ -125,7 +125,7 @@ export function Header() {
         <Link
           href="/preview"
           aria-label={`${site.name}, home`}
-          className="inline-flex shrink-0 items-center justify-self-start"
+          className="relative inline-flex shrink-0 items-center justify-self-start after:absolute after:-inset-2 after:content-['']"
         >
           {site.signature ? (
             // Masked, not <img>: the mark is a single-colour shape with an
@@ -162,6 +162,8 @@ export function Header() {
         </Link>
 
         <ul
+          // Each link carries an invisible `after:` pad so its tap area is ~44px tall
+          // even though the label is 20px (2026-11-13); nothing about the look moves.
           // Four tabs have to fit beside the monogram on a 375px phone, where
           // "Resume" used to run off the edge (Bart, 2026-09-15): tighter
           // gaps and tracking and a hard 0.66rem under the small breakpoint.
@@ -203,8 +205,8 @@ export function Header() {
                     // states keep the same box and nothing shifts on navigation.
                     className={
                       active
-                        ? "relative inline-block pb-1 font-bold"
-                        : "relative inline-block pb-1 opacity-70 transition-opacity hover:opacity-100"
+                        ? "relative inline-block pb-1 font-bold after:absolute after:-inset-x-1 after:-inset-y-3 after:content-['']"
+                        : "relative inline-block pb-1 opacity-70 transition-opacity hover:opacity-100 after:absolute after:-inset-x-1 after:-inset-y-3 after:content-['']"
                     }
                   >
                     {item.label}

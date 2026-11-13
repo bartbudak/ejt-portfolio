@@ -54,7 +54,7 @@ export const resume = {
       title: "Director of Marketing",
       dates: "Aug 2025 – Jun 2026",
       bullets: [
-        "Led all marketing as the department's voice on the executive leadership team, managing a 6-person in-house team plus 10 agency partners across two creative agencies.",
+        "Led all marketing as the department's voice on the executive leadership team. Led a 6-person in-house team (2 direct reports), directed two creative agencies through briefs and feedback, and helped manage a PR firm.",
         "Conceived, pitched and licensed an official collaboration with Matt Dinniman's bestselling Dungeon Crawler Carl series. The Virgin Dirty Shirley bar sold out in under 36 hours, became one of the top three bars by volume in the company's 35-year history, and inspired the first playable Dungeon Crawler Carl game, built by our web agency View Source from a direction our marketing team set, and covered by IGN.",
         "Built a national partner strategy on a scrappy budget: rather than pay for dream influencers, went to the stores they shop in. Events and limited-time co-branded products with bookstores, breweries, record stores, vintage stores and museums, including Butterfield Market, Books Are Magic, Su'Juk, Talea Beer Co. and Greenwich Letterpress.",
         "Brought the brand to PAX West, an entirely new audience, where booth demand ran so high the venue stationed permanent security to manage the line.",

@@ -44,10 +44,16 @@ export const site = {
     { value: "82%", label: "Increase in followers on Instagram. 22k to 40k." },
     { value: "37%", label: "Increase in email subscribers. 40k to 55k." },
   ],
-  // What the Director role covered: her résumé's own wording, in the first
-  // person. Shown in the "at a glance" band under "Hi There!".
+  // What the Director role covered, in the first person. Shown in the "at a
+  // glance" band under "Hi There!". Corrected 2026-11-13 at Ellie's request: it
+  // used to say she managed "a 6-person in-house team plus 10 agency partners",
+  // which overstated it. She directly managed 2 people on a 6-person team, and
+  // gave the two agencies (Young Jerks, View Source) briefs and feedback rather
+  // than managing 10 individuals. She also helped manage a PR firm (La Rue PR for
+  // a few months after the Maeve launch, and one before it); that firm's own
+  // headcount (~7) is deliberately not claimed.
   scope:
-    "As Marketing Director, I led all marketing as the department's voice on the executive leadership team, managing a 6-person in-house team plus 10 agency partners across two creative agencies.",
+    "As Marketing Director, I led all marketing as the department's voice on the executive leadership team. I led a 6-person team (2 direct reports) and directed our two creative agencies, The Young Jerks and View Source, through briefs and feedback. I also helped manage our PR firm.",
   // The three numbers shown under "Hi There!" so results come before the
   // personal sections (a reviewer's first-read feedback, 2026-11-13). They are
   // looked up in `stats` by value, so the wording stays in one place.

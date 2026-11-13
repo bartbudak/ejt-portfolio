@@ -92,10 +92,13 @@ export function MobileCollapse({
             {title}
           </span>
           {blurb && (
+            // No `block` here: it overrides line-clamp's display and silently turns
+            // the 2-line teaser into the full text (found 2026-11-13, when the award
+            // blurbs got long and showed twice once a card was open).
             // On a bare card the row is the head and the body follows it,
             // so the teaser goes once the body is showing.
             <span
-              className={`mt-1 line-clamp-2 block text-sm leading-snug opacity-80 ${
+              className={`mt-1 line-clamp-2 text-sm leading-snug opacity-80 ${
                 !framed && open ? "hidden" : ""
               }`}
             >

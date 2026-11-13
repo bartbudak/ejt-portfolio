@@ -298,7 +298,9 @@ export function Collections({ title, intro, items, tone, id = "campaigns" }: Pro
           style={{
             ...WONK,
             color: tone.display,
-            fontSize: "clamp(2.5rem,8vw,6rem)",
+            // 8.4vw, floor 1.5rem: "COLLABORATIONS" at the old 2.5rem floor was 386px
+            // wide in a 335px phone column and widened the whole page (2026-11-13).
+            fontSize: "clamp(1.5rem,8.4vw,6rem)",
           }}
         >
           {title}
@@ -466,7 +468,10 @@ export function Collections({ title, intro, items, tone, id = "campaigns" }: Pro
                           );
                         }
                         return (
-                          <span key={line} className="block whitespace-nowrap">
+                          // Wraps on a phone: "My Straight Friends" is 444px on one
+                          // line, in a 269px box that clips what overflows, so the
+                          // title was cut off (2026-11-13). One line again from `sm`.
+                          <span key={line} className="block sm:whitespace-nowrap">
                             {line}
                           </span>
                         );

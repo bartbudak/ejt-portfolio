@@ -34,17 +34,26 @@ export interface OffTheClockTile {
     position?: string;
     /** A CSS colour (a theme token works) painted behind a transparent image. */
     background?: string;
+    /** Shape of the picture in the Off the Clock deck, as a CSS aspect ratio.
+     *  Default "1 / 1". Landscape ones keep the deck's cards short; the books
+     *  need to stay square or their titles get too small to read. */
+    aspect?: string;
   };
 }
 
-export const offTheClockIntro = "Here's what I'm up to when I'm not working.";
+// Ellie's own wording (2026-11-13), replacing "Here's what I'm up to when I'm not
+// working." with something that sets the cards up.
+export const offTheClockIntro =
+  "When I'm not working on a new product, I love diving deep into my hobbies. Here are a few of my favorite things!";
 
 export const offTheClockTiles: OffTheClockTile[] = [
   {
     slug: "gamer",
     label: "Ranked Gamer",
     drafted: true,
-    body: "My husband and I met playing League of Legends: Wild Rift, and the guild we founded is ranked top 10 in North America. I play mostly ARAM, but I main Samira and Jinx in the duo lane. I'm part of the gaming audience myself, which is how I knew PAX West and Dungeon Crawler Carl would be a hit.",
+    // The "I play mostly ARAM, but I main Samira and Jinx in the duo lane"
+    // sentence was cut at Ellie's request (2026-11-13) so the card is shorter.
+    body: "My husband and I met playing League of Legends: Wild Rift, and the guild we founded is ranked top 10 in North America. I'm part of the gaming audience myself, which is how I knew PAX West and Dungeon Crawler Carl would be a hit.",
     photo: {
       src: "/personal/ranked-gamer.jpg",
       alt: "Ellie's League of Legends: Wild Rift rank card: Grandmaster III, 'MØL's #1 fan'",
@@ -56,6 +65,7 @@ export const offTheClockTiles: OffTheClockTile[] = [
       // the rank is the point. The character art on the right is what's lost.
       fit: "cover",
       position: "left center",
+      aspect: "4 / 3",
     },
   },
   {
@@ -73,6 +83,10 @@ export const offTheClockTiles: OffTheClockTile[] = [
       src: "/personal/epic-fantasy-books.webp",
       alt: "Five fantasy book covers laid out together: The Way of Kings by Brandon Sanderson, The Name of the Wind by Patrick Rothfuss, Mistborn by Brandon Sanderson, Throne of Glass by Sarah J. Maas, and The Hobbit by J.R.R. Tolkien",
       background: "var(--ejd-marigold)",
+      // Square on purpose, and `contain`: five covers have to stay big enough to
+      // read, and the marigold behind the transparent file fills any spare room.
+      fit: "contain",
+      aspect: "1 / 1",
     },
   },
   {
@@ -86,6 +100,9 @@ export const offTheClockTiles: OffTheClockTile[] = [
     photo: {
       src: "/personal/syl-and-mordecai.jpg",
       alt: "Mordecai, a long-haired black cat, sitting upright on a kitchen island behind Sylphrena, a white and grey Ragdoll cat, lounging on the dining table",
+      // The card crops this 3:4 photo to a landscape frame; keep both cats in it.
+      position: "center 38%",
+      aspect: "4 / 3",
     },
   },
 ];

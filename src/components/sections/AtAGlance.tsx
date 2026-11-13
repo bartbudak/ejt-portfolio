@@ -22,12 +22,26 @@ export function AtAGlance() {
   return (
     <section
       aria-label="At a glance"
-      className="w-full px-5 py-12 sm:px-10 sm:py-16"
-      style={{ backgroundColor: "var(--ejd-marigold)" }}
+      // An ombre at the top: "Hi There!" above is vermilion, and a hard edge into
+      // yellow felt abrupt (Ellie, 2026-11-13). The first 8rem fade from that
+      // vermilion into the marigold, the padding keeps the copy below the fade
+      // (so the vermilion numbers never sit on pink), and the band is still its
+      // own yellow section from there down.
+      className="w-full px-5 pb-12 pt-24 sm:px-10 sm:pb-16 sm:pt-32"
+      style={{
+        // The plain marigold is the fallback for a browser without `color-mix`.
+        backgroundColor: "var(--ejd-marigold)",
+        // Lightened 2026-11-13 (Ellie: "a bit lighter, similar in lightness to the
+        // pink in Off the Clock"): 75% white over the page's marigold, a soft butter
+        // yellow, ~90% lightness against that pink's 94%. Taken from the token, not
+        // a hex, so it still follows whichever palette is active.
+        backgroundImage:
+          "linear-gradient(to bottom, var(--ejd-vermilion) 0, color-mix(in srgb, var(--ejd-marigold) 25%, white) 8rem)",
+      }}
     >
       <div className="mx-auto grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
         <p
-          className="max-w-[44ch] text-lg leading-relaxed sm:text-2xl"
+          className="max-w-[46ch] text-base leading-relaxed sm:text-xl"
           style={{ color: "var(--ejd-ink)", textWrap: "pretty" }}
         >
           {site.scope}

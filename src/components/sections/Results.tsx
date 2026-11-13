@@ -35,7 +35,11 @@ export function Results() {
   return (
     <section
       id="results"
-      className="relative isolate w-full"
+      // `overflow-x-clip`, not `hidden`: the bursts hang past the section's
+      // edge by design and made the whole page scroll sideways on a tablet (74px
+      // at 768, 42px at 1024). `clip` crops them without making this a scroll
+      // container, so the pinned marquee above still pins (2026-11-13).
+      className="relative isolate w-full overflow-x-clip"
       // The hero's blush, not the Maeve paper. That paper (#fff3e5) is a pale
       // peach, and sitting under the vermilion "Hi There!" it read as skin
       // rather than as a ground (Bart, 2026-09-05). Blush also puts the section
