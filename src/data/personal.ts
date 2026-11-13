@@ -4,8 +4,10 @@
 // Reworded 2026-11-13 at Ellie's request: the first version "read like AI", so
 // every tile and the Beyond the Desk copy were rewritten in her voice, using
 // only facts she gave (how she and her husband met on Wild Rift, their guild,
-// her ARAM / Samira / Jinx play, the cats' names) and what is already in her
-// résumé and briefs. The tiles are marked `drafted` until she has read them.
+// the cats' names) and what is already in her résumé and briefs. The tiles are
+// marked `drafted` until she has read them. The guild is "the guild we helped
+// lead", not "founded" (Ellie, 2026-11-13); the ARAM / Samira / Jinx sentence
+// was cut the same day to shorten the card.
 // The Color-on-Color Dresser and Currently Learning tiles were cut the same day.
 //
 // Tile order is deliberate: Cat Parent comes AFTER the book tile because the
@@ -56,7 +58,7 @@ export const offTheClockTiles: OffTheClockTile[] = [
     drafted: true,
     // The "I play mostly ARAM, but I main Samira and Jinx in the duo lane"
     // sentence was cut at Ellie's request (2026-11-13) so the card is shorter.
-    body: "My husband and I met playing League of Legends: Wild Rift, and the guild we founded is ranked top 10 in North America. I'm part of the gaming audience myself, which is how I knew PAX West and Dungeon Crawler Carl would be a hit.",
+    body: "My husband and I met playing League of Legends: Wild Rift, and the guild we helped lead is ranked top 10 in North America. I'm part of the gaming audience myself, which is how I knew PAX West and Dungeon Crawler Carl would be a hit.",
     photo: {
       src: "/personal/ranked-gamer.jpg",
       alt: "Ellie's League of Legends: Wild Rift rank card: Grandmaster III, 'MØL's #1 fan'",
