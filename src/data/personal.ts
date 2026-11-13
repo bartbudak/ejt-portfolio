@@ -2,15 +2,14 @@
 // 2026-11-01 restructure, between "Hi There!" and "My Crown Jewel".
 //
 // Shaped from Ellie's own restructure brief, not invented. The Color-on-Color
-// Dresser tile is still `drafted: true`: her brief gave the idea (dopamine
-// dressing / secondhand), not finished copy, so confirm the wording with her
-// before calling this final. "Currently Learning" has no photo yet — she
-// couldn't think of one (2026-11-13).
+// Dresser and Currently Learning tiles were cut on 2026-11-13 (she couldn't
+// back the dresser one with a photo, and wanted the section kept simple), so
+// there are three tiles: cats, gamer, reader.
 //
 // Photos supplied by Ellie: cats together (2026-11-01,
-// public/personal/syl-and-mordecai.jpg), the League of Legends rank card and
-// the mural photo (2026-11-13, public/personal/ranked-gamer.jpg and
-// dresser.jpg).
+// public/personal/syl-and-mordecai.jpg) and the League of Legends rank card
+// (2026-11-13, public/personal/ranked-gamer.jpg). The reader tile is a
+// composite of five cover images (public/personal/epic-fantasy-books.webp).
 
 export interface OffTheClockTile {
   slug: string;
@@ -65,22 +64,13 @@ export const offTheClockTiles: OffTheClockTile[] = [
     slug: "reader",
     label: "Epic Fantasy Reader",
     body: "If it has a map in the front, I've probably read it.",
-  },
-  {
-    slug: "dresser",
-    label: "Color-on-Color Dresser",
-    drafted: true,
-    body: "Dopamine dressing, almost entirely secondhand. I'd rather have one great piece than ten fast-fashion ones.",
+    // Made 2026-11-13 from Ellie's five picks, in the order she sent them, laid
+    // out flat (a fan hid every title but one): the retailers' own cover images,
+    // arranged on a cream ground with a soft shadow. Nothing is hand-drawn.
     photo: {
-      src: "/personal/dresser.jpg",
-      alt: "Ellie in an orange jacket over black, standing in front of a colorful abstract mural",
+      src: "/personal/epic-fantasy-books.webp",
+      alt: "Five fantasy book covers laid out together: The Way of Kings by Brandon Sanderson, The Name of the Wind by Patrick Rothfuss, Mistborn by Brandon Sanderson, Throne of Glass by Sarah J. Maas, and The Hobbit by J.R.R. Tolkien",
     },
-  },
-  {
-    slug: "learning",
-    label: "Currently Learning",
-    drafted: true,
-    body: "Sewing and drawing — badly, joyfully.",
   },
 ];
 

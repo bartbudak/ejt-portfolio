@@ -19,6 +19,7 @@ export function MobileCollapse({
   title,
   blurb,
   framed = true,
+  fill = false,
   children,
 }: {
   /** What sits in the 3.5rem square at the left: a picture, a letter, a number. */
@@ -27,6 +28,9 @@ export function MobileCollapse({
   blurb?: string;
   /** The row draws its own small frame unless the card around it already has one. */
   framed?: boolean;
+  /** Pass the slot's height down to the body on a wide screen, for a card whose
+   *  frame should stretch to match its neighbours (a photo beside post cards). */
+  fill?: boolean;
   children: ReactNode;
 }) {
   const [open, setOpen] = useState(false);
@@ -44,7 +48,7 @@ export function MobileCollapse({
   };
 
   return (
-    <div>
+    <div className={fill ? "flex h-full flex-col" : undefined}>
       <button
         ref={rowRef}
         type="button"
@@ -113,7 +117,11 @@ export function MobileCollapse({
         </svg>
       </button>
 
-      <div className={open ? "mt-3" : "max-sm:hidden"}>{children}</div>
+      <div
+        className={`${open ? "mt-3" : "max-sm:hidden"} ${fill ? "min-h-0 flex-1" : ""}`}
+      >
+        {children}
+      </div>
 
       {open && (
         <button

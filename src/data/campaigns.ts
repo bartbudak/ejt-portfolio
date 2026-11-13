@@ -178,6 +178,12 @@ export interface Collection {
   /** A real photograph of the collaboration, shown framed beside the copy on
    *  bands that have no `art`. Dimensions are the file's real ones. */
   photo?: { src: string; alt: string; width: number; height: number };
+  /**
+   * More photographs, shown as framed cards at the head of the post row so the
+   * photos and the posts read as one gallery (bands without `art`). Each file
+   * is a 900x1125 (4:5) crop; `title` names the card in the phone's folded row.
+   */
+  gallery?: { src: string; alt: string; title: string }[];
   layout: BandLayout;
   /** Her own band artwork. Falls back to `motif` when a band has none. */
   frame?: FramePiece[];
@@ -390,10 +396,20 @@ export const collabsIntro =
 // The other three collabs are still written from the asset folders and stay
 // marked `drafted` until she supplies her own.
 
-// The three non-DCC collabs used to carry a big display line under the copy
-// ("Pineapple Coco Cacao", "Gretchen, Collectible", "800K Views"). It read as a
+// The non-DCC collabs used to carry a big display line under the copy
+// ("Gretchen, Collectible", "800K Views"). It read as a
 // second title and split each band into two slides, so it is gone (Ellie,
 // 2026-11-13); DCC never had one. The seasons' own logotypes live in their art.
+//
+// Their palettes are fixed hexes, like DCC's, and deliberately NOT the seasonal
+// grounds: they used to sit on Valentine's blush, Spring's sage and Summer's ice
+// with a Valentine's heart, Summer star and Holiday bird, so they read as more
+// seasons (Ellie, 2026-11-13). Placeholders until each collab has its own art;
+// every pair clears WCAG AA.
+//
+// Talea was cut from this list (Ellie, 2026-11-13): no photos or links to share,
+// so it read as sparse next to the others. Its National Launch card
+// (src/data/launch.ts) is unchanged.
 export const collabs: Collection[] = [
   {
     slug: "dcc",
@@ -458,57 +474,11 @@ export const collabs: Collection[] = [
     ],
   },
   {
-    slug: "talea",
-    label: "Talea",
-    briefTitle: "Talea × Maeve",
-    // Collab palettes are fixed hexes, like DCC's, and deliberately NOT the
-    // seasonal grounds: Talea used to sit on Valentine's blush with its heart,
-    // PAX on Spring's sage with Summer's star, MSF on Summer's ice with
-    // Holiday's bird — so they read as three more seasons (Ellie, 2026-11-13).
-    // These are placeholders until she supplies each collab's own art; every
-    // pair clears WCAG AA (display 5.6–10.5:1, body 8.3–14.6:1).
-    ground: "#0f5257",
-    display: "#ffd84d",
-    body: "#fff6e0",
-    layout: { align: "left", nutshell: "none", motifs: "right" },
-    // The real post, already linked on National Launch (src/data/launch.ts)
-    // — added here too (2026-11-13) so this panel isn't empty-handed while
-    // PAX West and My Straight Friends still are.
-    posts: [
-      {
-        handle: "@taleabeer",
-        post: "https://www.instagram.com/p/DUletwej_--/",
-        aspect: "839 / 1049",
-      },
-    ],
-    rows: [
-      {
-        label: "Theme",
-        drafted: true,
-        body: "Take the Valentine's collection off the shelf for one night. Talea is a Brooklyn brewery with the same audience and the same refusal to be serious about a serious craft, so we co-brewed rather than co-branded.",
-      },
-      {
-        label: "What I did",
-        drafted: true,
-        // Creative-process angle (Ellie, 2026-11-13): National Launch
-        // (src/data/launch.ts) now makes the strategic case for Talea, so
-        // this row leans into what "co-brewed, not co-branded" meant in
-        // practice — the collaboration itself, not the event logistics.
-        body: "Worked with Talea's brewers to actually co-develop the Pineapple Coco Cacao sour, not license our name onto an existing batch, then built craft stations so guests could see both crafts side by side — a Galentine's rom-com trivia night, with the collection as the prize table.",
-      },
-      {
-        label: "Result",
-        drafted: true,
-        body: "119 attendees, and a chocolate brand in a room full of people who came for beer.",
-      },
-    ],
-  },
-  {
     slug: "pax-west",
     label: "PAX West",
     briefTitle: "PAX West",
     ground: "#2b1b5a",
-    // Own palette, not Spring's sage — see the note on Talea above.
+    // Own palette, not Spring's sage — see the note above `collabs`.
     display: "#62f0c1",
     body: "#f3efff",
     layout: { align: "left", nutshell: "none", motifs: "scatter" },
@@ -519,15 +489,28 @@ export const collabs: Collection[] = [
     // The photo is the collectible card itself, cropped out of a phone
     // screenshot of the agency's page (page chrome removed; 705x1006, a thin
     // margin of the card's own black border kept so no background bleeds in).
-    // All four posts embed and measure 1024x1280 = 4:5 in a real browser. The
-    // "SPECIAL EDITION" ticket graphic and booth photos from her brief still
-    // aren't in the repo.
+    // All four posts embed and measure 1024x1280 = 4:5 in a real browser.
     photo: {
       src: "/collabs/pax-gretchen-card.webp",
       alt: "The collectible “Legend of Gretchen” card: Gretchen the bear carrying a basket of blackberries, framed by birds, mushrooms and vines, with a short story along the bottom",
       width: 705,
       height: 1006,
     },
+    // Two of Ellie's own photos from the show (2026-11-13). The first also shows
+    // the card's pink "Special Trading Card Edition" back — the ticket graphic
+    // her brief mentions.
+    gallery: [
+      {
+        src: "/collabs/pax-card-display.webp",
+        title: "The card, on display",
+        alt: "A tabletop display at the Maeve booth: a sign reading “Limited Edition Collectible Card, only available at PAX West”, and in an acrylic frame the card's two sides, a pink “Special Trading Card Edition” back and the Gretchen bear front",
+      },
+      {
+        src: "/collabs/pax-booth-table.webp",
+        title: "The booth table",
+        alt: "The booth's table: Maeve truffle bars on stands in front of a hanging T-shirt, a pink beanie and a green cap",
+      },
+    ],
     posts: [
       // A carousel; the embed shows its first slide.
       ig("DOHF7KRk9J1"),
@@ -561,7 +544,7 @@ export const collabs: Collection[] = [
     slug: "my-straight-friends",
     label: "My Straight Friends",
     briefTitle: "My Straight Friends",
-    // Own palette, not Summer's ice — see the note on Talea above. Warm cream
+    // Own palette, not Summer's ice — see the note above `collabs`. Warm cream
     // with the magenta from the step-and-repeat backdrop, so the photo sits in
     // a band that already matches it.
     ground: "#ffe9c7",
@@ -618,7 +601,7 @@ export const collabs: Collection[] = [
     rows: [
       {
         label: "What",
-        body: "Joe Dombrowski (1.5 million followers) and Ricci Armani (42.8k followers) make up the comedy duo called My Straight Friends (101k followers). In exchange for Maeve sponsoring the duo's shows for 3 months, MSF created humorous advertisements for us and gave a brand pitch during intermissions. We also built a Step & Repeat for photo opps and made sure to provide bars or a big bowl of bonbons for every show.",
+        body: "Joe Dombrowski (1.7 million followers) and Ricci Armani (44.7k followers) make up the comedy duo called My Straight Friends (103k followers). In exchange for Maeve sponsoring the duo's shows for 3 months, MSF created humorous advertisements for us and gave a brand pitch during intermissions. We also built a Step & Repeat for photo opps and made sure to provide bars or a big bowl of bonbons for every show.",
       },
       {
         label: "Why",

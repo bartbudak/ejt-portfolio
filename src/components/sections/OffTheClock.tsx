@@ -10,10 +10,9 @@ import { offTheClockIntro, offTheClockTiles } from "@/data/personal";
 // "Hi There!" above it and the paper of "Beyond the Desk" below, so the three
 // panels step rather than collide.
 //
-// Every tile's photo is a placeholder (below) until Ellie supplies one; the
-// Color-on-Color Dresser tile is still `drafted: true` in
-// src/data/personal.ts — confirm that wording with her before calling this
-// section final.
+// A tile without a photo shows the placeholder (below) until Ellie supplies
+// one. The Color-on-Color Dresser and Currently Learning tiles were cut
+// (Ellie, 2026-11-13) to keep the section simple.
 
 const WONK = { fontVariationSettings: '"SOFT" 0, "WONK" 1' } as const;
 

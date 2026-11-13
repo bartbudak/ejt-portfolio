@@ -9,7 +9,7 @@ import { seasons, seasonsIntro, collabs, collabsIntro } from "@/data/campaigns";
 // Campaigns & Collabs — merged tab (2026-11-01 restructure). Used to be two
 // separate tabs (/preview/campaigns, /preview/collabs); Ellie asked for one
 // page, Seasonal Collections first and then the partnerships, in the order
-// her deck already has them (DCC, Talea, PAX West, My Straight Friends — see
+// her deck already has them (DCC, PAX West, My Straight Friends — see
 // `collabs` in src/data/campaigns.ts). The old routes now redirect here
 // (firebase.json).
 //

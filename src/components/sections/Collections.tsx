@@ -3,7 +3,11 @@
 import Image from "next/image";
 import { useState } from "react";
 import type { Collection, CollectionPost } from "@/data/campaigns";
-import { PostCard, PostPlaceholder } from "@/components/shared/PostCard";
+import {
+  CARD_FRAME,
+  PostCard,
+  PostPlaceholder,
+} from "@/components/shared/PostCard";
 import { InstagramEmbed } from "@/components/shared/InstagramEmbed";
 import {
   Nutshell,
@@ -242,6 +246,40 @@ export function Collections({ title, intro, items, tone, id = "campaigns" }: Pro
     </MobileCollapse>
   ));
 
+  // Photographs of the collaboration, as cards in the same row as the posts
+  // (bands without `art`). The frame stretches to the posts' height and the
+  // photo crops to fill it, so the row stays even.
+  const photoCards = current.art
+    ? []
+    : (current.gallery ?? []).map((photo) => (
+        <MobileCollapse
+          key={photo.src}
+          fill
+          title={photo.title}
+          thumb={
+            <Image
+              src={photo.src}
+              alt=""
+              fill
+              sizes="56px"
+              className="object-cover"
+            />
+          }
+        >
+          <div style={CARD_FRAME} className="h-full overflow-hidden">
+            <Image
+              src={photo.src}
+              alt={photo.alt}
+              width={900}
+              height={1125}
+              sizes="(min-width: 640px) 300px, 90vw"
+              className="block aspect-[4/5] h-full w-full object-cover"
+            />
+          </div>
+        </MobileCollapse>
+      ));
+  const gridCards = [...photoCards, ...cards];
+
   return (
     <section
       id={id}
@@ -376,7 +414,7 @@ export function Collections({ title, intro, items, tone, id = "campaigns" }: Pro
                 // own bottom padding — the post row supplies the gap — so the
                 // two read as one band rather than two slides.
                 className={`relative flow-root ${PANEL_PADDING[current.layout.reserve ?? "none"]} ${
-                  current.showcase || cards.length > 0
+                  current.showcase || gridCards.length > 0
                     ? "pb-0"
                     : PANEL_BOTTOM[current.layout.reserve ?? "none"]
                 }`}
@@ -565,8 +603,8 @@ export function Collections({ title, intro, items, tone, id = "campaigns" }: Pro
             </>
           )}
 
-          {!current.art && cards.length > 0 && (
-            <PostGrid cards={cards} ground={current.ground} centered />
+          {!current.art && gridCards.length > 0 && (
+            <PostGrid cards={gridCards} ground={current.ground} centered />
           )}
         </div>
       </div>
