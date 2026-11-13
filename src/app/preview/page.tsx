@@ -4,10 +4,12 @@ import { ThemeSwitcher } from "@/components/shared/PalettePicker";
 import { Hero } from "@/components/sections/Hero";
 import { Marquee } from "@/components/shared/Marquee";
 import { About } from "@/components/sections/About";
+import { AtAGlance } from "@/components/sections/AtAGlance";
 import { OffTheClock } from "@/components/sections/OffTheClock";
 import { BeyondTheDesk } from "@/components/sections/BeyondTheDesk";
 import { CrownJewel } from "@/components/sections/CrownJewel";
 import { Contact } from "@/components/sections/Contact";
+import { Credits } from "@/components/shared/Credits";
 
 // Local-only preview of the home while the live site stays on the coming-soon
 // holding page (site.comingSoon). noindex as defense-in-depth — do NOT deploy
@@ -36,6 +38,7 @@ export default function PreviewPage() {
         </div>
         <Marquee className="sticky top-[var(--ejt-band-top,var(--ejt-header))] z-30" />
         <About />
+        <AtAGlance />
       </div>
       {/* New in the 2026-11-01 restructure: the person behind the pitch decks,
           and why she goes to origin. Everything from "The Idea" through
@@ -45,6 +48,7 @@ export default function PreviewPage() {
       <BeyondTheDesk />
       <CrownJewel />
       <Contact />
+      <Credits />
     </>
   );
 }

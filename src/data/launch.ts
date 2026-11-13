@@ -44,7 +44,7 @@ export interface LaunchPost {
 
 // Rendered under the heading, at her request (2026-09-07). Her words, verbatim.
 export const launchIntro =
-  "We had to be scrappy with our national strategy since we invested so much into the brand itself. It cost too much to work with some of our dream influencers, but I knew that if I could find the stores the influencers shop in, they could be influenced naturally. We partnered with stores in key locations around the country and created opportunities for our audience to discover Maeve in their own environment. We targeted stores that were not typically associated with chocolate brands, like bookstores, breweries, record stores, vintage stores, and museums. We held events and/or created LTO dual-branded products with them.";
+  "We had to be scrappy with our national strategy since we invested so much into the brand itself. It cost too much to work with some of our dream influencers, but I knew that if I could find the stores the influencers shop in, they could be influenced naturally. We partnered with stores in key locations around the country and created opportunities for our audience to discover Maeve in their own environment. We targeted stores that were not typically associated with chocolate brands, like bookstores, breweries, record stores, vintage stores, and museums. We held events and/or created limited-time-offer (LTO) dual-branded products with them.";
 
 export const launchPosts: LaunchPost[] = [
   // Partners and captions are Ellie's, from her 2026-09-07 feedback. Two of the
@@ -84,7 +84,7 @@ export const launchPosts: LaunchPost[] = [
     // audience already is" thesis, so the caption makes the case for Talea
     // rather than recapping the event — the event itself, and the co-brewing
     // behind it, is Collabs' job now (src/data/campaigns.ts).
-    what: "A brewery with our exact audience — proof we didn't need a chocolate aisle to find them",
+    what: "A brewery with our exact audience. Proof that we didn't need a chocolate aisle to find them",
     handle: "@taleabeer",
     post: "https://www.instagram.com/p/DUletwej_--/",
     // A vertical video, letterboxed to 4:5 on Instagram's own black.

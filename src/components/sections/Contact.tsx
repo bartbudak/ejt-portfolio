@@ -90,7 +90,7 @@ export function Contact() {
           // change again, and the orphan should not come back with it.
           style={{ color: "var(--ejd-ink)", textWrap: "pretty" }}
         >
-          {`I'm based in ${site.location} and looking for my next brand home. In-house building something from the ground up, or agency-side helping other brands find their story. If any of this resonates, I'd love to hear from you.`}
+          {`I'm based in ${site.location}, and looking for my next role, either in-house on a brand team or agency-side helping other brands tell their story. If any of this sounds like a good fit, I'd love to hear from you!`}
         </p>
 
         <ul className="flex flex-wrap items-center justify-center gap-3">

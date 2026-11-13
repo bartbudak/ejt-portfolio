@@ -78,13 +78,18 @@ export function OffTheClock() {
                         ? "object-contain"
                         : "object-cover"
                     }`}
-                    style={
-                      tile.photo.fit === "contain"
+                    style={{
+                      ...(tile.photo.fit === "contain"
                         ? { backgroundColor: "var(--mv-paper)" }
-                        : tile.photo.position
-                          ? { objectPosition: tile.photo.position }
-                          : undefined
-                    }
+                        : null),
+                      ...(tile.photo.position
+                        ? { objectPosition: tile.photo.position }
+                        : null),
+                      // A transparent image: the theme supplies the colour.
+                      ...(tile.photo.background
+                        ? { backgroundColor: tile.photo.background }
+                        : null),
+                    }}
                   />
                 ) : (
                   <PhotoPlaceholder label={tile.label} />

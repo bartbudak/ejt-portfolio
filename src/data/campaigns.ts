@@ -19,9 +19,11 @@
 // `frame` / `floatArt` / `showcase` / `wordmark` fields are gone from the
 // seasons; the collaboration bands below still use them.
 //
-// Three of her own typos are kept as she typed them rather than silently
-// corrected, per the standing copy rule: "activites" (Fall), "pacakging" and
-// "peak into" (Holiday). Flag them to her; do not fix them here.
+// Grammar pass 2026-11-13, at Ellie's request ("edit all grammatical errors"):
+// spelling, punctuation and agreement fixed throughout her briefs, including
+// the three typos that used to be kept as typed ("activites", "pacakging",
+// "peak into"). Wording is otherwise hers and unchanged. Em dashes became
+// colons, per her standing rule.
 
 import { DCC_ART, DECK, SEASON_ART, type BandArt } from "./seasonScenes";
 
@@ -213,8 +215,13 @@ export interface Collection {
   art?: BandArt;
 }
 
+// Both intros were written FOR Ellie in an earlier session (2026-09-05), not by
+// her, and read that way. Reworded 2026-11-13 using only her own résumé and
+// briefs: the seasonal one is her résumé line ("Owned five seasonal collections
+// a year end to end ... 50+ limited-time products over four years"), the collab
+// one just says what each band holds. Flag for her review.
 export const seasonsIntro =
-  "Five times a year, every year, I owned a full seasonal collection start to finish: concept, product development, packaging, photography direction, and the campaign that took it to market. Over four years, that's 50+ limited-time products. Here's the brief behind each one.";
+  "The everyday line launched in March 2025, and Summer was our first seasonal collection. In all, we created five seasonal collections with 50+ limited-time products. I started developing them in 2023 so each would be ready on time for its launch over the year that followed, and I owned each one from start to finish: concept, product development, packaging, photography direction and the campaign that took it to market. Here's the brief behind each one.";
 
 export const seasons: Collection[] = [
   {
@@ -246,7 +253,7 @@ export const seasons: Collection[] = [
       },
       {
         label: "Launch Campaign",
-        body: "Pop up in multiple book stores across the country and host events where our audience can gather, read, play games and eat delicious treats. Write short romantasy stories based off the bar wraps and launch microcampaigns on social and email teasing out the stories. Collaborate with influential artist, Valheria Rocha, to create bespoke Valentine cards. Influencer and PR send includes these cards, stickers, a unique bookmark, zines with the romance stories, a postcard so they can send a love letter of their own, and product, of course. Host a “Key To Your Heart” event at the flagship store where pairs can come solve puzzle boxes while they snack on chocolate.",
+        body: "Pop up in multiple bookstores across the country and host events where our audience can gather, read, play games and eat delicious treats. Write short romantasy stories based on the bar wraps and launch microcampaigns on social and email teasing out the stories. Collaborate with the influential artist Valheria Rocha to create bespoke Valentine's cards. The influencer and PR send includes these cards, stickers, a unique bookmark, zines with the romance stories, a postcard so they can send a love letter of their own, and product, of course. Host a “Key To Your Heart” event at the flagship store where pairs can come and solve puzzle boxes while they snack on chocolate.",
         // The one name she hyperlinks in this band. Her deck points it at the
         // artist's Instagram, so the site does too rather than leaving it as
         // flat text (Ellie, "please ensure all links are properly linked out").
@@ -285,7 +292,7 @@ export const seasons: Collection[] = [
         // label is rendered separately here, so the stray repeat is dropped;
         // every other word is hers.
         label: "Launch Campaign",
-        body: "We brought Gretchen the Bear, from our Hungry Blackberry bar, in as the season's main character. The story: a delicious smell wakes her from hibernation, she wanders out of her cave, and stumbles straight into a glamorous garden party. We shot the whole thing Alice in Wonderland–style: girls in ball gowns paired with rubber boots and garden tools, tipped just far enough into absurd and whimsical to feel like Maeve's world rather than a stock garden shoot. On Instagram, Gretchen followed it up with her own guide to recycling and composting, which we then built into the influencer PR box - cards, product, and a mini compost bin for the bonbon wrappers.",
+        body: "We brought Gretchen the Bear, from our Hungry Blackberry bar, in as the season's main character. The story: a delicious smell wakes her from hibernation, she wanders out of her cave, and stumbles straight into a glamorous garden party. We shot the whole thing Alice in Wonderland–style: girls in ball gowns paired with rubber boots and garden tools, tipped just far enough into the absurd and whimsical to feel like Maeve's world rather than a stock garden shoot. On Instagram, Gretchen followed it up with her own guide to recycling and composting, which we then built into the influencer PR box: cards, product and a mini compost bin for the bonbon wrappers.",
       },
     ],
   },
@@ -304,7 +311,7 @@ export const seasons: Collection[] = [
     rows: [
       {
         label: "Theme",
-        body: "walking down the food aisle at the state fair but in Maeve's World, with magical rides and zany characters serving you up nostalgic and delicious flavors that feed your inner child.",
+        body: "Walking down the food aisle at the state fair, but in Maeve's world, with magical rides and zany characters serving you up nostalgic and delicious flavors that feed your inner child.",
       },
       {
         label: "Launch Campaign",
@@ -340,7 +347,7 @@ export const seasons: Collection[] = [
       },
       {
         label: "Launch Campaign",
-        body: "Bring the stories to life with a photoshoot recreating all the activites depicted on the packaging. Host a haunted factory tour that thousands of people attend. Collaborate with influencers to spread the word, creating unique content like nail art based on the packaging. Collaborate with a local cider business to create a cobranded LTO beverage inspired by one of the bars.",
+        body: "Bring the stories to life with a photoshoot recreating all the activities depicted on the packaging. Host a haunted factory tour that thousands of people attend. Collaborate with influencers to spread the word, creating unique content like nail art based on the packaging. Collaborate with a local cider business to create a co-branded LTO beverage inspired by one of the bars.",
       },
     ],
   },
@@ -371,7 +378,7 @@ export const seasons: Collection[] = [
       },
       {
         label: "Launch Campaign",
-        body: "Use the packaging and product to create a miniature town and capture shortform videos as a peak into Maeve’s world during the holidays to use on social, email and ads. Host a holiday market at the factory, inviting other local businesses to vend. Create Black Friday, Small Business Saturday and Cyber Monday campaigns that tie into the collection by using the frog hidden throughout the pacakging as a sales/promotions mascot. Create a gift guide series featuring recommendations from a diverse set of employees.",
+        body: "Use the packaging and product to create a miniature town and capture short-form videos as a peek into Maeve’s world during the holidays to use on social, email and ads. Host a holiday market at the factory, inviting other local businesses to vend. Create Black Friday, Small Business Saturday and Cyber Monday campaigns that tie into the collection by using the frog hidden throughout the packaging as a sales/promotions mascot. Create a gift guide series featuring recommendations from a diverse set of employees.",
       },
     ],
   },
@@ -384,14 +391,12 @@ export const seasons: Collection[] = [
 // all marked drafted.
 
 export const collabsIntro =
-  "The other half of the calendar. Partnerships I conceived, pitched and licensed myself, bringing worlds our audience was already obsessed with into ours, and finding out that a fanbase notices everything.";
+  "Here are a few of my favorite collaboration examples. These aren't the only collaborations we did, just the ones I thought were unique and worth sharing.";
 
-// ⚠️ Dungeon Crawler Carl is now HERS, verbatim, from the second Canva export
-// (Downloads/v.pdf, 2026-09-11) — four long rows where there used to be four
-// short ones I had written. Four of her own typos here were fixed at her own
-// request (2026-11-01 restructure): "turn it's remnants" → "its", "I shoot my
-// shot" → "shot", "concieved" → "conceived", "hundred of thousands" →
-// "hundreds of thousands". Everything else in these rows is still verbatim.
+// ⚠️ Dungeon Crawler Carl is HERS, from the second Canva export (2026-09-11):
+// four long rows where there used to be four short ones I had written. Typos
+// were fixed at her request on 2026-11-01 and again in the 2026-11-13 grammar
+// pass; the wording is otherwise verbatim.
 //
 // The other three collabs are still written from the asset folders and stay
 // marked `drafted` until she supplies her own.
@@ -455,7 +460,7 @@ export const collabs: Collection[] = [
     rows: [
       {
         label: "What",
-        body: "Dungeon Crawler Carl is an extremely popular LitRPG Fantasy series by author Matt Dinniman. The story begins when an alien corporation destroys all man-made structures on Earth and turn its remnants into an 18-level dungeon. We follow two protagonists, Carl, the lovable main character, and Princess Donut, the talking Persian cat. Donut is full of personality and her favorite drink in the dungeon is a “Virgin Dirty Shirley” (AKA a Shirley Temple lol.) We created a Virgin Dirty Shirley bar in her honor and it sold out in under 36 hours.",
+        body: "Dungeon Crawler Carl is an extremely popular LitRPG Fantasy series by author Matt Dinniman. The story begins when an alien corporation destroys all man-made structures on Earth and turns its remnants into an 18-level dungeon. We follow two protagonists, Carl, the lovable main character, and Princess Donut, the talking Persian cat. Donut is full of personality and her favorite drink in the dungeon is a “Virgin Dirty Shirley” (AKA a Shirley Temple, lol.) We created a Virgin Dirty Shirley bar in her honor and it sold out in under 36 hours.",
         // The one name her deck hyperlinks on this band.
         links: [{ text: "Matt Dinniman", href: "https://mattdinniman.com/" }],
       },
@@ -465,11 +470,11 @@ export const collabs: Collection[] = [
       },
       {
         label: "My Role",
-        body: "I pitched the idea to the author and to the leadership team. I helped negotiate the licensing agreement, wrote the creative brief, briefed the design agency, conceived a launch plan, spending hours ensuring every detail was lore accurate, which is extremely important to a community like this. I approved content for all digital channels and merchandising in the two storefronts.",
+        body: "I pitched the idea to the author and to the leadership team. I helped negotiate the licensing agreement, wrote the creative brief, briefed the design agency, conceived a launch plan, spending hours ensuring every detail was lore-accurate, which is extremely important to a community like this. I approved content for all digital channels and merchandising in the two storefronts.",
       },
       {
         label: "The Results",
-        body: "This opened up Maeve to a new rabid audience. DCC was in the early stages of virality when we got the licensing agreement so the fanbase nearly lost their minds seeing a cool collaboration with their favorite IP for the first time. Our social posts on Instagram and Reddit all went minorly viral, with an average of 1,000+ likes, hundreds of thousands of views and extremely high share and comment rates. The product sold out in under 36 hours and the company had to scour the state to find any remaining cherries from the season so they could make more bars. It is now one of the top 3 selling bars by volume in the company’s 35 year history.",
+        body: "This opened up Maeve to a new rabid audience. DCC was in the early stages of virality when we got the licensing agreement, so the fanbase nearly lost their minds seeing a cool collaboration with their favorite series for the first time. Our social posts on Instagram and Reddit all went minorly viral, with an average of 1,000+ likes, hundreds of thousands of views and extremely high share and comment rates. The product sold out in under 36 hours, and the company had to scour the state to find any remaining cherries from the season so they could make more bars. It is now one of the top 3 selling bars by volume in the company’s 35-year history.",
       },
     ],
   },
@@ -522,21 +527,21 @@ export const collabs: Collection[] = [
     rows: [
       {
         label: "What",
-        body: "PAX West is a gaming festival held annually in Seattle that celebrates video games, table top games, and gaming culture. Maeve attended with a booth, giving away prizes, collecting email addresses and engaging with gaming consumers face to face. We created a collectible card reminiscent of a Pokemon or Magic The Gathering card just for the festival.",
+        body: "PAX West is a gaming festival held annually in Seattle that celebrates video games, tabletop games and gaming culture. Maeve attended with a booth, giving away prizes, collecting email addresses and engaging with gaming consumers face to face. We created a collectible card reminiscent of a Pokémon or Magic: The Gathering card just for the festival.",
       },
       {
         label: "Why",
-        body: "Our strategy of 'fun and depth are not mutually exclusive' takes a bit of perspective and nuance to fully understand. When we realized this, we decided to lean into the nerdy side of our target audience — the people who obsess over their favorite world, take the time to learn the lore behind their favorite characters, and fully understand why every interaction plays out the way it does. This, and the magical world we were building, is why I pitched attending PAX West. I also noticed an emerging trend of games creating collectible cards and thought we could create something special with our IP that would feel right at home in this space.",
+        body: "Our strategy of “fun and depth are not mutually exclusive” takes a bit of perspective and nuance to fully understand. When we realized this, we decided to lean into the nerdy side of our target audience: the people who obsess over their favorite world, take the time to learn the lore behind their favorite characters, and fully understand why every interaction plays out the way it does. This, and the magical world we were building, is why I pitched attending PAX West. I also noticed an emerging trend of games creating collectible cards and thought we could create something special with our IP that would feel right at home in this space.",
       },
       {
         label: "My Role",
-        body: "I pitched attending, secured the booth placement, planned the activations, prizes and booth planogram as well as working the booth all weekend (including set up and take down!) I led a design agency in creating the collectible card, making sure it truly felt special and similar to other cards available at the show, but with a Maeve twist.",
+        body: "I pitched attending, secured the booth placement, planned the activations, prizes and booth planogram as well as working the booth all weekend, including setup and takedown! I led a design agency in creating the collectible card, making sure it truly felt special and similar to other cards available at the show, but with a Maeve twist.",
       },
       {
         label: "The Results",
         // "recieved" in her original was a slip, not a voice choice; fixed
         // here rather than preserved (flag anything you'd rather I'd left).
-        body: "The Maeve booth was so crowded, we were given extra security to manage the line, which went down the entire hall and around the corner on the first day of the show. We collected nearly 1,000 email addresses in exchange for a prize — chocolate, merch, factory tour tickets or a collectible card. The card was warmly received and we saw many UGC posts of folks placing it in their collection.",
+        body: "The Maeve booth was so crowded that we were given extra security to manage the line, which went down the entire hall and around the corner on the first day of the show. We collected nearly 1,000 email addresses in exchange for a prize: chocolate, merch, factory tour tickets or a collectible card. The card was warmly received, and we saw many user-generated content (UGC) posts of folks placing it in their collection.",
       },
     ],
   },
@@ -563,15 +568,14 @@ export const collabs: Collection[] = [
     // rows — same note as PAX West above: real engagement numbers, but no
     // post links or the Joe/Ricci photo as a clean asset yet.
     //
-    // Posts added 2026-11-13 from the five links Ellie sent, in her order.
-    // Two EMBED (@maevechocolate DPM-vVNkgri, @joe_dombrowski DPZBnEEEZ8w, both
-    // measured 1024x1280 = 4:5). The other three are all @my_straight_friends
-    // posts, which Instagram's embed refuses ("the link may be broken, or the
-    // post may have been removed") even though the posts are live and public —
-    // one is age-restricted. So they are link-out cards: the post's own cover
-    // image, centre-cropped to 4:5 (public/collabs/msf-*.webp), linking to the
-    // post. The age-restricted one (DPhhxMXksz3) shows nothing logged-out, so it
-    // gets the labelled placeholder with a link.
+    // Posts added 2026-11-13 from the links Ellie sent, in her order. Two EMBED
+    // (@maevechocolate DPM-vVNkgri, @joe_dombrowski DPZBnEEEZ8w, both measured
+    // 1024x1280 = 4:5). Instagram's embed refuses every @my_straight_friends
+    // post even though they are live and public, so those are link-out cards:
+    // the post's own cover image, centre-cropped to 4:5
+    // (public/collabs/msf-*.webp), linking to the post. A fifth, age-restricted
+    // post (DPhhxMXksz3) was dropped at Ellie's request (2026-11-13): it shows
+    // nothing to a logged-out visitor.
     posts: [
       ig("DPM-vVNkgri"),
       {
@@ -581,12 +585,6 @@ export const collabs: Collection[] = [
           src: "/collabs/msf-DPub-ubkmPS.webp",
           alt: "Cover of a video: a comedian in a cap holding a microphone on a stage, captioned “who is this?”, with a Maeve Chocolate logo behind them",
         },
-      },
-      {
-        handle: "@my_straight_friends",
-        link: "https://www.instagram.com/p/DPhhxMXksz3/",
-        placeholder: "Age-restricted post",
-        note: "Opens on Instagram",
       },
       {
         handle: "@my_straight_friends & @maevechocolate",
@@ -601,7 +599,7 @@ export const collabs: Collection[] = [
     rows: [
       {
         label: "What",
-        body: "Joe Dombrowski (1.7 million followers) and Ricci Armani (44.7k followers) make up the comedy duo called My Straight Friends (103k followers). In exchange for Maeve sponsoring the duo's shows for 3 months, MSF created humorous advertisements for us and gave a brand pitch during intermissions. We also built a Step & Repeat for photo opps and made sure to provide bars or a big bowl of bonbons for every show.",
+        body: "Joe Dombrowski (1.7 million followers) and Ricci Armani (44.7k followers) make up the comedy duo called My Straight Friends (103k followers). In exchange for Maeve sponsoring the duo's shows for 3 months, MSF created humorous advertisements for us and gave a brand pitch during intermissions. We also built a Step & Repeat for photo ops and made sure to provide bars or a big bowl of bonbons for every show.",
       },
       {
         label: "Why",
@@ -609,11 +607,11 @@ export const collabs: Collection[] = [
       },
       {
         label: "My Role",
-        body: "I met Ricci while I was out and about and we hit it off instantly. We set up a call to talk about a sponsorship and workshopped the right package until we both felt like we were winning. I managed the relationships with the talent and sent them brand kits and high-level scripts for the advertisements.",
+        body: "I met Ricci while I was out and about, and we hit it off instantly. We set up a call to talk about a sponsorship and workshopped the right package until we both felt like we were winning. I managed the relationships with the talent and sent them brand kits and high-level scripts for the advertisements.",
       },
       {
         label: "The Results",
-        body: "Ricci's ad got over 65k views and Joe's got over 800k, both with high conversion and click rates, with Joe's being one of the highest performing ads of all time. We saw lots of UGC from attendees of the shows and gained a few hundred followers, including some influencers who love My Straight Friends.",
+        body: "Ricci's ad, a video of him talking about our brand while baking cookies, got over 800k views. We turned it into a social and Google ad, and it got tons of views and engagement, with high conversion and click rates, becoming one of the best-performing ads of all time for us. Joe's did well too. We saw lots of user-generated content (UGC) from attendees of the shows and gained a few hundred followers, including some influencers who love My Straight Friends.",
       },
     ],
   },

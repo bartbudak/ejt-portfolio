@@ -35,8 +35,9 @@ export interface Award {
 export const awards: Award[] = [
   {
     name: "Webby Awards",
-    detail: "People's Voice Winner, Food & Drink, for the Maeve website",
-    credit: "Built with View Source",
+    detail:
+      "People's Voice Winner, Food & Drink, for the Maeve website. I partnered with View Source, the agency that built it.",
+    credit: "Built by View Source",
     href: "https://winners.webbyawards.com/2026/websites-and-mobile-sites/general-desktop-mobile-sites/food-drink/364780/maeve-chocolate",
     linkLabel: "See the win",
     // Captured from the live site rather than lifted from anyone's case study:
@@ -52,8 +53,22 @@ export const awards: Award[] = [
   },
   {
     name: "Dieline Awards",
+    // Credit added 2026-11-13: the packaging was designed by The Young Jerks, and
+    // Dieline credits the entry to Maeve & Young Jerks. Agency readers look for it.
+    credit: "Designed by The Young Jerks",
+    // Reworded 2026-11-13 so it reads as the PROJECT's win, not a design win of
+    // her own. In her words: the Young Jerks did the packaging design; she gave
+    // them the briefs, managed them, gave feedback and went to the press checks.
     detail:
-      "Three awards: 2nd place for the everyday bar line, plus two for seasonal collections. All three conceived and led personally.",
+      "Five placements for Maeve's packaging across 2025 and 2026: three 2nd places (the everyday line, Celebrations and Holiday), a 3rd (Spring) and a Merit award (Summer). The Young Jerks designed it; I wrote the briefs, managed the agency, gave feedback and went to the press checks.",
+    // Checked 2026-11-13 against Dieline's own winners pages, all credited to
+    // "Maeve & Young Jerks": 2025 2nd "Maeve Chocolate"; 2026 2nd Celebrations,
+    // 3rd Spring (Confectionery Desserts and Sweet Snacks), 2nd Holiday and Merit
+    // Winner Summer (Limited Editions).
+    extra: {
+      href: "https://thedieline.com/the-best-packaging-and-cpg-of-2026-dieline-awards-winners-revealed/",
+      label: "2026 winners list",
+    },
     href: "https://thedieline.com/occasion-driven-chocolate-packaging-for-everyday-gifting-with-maeve/",
     linkLabel: "Read the feature",
     preview: {
@@ -64,7 +79,7 @@ export const awards: Award[] = [
   {
     name: "Dungeon Crawler Carl",
     detail:
-      "The collaboration became the first playable Dungeon Crawler game, covered by IGN.",
+      "The collaboration inspired the first playable Dungeon Crawler Carl game, covered by IGN. Our marketing team set the direction and View Source built it.",
     href: "https://www.ign.com/articles/a-free-dungeon-crawler-carl-flash-game-is-now-available-to-play-online",
     linkLabel: "Read on IGN",
     preview: {

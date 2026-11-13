@@ -4,13 +4,23 @@
 //
 // ⚠️ COPY RULES, from Ellie's first round of feedback (2026-09-07):
 //   1. First person, always.
-//   2. Her words wherever they exist. Every `body` below is hers verbatim,
-//      pasted from her feedback doc. Do not tighten, re-order or "improve"
-//      them — ask her first.
+//   2. Her words wherever they exist. Every `body` below is hers, pasted from
+//      her feedback doc. Do not tighten, re-order or "improve" them — ask her
+//      first. (2026-11-13: at her request, spelling, punctuation and
+//      agreement were corrected; the wording is unchanged.)
 //   3. No em dashes anywhere in rendered copy. Where one was doing real work
 //      it becomes a colon or a full stop, never a silent deletion.
 export const briefIntro = "The Idea";
 export const briefScript = "in a nutshell";
+
+// Opens the Work page, above "The Idea". Added 2026-11-13: that page used to
+// follow "My Crown Jewel" on About, which told the reader what they were about to
+// read. Now it is a tab of its own, and it began cold with "The Idea in a
+// nutshell". This says what the page is, using only dates Ellie gave (work began
+// in 2023, Maeve launched in March 2025).
+export const briefOpenerLabel = "The Maeve rebrand";
+export const briefOpener =
+  "This is the story of how Seattle Chocolate became Maeve. We started working on it in 2023 and launched in March 2025. Here's why I pitched it, what we decided, and what happened next.";
 
 /** Sits between the lead and the five strategies, as she asked. */
 export const briefTurn = "So what exactly did I do?";
@@ -31,8 +41,8 @@ export interface BriefLine {
 // (she quoted its ending back when asking for the sub-heading), with its em
 // dash turned into a colon.
 export const briefLead = [
-  "Seattle Chocolate had a fantastic product with a built-in giveback to cocoa farmers around the world. In order to have a bigger impact on the farmers lives, they needed to appeal to younger consumers in markets outside of Seattle.",
-  "I saw many chocolate brands on shelf that were either very serious with health-forward messaging or colorful, clownish, sugary candy brands. I wondered why a chocolate brand couldn't be somewhere in the middle; fun while still having depth.",
+  "Seattle Chocolate had a fantastic product with a built-in giveback to cocoa farmers around the world. In order to have a bigger impact on the farmers' lives, they needed to appeal to younger consumers in markets outside of Seattle.",
+  "I saw many chocolate brands on the shelf that were either very serious with health-forward messaging or colorful, clownish, sugary candy brands. I wondered why a chocolate brand couldn't be somewhere in the middle; fun while still having depth.",
   "So I pitched the reinvention of a 35-year-old chocolate brand, and then led it: 100+ products in three years, a new name, and a whole world to put them in.",
 ];
 
@@ -43,19 +53,19 @@ export const brief: BriefLine[] = [
   },
   {
     heading: "Design Strategy",
-    body: "I wanted something that would pop on the shelf - something bold, readable, that wouldn't get stale in a few years. This was our chance to break the “fun OR healthful” rule of the category. We leaned into colorful, maximalist, fantastical designs with a subtle nod to American traditional tattoo style. I acted as the liaison between the design agencies and the business, leading all calls and briefings.",
+    body: "I wanted something that would pop on the shelf: something bold and readable that wouldn't get stale in a few years. This was our chance to break the “fun OR healthful” rule of the category. We leaned into colorful, maximalist, fantastical designs with a subtle nod to American traditional tattoo style. I acted as the liaison between the design agencies and the business, leading all calls and briefings.",
   },
   {
     heading: "Name Strategy",
     wide: true,
-    body: "It is a woman-owned business so I felt it was important that the name sounded feminine. It needed to be an open-vessel name that could be filled with meaning over time without limiting their expansion. Lastly, I kept the old name on the packaging, bar caddies, shipping boxes and displays to ease the transition.",
+    body: "It is a woman-owned business, so I felt it was important that the name sounded feminine. It needed to be an open-vessel name that could be filled with meaning over time without limiting its expansion. Lastly, I kept the old name on the packaging, bar caddies, shipping boxes and displays to ease the transition.",
   },
   {
     heading: "Launch Campaign",
-    body: "Chocolate is an emotional food that acts as a small escape from the monotonies of the day. We leaned into this feeling of escapism and created a fantasy world, bringing the characters on the packaging to life with world maps, narrative lore, unique merchandise, unexpected collaborations, and more. I created the marketing plan and launch plans by channel, including the e-commerce website, email, socials, ads, PR, influencers, collaborations and refreshing brick & mortar stores.",
+    body: "Chocolate is an emotional food that acts as a small escape from the monotonies of the day. We leaned into this feeling of escapism and created a fantasy world, bringing the characters on the packaging to life with world maps, narrative lore, unique merchandise, unexpected collaborations, and more. I created the marketing plan and launch plans by channel, including the e-commerce website, email, socials, ads, PR, influencers, collaborations and refreshing brick-and-mortar stores.",
   },
   {
     heading: "Seasonal Strategy",
-    body: "In addition to the 50+ everyday products, we created 5 seasonal collections - Valentine's Day, Spring, Summer, Fall and Holiday, with over 50 more products (see Campaigns tab for a deeper dive.) These lines allowed us to expand on the everyday launch campaign and world building, while introducing exciting, new limited-edition products on a regular basis.",
+    body: "In addition to the 50+ everyday products, we created 5 seasonal collections (Valentine's Day, Spring, Summer, Fall and Holiday) with over 50 more products (see the Campaigns tab for a deeper dive). These lines allowed us to expand on the everyday launch campaign and world building, while introducing exciting, new limited-edition products on a regular basis.",
   },
 ];

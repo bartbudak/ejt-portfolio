@@ -10,6 +10,7 @@ import { Launch } from "@/components/sections/Launch";
 import { Awards } from "@/components/sections/Awards";
 import { Testimonial } from "@/components/sections/Testimonial";
 import { Contact } from "@/components/sections/Contact";
+import { Credits } from "@/components/shared/Credits";
 
 // Work — new tab (2026-11-01 restructure). Everything that used to run on
 // About from "The Idea" through Kirsty's letter, moved here as-is; About's
@@ -62,6 +63,7 @@ export default function WorkPage() {
         <Testimonial />
       </div>
       <Contact />
+      <Credits />
     </>
   );
 }

@@ -1,8 +1,12 @@
+import Image from "next/image";
 import { Marquee } from "@/components/shared/Marquee";
+import { CARD_FRAME } from "@/components/shared/PostCard";
 import {
   brief,
   briefIntro,
   briefLead,
+  briefOpener,
+  briefOpenerLabel,
   briefScript,
   briefTurn,
 } from "@/data/brief";
@@ -41,6 +45,40 @@ export function Brief() {
       />
 
       <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-10 sm:py-24">
+        {/* Orients a reader who arrives here from "See the rebrand": a picture of
+            the brand itself, then what this page is. The picture is Maeve's own
+            header artwork (the bear, the logotype, the sea monster, the woman with
+            her animals), chosen by Ellie (2026-11-13) over PAX photos, a hero
+            capture from maevechocolate.com, or a bare logo: it is the brand's
+            world and its name in one wide image, and it is not used elsewhere. */}
+        <div className="mx-auto mb-16 flex max-w-5xl flex-col items-center gap-10 sm:mb-24">
+          <div style={CARD_FRAME} className="w-full overflow-hidden">
+            <Image
+              src="/brand/maeve-header.webp"
+              alt="The Maeve header illustration: Gretchen the bear on the left, the MAEVE logotype in the middle with a sea monster's tentacles rising from the waves, and a woman with long white hair cradling a duck, a beaver and a frog on the right"
+              width={2000}
+              height={446}
+              sizes="(min-width: 1024px) 1000px, 92vw"
+              priority
+              className="block h-auto w-full"
+            />
+          </div>
+          <div className="text-center">
+            <p
+              className="font-display text-xl font-black uppercase tracking-[0.08em]"
+              style={{ ...WONK, color: "var(--ejd-vermilion)" }}
+            >
+              {briefOpenerLabel}
+            </p>
+            <p
+              className="mx-auto mt-3 max-w-[46ch] text-xl leading-relaxed sm:text-2xl"
+              style={{ color: "var(--ejd-ink)", textWrap: "pretty" }}
+            >
+              {briefOpener}
+            </p>
+          </div>
+        </div>
+
         <h2
           className="text-center font-display font-black uppercase leading-[0.84] tracking-[-0.03em]"
           style={{

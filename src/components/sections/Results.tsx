@@ -91,7 +91,7 @@ export function Results() {
           className="max-w-[48ch] text-base leading-relaxed sm:text-xl"
           style={{ color: "var(--ejd-ink)" }}
         >
-          And within the first year, post-launch, the business saw:
+          And in the first year after launch, from March 2025 to a year later in 2026, the business saw:
         </p>
 
         <dl className="grid w-full max-w-4xl grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-3">
@@ -104,7 +104,7 @@ export function Results() {
                 {s.value}
               </dt>
               <dd
-                className="max-w-[18ch] text-xs leading-snug sm:text-base"
+                className="max-w-[24ch] text-xs leading-snug sm:text-base"
                 style={{ color: "var(--ejd-ink)" }}
               >
                 {s.label}
@@ -112,6 +112,13 @@ export function Results() {
             </div>
           ))}
         </dl>
+
+        <p
+          className="max-w-[48ch] text-base leading-relaxed sm:text-xl"
+          style={{ color: "var(--ejd-ink)" }}
+        >
+          {site.resultsNote}
+        </p>
       </div>
       </div>
     </section>

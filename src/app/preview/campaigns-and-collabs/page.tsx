@@ -4,6 +4,7 @@ import { ThemeSwitcher } from "@/components/shared/PalettePicker";
 import { Marquee } from "@/components/shared/Marquee";
 import { Collections, LIGHT_TONE } from "@/components/sections/Collections";
 import { Contact } from "@/components/sections/Contact";
+import { Credits } from "@/components/shared/Credits";
 import { seasons, seasonsIntro, collabs, collabsIntro } from "@/data/campaigns";
 
 // Campaigns & Collabs — merged tab (2026-11-01 restructure). Used to be two
@@ -47,6 +48,7 @@ export default function CampaignsAndCollabsPage() {
         tone={LIGHT_TONE}
       />
       <Contact />
+      <Credits />
     </>
   );
 }

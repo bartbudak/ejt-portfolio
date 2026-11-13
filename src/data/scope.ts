@@ -77,8 +77,10 @@ export interface LocalPost {
 // Captions are her list of what the local campaign consisted of, not invented
 // post copy.
 export const localPosts: LocalPost[] = [
-  // ⚠️ Every caption below is Ellie's, verbatim from her 2026-09-07 feedback.
-  // First person, no em dashes. Do not tighten or re-order them; ask her first.
+  // ⚠️ Every caption below is Ellie's, from her 2026-09-07 feedback, except
+  // Wheatpasting: that one was written for her (2026-09-05) and reworded in
+  // her voice on 2026-11-13 — flag it for her. First person, no em dashes. Do
+  // not tighten or re-order them; ask her first. (Grammar fixed 2026-11-13.)
   {
     slug: "storefront",
     label: "Flagship store",
@@ -110,7 +112,7 @@ export const localPosts: LocalPost[] = [
     slug: "wheatpaste",
     label: "Wheatpasting",
     caption:
-      "Guerrilla posters across the city, announcing the change before most people knew one was coming.",
+      "We wheatpasted posters all over the city to announce the rebrand before most people knew it was coming.",
     image: "/local/wheatpaste.webp",
     alt: "A wall of wheatpasted Maeve posters",
   },
@@ -118,7 +120,7 @@ export const localPosts: LocalPost[] = [
     slug: "press",
     label: "Local news",
     caption:
-      "I acted as the face of the brand and was interviewed by MSNBC, King 5 News, Evening Magazine, Fox 13, Bizwomen, Candy & Snack TODAY, The National Confectioners Association, Alaska Airlines in-flight media in addition to podcasts and panels.",
+      "I acted as the face of the brand and was interviewed by MSNBC, King 5 News, Evening Magazine, Fox 13, Bizwomen, Candy & Snack TODAY, The National Confectioners Association and Alaska Airlines in-flight media, in addition to podcasts and panels.",
     image: "/local/press.webp",
     alt: "A newspaper spread about Maeve Chocolate",
   },

@@ -24,7 +24,7 @@ export const resume = {
   name: "Ellie Thompson",
   role: "Brand Manager · Marketing Director · Creative Strategist",
   contact: [
-    { label: "New York, NY" },
+    { label: "Seattle, WA" },
     { label: "elliejth@gmail.com", href: "mailto:elliejth@gmail.com" },
     { label: "(425) 785-9919", href: "tel:+14257859919" },
     { label: "elliejthompson.com", href: "https://elliejthompson.com" },
@@ -37,9 +37,9 @@ export const resume = {
     "Brand leader with seven years growing consumer food brands from the inside out, and the person behind the reinvention of a 35-year-old company into Maeve Chocolate: a brand now winning national design awards and selling out in record time. Psychology grad with a serious design habit, who pairs consumer insight with a sharp eye, sells the vision internally, directs world-class creative partners, and turns concepts into award-winning, record-breaking products.",
   stats: [
     { value: "110%", label: "YoY ecommerce growth post-rebrand" },
-    { value: "18%", label: "Overall growth" },
-    { value: "36 hrs", label: "Fastest sellout in company history" },
-    { value: "4", label: "National design awards: 3 Dieline, 1 Webby" },
+    { value: "18%", label: "Company revenue growth" },
+    { value: "36 hrs", label: "Fastest sellout in company history: Virgin Dirty Shirley bar" },
+    { value: "6", label: "National design awards and placements won by the Maeve project: 5 Dieline, 1 Webby" },
     { value: "82%", label: "Instagram growth, 22K to 40K" },
     { value: "37%", label: "Email growth, 40K to 55K" },
   ],
@@ -55,7 +55,7 @@ export const resume = {
       dates: "Aug 2025 – Jun 2026",
       bullets: [
         "Led all marketing as the department's voice on the executive leadership team, managing a 6-person in-house team plus 10 agency partners across two creative agencies.",
-        "Conceived, pitched and licensed an official collaboration with Matt Dinniman's bestselling Dungeon Crawler Carl series. The Virgin Dirty Shirley bar sold out in under 36 hours, became one of the top three bars by volume in the company's 35-year history, and grew into the first playable Dungeon Crawler Carl game, covered by IGN.",
+        "Conceived, pitched and licensed an official collaboration with Matt Dinniman's bestselling Dungeon Crawler Carl series. The Virgin Dirty Shirley bar sold out in under 36 hours, became one of the top three bars by volume in the company's 35-year history, and inspired the first playable Dungeon Crawler Carl game, built by our web agency View Source from a direction our marketing team set, and covered by IGN.",
         "Built a national partner strategy on a scrappy budget: rather than pay for dream influencers, went to the stores they shop in. Events and limited-time co-branded products with bookstores, breweries, record stores, vintage stores and museums, including Butterfield Market, Books Are Magic, Su'Juk, Talea Beer Co. and Greenwich Letterpress.",
         "Brought the brand to PAX West, an entirely new audience, where booth demand ran so high the venue stationed permanent security to manage the line.",
         "Secured placement in Pop Up Grocer after years of persistent outreach, expanding the brand's reach with trend-forward retail audiences.",
@@ -67,7 +67,7 @@ export const resume = {
       bullets: [
         "Hired and directed creative agency The Young Jerks after auditioning (and parting with) several others; authored the substance of the brand guidelines and drove detailed creative feedback on every concept for four years.",
         "Partnered with web agency View Source on the Maeve website, a Webby Awards People's Voice Winner for Food & Drink.",
-        "Owned five seasonal collections a year end to end: concept, product development, packaging, photography direction and the campaign that took each to market. 50+ limited-time products over four years, plus email, paid social and search, organic social, PR, influencer and brand collaborations.",
+        "Owned the five seasonal collections end to end, from development in 2023 through each launch the year after the rebrand: concept, product development, packaging, photography direction and the campaign that took each to market. 50+ limited-time products, plus email, paid social and search, organic social, PR, influencer and brand collaborations.",
         "Creative-directed 15 photoshoots, growing from on-set assistant to owning concepts, shot lists, prop sourcing, contractor and photographer hiring, and on-set direction.",
         "Reimagined the factory tour and flagship store twice, from concept and script to videos, run of show, merchandising and key builds, all designed to transport guests into Maeve's world.",
         "Partnered with the sales team daily, creating hundreds of pieces of collateral over the years: sales decks, catalogs, in-store signage, displays, caddies, shippers, shelf tags and broker mailings.",
@@ -112,14 +112,14 @@ export const resume = {
     heading: "Recognition",
     items: [
       {
-        name: "Dieline Awards (3)",
+        name: "Dieline Awards (5)",
         detail:
-          "2nd place for Maeve's everyday bar line, plus two for seasonal collections. All three conceived and led personally.",
+          "Five placements across 2025 and 2026: 2nd for the everyday line, 2nd for the Celebrations and Holiday collections, 3rd for Spring and a Merit award for Summer. The Young Jerks designed the packaging; I wrote the briefs, managed the agency and went to the press checks.",
       },
       {
         name: "Webby Awards",
         detail:
-          "People's Voice Winner, Food & Drink, for the Maeve website, created with agency View Source.",
+          "People's Voice Winner, Food & Drink, for the Maeve website, built by agency View Source.",
       },
       {
         name: "NEXTY Awards Finalist",

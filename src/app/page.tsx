@@ -5,6 +5,7 @@ import { Marquee } from "@/components/shared/Marquee";
 import { Work } from "@/components/sections/Work";
 import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
+import { Credits } from "@/components/shared/Credits";
 
 export default function Home() {
   // Holding page until the full site is ready (toggle in src/lib/site.ts).
@@ -21,6 +22,7 @@ export default function Home() {
       <Work />
       <About />
       <Contact />
+      <Credits />
     </>
   );
 }

@@ -1,5 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Marquee } from "@/components/shared/Marquee";
+import { CARD_FRAME } from "@/components/shared/PostCard";
 
 // "MY CROWN JEWEL" — the slide Ellie asked for between "Hi There!" and "The
 // Idea": something that introduces the main thing she has worked on and hands
@@ -51,11 +53,27 @@ export function CrownJewel() {
           style={{ color: "var(--ejd-ink)" }}
         >
           The best way to showcase my skillset is to walk you through the
-          thinking behind the biggest project of my career - the Maeve rebrand. I
+          thinking behind the biggest project of my career: the Maeve rebrand. I
           pitched the concept and saw through the execution of the rebrand of
           Seattle Chocolate&rsquo;s 35-year-old namesake brand, creating over 100
           chocolate products in 3 years.
         </p>
+
+        {/* The Maeve drawing Ellie chose for this slide (2026-11-13), in place of
+            the PAX booth photo it had for a day: a woman with starry hair holding
+            Seattle, a ship and palm trees, under the MAEVE logotype. Trimmed from
+            Maeve-Ellie_F-20x16.pdf; it is Maeve's artwork, credited in the page's
+            fine print. */}
+        <div style={CARD_FRAME} className="w-[min(88vw,34rem)] overflow-hidden">
+          <Image
+            src="/brand/maeve-ellie-drawing.webp"
+            alt="A Maeve illustration: a woman with starry hair and green glasses holds a tiny Seattle skyline, a sailing ship and palm trees in her arms, beneath the MAEVE logotype"
+            width={1600}
+            height={1265}
+            sizes="(min-width: 640px) 544px, 88vw"
+            className="block h-auto w-full"
+          />
+        </div>
 
         <Link
           href="/preview/work"

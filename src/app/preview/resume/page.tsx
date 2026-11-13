@@ -3,6 +3,7 @@ import { Header } from "@/components/layout/Header";
 import { ThemeSwitcher } from "@/components/shared/PalettePicker";
 import { Marquee } from "@/components/shared/Marquee";
 import { Contact } from "@/components/sections/Contact";
+import { Credits } from "@/components/shared/Credits";
 import { ResumeDoc } from "@/components/sections/ResumeDoc";
 import { CARD_FRAME } from "@/components/shared/PostCard";
 
@@ -92,6 +93,7 @@ export default function ResumePage() {
       </section>
 
       <Contact />
+      <Credits />
     </>
   );
 }
