@@ -1,13 +1,16 @@
 // "Off the Clock" and "Beyond the Desk" — new sections added to About in the
 // 2026-11-01 restructure, between "Hi There!" and "My Crown Jewel".
 //
-// Shaped from Ellie's own restructure brief, not invented. Two Off the Clock
-// tiles are `drafted: true`: her brief gave the idea (dopamine dressing /
-// secondhand; sewing and drawing "badly, joyfully") rather than a finished
-// line, so confirm the wording with her before calling this final. Every
-// tile's photo is a placeholder until she supplies one, except Cat Parent —
-// she sent a photo of both cats together on 2026-11-01
-// (public/personal/syl-and-mordecai.jpg).
+// Shaped from Ellie's own restructure brief, not invented. The Color-on-Color
+// Dresser tile is still `drafted: true`: her brief gave the idea (dopamine
+// dressing / secondhand), not finished copy, so confirm the wording with her
+// before calling this final. "Currently Learning" has no photo yet — she
+// couldn't think of one (2026-11-13).
+//
+// Photos supplied by Ellie: cats together (2026-11-01,
+// public/personal/syl-and-mordecai.jpg), the League of Legends rank card and
+// the mural photo (2026-11-13, public/personal/ranked-gamer.jpg and
+// dresser.jpg).
 
 export interface OffTheClockTile {
   slug: string;
@@ -16,7 +19,12 @@ export interface OffTheClockTile {
   /** Her brief gave the idea, not finished copy — confirm wording with her. */
   drafted?: boolean;
   /** A real photo, once she's supplied one. Falls back to the placeholder. */
-  photo?: { src: string; alt: string };
+  photo?: {
+    src: string;
+    alt: string;
+    /** "contain" for a screenshot that shouldn't be edge-cropped. Default "cover". */
+    fit?: "cover" | "contain";
+  };
 }
 
 export const offTheClockIntro = "The person behind the pitch decks.";
@@ -37,6 +45,14 @@ export const offTheClockTiles: OffTheClockTile[] = [
     slug: "gamer",
     label: "Ranked Gamer",
     body: "Top tier in North America on League of Legends: Wild Rift. That's how I knew PAX West and Dungeon Crawler Carl would land — I'm part of that audience.",
+    photo: {
+      src: "/personal/ranked-gamer.jpg",
+      alt: "Ellie's League of Legends: Wild Rift rank card — Grandmaster III, 'MØL's #1 fan'",
+      // Her rank card is a wide UI screenshot; cropping it to the tile's
+      // portrait frame would cut off the rank and the character art on
+      // either side, so it's shown whole instead of edge-to-edge.
+      fit: "contain",
+    },
   },
   {
     slug: "reader",
@@ -48,6 +64,10 @@ export const offTheClockTiles: OffTheClockTile[] = [
     label: "Color-on-Color Dresser",
     drafted: true,
     body: "Dopamine dressing, almost entirely secondhand. I'd rather have one great piece than ten fast-fashion ones.",
+    photo: {
+      src: "/personal/dresser.jpg",
+      alt: "Ellie in an orange jacket over black, standing in front of a colorful abstract mural",
+    },
   },
   {
     slug: "learning",

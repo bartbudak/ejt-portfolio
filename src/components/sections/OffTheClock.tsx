@@ -10,9 +10,10 @@ import { offTheClockIntro, offTheClockTiles } from "@/data/personal";
 // "Hi There!" above it and the paper of "Beyond the Desk" below, so the three
 // panels step rather than collide.
 //
-// Every tile's photo is a placeholder (below) until Ellie supplies real ones;
-// two tiles are `drafted: true` in src/data/personal.ts — confirm that wording
-// with her before calling this section final.
+// Every tile's photo is a placeholder (below) until Ellie supplies one; the
+// Color-on-Color Dresser tile is still `drafted: true` in
+// src/data/personal.ts — confirm that wording with her before calling this
+// section final.
 
 const WONK = { fontVariationSettings: '"SOFT" 0, "WONK" 1' } as const;
 
@@ -73,7 +74,16 @@ export function OffTheClock() {
                     alt={tile.photo.alt}
                     width={900}
                     height={1125}
-                    className="aspect-[4/5] h-auto w-full object-cover"
+                    className={`aspect-[4/5] h-auto w-full ${
+                      tile.photo.fit === "contain"
+                        ? "object-contain"
+                        : "object-cover"
+                    }`}
+                    style={
+                      tile.photo.fit === "contain"
+                        ? { backgroundColor: "var(--mv-paper)" }
+                        : undefined
+                    }
                   />
                 ) : (
                   <PhotoPlaceholder label={tile.label} />
