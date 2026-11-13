@@ -458,7 +458,11 @@ export const collabs: Collection[] = [
       {
         label: "What I did",
         drafted: true,
-        body: "A Galentine's rom-com trivia night with a co-brewed Pineapple Coco Cacao sour, craft stations, and the collection as the prize table.",
+        // Creative-process angle (Ellie, 2026-11-13): National Launch
+        // (src/data/launch.ts) now makes the strategic case for Talea, so
+        // this row leans into what "co-brewed, not co-branded" meant in
+        // practice — the collaboration itself, not the event logistics.
+        body: "Worked with Talea's brewers to actually co-develop the Pineapple Coco Cacao sour, not license our name onto an existing batch, then built craft stations so guests could see both crafts side by side — a Galentine's rom-com trivia night, with the collection as the prize table.",
       },
       {
         label: "Result",

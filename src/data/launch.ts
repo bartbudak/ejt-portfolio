@@ -80,7 +80,11 @@ export const launchPosts: LaunchPost[] = [
   {
     partner: "Talea Beer Co.",
     still: "/launch/stills/talea.webp",
-    what: "Romance trivia night with a LTO Pineapple Cacao Sour cobranded beverage",
+    // Strategy angle (Ellie, 2026-11-13): this page argues the "go where our
+    // audience already is" thesis, so the caption makes the case for Talea
+    // rather than recapping the event — the event itself, and the co-brewing
+    // behind it, is Collabs' job now (src/data/campaigns.ts).
+    what: "A brewery with our exact audience — proof we didn't need a chocolate aisle to find them",
     handle: "@taleabeer",
     post: "https://www.instagram.com/p/DUletwej_--/",
     // A vertical video, letterboxed to 4:5 on Instagram's own black.
@@ -88,10 +92,13 @@ export const launchPosts: LaunchPost[] = [
   },
 ];
 
-/** The rest of the national list, from her deck — no post links attached yet. */
+/**
+ * The rest of the national list, from her deck — no post links attached yet.
+ * Talea and Su'Juk used to live only here before they were swapped into
+ * `launchPosts` above (see that array's own comment); removed from here
+ * 2026-11-13 so they don't appear twice on the page.
+ */
 export const launchAlsoRan = [
-  "Talea Brewery, a Valentine's party in their Williamsburg taproom with an LTO chocolate stout",
-  "Su'Juk, multiple snack and thrift events",
   "Greenwich Letterpress, chocolate next to their sticker wall",
   "Dungeon Crawler Carl x Maeve bar",
   "My Straight Friends, comedy duo sponsorship",
