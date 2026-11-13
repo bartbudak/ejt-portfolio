@@ -38,6 +38,9 @@ export interface OffTheClockTile {
      *  Default "1 / 1". Landscape ones keep the deck's cards short; the books
      *  need to stay square or their titles get too small to read. */
     aspect?: string;
+    /** A picture made of two photos side by side: draws a thin divider down the
+     *  middle, in the page's ink colour (so it follows the theme). */
+    divider?: boolean;
   };
 }
 
@@ -97,12 +100,19 @@ export const offTheClockTiles: OffTheClockTile[] = [
     // Archive) and Mordecai (after Dungeon Crawler Carl's own cat). The
     // sentence is built from her own wording (2026-11-13).
     body: "My husband and I are proud cat parents to Syl and Mordecai, named after two beloved characters from two of our favorite book series: The Stormlight Archive and Dungeon Crawler Carl.",
+    // Replaced 2026-11-13 with Ellie's two favourite photos, one per cat, set side
+    // by side in a single picture (public/personal/cats.webp, 1200x1050): Sylphrena
+    // on the left getting a boop, Mordecai on the right, so they face each other.
+    // The divider is drawn over the join (`divider`), not baked in, so it takes the
+    // theme's ink colour and there is no dark flash while the image loads. The old
+    // shared photo, syl-and-mordecai.jpg, is unused.
     photo: {
-      src: "/personal/syl-and-mordecai.jpg",
-      alt: "Mordecai, a long-haired black cat, sitting upright on a kitchen island behind Sylphrena, a white and grey Ragdoll cat, lounging on the dining table",
-      // The card crops this 3:4 photo to a landscape frame; keep both cats in it.
-      position: "center 38%",
-      aspect: "4 / 3",
+      src: "/personal/cats.webp",
+      alt: "Two photos side by side. On the left, Sylphrena, a white and grey long-haired cat, closes her eyes as a finger boops her nose. On the right, Mordecai, a long-haired black and grey cat with yellow eyes, sits upright on the dining table.",
+      fit: "cover",
+      position: "center",
+      aspect: "8 / 7",
+      divider: true,
     },
   },
 ];
