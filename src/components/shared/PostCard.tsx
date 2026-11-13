@@ -110,7 +110,14 @@ export function PostCard({
 // card's shape, rather than an empty one that reads as broken. National Launch
 // has used it since the partner list arrived ahead of the links; the seasonal
 // bands used it for every post until Ellie's links landed (2026-09-13).
-export function PostPlaceholder({ label }: { label: string }) {
+export function PostPlaceholder({
+  label,
+  note = "Awaiting post link",
+}: {
+  label: string;
+  /** The small line under the label. */
+  note?: string;
+}) {
   return (
     <div
       className="flex flex-col justify-between gap-[1.5em] p-[1.25em]"
@@ -123,7 +130,7 @@ export function PostPlaceholder({ label }: { label: string }) {
         {label}
       </span>
       <span className="font-mono text-[0.75em] uppercase tracking-[0.14em] opacity-50">
-        Awaiting post link
+        {note}
       </span>
     </div>
   );

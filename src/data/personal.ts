@@ -24,6 +24,9 @@ export interface OffTheClockTile {
     alt: string;
     /** "contain" for a screenshot that shouldn't be edge-cropped. Default "cover". */
     fit?: "cover" | "contain";
+    /** CSS object-position for a "cover" crop, e.g. "left center". Default is
+     *  the middle of the image. */
+    position?: string;
   };
 }
 
@@ -48,10 +51,14 @@ export const offTheClockTiles: OffTheClockTile[] = [
     photo: {
       src: "/personal/ranked-gamer.jpg",
       alt: "Ellie's League of Legends: Wild Rift rank card — Grandmaster III, 'MØL's #1 fan'",
-      // Her rank card is a wide UI screenshot; cropping it to the tile's
-      // portrait frame would cut off the rank and the character art on
-      // either side, so it's shown whole instead of edge-to-edge.
-      fit: "contain",
+      // Her rank card is a wide (1392x808) UI screenshot and the tile is a
+      // 4:5 portrait. It used to be shown whole ("contain"), which left it
+      // small inside the frame; Ellie asked for it cropped to fill (2026-11-13).
+      // A 4:5 window is ~646px of its 1392, so we keep the LEFT edge: the
+      // avatar, "MØL's #1 fan", "Grandmaster III" and the champion badges —
+      // the rank is the point. The character art on the right is what's lost.
+      fit: "cover",
+      position: "left center",
     },
   },
   {

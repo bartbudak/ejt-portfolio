@@ -78,12 +78,16 @@ type Props = {
 // the accessibility tree. Bands with no artwork of their own fall back to their
 // single motif in the top-right corner.
 function Frame({ collection }: { collection: Collection }) {
-  const pieces = collection.frame ?? [
-    {
-      src: collection.motif,
-      className: "-right-8 -top-8 h-40 rotate-12 sm:h-64 w-auto",
-    },
-  ];
+  const pieces =
+    collection.frame ??
+    (collection.motif
+      ? [
+          {
+            src: collection.motif,
+            className: "-right-8 -top-8 h-40 rotate-12 sm:h-64 w-auto",
+          },
+        ]
+      : []);
 
   return (
     <>
@@ -162,7 +166,7 @@ export function Collections({ title, intro, items, tone, id = "campaigns" }: Pro
   // post's embed page by scripts/post-stills.mjs and keyed by its shortcode
   // (a Reddit thread by its id).
   const stillFor = (post: CollectionPost) => {
-    const code = post.post?.match(
+    const code = (post.post ?? post.link)?.match(
       /instagram\.com\/(?:p|reel|reels|tv)\/([A-Za-z0-9_-]+)/,
     )?.[1];
     if (code) return `/posts/${code}.webp`;
@@ -172,7 +176,7 @@ export function Collections({ title, intro, items, tone, id = "campaigns" }: Pro
 
   const cards = (current.posts ?? []).map((post) => (
     <MobileCollapse
-      key={post.post ?? post.reddit ?? post.placeholder}
+      key={post.post ?? post.link ?? post.reddit ?? post.placeholder}
       // A collaboration post credits two accounts, which is too long a title
       // for a phone row in display caps: the first account is the title and
       // the partner goes in the line below it.
@@ -208,7 +212,7 @@ export function Collections({ title, intro, items, tone, id = "campaigns" }: Pro
       <PostCard
         handle={post.handle}
         caption={post.caption}
-        href={post.post || post.reddit || undefined}
+        href={post.post || post.link || post.reddit || undefined}
         linkLabel={post.reddit ? "View on Reddit" : undefined}
         media={
           post.post ? (
@@ -228,7 +232,10 @@ export function Collections({ title, intro, items, tone, id = "campaigns" }: Pro
               className="block h-auto w-full"
             />
           ) : (
-            <PostPlaceholder label={post.placeholder ?? current.label} />
+            <PostPlaceholder
+              label={post.placeholder ?? current.label}
+              note={post.note}
+            />
           )
         }
       />
@@ -364,8 +371,12 @@ export function Collections({ title, intro, items, tone, id = "campaigns" }: Pro
               and "centred in the brief" are very different places, and the deck
               means the second. */}
               <div
-                className={`relative ${PANEL_PADDING[current.layout.reserve ?? "none"]} ${
-                  current.showcase
+                // `flow-root` contains the photo's float, so it can never hang
+                // down into the posts. With posts below, the brief gives up its
+                // own bottom padding — the post row supplies the gap — so the
+                // two read as one band rather than two slides.
+                className={`relative flow-root ${PANEL_PADDING[current.layout.reserve ?? "none"]} ${
+                  current.showcase || cards.length > 0
                     ? "pb-0"
                     : PANEL_BOTTOM[current.layout.reserve ?? "none"]
                 }`}
@@ -459,6 +470,31 @@ export function Collections({ title, intro, items, tone, id = "campaigns" }: Pro
                   />
                 ))}
 
+                {/* A real photograph of the collaboration, framed the way the
+                    panel is (hairline, ring in the band's own colour, hairline).
+                    Floats right beside the copy on wide screens and stacks above
+                    it on narrow ones. */}
+                {current.photo && (
+                  <figure
+                    className="relative mx-auto mt-10 w-full max-w-xs lg:float-right lg:ml-10 lg:mr-2 lg:mt-10 lg:w-[30%] lg:max-w-none"
+                    style={{
+                      border: "var(--mv-stroke) solid var(--ejd-ink)",
+                      boxShadow: `0 0 0 8px ${current.display}, 0 0 0 calc(8px + var(--mv-stroke)) var(--ejd-ink)`,
+                      borderRadius: 16,
+                      overflow: "hidden",
+                    }}
+                  >
+                    <Image
+                      src={current.photo.src}
+                      alt={current.photo.alt}
+                      width={current.photo.width}
+                      height={current.photo.height}
+                      sizes="(min-width: 1024px) 300px, 320px"
+                      className="block h-auto w-full"
+                    />
+                  </figure>
+                )}
+
                 <dl
                   // Flush with the heading, not indented from it. A band whose artwork
                   // floats needs no column limit — the shape does that job, and a
@@ -530,7 +566,7 @@ export function Collections({ title, intro, items, tone, id = "campaigns" }: Pro
           )}
 
           {!current.art && cards.length > 0 && (
-            <PostGrid cards={cards} ground={current.ground} />
+            <PostGrid cards={cards} ground={current.ground} centered />
           )}
         </div>
       </div>

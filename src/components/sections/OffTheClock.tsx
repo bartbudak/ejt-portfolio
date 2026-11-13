@@ -82,7 +82,9 @@ export function OffTheClock() {
                     style={
                       tile.photo.fit === "contain"
                         ? { backgroundColor: "var(--mv-paper)" }
-                        : undefined
+                        : tile.photo.position
+                          ? { objectPosition: tile.photo.position }
+                          : undefined
                     }
                   />
                 ) : (

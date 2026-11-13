@@ -119,6 +119,15 @@ export interface CollectionPost {
    * uses, with this label in the frame. Set on the stand-in entries below.
    */
   placeholder?: string;
+  /** Small line under a placeholder's label. Defaults to "Awaiting post link". */
+  note?: string;
+  /**
+   * A post that Instagram will not EMBED (the account has embedding off, or the
+   * post is age-restricted) but that is live and linkable: the card shows
+   * `image` and links out to this URL instead. Use `post` for anything that
+   * does embed.
+   */
+  link?: string;
 }
 
 // Her deck shows each band ending in a row of Instagram posts — three under
@@ -161,8 +170,14 @@ export interface Collection {
   display: string;
   /** Body copy over that ground. */
   body: string;
-  motif: string;
-  motifAlt: string;
+  /** Corner illustration. Optional: the three non-DCC collaborations used to
+   *  borrow seasonal motifs (Valentine's heart, Summer star, Holiday bird),
+   *  which made them read as more seasons. They have none now (2026-11-13). */
+  motif?: string;
+  motifAlt?: string;
+  /** A real photograph of the collaboration, shown framed beside the copy on
+   *  bands that have no `art`. Dimensions are the file's real ones. */
+  photo?: { src: string; alt: string; width: number; height: number };
   layout: BandLayout;
   /** Her own band artwork. Falls back to `motif` when a band has none. */
   frame?: FramePiece[];
@@ -375,6 +390,10 @@ export const collabsIntro =
 // The other three collabs are still written from the asset folders and stay
 // marked `drafted` until she supplies her own.
 
+// The three non-DCC collabs used to carry a big display line under the copy
+// ("Pineapple Coco Cacao", "Gretchen, Collectible", "800K Views"). It read as a
+// second title and split each band into two slides, so it is gone (Ellie,
+// 2026-11-13); DCC never had one. The seasons' own logotypes live in their art.
 export const collabs: Collection[] = [
   {
     slug: "dcc",
@@ -442,13 +461,16 @@ export const collabs: Collection[] = [
     slug: "talea",
     label: "Talea",
     briefTitle: "Talea × Maeve",
-    wordmark: "Pineapple Coco Cacao",
-    ground: "var(--ejd-blush)",
-    display: "var(--ejd-violet)",
-    body: "var(--ejd-ink)",
-    motif: "/motifs/valentines-heart.png",
-    motifAlt: "A purple candy heart",
-    layout: { align: "left", nutshell: "inline", motifs: "right" },
+    // Collab palettes are fixed hexes, like DCC's, and deliberately NOT the
+    // seasonal grounds: Talea used to sit on Valentine's blush with its heart,
+    // PAX on Spring's sage with Summer's star, MSF on Summer's ice with
+    // Holiday's bird — so they read as three more seasons (Ellie, 2026-11-13).
+    // These are placeholders until she supplies each collab's own art; every
+    // pair clears WCAG AA (display 5.6–10.5:1, body 8.3–14.6:1).
+    ground: "#0f5257",
+    display: "#ffd84d",
+    body: "#fff6e0",
+    layout: { align: "left", nutshell: "none", motifs: "right" },
     // The real post, already linked on National Launch (src/data/launch.ts)
     // — added here too (2026-11-13) so this panel isn't empty-handed while
     // PAX West and My Straight Friends still are.
@@ -485,23 +507,35 @@ export const collabs: Collection[] = [
     slug: "pax-west",
     label: "PAX West",
     briefTitle: "PAX West",
-    wordmark: "Gretchen, Collectible",
-    ground: "var(--ejd-sage)",
-    // Was --mv-paper, which measured 1.54:1 on sage — invisible. --ejd-deep is
-    // the same fix the seasonal bands got.
-    display: "var(--ejd-deep)",
-    body: "var(--ejd-ink)",
-    motif: "/motifs/summer-star.png",
-    motifAlt: "An illustrated star",
-    layout: { align: "left", nutshell: "inline", motifs: "scatter" },
+    ground: "#2b1b5a",
+    // Own palette, not Spring's sage — see the note on Talea above.
+    display: "#62f0c1",
+    body: "#f3efff",
+    layout: { align: "left", nutshell: "none", motifs: "scatter" },
     // Her own verbatim brief (2026-11-13), replacing the earlier guessed
     // rows. Matches DCC's What/Why/My Role/The Results shape rather than the
     // shorter Theme/What I did/Result some of the other collabs still use.
-    // No posts yet — she has real Instagram engagement numbers for this one
-    // but not the post links themselves; ask before adding placeholder cards
-    // (see the standing rule above `collabs`, "it does not hold empty
-    // frames"). The booth card graphic and the "SPECIAL EDITION" ticket
-    // graphic from her brief aren't in the repo as clean assets yet either.
+    // Photo + posts added 2026-11-13 from Ellie's own links and screenshot.
+    // The photo is the collectible card itself, cropped out of a phone
+    // screenshot of the agency's page (page chrome removed; 705x1006, a thin
+    // margin of the card's own black border kept so no background bleeds in).
+    // All four posts embed and measure 1024x1280 = 4:5 in a real browser. The
+    // "SPECIAL EDITION" ticket graphic and booth photos from her brief still
+    // aren't in the repo.
+    photo: {
+      src: "/collabs/pax-gretchen-card.webp",
+      alt: "The collectible “Legend of Gretchen” card: Gretchen the bear carrying a basket of blackberries, framed by birds, mushrooms and vines, with a short story along the bottom",
+      width: 705,
+      height: 1006,
+    },
+    posts: [
+      // A carousel; the embed shows its first slide.
+      ig("DOHF7KRk9J1"),
+      // Posted jointly with PAX's own account.
+      ig("DN8r1ZkjxHk", "@officialpax_ & @maevechocolate"),
+      ig("DN3ms9hQv1y"),
+      ig("DN6Mw6okn2K"),
+    ],
     rows: [
       {
         label: "What",
@@ -527,16 +561,60 @@ export const collabs: Collection[] = [
     slug: "my-straight-friends",
     label: "My Straight Friends",
     briefTitle: "My Straight Friends",
-    wordmark: "800K Views",
-    ground: "var(--ejd-ice)",
-    display: "var(--ejd-deep)",
-    body: "var(--ejd-ink)",
-    motif: "/motifs/holiday-bird.png",
-    motifAlt: "An illustrated bird",
-    layout: { align: "left", nutshell: "inline", motifs: "right" },
+    // Own palette, not Summer's ice — see the note on Talea above. Warm cream
+    // with the magenta from the step-and-repeat backdrop, so the photo sits in
+    // a band that already matches it.
+    ground: "#ffe9c7",
+    display: "#b3125f",
+    body: "#2a1320",
+    // Already on the site (About › Scope). Alt text describes the scene only:
+    // which of the four people are Joe and Ricci is not something we know.
+    photo: {
+      src: "/local/collaborations.webp",
+      alt: "Four people mugging for the camera in front of a My Straight Friends × Maeve Chocolate step-and-repeat backdrop",
+      width: 900,
+      height: 1125,
+    },
+    layout: { align: "left", nutshell: "none", motifs: "right" },
     // Her own verbatim brief (2026-11-13), replacing the earlier guessed
     // rows — same note as PAX West above: real engagement numbers, but no
     // post links or the Joe/Ricci photo as a clean asset yet.
+    //
+    // Posts added 2026-11-13 from the five links Ellie sent, in her order.
+    // Two EMBED (@maevechocolate DPM-vVNkgri, @joe_dombrowski DPZBnEEEZ8w, both
+    // measured 1024x1280 = 4:5). The other three are all @my_straight_friends
+    // posts, which Instagram's embed refuses ("the link may be broken, or the
+    // post may have been removed") even though the posts are live and public —
+    // one is age-restricted. So they are link-out cards: the post's own cover
+    // image, centre-cropped to 4:5 (public/collabs/msf-*.webp), linking to the
+    // post. The age-restricted one (DPhhxMXksz3) shows nothing logged-out, so it
+    // gets the labelled placeholder with a link.
+    posts: [
+      ig("DPM-vVNkgri"),
+      {
+        handle: "@my_straight_friends & @maevechocolate",
+        link: "https://www.instagram.com/p/DPub-ubkmPS/",
+        image: {
+          src: "/collabs/msf-DPub-ubkmPS.webp",
+          alt: "Cover of a video: a comedian in a cap holding a microphone on a stage, captioned “who is this?”, with a Maeve Chocolate logo behind them",
+        },
+      },
+      {
+        handle: "@my_straight_friends",
+        link: "https://www.instagram.com/p/DPhhxMXksz3/",
+        placeholder: "Age-restricted post",
+        note: "Opens on Instagram",
+      },
+      {
+        handle: "@my_straight_friends & @maevechocolate",
+        link: "https://www.instagram.com/p/DPCAbM6CVUr/",
+        image: {
+          src: "/collabs/msf-DPCAbM6CVUr.webp",
+          alt: "Cover of a video: three comedians laughing into microphones on a stage below a slide that reads “Clay Aiken”",
+        },
+      },
+      ig("DPZBnEEEZ8w", "@joe_dombrowski"),
+    ],
     rows: [
       {
         label: "What",

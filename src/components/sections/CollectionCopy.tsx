@@ -104,10 +104,15 @@ export function PostGrid({
   ground,
   perches,
   phoneOnlyBefore = 0,
+  centered = false,
 }: {
   cards: ReactNode[];
   ground: string;
   perches?: Perch[];
+  /** The collaboration bands: a short row sits in the middle rather than
+   *  leaving an empty column, and the gap above is tighter so the posts read as
+   *  the end of the brief, not a second slide. */
+  centered?: boolean;
   /** The first N cards show only on a phone — wider, the band seats them in
    *  its own composition instead. */
   phoneOnlyBefore?: number;
@@ -116,13 +121,20 @@ export function PostGrid({
     <ul
       // Tight side padding on a phone: inside a band the rows are already
       // narrow, and a handle in display caps needs every pixel of the column.
-      className="grid grid-cols-1 gap-5 px-3 pb-12 pt-12 sm:grid-cols-3 sm:gap-6 sm:px-14 sm:pb-16"
+      className={
+        centered
+          ? "flex flex-col gap-5 px-3 pb-12 pt-8 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6 sm:px-14 sm:pb-16 sm:pt-10"
+          : "grid grid-cols-1 gap-5 px-3 pb-12 pt-12 sm:grid-cols-3 sm:gap-6 sm:px-14 sm:pb-16"
+      }
       style={{ backgroundColor: ground }}
     >
       {cards.map((card, i) => (
         <li
           key={i}
-          className={`relative ${i < phoneOnlyBefore ? "sm:hidden" : ""}`}
+          // Three to a row: (100% - two 1.5rem gaps) / 3.
+          className={`relative ${i < phoneOnlyBefore ? "sm:hidden" : ""} ${
+            centered ? "sm:w-[calc((100%-3rem)/3)]" : ""
+          }`}
         >
           {card}
           {perches
