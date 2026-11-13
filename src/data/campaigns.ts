@@ -449,6 +449,16 @@ export const collabs: Collection[] = [
     motif: "/motifs/valentines-heart.png",
     motifAlt: "A purple candy heart",
     layout: { align: "left", nutshell: "inline", motifs: "right" },
+    // The real post, already linked on National Launch (src/data/launch.ts)
+    // — added here too (2026-11-13) so this panel isn't empty-handed while
+    // PAX West and My Straight Friends still are.
+    posts: [
+      {
+        handle: "@taleabeer",
+        post: "https://www.instagram.com/p/DUletwej_--/",
+        aspect: "839 / 1049",
+      },
+    ],
     rows: [
       {
         label: "Theme",
@@ -484,21 +494,32 @@ export const collabs: Collection[] = [
     motif: "/motifs/summer-star.png",
     motifAlt: "An illustrated star",
     layout: { align: "left", nutshell: "inline", motifs: "scatter" },
+    // Her own verbatim brief (2026-11-13), replacing the earlier guessed
+    // rows. Matches DCC's What/Why/My Role/The Results shape rather than the
+    // shorter Theme/What I did/Result some of the other collabs still use.
+    // No posts yet — she has real Instagram engagement numbers for this one
+    // but not the post links themselves; ask before adding placeholder cards
+    // (see the standing rule above `collabs`, "it does not hold empty
+    // frames"). The booth card graphic and the "SPECIAL EDITION" ticket
+    // graphic from her brief aren't in the repo as clean assets yet either.
     rows: [
       {
-        label: "Theme",
-        drafted: true,
-        body: "An audience we'd never touched before, at a show where nobody was expecting chocolate.",
+        label: "What",
+        body: "PAX West is a gaming festival held annually in Seattle that celebrates video games, table top games, and gaming culture. Maeve attended with a booth, giving away prizes, collecting email addresses and engaging with gaming consumers face to face. We created a collectible card reminiscent of a Pokemon or Magic The Gathering card just for the festival.",
       },
       {
-        label: "What I did",
-        drafted: true,
-        body: "Gave away a limited-edition Gretchen the Blackberry Bear collectible card, trading-card style with its own flavor text, so the booth had something to collect rather than something to sample.",
+        label: "Why",
+        body: "Our strategy of 'fun and depth are not mutually exclusive' takes a bit of perspective and nuance to fully understand. When we realized this, we decided to lean into the nerdy side of our target audience — the people who obsess over their favorite world, take the time to learn the lore behind their favorite characters, and fully understand why every interaction plays out the way it does. This, and the magical world we were building, is why I pitched attending PAX West. I also noticed an emerging trend of games creating collectible cards and thought we could create something special with our IP that would feel right at home in this space.",
       },
       {
-        label: "Result",
-        drafted: true,
-        body: "Booth demand ran high enough that the venue stationed permanent security to manage the line. The card disappeared fast.",
+        label: "My Role",
+        body: "I pitched attending, secured the booth placement, planned the activations, prizes and booth planogram as well as working the booth all weekend (including set up and take down!) I led a design agency in creating the collectible card, making sure it truly felt special and similar to other cards available at the show, but with a Maeve twist.",
+      },
+      {
+        label: "The Results",
+        // "recieved" in her original was a slip, not a voice choice; fixed
+        // here rather than preserved (flag anything you'd rather I'd left).
+        body: "The Maeve booth was so crowded, we were given extra security to manage the line, which went down the entire hall and around the corner on the first day of the show. We collected nearly 1,000 email addresses in exchange for a prize — chocolate, merch, factory tour tickets or a collectible card. The card was warmly received and we saw many UGC posts of folks placing it in their collection.",
       },
     ],
   },
@@ -513,18 +534,26 @@ export const collabs: Collection[] = [
     motif: "/motifs/holiday-bird.png",
     motifAlt: "An illustrated bird",
     layout: { align: "left", nutshell: "inline", motifs: "right" },
+    // Her own verbatim brief (2026-11-13), replacing the earlier guessed
+    // rows — same note as PAX West above: real engagement numbers, but no
+    // post links or the Joe/Ricci photo as a clean asset yet.
     rows: [
       {
-        label: "Theme",
-        drafted: true,
-        body: "Comedy duos have what brands keep trying to buy: an audience that trusts the joke. So we sponsored the joke instead of interrupting it.",
+        label: "What",
+        body: "Joe Dombrowski (1.5 million followers) and Ricci Armani (42.8k followers) make up the comedy duo called My Straight Friends (101k followers). In exchange for Maeve sponsoring the duo's shows for 3 months, MSF created humorous advertisements for us and gave a brand pitch during intermissions. We also built a Step & Repeat for photo opps and made sure to provide bars or a big bowl of bonbons for every show.",
       },
       {
-        label: "What I did",
-        drafted: true,
-        body: "Sponsored their shows over several months and produced branded video content with them rather than around them.",
+        label: "Why",
+        body: 'Comedians live in a unique space within culture, allowing them to say things others would deem inappropriate. This candor lends them a sense of integrity and the general perspective that they are "more honest" than the average person. Even though the sponsorship was always mentioned, the way they would discuss the brand, almost as if they were on FaceTime with one of their friends, made it feel like an authentic recommendation and like a natural fit for viewers\' aspirational lifestyles.',
       },
-      { label: "Result", drafted: true, body: "One video hit 800K views." },
+      {
+        label: "My Role",
+        body: "I met Ricci while I was out and about and we hit it off instantly. We set up a call to talk about a sponsorship and workshopped the right package until we both felt like we were winning. I managed the relationships with the talent and sent them brand kits and high-level scripts for the advertisements.",
+      },
+      {
+        label: "The Results",
+        body: "Ricci's ad got over 65k views and Joe's got over 800k, both with high conversion and click rates, with Joe's being one of the highest performing ads of all time. We saw lots of UGC from attendees of the shows and gained a few hundred followers, including some influencers who love My Straight Friends.",
+      },
     ],
   },
 ];
