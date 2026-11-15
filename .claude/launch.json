@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "ejt-portfolio-dev",
-      "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["exec", "next", "dev", "--port", "3100"],
+      "runtimeExecutable": "./node_modules/.bin/next",
+      "runtimeArgs": ["dev", "--port", "3100"],
       "port": 3100
     }
   ]
