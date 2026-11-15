@@ -4,21 +4,18 @@ import { site } from "@/lib/site";
 //
 // Added 2026-11-13 after a first-read review of the site as a hiring manager
 // would see it: the About page opened with the person and the hobbies and did
-// not say, until the Work page or the résumé PDF, what level she worked at or
-// what she achieved. This band says both in one glance, in her résumé's own
-// words and the same figures as The Results.
+// not say, until the Work page or the résumé PDF, what level she worked at.
 //
 // It is its own section rather than more copy in "Hi There!" on purpose: that
 // section's astronaut photo is sized by the section's height, so extra text
 // there makes the photo grow over the copy.
-
-const WONK = { fontVariationSettings: '"SOFT" 0, "WONK" 1' } as const;
+//
+// The three-number scoreboard (110% / 36 hrs / 6) that used to sit beside the
+// scope copy was cut 2026-11-15, Ellie's own call: it repeated The Results on
+// the Work page verbatim rather than saying anything new about the role, and
+// she wanted this band to earn its place rather than pad it with a rerun.
 
 export function AtAGlance() {
-  const stats = site.stats.filter((s) =>
-    (site.proof as readonly string[]).includes(s.value),
-  );
-
   return (
     <section
       aria-label="At a glance"
@@ -27,7 +24,7 @@ export function AtAGlance() {
       // vermilion into the marigold, the padding keeps the copy below the fade
       // (so the vermilion numbers never sit on pink), and the band is still its
       // own yellow section from there down.
-      className="w-full px-5 pb-12 pt-24 sm:px-10 sm:pb-16 sm:pt-32"
+      className="w-full px-5 pb-10 pt-24 sm:px-10 sm:pb-12 sm:pt-32"
       style={{
         // The plain marigold is the fallback for a browser without `color-mix`.
         backgroundColor: "var(--ejd-marigold)",
@@ -39,36 +36,13 @@ export function AtAGlance() {
           "linear-gradient(to bottom, var(--ejd-vermilion) 0, color-mix(in srgb, var(--ejd-marigold) 25%, white) 8rem)",
       }}
     >
-      <div className="mx-auto grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+      <div className="mx-auto w-full max-w-3xl">
         <p
-          className="max-w-[46ch] text-base leading-relaxed sm:text-xl"
+          className="text-center text-lg leading-relaxed sm:text-2xl"
           style={{ color: "var(--ejd-ink)", textWrap: "pretty" }}
         >
           {site.scope}
         </p>
-
-        <dl className="grid grid-cols-3 gap-4 sm:gap-8">
-          {stats.map((s) => (
-            <div key={s.value} className="flex flex-col gap-1">
-              <dt
-                className="whitespace-nowrap font-display font-black leading-none tracking-[-0.02em] tabular-nums"
-                style={{
-                  ...WONK,
-                  color: "var(--ejd-vermilion)",
-                  fontSize: "clamp(1.75rem,3.6vw,3.25rem)",
-                }}
-              >
-                {s.value}
-              </dt>
-              <dd
-                className="text-xs leading-snug sm:text-base"
-                style={{ color: "var(--ejd-ink)" }}
-              >
-                {s.label}
-              </dd>
-            </div>
-          ))}
-        </dl>
       </div>
     </section>
   );

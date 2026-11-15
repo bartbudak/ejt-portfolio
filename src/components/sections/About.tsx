@@ -108,6 +108,17 @@ export function About() {
             height={1588}
             sizes="(min-width: 768px) 40vw, 90vw"
             className="absolute inset-y-0 right-0 h-full w-auto max-w-none object-contain object-bottom"
+            // Her photo's own backdrop met the section's flat vermilion in a hard
+            // rectangle at the bottom edge (Ellie, 2026-11-15). Rather than blur
+            // the photo itself, the bottom ~15% fades to transparent so the
+            // section's own vermilion shows through underneath it — the same
+            // "fade into the field" the ombre bands above use, just vertical.
+            style={{
+              WebkitMaskImage:
+                "linear-gradient(to bottom, black 0%, black 82%, transparent 100%)",
+              maskImage:
+                "linear-gradient(to bottom, black 0%, black 82%, transparent 100%)",
+            }}
           />
         </div>
       </div>

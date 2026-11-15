@@ -45,19 +45,13 @@ export const site = {
     { value: "37%", label: "Increase in email subscribers. 40k to 55k." },
   ],
   // What the Director role covered, in the first person. Shown in the "at a
-  // glance" band under "Hi There!". Corrected 2026-11-13 at Ellie's request: it
-  // used to say she managed "a 6-person in-house team plus 10 agency partners",
-  // which overstated it. She directly managed 2 people on a 6-person team, and
-  // gave the two agencies (Young Jerks, View Source) briefs and feedback rather
-  // than managing 10 individuals. She also helped manage a PR firm (La Rue PR for
-  // a few months after the Maeve launch, and one before it); that firm's own
-  // headcount (~7) is deliberately not claimed.
+  // glance" band under "Hi There!". Tightened again 2026-11-15, her own
+  // wording: drops the team-size/agency-name specifics (still true, just not
+  // needed here — "all external agencies" covers Young Jerks, View Source and
+  // the PR firm in one phrase) in favor of the two things that actually
+  // distinguish the role: a seat on the executive team, and direct reports.
   scope:
-    "As Marketing Director, I led all marketing as the department's voice on the executive leadership team. I led a 6-person team (2 direct reports) and directed our two creative agencies, The Young Jerks and View Source, through briefs and feedback. I also helped manage our PR firm.",
-  // The three numbers shown under "Hi There!" so results come before the
-  // personal sections (a reviewer's first-read feedback, 2026-11-13). They are
-  // looked up in `stats` by value, so the wording stays in one place.
-  proof: ["110%", "36 hrs", "6"],
+    "As Marketing Director, I acted as the department's voice on the executive team and managed two direct reports and all external agencies.",
   // Under the Results grid. From her résumé's Maeve Rebrand entry: "carried the
   // brand into national retail for the first time (including Sprouts, with
   // natural grocery ACV up 3 points)". ACV is spelled out for non-CPG readers.
