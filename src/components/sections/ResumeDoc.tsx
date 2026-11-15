@@ -135,7 +135,6 @@ export function ResumeDoc({ print = false }: { print?: boolean }) {
         .rz-chips li { font-size: 0.6em; font-weight: 600; padding: 0.3em 0.7em; border: 0.1em solid ${INK}; border-radius: 2em; background: ${MARIGOLD}; }
         .rz-press { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 0.25em 0; font-size: 0.7em; font-weight: 600; }
         .rz-press li + li::before { content: "·"; margin: 0 0.6em; color: ${VERMILION}; font-weight: 400; }
-        .rz-press-note { margin: 0.45em 0 0; font-size: 0.68em; font-style: italic; }
         .rz-edu { margin: 0; font-size: 0.74em; }
         .rz-edu b { display: block; }
         .rz-quote { margin: 1.3em 0 0; padding: 0.9em 1em 0.85em 1.05em; border-left: 0.35em solid ${MARIGOLD}; font-size: 0.74em; line-height: 1.45; }
@@ -267,7 +266,6 @@ export function ResumeDoc({ print = false }: { print?: boolean }) {
               <li key={o}>{o}</li>
             ))}
           </ul>
-          <p className="rz-press-note">{resume.press.note}</p>
         </Section>
 
         <Section title={resume.education.heading}>

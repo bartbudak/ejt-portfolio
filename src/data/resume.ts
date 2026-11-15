@@ -34,7 +34,7 @@ export const resume = {
     },
   ],
   summary:
-    "Brand leader with seven years growing consumer food brands from the inside out, and the person behind the reinvention of a 35-year-old company into Maeve Chocolate: a brand now winning national design awards and selling out in record time. Psychology grad with a serious design habit, who pairs consumer insight with a sharp eye, sells the vision internally, directs world-class creative partners, and turns concepts into award-winning, record-breaking products.",
+    "Brand leader with seven years growing consumer food brands from the inside out, and the person behind the reinvention of a 35-year-old company into Maeve Chocolate: a brand now winning national design awards and selling out in record time. Pairs consumer insight with creative direction — sells the vision internally, directs world-class creative partners, and turns concepts into award-winning, record-breaking products.",
   stats: [
     { value: "110%", label: "YoY ecommerce growth post-rebrand" },
     { value: "18%", label: "Company revenue growth" },
@@ -55,7 +55,7 @@ export const resume = {
       dates: "Aug 2025 – Jun 2026",
       bullets: [
         "Led all marketing as the department's voice on the executive leadership team. Led a 6-person in-house team (2 direct reports), directed two creative agencies through briefs and feedback, and helped manage a PR firm.",
-        "Conceived, pitched and licensed an official collaboration with Matt Dinniman's bestselling Dungeon Crawler Carl series. The Virgin Dirty Shirley bar sold out in under 36 hours, became one of the top three bars by volume in the company's 35-year history, and inspired the first playable Dungeon Crawler Carl game, built by our web agency View Source from a direction our marketing team set, and covered by IGN.",
+        "Conceived, pitched and licensed an official collaboration with Matt Dinniman's bestselling Dungeon Crawler Carl series. The Virgin Dirty Shirley bar sold out in under 36 hours and became one of the top three bars by volume in the company's 35-year history; the tie-in grew into the first playable Dungeon Crawler Carl game (built by web agency View Source, directed by our marketing team), covered by IGN.",
         "Built a national partner strategy on a scrappy budget: rather than pay for dream influencers, went to the stores they shop in. Events and limited-time co-branded products with bookstores, breweries, record stores, vintage stores and museums, including Butterfield Market, Books Are Magic, Su'Juk, Talea Beer Co. and Greenwich Letterpress.",
         "Brought the brand to PAX West, an entirely new audience, where booth demand ran so high the venue stationed permanent security to manage the line.",
         "Secured placement in Pop Up Grocer after years of persistent outreach, expanding the brand's reach with trend-forward retail audiences.",
@@ -69,9 +69,7 @@ export const resume = {
         "Partnered with web agency View Source on the Maeve website, a Webby Awards People's Voice Winner for Food & Drink.",
         "Owned the five seasonal collections end to end, from development in 2023 through each launch the year after the rebrand: concept, product development, packaging, photography direction and the campaign that took each to market. 50+ limited-time products, plus email, paid social and search, organic social, PR, influencer and brand collaborations.",
         "Creative-directed 15 photoshoots, growing from on-set assistant to owning concepts, shot lists, prop sourcing, contractor and photographer hiring, and on-set direction.",
-        "Reimagined the factory tour and flagship store twice, from concept and script to videos, run of show, merchandising and key builds, all designed to transport guests into Maeve's world.",
-        "Partnered with the sales team daily, creating hundreds of pieces of collateral over the years: sales decks, catalogs, in-store signage, displays, caddies, shippers, shelf tags and broker mailings.",
-        "Represented the brands at major trade shows including the Fancy Food Shows, Natural Products Expo West, Sweets & Snacks Expo, the NW Chocolate Festival and Fine Chocolate Industry Association events.",
+        "Reimagined the factory tour and flagship store twice end to end, represented the brands at major trade shows (Expo West, Sweets & Snacks, the NW Chocolate Festival), and partnered with sales daily on collateral across the portfolio.",
         "Grew Instagram from 22K to 40K followers and built the email program that took subscribers from 40K to 55K.",
         "Co-managed sister brand jcoco (craft, culinary-inspired): shaped its 2020 brand refresh, concepted new flavors, and helped create its brand and style guide.",
       ],
@@ -104,8 +102,9 @@ export const resume = {
     heading: "Beyond the Desk",
     items: [
       "Origin sourcing & storytelling: traveled to cocoa farms in Ghana, Costa Rica, Nicaragua, Ecuador, Peru and Brazil to meet farmers, shape farmer-support initiatives, and capture content for web, social and advertising; trained hands-on in bean-to-bar chocolate making.",
+      "Board member, Ethical Apparel Africa Foundation (EAAF) — fair, sustainable garment manufacturing across West Africa.",
+      "Board member, Cancer Pathways — helped plan the annual gala fundraiser.",
       "Speaker: industry panels on the climate crisis and its impact on cocoa; guest speaker at the UW Foster School of Business on the Maeve rebrand.",
-      "Utility player: at a 75-person company, served as a go-to brainstorm partner for every department and helped lead company-wide strategic planning sessions.",
     ],
   },
   recognition: {
@@ -163,7 +162,6 @@ export const resume = {
       "Natural Products Insider",
       "Alaska Airlines in-flight media",
     ],
-    note: "Named one of Seattle Business Magazine's Best Companies to Work For during tenure.",
   },
   education: {
     heading: "Education",
