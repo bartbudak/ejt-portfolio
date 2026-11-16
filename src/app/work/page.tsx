@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
-import { ThemeSwitcher } from "@/components/shared/PalettePicker";
 import { Marquee } from "@/components/shared/Marquee";
 import { Brief } from "@/components/sections/Brief";
 import { Results } from "@/components/sections/Results";
@@ -12,23 +11,18 @@ import { Testimonial } from "@/components/sections/Testimonial";
 import { Contact } from "@/components/sections/Contact";
 import { Credits } from "@/components/shared/Credits";
 
-// Work — new tab (2026-11-01 restructure). Everything that used to run on
-// About from "The Idea" through Kirsty's letter, moved here as-is; About's
-// Crown Jewel now teases this page with a "See the rebrand" CTA instead.
-//
-// Local-only, same as the rest of /preview: noindex, and do NOT deploy to the
-// main hosting channel while the live site is still the coming-soon page.
+// Work — moved here from /preview/work on launch, 2026-11-15. Everything
+// that used to run on About from "The Idea" through Kirsty's letter, moved
+// here as-is in the 2026-11-01 restructure; About's Crown Jewel teases this
+// page with a "See the rebrand" CTA.
 export const metadata: Metadata = {
   title: "Work",
-  robots: { index: false, follow: false },
 };
 
 export default function WorkPage() {
   return (
     <>
       <Header />
-      {/* Preview-only palette picker; delete to remove. */}
-      <ThemeSwitcher />
       <Brief />
       {/* One band across both: the numbers and the before/after are a single
           argument — here is what changed, and here is what it looked like — so

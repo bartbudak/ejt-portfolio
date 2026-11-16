@@ -25,9 +25,6 @@ export const site = {
     "Seven years growing consumer food brands from the inside out. Most notably, I led the from-scratch reinvention of a 35-year-old chocolate company into Maeve, a brand now winning national design awards and selling out in record time. I'm a psychology grad with a serious design habit, and right now I'm looking for my next brand home.",
   description:
     "I'm Ellie Thompson, the brand and marketing leader behind Maeve, the reinvention of Seattle Chocolate Company.",
-  // While the full site is in progress, render the coming-soon holding page.
-  // Flip to false to launch the full multi-section site.
-  comingSoon: true,
   // Hero scoreboard. Four, not six — her deck lists 110% / +12% / 4 awards /
   // 36 hrs / 5.5x / 81% IG; the two weakest (+12% B2B, 81% IG) dilute the rest.
   // Swap them back in here if she'd rather lead with breadth than punch.
@@ -102,26 +99,26 @@ export const site = {
   // anchors — the tabs switch pages, and the header derives the active tab from
   // the pathname, so these strings must stay exact.
   //
-  // ⚠️ They point into /preview because that is where the site is being built
-  // while the live domain still serves the coming-soon page. At launch they
-  // become "/" and "/campaigns".
+  // Launched to the root paths 2026-11-15 — they used to point into /preview
+  // while the live domain served the coming-soon page.
   nav: [
-    { label: "About", href: "/preview", external: false },
+    { label: "About", href: "/", external: false },
     // New tab (2026-11-01 restructure): everything from "The Idea" through
     // Kirsty's letter, moved off About, which now teases this page instead.
-    { label: "Work", href: "/preview/work", external: false },
+    { label: "Work", href: "/work", external: false },
     // Campaigns and Collaborations merged into one tab (2026-11-01
     // restructure): Seasonal Collections first, then the partnerships, on one
-    // page. The two old routes now redirect here (firebase.json).
+    // page. The old /preview/campaigns and /preview/collabs routes redirect
+    // here (firebase.json).
     {
       label: "Campaigns & Collabs",
-      href: "/preview/campaigns-and-collabs",
+      href: "/campaigns-and-collabs",
       external: false,
     },
     // Its own page since 2026-09-13 (Bart): the résumé rendered in the site's
     // own type inside the frame, with the PDF — printed from that same
     // rendition — offered for download at the top.
-    { label: "Resume", href: "/preview/resume", external: false },
+    { label: "Resume", href: "/resume", external: false },
   ],
   // Her hand-drawn "ejt" monogram, used as the logo in the header. Extracted
   // from the Procreate PDF she supplied: a 2388x1668 JPEG of black ink on

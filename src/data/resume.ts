@@ -1,4 +1,4 @@
-// Ellie's résumé — the content behind both the page at /preview/resume and the
+// Ellie's résumé — the content behind both the page at /resume and the
 // PDF it offers, which is printed from the same rendition (scripts/print-resume.sh).
 //
 // Updated 2026-09-13 from the résumé she supplied in August and the site

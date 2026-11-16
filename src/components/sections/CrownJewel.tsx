@@ -16,9 +16,9 @@ import { CARD_FRAME } from "@/components/shared/PostCard";
 // the three panels step rather than collide.
 //
 // 2026-11-01 restructure: this is now the LAST section on About, acting as a
-// teaser into the new /preview/work page (everything from here through
-// Kirsty's letter moved there as-is). The CTA below is new; the copy above it
-// is still hers, untouched.
+// teaser into the new /work page (everything from here through Kirsty's
+// letter moved there as-is). The CTA below is new; the copy above it is
+// still hers, untouched.
 
 const WONK = { fontVariationSettings: '"SOFT" 0, "WONK" 1' } as const;
 
@@ -78,7 +78,7 @@ export function CrownJewel() {
         </p>
 
         <Link
-          href="/preview/work"
+          href="/work"
           className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-base font-semibold tracking-[0.02em] transition-transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 sm:text-lg"
           style={{
             backgroundColor: "var(--ejd-marigold)",

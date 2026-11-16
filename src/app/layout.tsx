@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
 import { ThemeProvider } from "@/components/shared/ThemeProvider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ServiceWorkerRegistration } from "@/components/shared/ServiceWorkerRegistration";
-import { Footer } from "@/components/layout/Footer";
+import { MarqueeSettingsProvider } from "@/components/shared/MarqueeSettings";
 
 // Display: chunky, slightly psychedelic high-contrast serif (SOFT/WONK axes).
 const fraunces = Fraunces({
@@ -90,8 +90,6 @@ const personJsonLd = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const showChrome = !site.comingSoon;
-
   return (
     <html
       lang="en"
@@ -103,16 +101,23 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem={showChrome}
-          forcedTheme={site.comingSoon ? "light" : undefined}
-        >
+        {/* Forced light always, not just during the coming-soon hold: dark
+            mode was never finished for the Maeve palette (several bands'
+            STOPS and grounds are light-only), so letting the system theme
+            through would ship a half-broken dark mode the day the site goes
+            public (2026-11-15). Revisit if real dark-mode support is ever
+            built. */}
+        <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
           <TooltipProvider>
             <ServiceWorkerRegistration />
-            <main className="flex-1">{children}</main>
-            {showChrome && <Footer />}
+            {/* Each page renders its own Header; Footer (a leftover shadcn
+                component in the old placeholder's design language, never
+                updated to the Maeve palette) was dropped on launch — Contact
+                and Credits already close out every page with the same
+                information in the site's real voice. */}
+            <MarqueeSettingsProvider>
+              <main className="flex-1">{children}</main>
+            </MarqueeSettingsProvider>
           </TooltipProvider>
         </ThemeProvider>
       </body>

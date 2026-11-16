@@ -1,21 +1,16 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
-import { ThemeSwitcher } from "@/components/shared/PalettePicker";
 import { Marquee } from "@/components/shared/Marquee";
 import { Contact } from "@/components/sections/Contact";
 import { Credits } from "@/components/shared/Credits";
 import { ResumeDoc } from "@/components/sections/ResumeDoc";
 import { CARD_FRAME } from "@/components/shared/PostCard";
 
-// Resume — its own tab (Bart, 2026-09-13): the page band, the title, the
-// download, then the résumé itself in the Maeve frame, rendered from the same
-// data the PDF is printed from.
-//
-// Local-only, same as /preview: noindex, and do NOT deploy either to the main
-// hosting channel while the live site is still the coming-soon page.
+// Resume — moved here from /preview/resume on launch, 2026-11-15. The page
+// band, the title, the download, then the résumé itself in the Maeve frame,
+// rendered from the same data the PDF is printed from.
 export const metadata: Metadata = {
   title: "Resume",
-  robots: { index: false, follow: false },
 };
 
 const WONK = { fontVariationSettings: '"SOFT" 0, "WONK" 1' } as const;
@@ -24,8 +19,6 @@ export default function ResumePage() {
   return (
     <>
       <Header />
-      {/* Preview-only palette picker; delete to remove. */}
-      <ThemeSwitcher />
       <Marquee
         items={["Resume"]}
         className="sticky top-[var(--ejt-band-top,var(--ejt-header))] z-30"

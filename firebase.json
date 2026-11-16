@@ -10,13 +10,33 @@
     "trailingSlash": true,
     "redirects": [
       {
+        "source": "/preview",
+        "destination": "/",
+        "type": 301
+      },
+      {
+        "source": "/preview/work",
+        "destination": "/work",
+        "type": 301
+      },
+      {
         "source": "/preview/campaigns",
-        "destination": "/preview/campaigns-and-collabs",
+        "destination": "/campaigns-and-collabs",
         "type": 301
       },
       {
         "source": "/preview/collabs",
-        "destination": "/preview/campaigns-and-collabs",
+        "destination": "/campaigns-and-collabs",
+        "type": 301
+      },
+      {
+        "source": "/preview/campaigns-and-collabs",
+        "destination": "/campaigns-and-collabs",
+        "type": 301
+      },
+      {
+        "source": "/preview/resume",
+        "destination": "/resume",
         "type": 301
       }
     ],

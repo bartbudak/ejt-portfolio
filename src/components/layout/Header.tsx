@@ -30,9 +30,11 @@ type NavItem = {
   alsoActiveOn?: readonly string[];
 };
 
-// next.config sets `trailingSlash: true`, so the live pathname is "/preview/"
-// while the config above holds "/preview". Compare them trimmed or the active
-// tab never lights up.
+// next.config sets `trailingSlash: true`, so the live pathname is "/work/"
+// while the config above holds "/work". Compare them trimmed or the active
+// tab never lights up. Root is the one path trailingSlash doesn't touch
+// ("/" stays "/"), and trimming it down to "" still compares correctly
+// against itself either way.
 const samePath = (a: string, b: string) =>
   a.replace(/\/+$/, "") === b.replace(/\/+$/, "");
 
@@ -40,16 +42,16 @@ const samePath = (a: string, b: string) =>
 // page rather than a fixture bolted over it — the same reason it is blush on
 // About, where it disappears into the title card.
 const TONES: Record<string, { bg: string; ink: string }> = {
-  "/preview": { bg: "var(--ejd-blush)", ink: "var(--ejd-ink)" },
+  "/": { bg: "var(--ejd-blush)", ink: "var(--ejd-ink)" },
   // Work opens on Brief's own marigold ground (2026-11-01 restructure).
-  "/preview/work": { bg: "var(--ejd-marigold)", ink: "var(--ejd-ink)" },
+  "/work": { bg: "var(--ejd-marigold)", ink: "var(--ejd-ink)" },
   // Collabs used to run on burnt orange as the inverse of Campaigns. Ellie
   // asked for the two to share a look now that Collaborations is its own tab
   // (2026-09-11), so the band takes the same paper ground. Merged into one
   // page (2026-11-01 restructure), still paper.
-  "/preview/campaigns-and-collabs": { bg: "var(--mv-paper)", ink: "var(--ejd-ink)" },
+  "/campaigns-and-collabs": { bg: "var(--mv-paper)", ink: "var(--ejd-ink)" },
 };
-const DEFAULT_TONE = TONES["/preview"];
+const DEFAULT_TONE = TONES["/"];
 
 // The active tab's rule. Two waves rather than a straight border, drawn as a
 // tiled <pattern> rather than one stretched path — with a stretched path the
@@ -123,7 +125,7 @@ export function Header() {
         className="mx-auto grid h-full w-full max-w-[1600px] grid-cols-[1fr_auto_1fr] items-center gap-2 px-3 sm:gap-4 sm:px-8"
       >
         <Link
-          href="/preview"
+          href="/"
           aria-label={`${site.name}, home`}
           className="relative inline-flex shrink-0 items-center justify-self-start after:absolute after:-inset-2 after:content-['']"
         >
